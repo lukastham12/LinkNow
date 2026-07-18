@@ -1,13 +1,23 @@
 /* Global styles.
-   Brand foundation (see BRIEF.md §7). These are starting values — the full
-   theme is built out in later phases. */
+   Brand foundation (see BRIEF.md §7): minimalist, elegant, black + gold.
+   Restraint over decoration — quiet space, one gold accent, photography leads.
+   These are starting values; the full theme is built out in later phases. */
 
 :root {
-  --color-bg: #0a0a0a;
-  --color-gold: #f5c542;
-  --color-gold-dim: #e8b923;
-  --color-text: #f5f0e6;
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Pure black to blend seamlessly with the logo artwork. */
+  --color-bg: #000000;
+  --color-surface: #0d0d0d;
+  --color-gold: #d9b25a; /* muted, refined gold — not a bright neon */
+  --color-gold-soft: #b9975a;
+  --color-text: #f2efe9;
+  --color-text-muted: #9a968e;
+  --color-hairline: rgba(217, 178, 90, 0.28);
+
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Consistent letter-spacing scale for the "spaced caps" look. */
+  --track-wide: 0.32em;
+  --track-mid: 0.18em;
 }
 
 * {
@@ -24,7 +34,10 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  line-height: 1.6;
+  line-height: 1.65;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
 }

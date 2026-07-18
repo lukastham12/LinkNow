@@ -1,21 +1,21 @@
 <!--
   Placeholder homepage for the Angular skeleton.
-  This exists ONLY to prove the project runs and to preview the brand
-  direction. The real pages are built in Phase 6 from BRIEF.md, using
-  Angular routing (src/app/app.routes.ts).
+  This exists ONLY to prove the project runs and to preview the (now
+  minimalist) brand direction. The real pages are built in Phase 6 from
+  BRIEF.md, using Angular routing (src/app/app.routes.ts).
 -->
-<main class="wrap">
-  <p class="eyebrow">Singapore Event Décor</p>
-  <h1 class="brand">Linknow<span class="co">Events&nbsp;Co.</span></h1>
-  <p class="tagline">
-    Custom backdrops, floral artistry &amp; setup for unforgettable celebrations.
-  </p>
+<main class="hero">
+  <img class="hero__logo" src="/brand/logo.jpg" alt="Linknow Events Co." width="220" height="220" />
 
-  <a class="cta" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+  <p class="hero__tagline">Custom Backdrops · Florals · Event Styling</p>
+
+  <span class="hero__rule" aria-hidden="true"></span>
+
+  <p class="hero__place">Singapore</p>
+
+  <a class="hero__cta" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
     Enquire on WhatsApp
   </a>
-
-  <p class="note">🚧 Skeleton preview — full site coming in later phases.</p>
 </main>
 
 <router-outlet />

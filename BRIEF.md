@@ -93,18 +93,26 @@ Two segments:
 
 ## 7. Brand & Vibe
 
-- **Feeling (keywords):** Luxe · celebratory · premium · glamorous · elegant. High-end event styling — **not corporate, not minimalist**.
-- **Identity:** **Gold neon on a black / near-black background.**
-  - **Brand name:** cursive **script** feel (matches the logo's "Linknow").
-  - **Supporting text:** refined, **spaced capitals** (e.g. `EVENTS CO.`, section labels with letter-spacing).
-- **Design approach:** **Image-led** — the décor photography carries the design; typography and gold accents frame it. Generous dark space, glowing gold highlights.
+> **Direction (updated in Phase 3): MINIMALIST.** The owner explicitly wants a
+> restrained, elegant, minimalist site — **not** a loud, glowing, "glamorous"
+> one. Premium comes from restraint: lots of black space, one quiet gold accent,
+> and the décor photography doing the talking. **Do not use heavy neon glows,
+> drop-shadows, or busy decoration.**
+
+- **Feeling (keywords):** minimalist · elegant · refined · calm · premium. Understated luxury.
+- **Identity:** black + muted gold. The colour comes mostly from the **logo and the photography**; the UI itself stays quiet.
+  - **Brand name:** the logo's cursive script (shown via the logo image, not re-created in CSS).
+  - **Supporting text:** refined **spaced capitals**, generous letter-spacing, modest sizes.
+- **Design approach:** **Image-led + minimalist** — generous negative (black) space, thin hairline gold dividers, thin-outline or text buttons (no big glowing pills). Let photography carry the visual weight.
 - **Logo:** gold neon interlocking-links mark above a gold script "Linknow" and spaced-caps "EVENTS CO." on black.
   - **File:** `public/brand/logo.jpg` (added to repo). Served at `/brand/logo.jpg`.
   - **Placement:** header/nav and footer (wired up in Phase 6).
-- **Suggested palette (starting point, refine in build):**
-  - Background: `#0A0A0A` / near-black
-  - Gold: `~#F5C542` / `#E8B923` with a lighter glow highlight
-  - Text on dark: off-white `#F5F0E6`
+  - The logo art has a near-black background, so use a **pure-black (`#000`) page background** where the logo sits, so it blends with no visible box.
+- **Palette (implemented in `src/styles.scss`):**
+  - Background: `#000000` (pure black); surface `#0d0d0d`
+  - Gold: `#d9b25a` (muted/refined — deliberately NOT a bright neon); softer `#b9975a`
+  - Text: `#f2efe9`; muted text `#9a968e`
+  - Gold hairline: `rgba(217, 178, 90, 0.28)`
 
 ---
 

@@ -55,7 +55,7 @@ There is **no configured linter** yet (no ESLint). Formatting is handled by **Pr
 
 ## Brand & tone rules (from BRIEF.md §7)
 
-- **Look:** gold neon on black / near-black. Luxe, celebratory, premium, glamorous, elegant — **not corporate, not minimalist**.
+- **Look:** **minimalist** black + muted gold. Restrained, elegant, premium — colour comes from the logo and photography, not from the UI. **No heavy neon glows, drop-shadows, or busy decoration** (owner directive, Phase 3). Pure-black background where the logo sits so it blends with no visible box. Palette lives in `src/styles.scss` (gold `#d9b25a`, not a bright neon).
 - **Type:** cursive **script** feel for the brand name; refined **spaced capitals** for supporting/section labels.
 - **Voice:** warm, high-end, celebratory; concise. Speaks to both retail (birthdays, weddings, personal celebrations) and corporate clients.
 - **Design priority:** **mobile-first** and **image-led** — the décor photography carries the design. Optimise images, lazy-load, provide alt text.
