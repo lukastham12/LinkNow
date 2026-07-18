@@ -1,0 +1,33 @@
+<header class="header">
+  <div class="header__inner">
+    <a class="header__brand" routerLink="/" aria-label="Linknow Events Co. — home" (click)="closeMenu()">
+      <img src="/brand/logo-transparent.png" alt="Linknow Events Co." width="48" height="48" />
+    </a>
+
+    <button
+      type="button"
+      class="header__toggle"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="primary-nav"
+      aria-label="Toggle navigation menu"
+      (click)="toggleMenu()"
+    >
+      <span class="header__toggle-bar" aria-hidden="true"></span>
+      <span class="header__toggle-bar" aria-hidden="true"></span>
+      <span class="header__toggle-bar" aria-hidden="true"></span>
+    </button>
+
+    <nav id="primary-nav" class="header__nav" [class.header__nav--open]="menuOpen()" aria-label="Primary">
+      @for (link of navLinks; track link.path) {
+        <a
+          class="header__link"
+          [routerLink]="link.path"
+          routerLinkActive="header__link--active"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          (click)="closeMenu()"
+          >{{ link.label }}</a
+        >
+      }
+    </nav>
+  </div>
+</header>

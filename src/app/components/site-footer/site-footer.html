@@ -1,0 +1,28 @@
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <img src="/brand/logo-transparent.png" alt="Linknow Events Co." width="72" height="72" />
+      <p class="footer__place">Event Décor · Singapore</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer">
+      @for (link of navLinks; track link.path) {
+        <a class="footer__link" [routerLink]="link.path">{{ link.label }}</a>
+      }
+    </nav>
+
+    <div class="footer__contact">
+      <a class="footer__cta" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+        WhatsApp us
+      </a>
+      <a class="footer__email" [href]="'mailto:' + enquiryEmail">{{ enquiryEmail }}</a>
+      <div class="footer__social">
+        <a [href]="instagramUrl" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <span aria-hidden="true">·</span>
+        <a [href]="tiktokUrl" target="_blank" rel="noopener noreferrer">TikTok</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer__legal">© {{ year }} LinkNow Pte Ltd · Linknow Events Co.</p>
+</footer>

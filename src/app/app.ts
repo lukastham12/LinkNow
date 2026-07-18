@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SiteHeader } from './components/site-header/site-header';
+import { SiteFooter } from './components/site-footer/site-footer';
+import { WhatsappButton } from './components/whatsapp-button/whatsapp-button';
 
+/** Root shell: shared header + routed page + footer + floating WhatsApp CTA. */
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, SiteHeader, SiteFooter, WhatsappButton],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
-  // Canonical contact value from BRIEF.md — WhatsApp is the primary CTA.
-  protected readonly whatsappMessage =
-    "Hi LinkNow, I'd like to enquire about your services";
-  protected readonly whatsappHref =
-    `https://wa.me/6588090600?text=${encodeURIComponent(this.whatsappMessage)}`;
-}
+export class App {}

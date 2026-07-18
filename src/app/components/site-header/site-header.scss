@@ -1,0 +1,101 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header__brand {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+
+  img {
+    width: 44px;
+    height: auto;
+    display: block;
+  }
+}
+
+.header__toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header__toggle-bar {
+  display: block;
+  height: 1.5px;
+  width: 100%;
+  background: var(--color-text);
+}
+
+.header__nav {
+  display: none;
+}
+
+/* Mobile: menu drops below the bar when open. */
+.header__nav--open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.5rem 1.25rem 1rem;
+  gap: 0.25rem;
+}
+
+.header__link {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  padding: 0.6rem 0;
+  transition: color 0.2s ease;
+}
+
+.header__link:hover,
+.header__link--active {
+  color: var(--color-gold);
+}
+
+/* Desktop / tablet: inline nav, hide the toggle. */
+@media (min-width: 720px) {
+  .header__toggle {
+    display: none;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .header__link {
+    padding: 0;
+  }
+}

@@ -1,0 +1,245 @@
+// Shared building blocks --------------------------------------------------
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.eyebrow--center {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.8rem;
+  border-radius: 2px;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.btn--solid {
+  background: var(--color-gold-strong);
+  color: #fff;
+  border: 1px solid var(--color-gold-strong);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-gold-strong) 88%, #000);
+}
+
+.btn--ghost {
+  color: var(--color-gold);
+  border: 1px solid var(--color-hairline);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-gold);
+  background: rgba(166, 124, 46, 0.06);
+}
+
+// Placeholder image panels (clearly marked; swap for real photos) ----------
+
+.ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #efe9df 0%, #e6ddcf 100%);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.ph__label {
+  font-size: 0.62rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+}
+
+.ph--hero {
+  min-height: 260px;
+  border-radius: 4px;
+}
+
+.ph--service {
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.ph--tile {
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+}
+
+// Layout -------------------------------------------------------------------
+
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1rem;
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero__title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.hero__sub {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  max-width: 46ch;
+  font-size: 1rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero__actions--center {
+  justify-content: center;
+}
+
+.section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+}
+
+.section--tint {
+  max-width: none;
+  background: color-mix(in srgb, var(--color-bg) 55%, #ffffff);
+  border-block: 1px solid var(--color-border);
+}
+
+.section--tint > * {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.section__title {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 600;
+}
+
+.section__cta {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.services {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+.service__name {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.service__blurb {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.portfolio {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.testimonials {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.testimonial {
+  margin: 0;
+  padding: 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.testimonial__quote {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.testimonial__author {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.placeholder-note {
+  margin: 1.5rem 0 0;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-style: italic;
+}
+
+.enquiry {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.enquiry__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 600;
+}
+
+.enquiry__sub {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+}
+
+// Responsive ---------------------------------------------------------------
+
+@media (min-width: 720px) {
+  .hero {
+    grid-template-columns: 1.1fr 1fr;
+    padding-top: 4.5rem;
+  }
+
+  .ph--hero {
+    min-height: 380px;
+  }
+
+  .services {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .portfolio {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testimonials {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

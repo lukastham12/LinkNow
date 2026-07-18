@@ -1,0 +1,79 @@
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__content">
+    <p class="eyebrow">Custom Event Décor · Singapore</p>
+    <h1 class="hero__title">Beautifully crafted backdrops &amp; florals for unforgettable events</h1>
+    <p class="hero__sub">
+      Birthdays, weddings, corporate celebrations — designed, built and styled by Linknow Events Co.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+        Enquire on WhatsApp
+      </a>
+      <a class="btn btn--ghost" routerLink="/contact">Request a quote</a>
+    </div>
+  </div>
+  <div class="hero__media ph ph--hero" role="img" aria-label="Placeholder for a featured event décor photo">
+    <span class="ph__label">Featured photo — coming soon</span>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" aria-labelledby="services-heading">
+  <p class="eyebrow eyebrow--center">What we do</p>
+  <h2 id="services-heading" class="section__title">Our services</h2>
+  <div class="services">
+    @for (service of services; track service.name) {
+      <article class="service">
+        <div class="ph ph--service" role="img" [attr.aria-label]="'Placeholder photo for ' + service.name">
+          <span class="ph__label">Photo</span>
+        </div>
+        <h3 class="service__name">{{ service.name }}</h3>
+        <p class="service__blurb">{{ service.blurb }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- PORTFOLIO TEASER -->
+<section class="section section--tint" aria-labelledby="portfolio-heading">
+  <p class="eyebrow eyebrow--center">Our work</p>
+  <h2 id="portfolio-heading" class="section__title">Recent events</h2>
+  <div class="portfolio">
+    @for (item of portfolio; track item) {
+      <div class="ph ph--tile" role="img" aria-label="Placeholder event photo">
+        <span class="ph__label">Photo</span>
+      </div>
+    }
+  </div>
+  <div class="section__cta">
+    <a class="btn btn--ghost" routerLink="/portfolio">View full portfolio</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" aria-labelledby="testimonials-heading">
+  <p class="eyebrow eyebrow--center">Kind words</p>
+  <h2 id="testimonials-heading" class="section__title">What clients say</h2>
+  <div class="testimonials">
+    @for (t of testimonials; track t.quote) {
+      <figure class="testimonial">
+        <blockquote class="testimonial__quote">“{{ t.quote }}”</blockquote>
+        <figcaption class="testimonial__author">— {{ t.author }}</figcaption>
+      </figure>
+    }
+  </div>
+  <p class="placeholder-note">Placeholder testimonials — real client reviews to be added.</p>
+</section>
+
+<!-- ENQUIRY STRIP -->
+<section class="enquiry" aria-labelledby="enquiry-heading">
+  <h2 id="enquiry-heading" class="enquiry__title">Planning something?</h2>
+  <p class="enquiry__sub">Tell us about your event and we'll help bring it to life.</p>
+  <div class="hero__actions hero__actions--center">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+    <a class="btn btn--ghost" routerLink="/contact">Contact us</a>
+  </div>
+</section>
