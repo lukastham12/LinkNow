@@ -55,12 +55,13 @@ There is **no configured linter** yet (no ESLint). Formatting is handled by **Pr
 
 ## Brand & tone rules (from BRIEF.md §7)
 
-- **Look:** **minimalist** black + muted gold. Restrained, elegant, premium — colour comes from the logo and photography, not from the UI. **No heavy neon glows, drop-shadows, or busy decoration** (owner directive, Phase 3). Pure-black background where the logo sits so it blends with no visible box. Palette lives in `src/styles.scss` (gold `#d9b25a`, not a bright neon).
+- **Look:** **minimalist & LIGHT.** Warm off-white canvas, charcoal text, gold as a *sparing* accent. Restrained, airy, premium — colour comes from the logo and photography, not the UI. The black-and-gold logo does NOT make the site dark. **No dark full-page backgrounds, no neon glows, no drop-shadows, no busy decoration** (owner directive, Phase 3). Palette lives in `src/styles.scss` (bg `#f6f3ee`, gold accent `#a67c2e`, text `#22201c`).
+- **Logo on light UI:** use `public/brand/logo-transparent.png` (transparent background). The original `logo.jpg` has a black background — only for dark surfaces.
 - **Type:** cursive **script** feel for the brand name; refined **spaced capitals** for supporting/section labels.
 - **Voice:** warm, high-end, celebratory; concise. Speaks to both retail (birthdays, weddings, personal celebrations) and corporate clients.
 - **Design priority:** **mobile-first** and **image-led** — the décor photography carries the design. Optimise images, lazy-load, provide alt text.
 - **Accessibility:** maintain sufficient contrast for gold-on-black; alt text on all décor images.
-- **Logo:** `public/brand/logo.jpg` (gold-neon mark on black). Served at `/brand/logo.jpg`. Used in header/nav and footer — wire it up in Phase 6.
+- **Logo files:** `public/brand/logo-transparent.png` (for the light UI — use this by default) and `public/brand/logo.jpg` (original, black background — dark surfaces only). Used in header/nav and footer — wire it up in Phase 6.
 
 ## Working agreement for all agents
 

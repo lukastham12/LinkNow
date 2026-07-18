@@ -1,17 +1,18 @@
 /* Global styles.
-   Brand foundation (see BRIEF.md §7): minimalist, elegant, black + gold.
-   Restraint over decoration — quiet space, one gold accent, photography leads.
+   Brand foundation (see BRIEF.md §7): minimalist & light. A warm off-white
+   canvas, charcoal text, gold used sparingly as an accent. The logo and (later)
+   the décor photography provide the colour — the UI itself stays quiet.
    These are starting values; the full theme is built out in later phases. */
 
 :root {
-  /* Pure black to blend seamlessly with the logo artwork. */
-  --color-bg: #000000;
-  --color-surface: #0d0d0d;
-  --color-gold: #d9b25a; /* muted, refined gold — not a bright neon */
+  --color-bg: #f6f3ee; /* warm off-white / cream */
+  --color-surface: #ffffff;
+  --color-text: #22201c; /* warm near-black charcoal */
+  --color-text-muted: #7c766b;
+  --color-gold: #a67c2e; /* deeper gold — legible as an accent on a light bg */
   --color-gold-soft: #b9975a;
-  --color-text: #f2efe9;
-  --color-text-muted: #9a968e;
-  --color-hairline: rgba(217, 178, 90, 0.28);
+  --color-hairline: rgba(166, 124, 46, 0.4);
+  --color-border: rgba(34, 32, 28, 0.14);
 
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 

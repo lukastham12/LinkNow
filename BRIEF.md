@@ -93,26 +93,28 @@ Two segments:
 
 ## 7. Brand & Vibe
 
-> **Direction (updated in Phase 3): MINIMALIST.** The owner explicitly wants a
-> restrained, elegant, minimalist site — **not** a loud, glowing, "glamorous"
-> one. Premium comes from restraint: lots of black space, one quiet gold accent,
-> and the décor photography doing the talking. **Do not use heavy neon glows,
-> drop-shadows, or busy decoration.**
+> **Direction (updated in Phase 3): MINIMALIST & LIGHT.** The owner wants a
+> restrained, elegant site on a **light / off-white** canvas — **not** a dark,
+> loud, or glowing one. The logo being black-and-gold does NOT mean the site is:
+> like most premium e-comm brands, the site is light and airy, with gold used
+> only as a sparing accent. Premium comes from restraint and whitespace, with the
+> décor photography providing the colour. **No dark full-page backgrounds, no
+> neon glows, no drop-shadows, no busy decoration.**
 
-- **Feeling (keywords):** minimalist · elegant · refined · calm · premium. Understated luxury.
-- **Identity:** black + muted gold. The colour comes mostly from the **logo and the photography**; the UI itself stays quiet.
+- **Feeling (keywords):** minimalist · light · airy · elegant · refined · premium. Understated, editorial luxury.
+- **Identity:** warm off-white canvas + charcoal text + **gold as a sparing accent**. Colour comes from the **logo and the photography**; the UI stays quiet.
   - **Brand name:** the logo's cursive script (shown via the logo image, not re-created in CSS).
   - **Supporting text:** refined **spaced capitals**, generous letter-spacing, modest sizes.
-- **Design approach:** **Image-led + minimalist** — generous negative (black) space, thin hairline gold dividers, thin-outline or text buttons (no big glowing pills). Let photography carry the visual weight.
-- **Logo:** gold neon interlocking-links mark above a gold script "Linknow" and spaced-caps "EVENTS CO." on black.
-  - **File:** `public/brand/logo.jpg` (added to repo). Served at `/brand/logo.jpg`.
+- **Design approach:** **Image-led + minimalist** — generous whitespace, thin hairline gold dividers, thin-outline or text buttons (no filled/glowing pills). Let photography carry the visual weight.
+- **Logo:** gold interlocking-links mark above a gold script "Linknow" and spaced-caps "EVENTS CO."
+  - **Original file:** `public/brand/logo.jpg` (black background — use only on dark surfaces, e.g. a photo overlay or a dark footer if any).
+  - **Light-background version:** `public/brand/logo-transparent.png` — the black background knocked out to transparency. **Use this one on the light UI** (header/nav, hero). Regenerate from the JPG with the Pillow script if needed.
   - **Placement:** header/nav and footer (wired up in Phase 6).
-  - The logo art has a near-black background, so use a **pure-black (`#000`) page background** where the logo sits, so it blends with no visible box.
 - **Palette (implemented in `src/styles.scss`):**
-  - Background: `#000000` (pure black); surface `#0d0d0d`
-  - Gold: `#d9b25a` (muted/refined — deliberately NOT a bright neon); softer `#b9975a`
-  - Text: `#f2efe9`; muted text `#9a968e`
-  - Gold hairline: `rgba(217, 178, 90, 0.28)`
+  - Background: `#f6f3ee` (warm off-white); surface `#ffffff`
+  - Gold accent: `#a67c2e` (deeper gold, legible on light); softer `#b9975a`
+  - Text: `#22201c` (warm charcoal); muted text `#7c766b`
+  - Gold hairline: `rgba(166, 124, 46, 0.4)`; neutral border `rgba(34, 32, 28, 0.14)`
 
 ---
 

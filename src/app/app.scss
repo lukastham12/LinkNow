@@ -10,7 +10,7 @@
 }
 
 .hero__logo {
-  width: clamp(140px, 42vw, 220px);
+  width: clamp(120px, 38vw, 168px);
   height: auto;
   display: block;
 }
@@ -28,7 +28,7 @@
   width: 44px;
   height: 1px;
   background: var(--color-gold);
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .hero__place {
@@ -58,5 +58,5 @@
 
 .hero__cta:hover {
   border-color: var(--color-gold);
-  background-color: rgba(217, 178, 90, 0.06);
+  background-color: rgba(166, 124, 46, 0.06);
 }
