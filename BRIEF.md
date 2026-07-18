@@ -135,12 +135,14 @@ Two segments:
 
 ---
 
-## 11. Recommended Tech Direction (to confirm in Phase 2)
+## 11. Tech Direction (decided in Phase 2)
 
-Given this is a **static, image-led marketing site** with a simple email form:
-- **Framework:** **Astro** — fast, ships minimal JavaScript, great for content/marketing sites, excellent image handling. _(Confirmed as default; revisit only if scope grows.)_
-- **Styling:** Tailwind CSS (or scoped CSS) for the dark/gold theme.
-- **Form handling:** Netlify Forms / Formspree / Web3Forms (chosen with the deploy target in Phase 8).
+- **Framework:** **Angular 20** (chosen by the product owner in Phase 2). Pinned to v20 for Node 22 compatibility.
+  - **SSR / prerendering is enabled** (`@angular/ssr`) to mitigate Angular's default weaknesses for this use case — it delivers ready-made HTML per page, which protects mobile load speed and Google/SEO (the brief's top priorities). Keep prerendering on for content pages.
+  - _Note: This reverses the earlier Astro recommendation. Astro would have been lighter for a pure marketing site, but Angular was selected. Build it well — lean on SSR/prerendering, keep bundles small, and don't add app complexity the brief doesn't call for._
+- **Styling:** SCSS with CSS custom properties for the dark/gold theme (see `src/styles.scss`).
+- **Routing:** Angular Router (`src/app/app.routes.ts`) — one route per page from §5.
+- **Form handling:** static-friendly handler (Formspree / Web3Forms) posting to email; chosen with the deploy target in Phase 8. No backend/database.
 - **Hosting:** Netlify or Vercel free tier, connected to git for auto-publish (Phase 8).
 
 ---
