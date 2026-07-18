@@ -1,0 +1,22 @@
+# build output
+dist/
+# dependencies
+node_modules/
+# generated types
+.astro/
+
+# environment variables (never commit secrets — analytics IDs, form keys, etc.)
+.env
+.env.production
+.env.*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# macOS / editor cruft
+.DS_Store
+.vscode/*
+!.vscode/extensions.json

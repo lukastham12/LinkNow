@@ -1,0 +1,103 @@
+---
+// Placeholder homepage for the Phase 2 skeleton.
+// This exists ONLY to prove the project runs and to preview the brand
+// direction. The real homepage is built in Phase 6 from BRIEF.md.
+import Layout from '../layouts/Layout.astro';
+
+// Canonical contact value from BRIEF.md — WhatsApp is the primary CTA.
+const whatsappNumber = '6588090600';
+const whatsappMessage = "Hi LinkNow, I'd like to enquire about your services";
+const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<Layout>
+  <main class="wrap">
+    <p class="eyebrow">Singapore Event Décor</p>
+    <h1 class="brand">Linknow<span class="co"> Events&nbsp;Co.</span></h1>
+    <p class="tagline">
+      Custom backdrops, floral artistry &amp; setup for unforgettable celebrations.
+    </p>
+
+    <a class="cta" href={whatsappHref} target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+
+    <p class="note">🚧 Skeleton preview — full site coming in later phases.</p>
+  </main>
+</Layout>
+
+<style>
+  .wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.25rem;
+    gap: 1.1rem;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 0.72rem;
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  .brand {
+    font-size: clamp(2.6rem, 12vw, 5rem);
+    line-height: 1;
+    color: var(--color-gold);
+    /* Neon-glow effect, echoing the logo. */
+    text-shadow:
+      0 0 8px rgba(245, 197, 66, 0.55),
+      0 0 22px rgba(245, 197, 66, 0.35);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .brand .co {
+    display: block;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.32em;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    margin-top: 0.6rem;
+    text-shadow: none;
+  }
+
+  .tagline {
+    max-width: 34ch;
+    color: var(--color-text);
+    opacity: 0.85;
+    font-size: clamp(1rem, 3.5vw, 1.15rem);
+  }
+
+  .cta {
+    margin-top: 0.5rem;
+    display: inline-block;
+    background: var(--color-gold);
+    color: #0a0a0a;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.9rem 1.6rem;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 0 18px rgba(245, 197, 66, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 26px rgba(245, 197, 66, 0.6);
+  }
+
+  .note {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    opacity: 0.5;
+  }
+</style>

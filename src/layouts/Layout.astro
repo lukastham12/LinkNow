@@ -1,0 +1,58 @@
+---
+// Base page layout — the shared HTML shell every page will use.
+// For the skeleton it just holds global styles and the page <head>.
+// It will grow a shared header/nav and footer in later phases.
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Linknow Events Co. — Singapore Event Décor',
+  description = 'Custom backdrops, floral services and setup labour for celebrations and events in Singapore.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* Brand foundation (see BRIEF.md §7).
+     These are starting values — the full theme is built out in later phases. */
+  :root {
+    --color-bg: #0a0a0a;
+    --color-gold: #f5c542;
+    --color-gold-dim: #e8b923;
+    --color-text: #f5f0e6;
+    --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+</style>
