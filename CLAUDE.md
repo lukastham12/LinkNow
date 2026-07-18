@@ -60,7 +60,7 @@ There is **no configured linter** yet (no ESLint). Formatting is handled by **Pr
 - **Voice:** warm, high-end, celebratory; concise. Speaks to both retail (birthdays, weddings, personal celebrations) and corporate clients.
 - **Design priority:** **mobile-first** and **image-led** — the décor photography carries the design. Optimise images, lazy-load, provide alt text.
 - **Accessibility:** maintain sufficient contrast for gold-on-black; alt text on all décor images.
-- **Logo:** used in header/nav and footer. File goes at `public/brand/logo.png` (not yet added — see `public/brand/README.md`).
+- **Logo:** `public/brand/logo.jpg` (gold-neon mark on black). Served at `/brand/logo.jpg`. Used in header/nav and footer — wire it up in Phase 6.
 
 ## Working agreement for all agents
 

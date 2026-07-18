@@ -1,13 +1,8 @@
 # Brand assets
 
-Drop brand image files here.
+Brand image files live here. Served at the site root, e.g.
+`public/brand/logo.jpg` → `/brand/logo.jpg`.
 
-## Logo — ACTION NEEDED
-The primary logo is not yet in the repo. When available, add it as:
-
-    public/brand/logo.png      (the gold-neon "Linknow Events Co." mark on black)
-
-Original filename from the product owner: `1784383427678_image.png`.
-
-Used in: site header/nav and footer (see BRIEF.md §7).
-Until it is added, the header/footer fall back to a styled text wordmark.
+## Logo
+`logo.jpg` — the gold-neon "Linknow Events Co." mark on black.
+Used in: site header/nav and footer (see BRIEF.md §7), wired up in Phase 6.

@@ -98,9 +98,9 @@ Two segments:
   - **Brand name:** cursive **script** feel (matches the logo's "Linknow").
   - **Supporting text:** refined, **spaced capitals** (e.g. `EVENTS CO.`, section labels with letter-spacing).
 - **Design approach:** **Image-led** — the décor photography carries the design; typography and gold accents frame it. Generous dark space, glowing gold highlights.
-- **Logo:** `1784383427678_image.png` — gold neon interlocking-links mark above a gold script "Linknow" and spaced-caps "EVENTS CO." on black.
-  - **Placement:** header/nav and footer.
-  - **⚠️ TODO:** logo file not yet in the repo. Place it at `public/logo.png` (or `src/assets/logo.png`) when added.
+- **Logo:** gold neon interlocking-links mark above a gold script "Linknow" and spaced-caps "EVENTS CO." on black.
+  - **File:** `public/brand/logo.jpg` (added to repo). Served at `/brand/logo.jpg`.
+  - **Placement:** header/nav and footer (wired up in Phase 6).
 - **Suggested palette (starting point, refine in build):**
   - Background: `#0A0A0A` / near-black
   - Gold: `~#F5C542` / `#E8B923` with a lighter glow highlight
@@ -149,7 +149,7 @@ Two segments:
 
 ## 12. Open TODOs (tracked for later phases)
 
-- [ ] Add logo file `1784383427678_image.png` to the repo.
+- [x] Add logo file to the repo → `public/brand/logo.jpg`.
 - [ ] Obtain and configure domain.
 - [ ] Add Google Analytics GA4 Measurement ID.
 - [ ] Supply real portfolio photos.
