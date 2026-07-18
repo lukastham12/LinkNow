@@ -32,7 +32,21 @@ ng generate component pages/services   # → src/app/pages/services/
 ng generate component components/site-header
 ```
 
-There is **no configured linter** yet (no ESLint). Formatting is handled by **Prettier** (config lives in `package.json`: `printWidth: 100`, `singleQuote: true`, Angular parser for `.html`). If a lint step is added later, document it here.
+```bash
+npm run lint        # ESLint (angular-eslint) over the project
+```
+
+Formatting is handled by **Prettier** (config in `package.json`: `printWidth: 100`, `singleQuote: true`, Angular parser for `.html`). Linting is **ESLint** via `angular-eslint` (`eslint.config.js`).
+
+## Automated quality gates (hooks)
+
+This project has **deterministic hooks** wired up in `.claude/settings.json` (see `.claude/hooks/README.md`) that run automatically:
+- **Before any Bash command** — destructive commands are blocked/asked for approval.
+- **After editing `.ts`/`.html`** — ESLint runs and blocks on errors.
+- **After a dependency change** (`package.json` edit or `npm install`) — `npm audit` runs and blocks on High/Critical vulnerabilities.
+- **Before an agent finishes** (Stop) — if `src/**` changed, lint + build + tests must pass.
+
+Practical upshot for any agent: keep the code lint-clean, don't introduce vulnerable deps, and make sure `npm run build` and `npm test` pass before you consider a task done — the hooks enforce this regardless.
 
 ## Architecture
 
