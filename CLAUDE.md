@@ -77,6 +77,18 @@ Practical upshot for any agent: keep the code lint-clean, don't introduce vulner
 - **Accessibility:** maintain sufficient contrast for gold-on-black; alt text on all décor images.
 - **Logo files:** `public/brand/logo-transparent.png` (for the light UI — use this by default) and `public/brand/logo.jpg` (original, black background — dark surfaces only). Used in header/nav and footer — wire it up in Phase 6.
 
+## Agent team & delivery pipeline
+
+Specialist agents live in `.claude/agents/`. The intended flow for building a page/feature:
+
+1. **product-manager** — confirms the business requirement against `BRIEF.md` (GO / NO-GO / needs-clarification). Read-only.
+2. **business-analyst** — turns a GO into a ticket in `tickets/NNN-slug.md` with testable acceptance criteria.
+3. **builder** — implements the ticket in small slices; verifies build + lint + tests.
+4. **reviewer** — critiques the result against the ticket + `CLAUDE.md` (read-only; must find problems, not rubber-stamp).
+5. **security-auditor** — checks vulnerabilities/secrets/data handling, esp. anything with user input (read-only).
+
+Builder is the only agent that writes application code. PM/BA/reviewer/security are read-only w.r.t. code (BA writes tickets only). Deterministic hooks (below/`.claude/hooks/`) back all of this up regardless of which agent is working.
+
 ## Working agreement for all agents
 
 - **Keep changes small and reviewable.** Prefer focused, single-purpose commits over large sweeping ones. Build page by page (see `BRIEF.md` §5), not all at once.
