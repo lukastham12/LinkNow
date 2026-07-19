@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Marketing / showcase website for **Linknow Events Co.** (LinkNow Pte Ltd), a Singapore events-décor company (custom backdrops, floral services, setup-only labour). It is a **content marketing site, not a web app**: no logins, accounts, payments, database, or admin dashboard. Conversion happens via **WhatsApp** and an **email-based enquiry form**.
+Marketing / showcase website for **Linknow Events Co.** (LinkNow Pte Ltd), a Singapore events-décor company (custom backdrops, floral services, setup-only labour). It is a **content marketing site, not a web app**: no logins, accounts, payments, database, or admin dashboard. Conversion happens via **WhatsApp** — the only enquiry channel (no form, no email, no contact page).
 
 The authoritative product spec is **`BRIEF.md`** — read it before building or changing pages. If code and `BRIEF.md` disagree, `BRIEF.md` wins (or flag the conflict).
 

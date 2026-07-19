@@ -6,7 +6,7 @@ _Last updated: 2026-07-18 · Owner: Product (lukastham12@gmail.com) · Status: A
 
 ## 1. Summary (the one-paragraph version)
 
-A **mobile-first marketing & showcase website** for **LinkNow Pte Ltd** (brand: **Linknow Events Co.**), a Singapore-based events décor company. The site's job is to make visitors feel the quality of our work through imagery, explain our services, build trust with portfolio + testimonials, and drive them to **enquire via WhatsApp or a quote form**. There is **no online catalogue, no pricing, no logins, and no payments** — pricing is handled per enquiry. This is a marketing site, not a web app.
+A **mobile-first marketing & showcase website** for **LinkNow Pte Ltd** (brand: **Linknow Events Co.**), a Singapore-based events décor company. The site's job is to make visitors feel the quality of our work through imagery, explain our services, build trust with portfolio + testimonials, and drive them to **enquire via WhatsApp** (the only enquiry channel — no form, no email, no contact page). There is **no online catalogue, no pricing, no logins, and no payments** — pricing is handled per enquiry. This is a marketing site, not a web app.
 
 ---
 
