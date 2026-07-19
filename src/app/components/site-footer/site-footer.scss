@@ -80,16 +80,6 @@
   background-color: color-mix(in srgb, var(--color-rose) 7%, transparent);
 }
 
-.footer__email {
-  color: var(--color-text);
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.footer__email:hover {
-  color: var(--color-rose);
-}
-
 .footer__social {
   display: flex;
   gap: 0.5rem;

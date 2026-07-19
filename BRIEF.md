@@ -39,8 +39,7 @@ Two segments:
 
 **In scope:**
 - Static, fast, image-led marketing site.
-- **WhatsApp CTA** — persistent and obvious (floating button + repeated per section), opening a **generic enquiry message** (e.g. `"Hi LinkNow, I'd like to enquire about your services"`).
-- **Enquiry / request-a-quote form** — submissions go **straight to email** (no database, no login).
+- **WhatsApp CTA** — persistent and obvious (floating button + repeated per section), opening a **generic enquiry message** (e.g. `"Hi LinkNow, I'd like to enquire about your services"`). **WhatsApp is the ONLY enquiry channel.**
 - **Web analytics** (e.g. Google Analytics) to track visits and behaviour.
 
 **Explicitly OUT of scope (do not build):**
@@ -48,6 +47,7 @@ Two segments:
 - ❌ No online payments or deposits.
 - ❌ No booking calendar / availability system.
 - ❌ No admin dashboard (content edits happen in code/files; we'll document how).
+- ❌ **No enquiry / request-a-quote form, no destination email, no contact page.** Enquiries happen through WhatsApp only (floating button + in-page CTAs). _(Owner directive, ticket 004 — reverses the earlier form-to-email idea; do not reintroduce a form, email, or "Contact us"/"Request a quote" affordance.)_
 - ❌ **No package catalogue, no package cards, no "from $X" pricing, no per-package pre-filled WhatsApp messages.** Pricing is per-enquiry only. _(This reverses an earlier idea — do not reintroduce it.)_
 
 ---
@@ -56,12 +56,13 @@ Two segments:
 
 | Page | Purpose | Key content |
 |------|---------|-------------|
-| **Home** | First impression + funnel to enquiry | Hero (logo, tagline, WhatsApp CTA), services overview, portfolio teaser, testimonials teaser, enquiry CTA |
-| **Services** | Explain the full offering | Custom backdrops · Floral services · Setup-only labour (materials supplied by client) |
+| **Home** | First impression + funnel to enquiry | Hero (logo, tagline, WhatsApp CTA), services overview, portfolio teaser, testimonials teaser, WhatsApp CTA |
+| **Services** | Explain the full offering | Custom backdrops · **Floral services (includes the floral showcase gallery)** · Setup-only labour (materials supplied by client) |
 | **Portfolio** | Proof of work | Gallery of décor photos; embed/link TikTok content; past clients |
-| **Testimonials** | Social proof | Customer reviews |
+| **Testimonials** | Social proof | **Real 5-star Google reviews only** (data-driven; placeholder until supplied) |
 | **About** | Who we are | Company story, team, what makes us different |
-| **Contact / Enquiry** | Convert | Enquiry form, WhatsApp, Instagram/TikTok, contact details |
+
+_Note: there is **no Contact/Enquiry page** and no Flowers tab. Floral lives under Services; enquiries are WhatsApp-only (floating button + in-page CTAs)._
 
 ---
 
@@ -73,18 +74,10 @@ Two segments:
 - Repeated CTA buttons within page sections.
 - Opens WhatsApp with a **generic pre-filled** message: `"Hi LinkNow, I'd like to enquire about your services"`.
 - Link format: `https://wa.me/6588090600?text=<url-encoded-message>`.
+- **This is the only enquiry channel.** There is no enquiry/quote form and no destination email.
 
-### Enquiry / Request-a-Quote Form
-- **Submissions go to email:** `novestelatham@gmail.com`
-- **No database, no login.** Use a static-site-friendly form handler (e.g. Netlify Forms, Formspree, or Web3Forms) so submissions arrive as email.
-- **Fields:**
-  - Name
-  - Contact (phone / email)
-  - Event type (birthday / wedding / corporate / other)
-  - Event date
-  - Service of interest (backdrops / floral / setup-only labour)
-  - Message
-- Include basic spam protection (honeypot and/or handler-provided captcha).
+### Enquiry / Request-a-Quote Form — REMOVED (ticket 004)
+- The email-based enquiry form is **out of scope**. Do not build a form, collect an email address, or add a "Contact us"/"Request a quote" affordance. All enquiries route through WhatsApp.
 
 ### Analytics
 - Integrate **Google Analytics** (GA4). Leave the Measurement ID as a clearly-marked `TODO` env/config value.
@@ -122,8 +115,8 @@ Two segments:
 
 ## 8. Contact & Social (canonical values)
 
-- **WhatsApp:** `+65 8809 0600` → `https://wa.me/6588090600`
-- **Enquiry email (form destination):** `novestelatham@gmail.com`
+- **WhatsApp:** `+65 8809 0600` → `https://wa.me/6588090600` (**only enquiry channel**)
+- ~~Enquiry email (form destination): `novestelatham@gmail.com`~~ — removed with the form (ticket 004); the site has no email affordance.
 - **Instagram:** https://www.instagram.com/linknowsg/
 - **TikTok:** https://www.tiktok.com/@linknowsg
 - **Region served:** Singapore only
@@ -154,7 +147,7 @@ Two segments:
   - _Note: This reverses the earlier Astro recommendation. Astro would have been lighter for a pure marketing site, but Angular was selected. Build it well — lean on SSR/prerendering, keep bundles small, and don't add app complexity the brief doesn't call for._
 - **Styling:** SCSS with CSS custom properties for the dark/gold theme (see `src/styles.scss`).
 - **Routing:** Angular Router (`src/app/app.routes.ts`) — one route per page from §5.
-- **Form handling:** static-friendly handler (Formspree / Web3Forms) posting to email; chosen with the deploy target in Phase 8. No backend/database.
+- **Form handling:** n/a — no enquiry form (removed in ticket 004). Enquiries are WhatsApp-only. No backend/database.
 - **Hosting:** Netlify or Vercel free tier, connected to git for auto-publish (Phase 8).
 
 ---
@@ -165,5 +158,5 @@ Two segments:
 - [ ] Obtain and configure domain.
 - [ ] Add Google Analytics GA4 Measurement ID.
 - [ ] Supply real portfolio photos.
-- [ ] Supply About-page copy and testimonials.
-- [ ] Confirm form handler choice at deploy time.
+- [ ] Supply About-page copy.
+- [ ] Supply real **5-star Google reviews** for the Testimonials source (`src/app/shared/testimonials.ts`) — currently an intentional placeholder/empty state (no fabricated reviews).

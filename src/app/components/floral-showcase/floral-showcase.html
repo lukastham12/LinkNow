@@ -1,0 +1,16 @@
+@for (group of catalogue; track group.category) {
+  <div class="group">
+    <h3 class="group__title">{{ group.category }}</h3>
+    <hr class="group__rule" aria-hidden="true" />
+    <ul class="grid">
+      @for (item of group.items; track item.image) {
+        <li class="card">
+          <div class="card__frame">
+            <img class="card__img" [src]="item.image" [alt]="item.name" loading="lazy" />
+          </div>
+          <p class="card__name">{{ item.name }}</p>
+        </li>
+      }
+    </ul>
+  </div>
+}

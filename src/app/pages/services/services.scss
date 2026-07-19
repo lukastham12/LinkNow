@@ -32,16 +32,6 @@
   background: color-mix(in srgb, var(--color-rose) 88%, #000);
 }
 
-.btn--ghost {
-  color: var(--color-rose);
-  border: 1px solid var(--color-hairline);
-}
-
-.btn--ghost:hover {
-  border-color: var(--color-rose);
-  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
-}
-
 // Intro --------------------------------------------------------------------
 
 .intro {
@@ -74,60 +64,36 @@
   justify-content: center;
 }
 
-// Category groups ----------------------------------------------------------
+// Service sections ---------------------------------------------------------
 
-.group {
+.service {
   max-width: 1120px;
   margin: 0 auto;
   padding: 2.5rem 1.25rem 0.5rem;
 }
 
-.group__title {
-  margin: 0 0 0.75rem;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: var(--track-wide);
-  text-transform: uppercase;
-  color: var(--color-text);
+.service__head {
+  max-width: 60ch;
 }
 
-.group__rule {
+.service__name {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.3rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+}
+
+.service__rule {
   border: 0;
   border-top: 1px solid var(--color-hairline);
-  margin: 0 0 1.75rem;
+  margin: 0 0 1rem;
+  max-width: 3.5rem;
+  margin-left: 0;
 }
 
-.grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.card {
-  margin: 0;
-}
-
-.card__frame {
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  overflow: hidden;
-  background: var(--color-surface);
-}
-
-.card__img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-}
-
-.card__name {
-  margin: 0.6rem 0 0;
-  font-size: 0.85rem;
-  color: var(--color-text);
+.service__blurb {
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
 }
 
 // Outro --------------------------------------------------------------------
@@ -143,19 +109,4 @@
   margin: 0 0 1.75rem;
   color: var(--color-text-muted);
   font-size: 1rem;
-}
-
-// Responsive ---------------------------------------------------------------
-
-@media (min-width: 560px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-  }
 }

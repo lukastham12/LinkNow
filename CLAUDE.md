@@ -61,8 +61,9 @@ Practical upshot for any agent: keep the code lint-clean, don't introduce vulner
 
 ## Canonical values (do not hard-code duplicates — reuse these)
 
-- **WhatsApp CTA:** `https://wa.me/6588090600` with a **generic** enquiry message (`"Hi LinkNow, I'd like to enquire about your services"`). There are **no per-package messages** — packages/pricing were removed from scope.
-- **Enquiry form destination email:** `novestelatham@gmail.com` (form posts to email via a static handler; no backend).
+- **WhatsApp CTA:** `https://wa.me/6588090600` with a **generic** enquiry message (`"Hi LinkNow, I'd like to enquire about your services"`). There are **no per-package messages** — packages/pricing were removed from scope. **WhatsApp is the ONLY enquiry channel** (ticket 004): there is no enquiry form, no destination email, and no Contact page. Do not add a form, `mailto:`, or "Contact us"/"Request a quote" button anywhere.
+- **Floral lives under Services** (ticket 004): there is no Flowers tab. The floral gallery is the reusable `app-floral-showcase` component (`src/app/components/floral-showcase/`, catalogue in `catalogue.ts`) rendered inside the Floral Services section of `/services`. `/flowers` redirects to `/services`.
+- **Testimonials:** data-driven from `src/app/shared/testimonials.ts` (`TESTIMONIALS: {author, quote, rating:5}[]`) — **real 5-star Google reviews only**, kept empty with a placeholder state until the owner supplies them. Never fabricate reviews.
 - **Instagram:** https://www.instagram.com/linknowsg/ · **TikTok:** https://www.tiktok.com/@linknowsg
 - **Region:** Singapore only (reflect in copy + local SEO).
 - **Production domain:** not yet owned — keep the canonical/base URL configurable (in `src/index.html` meta and any SEO/sitemap setup). Do not hard-code a production domain.

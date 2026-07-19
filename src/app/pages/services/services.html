@@ -1,0 +1,36 @@
+<section class="intro">
+  <p class="eyebrow">Our Services</p>
+  <h1 class="intro__title">What we create</h1>
+  <p class="intro__lede">
+    Three ways we help bring your celebration to life — from concept to install. Every project is
+    bespoke, so tell us what you have in mind and we'll take it from there.
+  </p>
+  <div class="intro__actions">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+</section>
+
+@for (offering of offerings; track offering.id) {
+  <section class="service" [id]="offering.id" [attr.aria-labelledby]="offering.id + '-heading'">
+    <div class="service__head">
+      <h2 [id]="offering.id + '-heading'" class="service__name">{{ offering.name }}</h2>
+      <hr class="service__rule" aria-hidden="true" />
+      <p class="service__blurb">{{ offering.blurb }}</p>
+    </div>
+
+    @if (offering.id === 'floral-services') {
+      <app-floral-showcase />
+    }
+  </section>
+}
+
+<section class="outro">
+  <p class="outro__text">Have an event in mind? Let's design it together.</p>
+  <div class="intro__actions intro__actions--center">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+</section>

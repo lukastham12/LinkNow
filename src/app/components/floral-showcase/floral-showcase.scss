@@ -1,0 +1,76 @@
+// Category groups ----------------------------------------------------------
+
+.group {
+  margin-top: 2.5rem;
+}
+
+.group:first-child {
+  margin-top: 0;
+}
+
+.group__title {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.group__rule {
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  margin: 0 0 1.75rem;
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  margin: 0;
+}
+
+.card__frame {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  // Light surface behind the letterboxed photo so contained (uncropped)
+  // images sit on a clean, consistent panel.
+  background: var(--color-surface);
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  // contain (not cover) so the ENTIRE flower is always visible — nothing is
+  // cropped, even tall/wide subjects like Bird of Paradise.
+  object-fit: contain;
+}
+
+.card__name {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+// Responsive ---------------------------------------------------------------
+
+@media (min-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}

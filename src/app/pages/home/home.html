@@ -10,7 +10,7 @@
       <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
         Enquire on WhatsApp
       </a>
-      <a class="btn btn--ghost" routerLink="/contact">Request a quote</a>
+      <a class="btn btn--ghost" routerLink="/services">View our services</a>
     </div>
   </div>
   <div class="hero__media ph ph--hero" role="img" aria-label="Placeholder for a featured event décor photo">
@@ -55,15 +55,24 @@
 <section class="section" aria-labelledby="testimonials-heading">
   <p class="eyebrow eyebrow--center">Kind words</p>
   <h2 id="testimonials-heading" class="section__title">What clients say</h2>
-  <div class="testimonials">
-    @for (t of testimonials; track t.quote) {
-      <figure class="testimonial">
-        <blockquote class="testimonial__quote">“{{ t.quote }}”</blockquote>
-        <figcaption class="testimonial__author">— {{ t.author }}</figcaption>
-      </figure>
-    }
-  </div>
-  <p class="placeholder-note">Placeholder testimonials — real client reviews to be added.</p>
+  @if (testimonials.length > 0) {
+    <div class="testimonials">
+      @for (t of testimonials; track t.quote) {
+        <figure class="testimonial">
+          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">
+            <span aria-hidden="true">★★★★★</span>
+          </div>
+          <blockquote class="testimonial__quote">“{{ t.quote }}”</blockquote>
+          <figcaption class="testimonial__author">— {{ t.author }}</figcaption>
+        </figure>
+      }
+    </div>
+  } @else {
+    <p class="placeholder-note">
+      Our 5-star Google reviews are coming soon. In the meantime, message us on WhatsApp to hear
+      about recent events.
+    </p>
+  }
 </section>
 
 <!-- ENQUIRY STRIP -->
@@ -74,6 +83,5 @@
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
       Enquire on WhatsApp
     </a>
-    <a class="btn btn--ghost" routerLink="/contact">Contact us</a>
   </div>
 </section>
