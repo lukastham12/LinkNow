@@ -1,18 +1,18 @@
 /* Global styles.
    Brand foundation (see BRIEF.md §7): minimalist & light. A warm off-white
-   canvas, charcoal text, gold used sparingly as an accent. The logo and (later)
-   the décor photography provide the colour — the UI itself stays quiet.
-   These are starting values; the full theme is built out in later phases. */
+   canvas, charcoal text, a soft rose/pink used sparingly as an accent (owner
+   override of the earlier gold accent, ticket 002). The logo and the décor
+   photography provide the colour — the UI itself stays quiet. */
 
 :root {
-  --color-bg: #f6f3ee; /* warm off-white / cream */
+  --color-bg: #faf6f3; /* warm off-white */
   --color-surface: #ffffff;
+  --color-blush: #ffdfe3; /* soft-pink section tint — accent SURFACES only, never text/button fill */
+  --color-rose: #a63f57; /* rose accent — AA on off-white bg and with white text */
+  --color-rose-soft: #c98a99;
   --color-text: #22201c; /* warm near-black charcoal */
   --color-text-muted: #7c766b;
-  --color-gold: #a67c2e; /* deeper gold — legible as an accent on a light bg */
-  --color-gold-strong: #8c6a24; /* darker gold for filled buttons (white text passes WCAG AA) */
-  --color-gold-soft: #b9975a;
-  --color-hairline: rgba(166, 124, 46, 0.4);
+  --color-hairline: rgba(166, 63, 87, 0.35);
   --color-border: rgba(34, 32, 28, 0.14);
 
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;

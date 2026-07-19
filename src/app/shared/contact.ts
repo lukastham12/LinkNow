@@ -17,6 +17,7 @@ export const TIKTOK_URL = 'https://www.tiktok.com/@linknowsg';
 export const NAV_LINKS: readonly { label: string; path: string }[] = [
   { label: 'Home', path: '/' },
   { label: 'Services', path: '/services' },
+  { label: 'Flowers', path: '/flowers' },
   { label: 'Portfolio', path: '/portfolio' },
   { label: 'Testimonials', path: '/testimonials' },
   { label: 'About', path: '/about' },

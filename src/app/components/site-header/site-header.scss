@@ -24,8 +24,12 @@
 
   img {
     width: 44px;
-    height: auto;
+    height: 44px;
     display: block;
+    /* Full original logo.jpg (gold mark on black) — contained as a small,
+       tidy rounded mark so the black block never reads as a dark UI band. */
+    object-fit: contain;
+    border-radius: 6px;
   }
 }
 
@@ -80,7 +84,7 @@
 
 .header__link:hover,
 .header__link--active {
-  color: var(--color-gold);
+  color: var(--color-rose);
 }
 
 /* Desktop / tablet: inline nav, hide the toggle. */

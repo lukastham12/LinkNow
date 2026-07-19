@@ -1,0 +1,161 @@
+// Shared building blocks (mirrors the home page for a consistent look) -------
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.8rem;
+  border-radius: 2px;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.btn--solid {
+  background: var(--color-rose);
+  color: #fff;
+  border: 1px solid var(--color-rose);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
+.btn--ghost {
+  color: var(--color-rose);
+  border: 1px solid var(--color-hairline);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-rose);
+  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
+}
+
+// Intro --------------------------------------------------------------------
+
+.intro {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1rem;
+}
+
+.intro__title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.intro__lede {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  max-width: 56ch;
+  font-size: 1rem;
+}
+
+.intro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.intro__actions--center {
+  justify-content: center;
+}
+
+// Category groups ----------------------------------------------------------
+
+.group {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 0.5rem;
+}
+
+.group__title {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.group__rule {
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  margin: 0 0 1.75rem;
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  margin: 0;
+}
+
+.card__frame {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.card__name {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+// Outro --------------------------------------------------------------------
+
+.outro {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.outro__text {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+// Responsive ---------------------------------------------------------------
+
+@media (min-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}

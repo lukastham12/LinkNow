@@ -102,19 +102,21 @@ Two segments:
 > neon glows, no drop-shadows, no busy decoration.**
 
 - **Feeling (keywords):** minimalist · light · airy · elegant · refined · premium. Understated, editorial luxury.
-- **Identity:** warm off-white canvas + charcoal text + **gold as a sparing accent**. Colour comes from the **logo and the photography**; the UI stays quiet.
+- **Identity:** warm off-white canvas + charcoal text + **soft rose/pink as a sparing accent**. Colour comes from the **logo and the photography**; the UI stays quiet.
   - **Brand name:** the logo's cursive script (shown via the logo image, not re-created in CSS).
   - **Supporting text:** refined **spaced capitals**, generous letter-spacing, modest sizes.
-- **Design approach:** **Image-led + minimalist** — generous whitespace, thin hairline gold dividers, thin-outline or text buttons (no filled/glowing pills). Let photography carry the visual weight.
-- **Logo:** gold interlocking-links mark above a gold script "Linknow" and spaced-caps "EVENTS CO."
-  - **Original file:** `public/brand/logo.jpg` (black background — use only on dark surfaces, e.g. a photo overlay or a dark footer if any).
-  - **Light-background version:** `public/brand/logo-transparent.png` — the black background knocked out to transparency. **Use this one on the light UI** (header/nav, hero). Regenerate from the JPG with the Pillow script if needed.
-  - **Placement:** header/nav and footer (wired up in Phase 6).
-- **Palette (implemented in `src/styles.scss`):**
-  - Background: `#f6f3ee` (warm off-white); surface `#ffffff`
-  - Gold accent: `#a67c2e` (deeper gold, legible on light); softer `#b9975a`
+- **Design approach:** **Image-led + minimalist** — generous whitespace, thin hairline rose dividers, thin-outline or text buttons (no filled/glowing pills). The one solid button is a flat rose fill with white text. Let photography carry the visual weight.
+- **Accent update (Owner override, ticket 002):** the accent shifted from **gold to a soft rose/pink** family so the brand reads softer and more floral while staying minimalist, light and accessible. The site canvas stays off-white; rose is used sparingly.
+- **Logo (Owner override, ticket 002):** gold interlocking-links mark above a gold script "Linknow" and spaced-caps "EVENTS CO."
+  - **File in use:** the **full original** `public/brand/logo.jpg` (gold mark on its black background) is used on the light UI (header/nav + footer), presented as a **small, cleanly-contained rounded mark** so the black block reads as a tidy logo, not a dark band across the UI. **This deliberately overrides the earlier rule that reserved `logo.jpg` for dark surfaces and used `logo-transparent.png` on the light UI.**
+  - **Alternate file:** `public/brand/logo-transparent.png` (transparent background) remains in the repo but is not currently wired into the UI.
+  - **Placement:** header/nav and footer.
+- **Palette (implemented in `src/styles.scss` — owner-confirmed, ticket 002):**
+  - Background: `#faf6f3` (warm off-white); surface `#ffffff`
+  - Rose accent: `#a63f57` (AA on off-white bg and with white text); softer `#c98a99`
+  - Blush section tint: `#ffdfe3` (accent surfaces ONLY — never body-text fill or button/text colour)
   - Text: `#22201c` (warm charcoal); muted text `#7c766b`
-  - Gold hairline: `rgba(166, 124, 46, 0.4)`; neutral border `rgba(34, 32, 28, 0.14)`
+  - Rose hairline: `rgba(166, 63, 87, 0.35)`; neutral border `rgba(34, 32, 28, 0.14)`
 
 ---
 

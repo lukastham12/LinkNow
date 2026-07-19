@@ -20,7 +20,10 @@
 
   img {
     width: 64px;
-    height: auto;
+    height: 64px;
+    /* Full original logo.jpg contained as a small tidy rounded mark. */
+    object-fit: contain;
+    border-radius: 8px;
   }
 }
 
@@ -47,7 +50,7 @@
 }
 
 .footer__link:hover {
-  color: var(--color-gold);
+  color: var(--color-rose);
 }
 
 .footer__contact {
@@ -59,7 +62,7 @@
 
 .footer__cta {
   display: inline-block;
-  color: var(--color-gold);
+  color: var(--color-rose);
   text-decoration: none;
   font-size: 0.72rem;
   letter-spacing: var(--track-mid);
@@ -73,8 +76,8 @@
 }
 
 .footer__cta:hover {
-  border-color: var(--color-gold);
-  background-color: rgba(166, 124, 46, 0.06);
+  border-color: var(--color-rose);
+  background-color: color-mix(in srgb, var(--color-rose) 7%, transparent);
 }
 
 .footer__email {
@@ -84,7 +87,7 @@
 }
 
 .footer__email:hover {
-  color: var(--color-gold);
+  color: var(--color-rose);
 }
 
 .footer__social {
@@ -99,7 +102,7 @@
   }
 
   a:hover {
-    color: var(--color-gold);
+    color: var(--color-rose);
   }
 }
 

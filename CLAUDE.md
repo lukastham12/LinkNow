@@ -69,13 +69,13 @@ Practical upshot for any agent: keep the code lint-clean, don't introduce vulner
 
 ## Brand & tone rules (from BRIEF.md §7)
 
-- **Look:** **minimalist & LIGHT.** Warm off-white canvas, charcoal text, gold as a *sparing* accent. Restrained, airy, premium — colour comes from the logo and photography, not the UI. The black-and-gold logo does NOT make the site dark. **No dark full-page backgrounds, no neon glows, no drop-shadows, no busy decoration** (owner directive, Phase 3). Palette lives in `src/styles.scss` (bg `#f6f3ee`, gold accent `#a67c2e`, text `#22201c`).
-- **Logo on light UI:** use `public/brand/logo-transparent.png` (transparent background). The original `logo.jpg` has a black background — only for dark surfaces.
+- **Look:** **minimalist & LIGHT.** Warm off-white canvas, charcoal text, **soft rose/pink** as a *sparing* accent (owner override, ticket 002 — replaces the earlier gold accent). Restrained, airy, premium — colour comes from the logo and photography, not the UI. The black-and-gold logo does NOT make the site dark. **No dark full-page backgrounds, no neon glows, no drop-shadows, no busy decoration** (owner directive, Phase 3). Palette lives in `src/styles.scss` (bg `#faf6f3`, rose accent `#a63f57`, softer rose `#c98a99`, blush tint `#ffdfe3`, text `#22201c`). Use `--color-blush` only as a section tint/accent surface — never as a text or button-fill colour.
+- **Logo on light UI (owner override, ticket 002):** use the **full original** `public/brand/logo.jpg` (gold mark on black background), presented as a small, cleanly-contained rounded mark (so the black block reads as a tidy logo, not a dark band). This **overrides** the earlier rule that used `logo-transparent.png` on light UI / reserved `logo.jpg` for dark surfaces. `logo-transparent.png` remains in the repo but is not currently wired in.
 - **Type:** cursive **script** feel for the brand name; refined **spaced capitals** for supporting/section labels.
 - **Voice:** warm, high-end, celebratory; concise. Speaks to both retail (birthdays, weddings, personal celebrations) and corporate clients.
 - **Design priority:** **mobile-first** and **image-led** — the décor photography carries the design. Optimise images, lazy-load, provide alt text.
 - **Accessibility:** maintain sufficient contrast for gold-on-black; alt text on all décor images.
-- **Logo files:** `public/brand/logo-transparent.png` (for the light UI — use this by default) and `public/brand/logo.jpg` (original, black background — dark surfaces only). Used in header/nav and footer — wire it up in Phase 6.
+- **Logo files:** `public/brand/logo.jpg` (original, gold mark on black — **now used on the light UI** as a small contained rounded mark, ticket 002 owner override) and `public/brand/logo-transparent.png` (transparent background — kept in repo, not currently wired in). Used in header/nav and footer.
 
 ## Agent team & delivery pipeline
 

@@ -27,23 +27,23 @@
 }
 
 .btn--solid {
-  background: var(--color-gold-strong);
+  background: var(--color-rose);
   color: #fff;
-  border: 1px solid var(--color-gold-strong);
+  border: 1px solid var(--color-rose);
 }
 
 .btn--solid:hover {
-  background: color-mix(in srgb, var(--color-gold-strong) 88%, #000);
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
 }
 
 .btn--ghost {
-  color: var(--color-gold);
+  color: var(--color-rose);
   border: 1px solid var(--color-hairline);
 }
 
 .btn--ghost:hover {
-  border-color: var(--color-gold);
-  background: rgba(166, 124, 46, 0.06);
+  border-color: var(--color-rose);
+  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
 }
 
 // Placeholder image panels (clearly marked; swap for real photos) ----------
