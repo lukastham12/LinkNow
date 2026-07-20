@@ -19,14 +19,69 @@
 
     <nav id="primary-nav" class="header__nav" [class.header__nav--open]="menuOpen()" aria-label="Primary">
       @for (link of navLinks; track link.path) {
-        <a
-          class="header__link"
-          [routerLink]="link.path"
-          routerLinkActive="header__link--active"
-          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
-          (click)="closeMenu()"
-          >{{ link.label }}</a
-        >
+        @if (link.children) {
+          <div
+            #item
+            class="header__item"
+            (mouseenter)="openDropdownFor(link.label)"
+            (mouseleave)="closeDropdown()"
+            (focusin)="openDropdownFor(link.label)"
+            (focusout)="onItemFocusOut($event, item)"
+          >
+            <div class="header__item-row">
+              <a
+                class="header__link"
+                [routerLink]="link.path"
+                routerLinkActive="header__link--active"
+                (click)="closeMenu()"
+                >{{ link.label }}</a
+              >
+              <button
+                type="button"
+                class="header__caret"
+                aria-haspopup="true"
+                [attr.aria-expanded]="isDropdownOpen(link.label)"
+                [attr.aria-controls]="link.label + '-submenu'"
+                [attr.aria-label]="
+                  (isDropdownOpen(link.label) ? 'Collapse ' : 'Expand ') + link.label + ' menu'
+                "
+                (click)="toggleDropdown(link.label)"
+                (keydown.escape)="closeDropdown()"
+              >
+                <span class="header__caret-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+            <ul
+              class="submenu"
+              [id]="link.label + '-submenu'"
+              [class.submenu--open]="isDropdownOpen(link.label)"
+            >
+              @for (child of link.children; track child.path + (child.fragment ?? '')) {
+                <li class="submenu__item">
+                  <a
+                    class="submenu__link"
+                    [routerLink]="child.path"
+                    [fragment]="child.fragment"
+                    routerLinkActive="submenu__link--active"
+                    (click)="closeMenu()"
+                    (keydown.escape)="closeDropdown()"
+                    >{{ child.label }}</a
+                  >
+                </li>
+              }
+            </ul>
+          </div>
+        } @else {
+          <a
+            class="header__link"
+            [routerLink]="link.path"
+            routerLinkActive="header__link--active"
+            [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+            (click)="closeMenu()"
+            >{{ link.label }}</a
+          >
+        }
       }
     </nav>
   </div>

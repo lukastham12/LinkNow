@@ -14,11 +14,37 @@ export const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIC
 export const INSTAGRAM_URL = 'https://www.instagram.com/linknowsg/';
 export const TIKTOK_URL = 'https://www.tiktok.com/@linknowsg';
 
-// Primary navigation used by the header (and footer). Floral lives under
-// Services; there is no Flowers or Contact tab (WhatsApp-only).
-export const NAV_LINKS: readonly { label: string; path: string }[] = [
+// Primary navigation used by the header (and footer).
+//
+// Floral is NOT a top-level tab (WhatsApp-only site, no Contact tab): the
+// Floral Showcase page (/flowers) is reachable only via the "Services"
+// dropdown and the Floral Services card on /services. The Services item
+// therefore carries `children` — the header renders them as an accessible
+// dropdown/submenu, while the footer ignores them and just lists the top level.
+export interface NavChild {
+  label: string;
+  path: string;
+  // Optional in-page anchor on the target route (e.g. #backdrops on /services).
+  fragment?: string;
+}
+
+export interface NavLink {
+  label: string;
+  path: string;
+  children?: readonly NavChild[];
+}
+
+export const NAV_LINKS: readonly NavLink[] = [
   { label: 'Home', path: '/' },
-  { label: 'Services', path: '/services' },
+  {
+    label: 'Services',
+    path: '/services',
+    children: [
+      { label: 'Custom Backdrops', path: '/services', fragment: 'backdrops' },
+      { label: 'Floral Services', path: '/flowers' },
+      { label: 'Setup-Only Labour', path: '/services', fragment: 'setup' },
+    ],
+  },
   { label: 'Portfolio', path: '/portfolio' },
   { label: 'Testimonials', path: '/testimonials' },
   { label: 'About', path: '/about' },

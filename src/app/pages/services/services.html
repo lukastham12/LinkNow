@@ -12,19 +12,48 @@
   </div>
 </section>
 
-@for (offering of offerings; track offering.id) {
-  <section class="service" [id]="offering.id" [attr.aria-labelledby]="offering.id + '-heading'">
-    <div class="service__head">
-      <h2 [id]="offering.id + '-heading'" class="service__name">{{ offering.name }}</h2>
-      <hr class="service__rule" aria-hidden="true" />
-      <p class="service__blurb">{{ offering.blurb }}</p>
-    </div>
-
-    @if (offering.id === 'floral-services') {
-      <app-floral-showcase />
+<section class="grid-section" aria-label="Our services">
+  <ul class="cards">
+    @for (card of cards; track card.id) {
+      <li class="cards__item">
+        <a
+          class="card"
+          [routerLink]="card.path"
+          [fragment]="card.fragment"
+          [attr.aria-label]="'Explore ' + card.name"
+        >
+          <span class="card__media">
+            <img
+              class="card__img"
+              [class.card__img--placeholder]="card.isPlaceholderImage"
+              [src]="card.image"
+              [alt]="card.imageAlt"
+              loading="lazy"
+            />
+          </span>
+          <span class="card__body">
+            <span class="card__name">{{ card.name }}</span>
+            <span class="card__blurb">{{ card.blurb }}</span>
+            <span class="card__explore" aria-hidden="true">Explore &rarr;</span>
+          </span>
+        </a>
+      </li>
     }
-  </section>
-}
+  </ul>
+</section>
+
+<section class="details" aria-label="Service details">
+  @for (card of cards; track card.id) {
+    <article class="detail" [id]="card.id" [attr.aria-labelledby]="card.id + '-heading'">
+      <h2 [id]="card.id + '-heading'" class="detail__name">{{ card.name }}</h2>
+      <hr class="detail__rule" aria-hidden="true" />
+      <p class="detail__text">{{ card.detail }}</p>
+      @if (card.id === 'floral') {
+        <a class="detail__link" routerLink="/flowers">View the Floral Showcase &rarr;</a>
+      }
+    </article>
+  }
+</section>
 
 <section class="outro">
   <p class="outro__text">Have an event in mind? Let's design it together.</p>

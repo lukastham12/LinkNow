@@ -57,12 +57,13 @@ Two segments:
 | Page | Purpose | Key content |
 |------|---------|-------------|
 | **Home** | First impression + funnel to enquiry | Hero (logo, tagline, WhatsApp CTA), services overview, portfolio teaser, testimonials teaser, WhatsApp CTA |
-| **Services** | Explain the full offering | Custom backdrops · **Floral services (includes the floral showcase gallery)** · Setup-only labour (materials supplied by client) |
+| **Services** | Explain the full offering | Card grid: Custom backdrops · **Floral services** · Setup-only labour (materials supplied by client). The Floral card links to the **Floral Showcase** page (`/flowers`, the gallery); Backdrops/Setup link to detail blocks on the page. |
+| **Floral Showcase** (`/flowers`) | The floral gallery | 42-item flower gallery (photo + name only, no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Floral Services card. |
 | **Portfolio** | Proof of work | Gallery of décor photos; embed/link TikTok content; past clients |
 | **Testimonials** | Social proof | **Real 5-star Google reviews only** (data-driven; placeholder until supplied) |
 | **About** | Who we are | Company story, team, what makes us different |
 
-_Note: there is **no Contact/Enquiry page** and no Flowers tab. Floral lives under Services; enquiries are WhatsApp-only (floating button + in-page CTAs)._
+_Note: there is **no Contact/Enquiry page** and no top-level Flowers tab. Floral lives under Services — the Floral Showcase page (`/flowers`) is reachable via the **Services nav dropdown** and the Floral Services card, not a top tab. Enquiries are WhatsApp-only (floating button + in-page CTAs)._
 
 ---
 

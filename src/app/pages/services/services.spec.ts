@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Services } from './services';
-import { FLOWER_CATALOGUE } from '../../components/floral-showcase/catalogue';
 
 describe('Services', () => {
   beforeEach(async () => {
@@ -26,13 +25,43 @@ describe('Services', () => {
     expect(text).toContain('Setup-Only Labour');
   });
 
-  it('embeds the floral showcase gallery with every catalogue item', () => {
+  it('renders a 3-card service grid, each with an image and an Explore affordance', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const totalItems = FLOWER_CATALOGUE.reduce((n, g) => n + g.items.length, 0);
-    expect(el.querySelector('app-floral-showcase')).toBeTruthy();
-    expect(el.querySelectorAll('.grid img').length).toBe(totalItems);
+    const cards = Array.from(el.querySelectorAll('a.card')) as HTMLAnchorElement[];
+    expect(cards.length).toBe(3);
+    for (const card of cards) {
+      expect(card.querySelector('img.card__img')).toBeTruthy();
+      expect(card.textContent ?? '').toContain('Explore');
+    }
+  });
+
+  it('links the Floral card to /flowers and the others to in-page anchors', () => {
+    const fixture = TestBed.createComponent(Services);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const hrefs = (Array.from(el.querySelectorAll('a.card')) as HTMLAnchorElement[]).map((a) =>
+      a.getAttribute('href'),
+    );
+    expect(hrefs).toContain('/flowers');
+    expect(hrefs).toContain('/services#backdrops');
+    expect(hrefs).toContain('/services#setup');
+  });
+
+  it('has detail blocks anchored at #backdrops and #setup', () => {
+    const fixture = TestBed.createComponent(Services);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('#backdrops')).toBeTruthy();
+    expect(el.querySelector('#setup')).toBeTruthy();
+  });
+
+  it('does not embed the floral gallery (it now lives on /flowers)', () => {
+    const fixture = TestBed.createComponent(Services);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('app-floral-showcase')).toBeNull();
   });
 
   it('uses the canonical generic WhatsApp link only (no email/quote/contact)', () => {

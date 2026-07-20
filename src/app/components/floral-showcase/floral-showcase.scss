@@ -49,9 +49,11 @@
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  // contain (not cover) so the ENTIRE flower is always visible — nothing is
-  // cropped, even tall/wide subjects like Bird of Paradise.
+  // The 42 photos are normalized to uniform white squares, so a 1:1 tile with
+  // contain keeps the grid visually consistent while never cropping a subject
+  // (e.g. tall Bird of Paradise). White card background blends the padding.
   object-fit: contain;
+  background: var(--color-surface);
 }
 
 .card__name {

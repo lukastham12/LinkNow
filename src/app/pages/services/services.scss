@@ -64,25 +64,135 @@
   justify-content: center;
 }
 
-// Service sections ---------------------------------------------------------
+// Service card grid --------------------------------------------------------
 
-.service {
+.grid-section {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 2.5rem 1.25rem 0.5rem;
+  padding: 1.5rem 1.25rem 0.5rem;
 }
 
-.service__head {
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  // Mobile-first: single column, then responsive tracks.
+  grid-template-columns: 1fr;
+}
+
+.cards__item {
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  // Subtle hover lift — no heavy shadow (minimalist/light).
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--color-rose);
+  outline: none;
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-rose);
+  outline-offset: 2px;
+}
+
+.card__media {
+  display: block;
+  background: var(--color-surface);
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.card__img--placeholder {
+  // The labelled SVG placeholder already fills its box — contain keeps its
+  // proportions tidy without cropping the label.
+  object-fit: contain;
+  background: var(--color-bg);
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.1rem 1.2rem 1.3rem;
+}
+
+.card__name {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card__blurb {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.card__explore {
+  margin-top: 0.4rem;
+  color: var(--color-rose);
+  font-size: 0.72rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Detail blocks (anchor targets for the cards) -----------------------------
+
+.details {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 0.5rem;
+}
+
+.detail {
   max-width: 60ch;
+  padding: 1.5rem 0;
+  // Offset so the sticky header doesn't cover the anchored heading.
+  scroll-margin-top: 5rem;
 }
 
-.service__name {
+.detail__name {
   margin: 0 0 0.75rem;
   font-size: clamp(1.3rem, 3.5vw, 1.75rem);
   font-weight: 600;
 }
 
-.service__rule {
+.detail__rule {
   border: 0;
   border-top: 1px solid var(--color-hairline);
   margin: 0 0 1rem;
@@ -90,10 +200,22 @@
   margin-left: 0;
 }
 
-.service__blurb {
-  margin: 0 0 1.5rem;
+.detail__text {
+  margin: 0 0 1rem;
   color: var(--color-text-muted);
   font-size: 1rem;
+}
+
+.detail__link {
+  color: var(--color-rose);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+}
+
+.detail__link:hover {
+  text-decoration: underline;
 }
 
 // Outro --------------------------------------------------------------------
