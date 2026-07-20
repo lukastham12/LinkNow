@@ -84,6 +84,9 @@
 
 .cards__item {
   margin: 0;
+  // Offset so the sticky header doesn't cover a card scrolled to via the
+  // Services dropdown's #backdrops / #setup anchors.
+  scroll-margin-top: 5rem;
 }
 
 .card {
@@ -102,16 +105,21 @@
     border-color 0.2s ease;
 }
 
-.card:hover,
-.card:focus-visible {
+// Only the interactive (linked) card lifts/highlights on hover.
+a.card:hover,
+a.card:focus-visible {
   transform: translateY(-4px);
   border-color: var(--color-rose);
   outline: none;
 }
 
-.card:focus-visible {
+a.card:focus-visible {
   outline: 2px solid var(--color-rose);
   outline-offset: 2px;
+}
+
+.card--static {
+  cursor: default;
 }
 
 .card__media {
@@ -169,53 +177,6 @@
   .cards {
     grid-template-columns: repeat(3, 1fr);
   }
-}
-
-// Detail blocks (anchor targets for the cards) -----------------------------
-
-.details {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 0.5rem;
-}
-
-.detail {
-  max-width: 60ch;
-  padding: 1.5rem 0;
-  // Offset so the sticky header doesn't cover the anchored heading.
-  scroll-margin-top: 5rem;
-}
-
-.detail__name {
-  margin: 0 0 0.75rem;
-  font-size: clamp(1.3rem, 3.5vw, 1.75rem);
-  font-weight: 600;
-}
-
-.detail__rule {
-  border: 0;
-  border-top: 1px solid var(--color-hairline);
-  margin: 0 0 1rem;
-  max-width: 3.5rem;
-  margin-left: 0;
-}
-
-.detail__text {
-  margin: 0 0 1rem;
-  color: var(--color-text-muted);
-  font-size: 1rem;
-}
-
-.detail__link {
-  color: var(--color-rose);
-  text-decoration: none;
-  font-size: 0.72rem;
-  letter-spacing: var(--track-mid);
-  text-transform: uppercase;
-}
-
-.detail__link:hover {
-  text-decoration: underline;
 }
 
 // Outro --------------------------------------------------------------------

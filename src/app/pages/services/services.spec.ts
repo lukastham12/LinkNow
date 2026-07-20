@@ -25,31 +25,28 @@ describe('Services', () => {
     expect(text).toContain('Setup-Only Labour');
   });
 
-  it('renders a 3-card service grid, each with an image and an Explore affordance', () => {
+  it('renders a 3-card service grid, each with an image', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const cards = Array.from(el.querySelectorAll('a.card')) as HTMLAnchorElement[];
+    const cards = Array.from(el.querySelectorAll('.card'));
     expect(cards.length).toBe(3);
     for (const card of cards) {
       expect(card.querySelector('img.card__img')).toBeTruthy();
-      expect(card.textContent ?? '').toContain('Explore');
     }
   });
 
-  it('links the Floral card to /flowers and the others to in-page anchors', () => {
+  it('links only the Floral card to /flowers (Backdrops/Setup are informational)', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const hrefs = (Array.from(el.querySelectorAll('a.card')) as HTMLAnchorElement[]).map((a) =>
-      a.getAttribute('href'),
-    );
-    expect(hrefs).toContain('/flowers');
-    expect(hrefs).toContain('/services#backdrops');
-    expect(hrefs).toContain('/services#setup');
+    const linkedCards = Array.from(el.querySelectorAll('a.card')) as HTMLAnchorElement[];
+    expect(linkedCards.length).toBe(1);
+    expect(linkedCards[0].getAttribute('href')).toBe('/flowers');
+    expect(linkedCards[0].textContent ?? '').toContain('Explore');
   });
 
-  it('has detail blocks anchored at #backdrops and #setup', () => {
+  it('exposes #backdrops and #setup anchor targets for the Services dropdown', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
