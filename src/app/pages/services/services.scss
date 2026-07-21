@@ -131,13 +131,12 @@ a.card:focus-visible {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  // Flower cut-outs sit on white — contain shows the whole bloom (no cropping).
+  object-fit: contain;
+  background: var(--color-surface);
 }
 
 .card__img--placeholder {
-  // The labelled SVG placeholder already fills its box — contain keeps its
-  // proportions tidy without cropping the label.
-  object-fit: contain;
   background: var(--color-bg);
 }
 

@@ -63,9 +63,17 @@
   text-transform: uppercase;
 }
 
-.ph--hero {
-  min-height: 260px;
-  border-radius: 4px;
+.hero__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__flower {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  height: auto;
 }
 
 .ph--service {
