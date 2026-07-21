@@ -34,11 +34,11 @@ export class Corporate {
   protected readonly photos: CorporatePhoto[] = [
     {
       src: '/backdrops/backdrop-08.jpg',
-      alt: 'In-store corporate event styled for Avocaderia',
+      alt: 'In-store Easter event styled for Avocaderia — storefront view',
     },
     {
       src: '/backdrops/backdrop-09.jpg',
-      alt: 'In-store corporate event styled for Avocaderia',
+      alt: 'In-store Easter event styled for Avocaderia — pastel balloon backdrop',
     },
   ];
 

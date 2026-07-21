@@ -8,8 +8,8 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    // anchorScrolling makes the Services dropdown's #corporate fragment link
-    // scroll to that card on /services.
+    // anchorScrolling: enables in-page #fragment scrolling and scroll
+    // restoration across route changes (kept general; no critical dependency).
     provideRouter(
       routes,
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),

@@ -43,7 +43,7 @@ describe('Corporate (Corporate Events page)', () => {
     expect(srcs).toContain('/backdrops/backdrop-08.jpg');
     expect(srcs).toContain('/backdrops/backdrop-09.jpg');
     for (const img of imgs) {
-      expect(img.getAttribute('alt')).toBe('In-store corporate event styled for Avocaderia');
+      expect(img.getAttribute('alt') ?? '').toContain('Avocaderia');
       expect(img.getAttribute('loading')).toBe('lazy');
     }
   });
