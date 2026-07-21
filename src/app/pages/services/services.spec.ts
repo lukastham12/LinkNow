@@ -22,7 +22,8 @@ describe('Services', () => {
     const text = el.textContent ?? '';
     expect(text).toContain('Custom Backdrops');
     expect(text).toContain('Floral Services');
-    expect(text).toContain('Setup-Only Labour');
+    expect(text).toContain('Corporate Events');
+    expect(text).not.toContain('Setup-Only Labour');
   });
 
   it('renders a 3-card service grid, each with an image', () => {
@@ -36,22 +37,25 @@ describe('Services', () => {
     }
   });
 
-  it('links only the Floral card to /flowers (Backdrops/Setup are informational)', () => {
+  it('links Custom Backdrops → /backdrops and Floral → /flowers (Corporate is informational)', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const linkedCards = Array.from(el.querySelectorAll('a.card')) as HTMLAnchorElement[];
-    expect(linkedCards.length).toBe(1);
-    expect(linkedCards[0].getAttribute('href')).toBe('/flowers');
-    expect(linkedCards[0].textContent ?? '').toContain('Explore');
+    expect(linkedCards.length).toBe(2);
+    const hrefs = linkedCards.map((a) => a.getAttribute('href'));
+    expect(hrefs).toContain('/backdrops');
+    expect(hrefs).toContain('/flowers');
+    const backdrops = linkedCards.find((a) => (a.textContent ?? '').includes('Custom Backdrops'));
+    expect(backdrops?.getAttribute('href')).toBe('/backdrops');
   });
 
-  it('exposes #backdrops and #setup anchor targets for the Services dropdown', () => {
+  it('exposes #backdrops and #corporate anchor targets for the Services dropdown', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.querySelector('#backdrops')).toBeTruthy();
-    expect(el.querySelector('#setup')).toBeTruthy();
+    expect(el.querySelector('#corporate')).toBeTruthy();
   });
 
   it('does not embed the floral gallery (it now lives on /flowers)', () => {

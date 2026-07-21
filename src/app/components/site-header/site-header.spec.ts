@@ -49,15 +49,17 @@ describe('SiteHeader', () => {
     expect(caret.getAttribute('aria-controls')).toBe(submenu.id);
   });
 
-  it('lists the three service children, with Floral Services linking to /flowers', () => {
+  it('lists the three service children, with Floral → /flowers and Custom Backdrops → /backdrops', () => {
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const links = Array.from(el.querySelectorAll('.submenu__link')) as HTMLAnchorElement[];
     const labels = links.map((a) => a.textContent?.trim());
-    expect(labels).toEqual(['Custom Backdrops', 'Floral Services', 'Setup-Only Labour']);
+    expect(labels).toEqual(['Custom Backdrops', 'Floral Services', 'Corporate Events']);
     const floral = links.find((a) => a.textContent?.includes('Floral Services'));
     expect(floral?.getAttribute('href')).toBe('/flowers');
+    const backdrops = links.find((a) => a.textContent?.includes('Custom Backdrops'));
+    expect(backdrops?.getAttribute('href')).toBe('/backdrops');
   });
 
   it('opens the dropdown on keyboard focus (focusin) and reflects it in aria-expanded', () => {

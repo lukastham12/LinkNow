@@ -31,9 +31,7 @@
   <div class="services">
     @for (service of services; track service.name) {
       <article class="service">
-        <div class="ph ph--service" role="img" [attr.aria-label]="'Placeholder photo for ' + service.name">
-          <span class="ph__label">Photo</span>
-        </div>
+        <img class="service__img" [src]="service.image" [alt]="service.imageAlt" loading="lazy" />
         <h3 class="service__name">{{ service.name }}</h3>
         <p class="service__blurb">{{ service.blurb }}</p>
       </article>
@@ -46,21 +44,19 @@
   <p class="eyebrow eyebrow--center">Our work</p>
   <h2 id="portfolio-heading" class="section__title">Recent events</h2>
   <div class="portfolio">
-    @for (item of portfolio; track item) {
-      <div class="ph ph--tile" role="img" aria-label="Placeholder event photo">
-        <span class="ph__label">Photo</span>
-      </div>
+    @for (item of portfolio; track item.image) {
+      <img class="portfolio__img" [src]="item.image" [alt]="item.alt" loading="lazy" />
     }
   </div>
   <div class="section__cta">
-    <a class="btn btn--ghost" routerLink="/portfolio">View full portfolio</a>
+    <a class="btn btn--ghost" routerLink="/backdrops">View full portfolio</a>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="section" aria-labelledby="testimonials-heading">
-  <p class="eyebrow eyebrow--center">Kind words</p>
-  <h2 id="testimonials-heading" class="section__title">What clients say</h2>
+  <p class="eyebrow eyebrow--center">Testimonials</p>
+  <h2 id="testimonials-heading" class="section__title">Client Testimonials</h2>
   @if (testimonials.length > 0) {
     <div class="testimonials">
       @for (t of testimonials; track t.quote) {
@@ -69,7 +65,7 @@
             <span aria-hidden="true">★★★★★</span>
           </div>
           <blockquote class="testimonial__quote">“{{ t.quote }}”</blockquote>
-          <figcaption class="testimonial__author">— {{ t.author }}</figcaption>
+          <figcaption class="testimonial__author">Verified Google review</figcaption>
         </figure>
       }
     </div>

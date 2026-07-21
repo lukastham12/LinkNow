@@ -46,23 +46,6 @@
   background: color-mix(in srgb, var(--color-rose) 7%, transparent);
 }
 
-// Placeholder image panels (clearly marked; swap for real photos) ----------
-
-.ph {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #efe9df 0%, #e6ddcf 100%);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-}
-
-.ph__label {
-  font-size: 0.62rem;
-  letter-spacing: var(--track-mid);
-  text-transform: uppercase;
-}
-
 .hero__media {
   display: flex;
   align-items: center;
@@ -76,15 +59,23 @@
   height: auto;
 }
 
-.ph--service {
+.service__img {
+  display: block;
+  width: 100%;
   aspect-ratio: 4 / 3;
+  object-fit: cover;
   border-radius: 4px;
+  border: 1px solid var(--color-border);
   margin-bottom: 1rem;
 }
 
-.ph--tile {
+.portfolio__img {
+  display: block;
+  width: 100%;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: 4px;
+  border: 1px solid var(--color-border);
 }
 
 // Layout -------------------------------------------------------------------

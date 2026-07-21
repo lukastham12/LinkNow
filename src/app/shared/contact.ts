@@ -40,9 +40,9 @@ export const NAV_LINKS: readonly NavLink[] = [
     label: 'Services',
     path: '/services',
     children: [
-      { label: 'Custom Backdrops', path: '/services', fragment: 'backdrops' },
+      { label: 'Custom Backdrops', path: '/backdrops' },
       { label: 'Floral Services', path: '/flowers' },
-      { label: 'Setup-Only Labour', path: '/services', fragment: 'setup' },
+      { label: 'Corporate Events', path: '/services', fragment: 'corporate' },
     ],
   },
   { label: 'Portfolio', path: '/portfolio' },

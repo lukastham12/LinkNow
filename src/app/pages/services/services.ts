@@ -8,22 +8,26 @@ interface ServiceCard {
   blurb: string;
   image: string;
   imageAlt: string;
-  // Present only when the card navigates somewhere. The Floral card links to the
-  // /flowers showcase; Backdrops/Setup have no dedicated page yet, so they are
-  // informational cards (the Services-nav dropdown scrolls to them via #id).
+  // Present only when the card navigates somewhere. Custom Backdrops links to
+  // the /backdrops portfolio and Floral to the /flowers showcase; Corporate
+  // Events is an informational card (the Services-nav dropdown scrolls to it
+  // via #corporate).
   link?: string;
   isPlaceholderImage: boolean;
+  // Floral cut-outs sit on white and must show whole (object-fit: contain);
+  // real backdrop scene photos fill the tile (object-fit: cover).
+  isCutout: boolean;
 }
 
 /**
  * Services overview page (route '/services').
  *
  * A modern card grid (image + title + one-line blurb) for the three service
- * lines from BRIEF.md §2: Custom Backdrops, Floral Services and Setup-Only
- * Labour. The Floral card links to the /flowers showcase; the other two are
- * informational (photos TODO) and are the scroll targets for the Services
- * dropdown's #backdrops / #setup anchors. WhatsApp is the only enquiry path —
- * no forms, email, quote button, or pricing.
+ * lines from BRIEF.md §2: Custom Backdrops, Floral Services and Corporate
+ * Events. Custom Backdrops links to the /backdrops portfolio and Floral to the
+ * /flowers showcase; Corporate Events is informational and is the scroll target
+ * for the Services dropdown's #corporate anchor. WhatsApp is the only enquiry
+ * path — no forms, email, quote button, or pricing.
  */
 @Component({
   selector: 'app-services',
@@ -39,10 +43,11 @@ export class Services {
       id: 'backdrops',
       name: 'Custom Backdrops',
       blurb: 'Bespoke backdrops designed and built for birthdays, weddings and corporate events.',
-      // TODO (BRIEF.md §12): replace with a real custom-backdrop photo.
-      image: '/placeholders/backdrops.svg',
-      imageAlt: 'Custom Backdrops — photo coming soon (placeholder)',
-      isPlaceholderImage: true,
+      image: '/backdrops/backdrop-07.jpg',
+      imageAlt: 'A custom pink-and-gold birthday backdrop by Linknow Events Co.',
+      link: '/backdrops',
+      isPlaceholderImage: false,
+      isCutout: false,
     },
     {
       id: 'floral',
@@ -52,15 +57,18 @@ export class Services {
       imageAlt: 'A single fresh rose, representative of our floral services',
       link: '/flowers',
       isPlaceholderImage: false,
+      isCutout: true,
     },
     {
-      id: 'setup',
-      name: 'Setup-Only Labour',
-      blurb: 'Your materials, our hands — a skilled crew to set up your vision.',
-      // TODO (BRIEF.md §12): replace with a real setup/install photo.
-      image: '/placeholders/setup.svg',
-      imageAlt: 'Setup-Only Labour — photo coming soon (placeholder)',
-      isPlaceholderImage: true,
+      id: 'corporate',
+      name: 'Corporate Events',
+      blurb:
+        'Styling and décor for company celebrations, launches and formal occasions — polished ' +
+        'setups your guests will remember.',
+      image: '/backdrops/backdrop-09.jpg',
+      imageAlt: 'A corporate in-store event styled by Linknow Events Co.',
+      isPlaceholderImage: false,
+      isCutout: false,
     },
   ];
 }

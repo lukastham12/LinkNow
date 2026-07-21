@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Services } from './pages/services/services';
 import { Flowers } from './pages/flowers/flowers';
+import { Backdrops } from './pages/backdrops/backdrops';
 
 export const routes: Routes = [
   { path: '', component: Home, title: 'Linknow Events Co. — Singapore Event Décor' },
@@ -9,6 +10,9 @@ export const routes: Routes = [
   // Floral Showcase is its own page, reachable via the Services dropdown and
   // the Floral Services card (not a top-level nav tab).
   { path: 'flowers', component: Flowers, title: 'Floral Showcase — Linknow Events Co.' },
+  // Custom Backdrops portfolio — reachable via the Services dropdown and the
+  // Custom Backdrops service card.
+  { path: 'backdrops', component: Backdrops, title: 'Custom Backdrops — Linknow Events Co.' },
   // Remaining pages (Portfolio, Testimonials, About) are added in later
   // tickets. Unknown paths fall back to the homepage for now.
   { path: '**', redirectTo: '' },

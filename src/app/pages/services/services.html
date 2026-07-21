@@ -22,6 +22,7 @@
               <img
                 class="card__img"
                 [class.card__img--placeholder]="card.isPlaceholderImage"
+                [class.card__img--cover]="!card.isCutout"
                 [src]="card.image"
                 [alt]="card.imageAlt"
                 loading="lazy"
@@ -39,6 +40,7 @@
               <img
                 class="card__img"
                 [class.card__img--placeholder]="card.isPlaceholderImage"
+                [class.card__img--cover]="!card.isCutout"
                 [src]="card.image"
                 [alt]="card.imageAlt"
                 loading="lazy"

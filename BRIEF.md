@@ -15,7 +15,7 @@ A **mobile-first marketing & showcase website** for **LinkNow Pte Ltd** (brand: 
 - **Legal name:** LinkNow Pte Ltd
 - **Brand name:** Linknow Events Co.
 - **Location / market:** Singapore only (reflect in copy and local SEO)
-- **What we do:** Design and build **custom backdrops** for celebrations and formal occasions (birthdays, weddings, corporate events) and provide **floral services**. We also offer **setup-only labour** — if the client already has their materials, we supply the manpower and skill to execute their vision.
+- **What we do:** Three headline service lines — **custom backdrops** for celebrations and formal occasions (birthdays, weddings, corporate events), **floral services**, and **corporate events** (styling and décor for company celebrations, launches and formal occasions, e.g. the Avocaderia in-store event). _(Setup-only labour — supplying just the manpower when the client already has their materials — is still offered on request but is no longer a headline service line; it was replaced by Corporate Events, ticket 006.)_
 
 **Homepage 10-second test:** A visitor immediately understands we create beautiful, professional event décor; sees striking photos of our work; grasps our three service lines; and can reach us on **WhatsApp** in one tap.
 
@@ -57,7 +57,8 @@ Two segments:
 | Page | Purpose | Key content |
 |------|---------|-------------|
 | **Home** | First impression + funnel to enquiry | Hero (logo, tagline, WhatsApp CTA), services overview, portfolio teaser, testimonials teaser, WhatsApp CTA |
-| **Services** | Explain the full offering | Card grid: Custom backdrops · **Floral services** · Setup-only labour (materials supplied by client). The Floral card links to the **Floral Showcase** page (`/flowers`, the gallery); Backdrops/Setup link to detail blocks on the page. |
+| **Services** | Explain the full offering | Card grid: Custom backdrops · **Floral services** · **Corporate events**. The Custom Backdrops card links to the **Backdrops Portfolio** page (`/backdrops`); the Floral card links to the **Floral Showcase** page (`/flowers`, the gallery); Corporate Events is an informational card (scroll target `#corporate`). |
+| **Backdrops Portfolio** (`/backdrops`) | Show the range of custom backdrops | Responsive gallery of real backdrop builds (photo tiles only, no prices) + WhatsApp CTA. **Not a top-level nav tab** — reachable via the Services dropdown and the Custom Backdrops card. |
 | **Floral Showcase** (`/flowers`) | The floral gallery | 42-item flower gallery (photo + name only, no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Floral Services card. |
 | **Portfolio** | Proof of work | Gallery of décor photos; embed/link TikTok content; past clients |
 | **Testimonials** | Social proof | **Real 5-star Google reviews only** (data-driven; placeholder until supplied) |

@@ -1,0 +1,33 @@
+<section class="intro">
+  <p class="eyebrow">Custom Backdrops</p>
+  <h1 class="intro__title">Custom Backdrops</h1>
+  <p class="intro__lede">
+    A look at backdrops we've designed and built across Singapore — for birthdays, weddings and
+    corporate events. Every piece is bespoke to the occasion, so browse for inspiration and tell us
+    what you have in mind.
+  </p>
+  <div class="intro__actions">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+</section>
+
+<section class="gallery" aria-label="Custom backdrops gallery">
+  <ul class="grid">
+    @for (photo of backdrops; track photo.src) {
+      <li class="grid__item">
+        <img class="grid__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+      </li>
+    }
+  </ul>
+</section>
+
+<section class="outro">
+  <p class="outro__text">Want a backdrop like these? Enquire on WhatsApp.</p>
+  <div class="intro__actions intro__actions--center">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+</section>

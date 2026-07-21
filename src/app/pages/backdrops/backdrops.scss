@@ -1,0 +1,125 @@
+// Shared building blocks (mirrors the other pages for a consistent look) -----
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.8rem;
+  border-radius: 2px;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.btn--solid {
+  background: var(--color-rose);
+  color: #fff;
+  border: 1px solid var(--color-rose);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
+// Intro --------------------------------------------------------------------
+
+.intro {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1rem;
+}
+
+.intro__title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.intro__lede {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  max-width: 56ch;
+  font-size: 1rem;
+}
+
+.intro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.intro__actions--center {
+  justify-content: center;
+}
+
+// Gallery grid -------------------------------------------------------------
+
+.gallery {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 0.5rem;
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  // Mobile-first: two columns, then more on wider screens.
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid__item {
+  margin: 0;
+}
+
+.grid__img {
+  display: block;
+  width: 100%;
+  // Consistent tiles for varied source photos; real scenes shown as-is.
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Outro --------------------------------------------------------------------
+
+.outro {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.outro__text {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
