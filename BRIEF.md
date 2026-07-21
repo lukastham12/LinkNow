@@ -56,15 +56,14 @@ Two segments:
 
 | Page | Purpose | Key content |
 |------|---------|-------------|
-| **Home** | First impression + funnel to enquiry | Hero (logo, tagline, WhatsApp CTA), services overview, portfolio teaser, testimonials teaser, WhatsApp CTA |
-| **Services** | Explain the full offering | Card grid: Custom backdrops · **Floral services** · **Corporate events**. The Custom Backdrops card links to the **Backdrops Portfolio** page (`/backdrops`); the Floral card links to the **Floral Showcase** page (`/flowers`, the gallery); Corporate Events is an informational card (scroll target `#corporate`). |
+| **Home** | First impression + funnel to enquiry | Hero (backdrop photo, tagline, WhatsApp CTA), services overview, **"Recent work"** teaser (links to `/services`), testimonials section, WhatsApp CTA |
+| **Services** | Explain the full offering | Card grid: Custom backdrops · **Floral services** · **Corporate events**. The Custom Backdrops card links to the **Backdrops Portfolio** page (`/backdrops`); the Floral card links to the **Floral Showcase** page (`/flowers`, the gallery); the Corporate Events card links to the **Corporate Events** page (`/corporate`). |
 | **Backdrops Portfolio** (`/backdrops`) | Show the range of custom backdrops | Responsive gallery of real backdrop builds (photo tiles only, no prices) + WhatsApp CTA. **Not a top-level nav tab** — reachable via the Services dropdown and the Custom Backdrops card. |
 | **Floral Showcase** (`/flowers`) | The floral gallery | 42-item flower gallery (photo + name only, no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Floral Services card. |
-| **Portfolio** | Proof of work | Gallery of décor photos; embed/link TikTok content; past clients |
-| **Testimonials** | Social proof | **Real 5-star Google reviews only** (data-driven; placeholder until supplied) |
+| **Corporate Events** (`/corporate`) | Décor for companies & formal occasions | Intro + copy on the range (weddings — described, no photos yet — corporate backdrops, product launches, grand openings, D&D, roadshows, festive/seasonal décor), the two Avocaderia in-store photos, and a WhatsApp CTA (no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Corporate Events card. |
 | **About** | Who we are | Company story, team, what makes us different |
 
-_Note: there is **no Contact/Enquiry page** and no top-level Flowers tab. Floral lives under Services — the Floral Showcase page (`/flowers`) is reachable via the **Services nav dropdown** and the Floral Services card, not a top tab. Enquiries are WhatsApp-only (floating button + in-page CTAs)._
+_Note: **Portfolio and Testimonials are not top-level nav pages.** The top nav is **Home · Services · About**. Testimonials is a **homepage section** ("Client Testimonials", real 5-star Google reviews only — data-driven, placeholder until supplied), and the homepage keeps a **"Recent work"** teaser that links to `/services`. There is **no Contact/Enquiry page** and no top-level Flowers tab. Floral and Corporate Events live under Services — their pages (`/flowers`, `/corporate`) are reachable via the **Services nav dropdown** and the respective service cards, not top tabs. Enquiries are WhatsApp-only (floating button + in-page CTAs)._
 
 ---
 

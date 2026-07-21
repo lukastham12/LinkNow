@@ -1,0 +1,47 @@
+<section class="intro">
+  <p class="eyebrow">Corporate Events</p>
+  <h1 class="intro__title">Décor for companies &amp; formal occasions</h1>
+  <p class="intro__lede">
+    From branded stage backdrops to full-room styling, we design and build décor for corporate
+    celebrations and formal occasions across Singapore — polished, on-brand setups your guests and
+    clients will remember.
+  </p>
+  <div class="intro__actions">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Planning a corporate event? Enquire on WhatsApp
+    </a>
+  </div>
+</section>
+
+<section class="showcase" aria-label="Corporate event photos">
+  <ul class="showcase__grid">
+    @for (photo of photos; track photo.src) {
+      <li class="showcase__item">
+        <img class="showcase__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+      </li>
+    }
+  </ul>
+  <p class="showcase__caption">In-store event styled for Avocaderia.</p>
+</section>
+
+<section class="range" aria-labelledby="range-heading">
+  <p class="eyebrow eyebrow--center">What we cover</p>
+  <h2 id="range-heading" class="range__title">A range of corporate occasions</h2>
+  <ul class="range__list">
+    @for (type of eventTypes; track type.name) {
+      <li class="range__item">
+        <h3 class="range__name">{{ type.name }}</h3>
+        <p class="range__blurb">{{ type.blurb }}</p>
+      </li>
+    }
+  </ul>
+</section>
+
+<section class="outro">
+  <p class="outro__text">Planning a corporate event? Let's design it together.</p>
+  <div class="intro__actions intro__actions--center">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Planning a corporate event? Enquire on WhatsApp
+    </a>
+  </div>
+</section>

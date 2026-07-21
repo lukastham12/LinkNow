@@ -14,14 +14,14 @@ describe('SiteHeader', () => {
     expect(TestBed.createComponent(SiteHeader).componentInstance).toBeTruthy();
   });
 
-  it('renders the top-level nav (Home, Services, Portfolio, Testimonials, About) with no Flowers tab', () => {
+  it('renders the top-level nav (Home, Services, About) with no Flowers tab', () => {
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const topLevel = Array.from(el.querySelectorAll('.header__nav > .header__link, .header__item')).map(
       (n) => (n.querySelector('.header__link') ?? n).textContent?.trim(),
     );
-    expect(topLevel).toEqual(['Home', 'Services', 'Portfolio', 'Testimonials', 'About']);
+    expect(topLevel).toEqual(['Home', 'Services', 'About']);
     // Floral is only reachable under the Services dropdown, never a top tab.
     const flowersTopTab = Array.from(el.querySelectorAll('.header__nav > .header__link')).find((a) =>
       /flowers|floral/i.test(a.textContent ?? ''),
@@ -49,7 +49,7 @@ describe('SiteHeader', () => {
     expect(caret.getAttribute('aria-controls')).toBe(submenu.id);
   });
 
-  it('lists the three service children, with Floral → /flowers and Custom Backdrops → /backdrops', () => {
+  it('lists the three service children linking to /backdrops, /flowers and /corporate', () => {
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -60,6 +60,8 @@ describe('SiteHeader', () => {
     expect(floral?.getAttribute('href')).toBe('/flowers');
     const backdrops = links.find((a) => a.textContent?.includes('Custom Backdrops'));
     expect(backdrops?.getAttribute('href')).toBe('/backdrops');
+    const corporate = links.find((a) => a.textContent?.includes('Corporate Events'));
+    expect(corporate?.getAttribute('href')).toBe('/corporate');
   });
 
   it('opens the dropdown on keyboard focus (focusin) and reflects it in aria-expanded', () => {

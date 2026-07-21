@@ -3,6 +3,7 @@ import { Home } from './pages/home/home';
 import { Services } from './pages/services/services';
 import { Flowers } from './pages/flowers/flowers';
 import { Backdrops } from './pages/backdrops/backdrops';
+import { Corporate } from './pages/corporate/corporate';
 
 export const routes: Routes = [
   { path: '', component: Home, title: 'Linknow Events Co. — Singapore Event Décor' },
@@ -13,7 +14,10 @@ export const routes: Routes = [
   // Custom Backdrops portfolio — reachable via the Services dropdown and the
   // Custom Backdrops service card.
   { path: 'backdrops', component: Backdrops, title: 'Custom Backdrops — Linknow Events Co.' },
-  // Remaining pages (Portfolio, Testimonials, About) are added in later
-  // tickets. Unknown paths fall back to the homepage for now.
+  // Corporate Events — informational page reachable via the Services dropdown
+  // and the Corporate Events service card. Registered before the wildcard.
+  { path: 'corporate', component: Corporate, title: 'Corporate Events — Linknow Events Co.' },
+  // Remaining pages (About) are added in later tickets. Unknown paths fall
+  // back to the homepage for now.
   { path: '**', redirectTo: '' },
 ];

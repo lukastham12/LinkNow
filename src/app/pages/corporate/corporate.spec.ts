@@ -1,49 +1,55 @@
 import { TestBed } from '@angular/core/testing';
-import { Backdrops } from './backdrops';
-import { BACKDROPS } from './backdrops.data';
+import { Corporate } from './corporate';
 
-describe('Backdrops (Custom Backdrops portfolio page)', () => {
+describe('Corporate (Corporate Events page)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Backdrops],
+      imports: [Corporate],
     }).compileComponents();
   });
 
   it('should create', () => {
-    expect(TestBed.createComponent(Backdrops).componentInstance).toBeTruthy();
+    expect(TestBed.createComponent(Corporate).componentInstance).toBeTruthy();
   });
 
-  it('has a single "Custom Backdrops" h1', () => {
-    const fixture = TestBed.createComponent(Backdrops);
+  it('has a single "Corporate Events" h1', () => {
+    const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = el.querySelectorAll('h1');
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent).toContain('Custom Backdrops');
   });
 
-  it('lists all 12 backdrop photos with descriptive alt text, lazy-loaded', () => {
-    expect(BACKDROPS.length).toBe(12);
-    const fixture = TestBed.createComponent(Backdrops);
+  it('describes the range of corporate occasions (incl. weddings, described only)', () => {
+    const fixture = TestBed.createComponent(Corporate);
+    fixture.detectChanges();
+    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
+    expect(text).toContain('Weddings');
+    expect(text).toContain('Corporate backdrops');
+    expect(text).toContain('Product launches');
+    expect(text).toContain('Grand openings');
+    expect(text).toMatch(/Dinner\s*&\s*dance/i);
+    expect(text).toContain('Roadshows');
+    expect(text).toMatch(/festive/i);
+  });
+
+  it('shows the two Avocaderia photos with descriptive alt text, lazy-loaded', () => {
+    const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const imgs = Array.from(el.querySelectorAll('.grid__img')) as HTMLImageElement[];
-    expect(imgs.length).toBe(12);
+    const imgs = Array.from(el.querySelectorAll('.showcase__img')) as HTMLImageElement[];
+    expect(imgs.length).toBe(2);
+    const srcs = imgs.map((i) => i.getAttribute('src'));
+    expect(srcs).toContain('/backdrops/backdrop-08.jpg');
+    expect(srcs).toContain('/backdrops/backdrop-09.jpg');
     for (const img of imgs) {
-      expect(img.getAttribute('src')).toMatch(/\/backdrops\/backdrop-\d{2}\.jpg$/);
-      expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
+      expect(img.getAttribute('alt')).toBe('In-store corporate event styled for Avocaderia');
       expect(img.getAttribute('loading')).toBe('lazy');
     }
   });
 
-  it('excludes the Avocaderia corporate photos (backdrop-08, backdrop-09) — now on /corporate', () => {
-    const srcs = BACKDROPS.map((b) => b.src);
-    expect(srcs).not.toContain('/backdrops/backdrop-08.jpg');
-    expect(srcs).not.toContain('/backdrops/backdrop-09.jpg');
-  });
-
   it('uses the canonical generic WhatsApp link only (no email/quote/contact/form)', () => {
-    const fixture = TestBed.createComponent(Backdrops);
+    const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const waLinks = Array.from(
@@ -61,7 +67,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
   });
 
   it('shows NO price, currency or quantity language anywhere (guardrail)', () => {
-    const fixture = TestBed.createComponent(Backdrops);
+    const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
     expect(text).not.toMatch(/\$|SGD|price|from\s*\$/i);

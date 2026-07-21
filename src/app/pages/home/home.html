@@ -15,11 +15,11 @@
   </div>
   <div class="hero__media">
     <img
-      class="hero__flower"
-      src="/brand/hero-flower.png"
-      alt="A fresh pink hydrangea stem"
-      width="699"
-      height="778"
+      class="hero__img"
+      src="/backdrops/backdrop-07.jpg"
+      alt="A custom pink-and-gold event backdrop built by Linknow Events Co."
+      width="1200"
+      height="900"
     />
   </div>
 </section>
@@ -30,11 +30,31 @@
   <h2 id="services-heading" class="section__title">Our services</h2>
   <div class="services">
     @for (service of services; track service.name) {
-      <article class="service">
-        <img class="service__img" [src]="service.image" [alt]="service.imageAlt" loading="lazy" />
-        <h3 class="service__name">{{ service.name }}</h3>
-        <p class="service__blurb">{{ service.blurb }}</p>
-      </article>
+      @if (service.link) {
+        <a class="service service--link" [routerLink]="service.link">
+          <img
+            class="service__img"
+            [class.service__img--contain]="service.isCutout"
+            [src]="service.image"
+            [alt]="service.imageAlt"
+            loading="lazy"
+          />
+          <h3 class="service__name">{{ service.name }}</h3>
+          <p class="service__blurb">{{ service.blurb }}</p>
+        </a>
+      } @else {
+        <article class="service">
+          <img
+            class="service__img"
+            [class.service__img--contain]="service.isCutout"
+            [src]="service.image"
+            [alt]="service.imageAlt"
+            loading="lazy"
+          />
+          <h3 class="service__name">{{ service.name }}</h3>
+          <p class="service__blurb">{{ service.blurb }}</p>
+        </article>
+      }
     }
   </div>
 </section>
@@ -42,14 +62,14 @@
 <!-- PORTFOLIO TEASER -->
 <section class="section section--tint" aria-labelledby="portfolio-heading">
   <p class="eyebrow eyebrow--center">Our work</p>
-  <h2 id="portfolio-heading" class="section__title">Recent events</h2>
+  <h2 id="portfolio-heading" class="section__title">Recent work</h2>
   <div class="portfolio">
     @for (item of portfolio; track item.image) {
       <img class="portfolio__img" [src]="item.image" [alt]="item.alt" loading="lazy" />
     }
   </div>
   <div class="section__cta">
-    <a class="btn btn--ghost" routerLink="/backdrops">View full portfolio</a>
+    <a class="btn btn--ghost" routerLink="/services">See our services</a>
   </div>
 </section>
 

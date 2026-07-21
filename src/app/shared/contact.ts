@@ -42,10 +42,8 @@ export const NAV_LINKS: readonly NavLink[] = [
     children: [
       { label: 'Custom Backdrops', path: '/backdrops' },
       { label: 'Floral Services', path: '/flowers' },
-      { label: 'Corporate Events', path: '/services', fragment: 'corporate' },
+      { label: 'Corporate Events', path: '/corporate' },
     ],
   },
-  { label: 'Portfolio', path: '/portfolio' },
-  { label: 'Testimonials', path: '/testimonials' },
   { label: 'About', path: '/about' },
 ];

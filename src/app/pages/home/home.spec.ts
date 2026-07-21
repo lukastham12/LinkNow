@@ -32,21 +32,38 @@ describe('Home', () => {
     expect(waLinks.length).toBeGreaterThan(0);
   });
 
-  it('links the portfolio teaser to /backdrops', () => {
+  it('links the "Recent work" teaser to /services', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const link = el.querySelector('a[href="/backdrops"]');
-    expect(link).toBeTruthy();
+    expect(el.textContent ?? '').toContain('Recent work');
+    const cta = el.querySelector('.section__cta a[href="/services"]');
+    expect(cta).toBeTruthy();
+    // The teaser no longer points at the /backdrops portfolio.
+    expect(el.querySelector('.section__cta a[href="/backdrops"]')).toBeNull();
   });
 
-  it('renders real backdrop images in the service cards and portfolio teaser', () => {
+  it('uses the hero backdrop photo (backdrop-07) as a cover image', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const hero = el.querySelector('.hero__img') as HTMLImageElement;
+    expect(hero).toBeTruthy();
+    expect(hero.getAttribute('src')).toBe('/backdrops/backdrop-07.jpg');
+    // The old hydrangea cut-out is gone.
+    expect(el.querySelector('.hero__flower')).toBeNull();
+  });
+
+  it('renders real décor images in the service cards and portfolio teaser', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const serviceImgs = Array.from(el.querySelectorAll('.service__img')) as HTMLImageElement[];
     expect(serviceImgs.length).toBe(3);
-    expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-07.jpg');
+    // Custom Backdrops card uses backdrop-02 (differs from the hero, backdrop-07).
+    expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-02.jpg');
+    // Floral card uses the lush wrapped bouquet, shown whole.
+    expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/floral-feature.jpg');
     expect(serviceImgs[2].getAttribute('src')).toBe('/backdrops/backdrop-09.jpg');
     const tiles = Array.from(el.querySelectorAll('.portfolio__img')) as HTMLImageElement[];
     expect(tiles.length).toBe(6);
@@ -56,6 +73,15 @@ describe('Home', () => {
     }
     // No leftover placeholder panels.
     expect(el.querySelector('.ph')).toBeNull();
+  });
+
+  it('links the Corporate Events service card to /corporate', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const card = el.querySelector('a.service--link[href="/corporate"]') as HTMLAnchorElement;
+    expect(card).toBeTruthy();
+    expect(card.textContent ?? '').toContain('Corporate Events');
   });
 
   it('shows testimonials as "Verified Google review" and never the reviewer name', () => {

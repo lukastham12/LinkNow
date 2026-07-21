@@ -52,11 +52,13 @@
   justify-content: center;
 }
 
-.hero__flower {
+.hero__img {
   display: block;
   width: 100%;
-  max-width: 380px;
-  height: auto;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
 }
 
 .service__img {
@@ -67,6 +69,12 @@
   border-radius: 4px;
   border: 1px solid var(--color-border);
   margin-bottom: 1rem;
+}
+
+// Cut-out/product photos on white show whole, not cropped.
+.service__img--contain {
+  object-fit: contain;
+  background: var(--color-surface);
 }
 
 .portfolio__img {
@@ -146,6 +154,28 @@
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr;
+}
+
+.service--link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.service--link:hover,
+.service--link:focus-visible {
+  transform: translateY(-3px);
+  outline: none;
+}
+
+.service--link:focus-visible {
+  outline: 2px solid var(--color-rose);
+  outline-offset: 3px;
+}
+
+.service--link .service__name {
+  color: var(--color-rose);
 }
 
 .service__name {
@@ -233,8 +263,8 @@
     padding-top: 4.5rem;
   }
 
-  .ph--hero {
-    min-height: 380px;
+  .hero__img {
+    height: 480px;
   }
 
   .services {

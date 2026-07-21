@@ -8,6 +8,11 @@ interface Service {
   blurb: string;
   image: string;
   imageAlt: string;
+  // Present when the card navigates somewhere (e.g. Corporate Events → /corporate).
+  link?: string;
+  // Cut-out/product photos on white show whole (object-fit: contain); real
+  // scene photos fill the tile (object-fit: cover).
+  isCutout?: boolean;
 }
 
 interface PortfolioTile {
@@ -34,14 +39,15 @@ export class Home {
     {
       name: 'Custom Backdrops',
       blurb: 'Bespoke backdrops designed and built for birthdays, weddings and corporate events.',
-      image: '/backdrops/backdrop-07.jpg',
-      imageAlt: 'A custom pink-and-gold birthday backdrop by Linknow Events Co.',
+      image: '/backdrops/backdrop-02.jpg',
+      imageAlt: 'A custom event backdrop built by Linknow Events Co.',
     },
     {
       name: 'Floral Services',
       blurb: 'Fresh and styled florals — arches, installations and arrangements for any occasion.',
-      image: '/flowers/hydrangea-china.jpg',
-      imageAlt: 'A fresh pink hydrangea, representative of our floral services',
+      image: '/flowers/floral-feature.jpg',
+      imageAlt: 'A lush wrapped bouquet, representative of our floral services',
+      isCutout: true,
     },
     {
       name: 'Corporate Events',
@@ -50,6 +56,7 @@ export class Home {
         'setups your guests will remember.',
       image: '/backdrops/backdrop-09.jpg',
       imageAlt: 'A corporate in-store event styled by Linknow Events Co.',
+      link: '/corporate',
     },
   ];
 

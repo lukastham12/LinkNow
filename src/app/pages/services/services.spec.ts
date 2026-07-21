@@ -37,17 +37,20 @@ describe('Services', () => {
     }
   });
 
-  it('links Custom Backdrops → /backdrops and Floral → /flowers (Corporate is informational)', () => {
+  it('links Custom Backdrops → /backdrops, Floral → /flowers and Corporate → /corporate', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const linkedCards = Array.from(el.querySelectorAll('a.card')) as HTMLAnchorElement[];
-    expect(linkedCards.length).toBe(2);
+    expect(linkedCards.length).toBe(3);
     const hrefs = linkedCards.map((a) => a.getAttribute('href'));
     expect(hrefs).toContain('/backdrops');
     expect(hrefs).toContain('/flowers');
+    expect(hrefs).toContain('/corporate');
     const backdrops = linkedCards.find((a) => (a.textContent ?? '').includes('Custom Backdrops'));
     expect(backdrops?.getAttribute('href')).toBe('/backdrops');
+    const corporate = linkedCards.find((a) => (a.textContent ?? '').includes('Corporate Events'));
+    expect(corporate?.getAttribute('href')).toBe('/corporate');
   });
 
   it('exposes #backdrops and #corporate anchor targets for the Services dropdown', () => {

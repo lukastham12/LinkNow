@@ -9,9 +9,8 @@ interface ServiceCard {
   image: string;
   imageAlt: string;
   // Present only when the card navigates somewhere. Custom Backdrops links to
-  // the /backdrops portfolio and Floral to the /flowers showcase; Corporate
-  // Events is an informational card (the Services-nav dropdown scrolls to it
-  // via #corporate).
+  // the /backdrops portfolio, Floral to the /flowers showcase and Corporate
+  // Events to the /corporate page.
   link?: string;
   isPlaceholderImage: boolean;
   // Floral cut-outs sit on white and must show whole (object-fit: contain);
@@ -24,10 +23,9 @@ interface ServiceCard {
  *
  * A modern card grid (image + title + one-line blurb) for the three service
  * lines from BRIEF.md §2: Custom Backdrops, Floral Services and Corporate
- * Events. Custom Backdrops links to the /backdrops portfolio and Floral to the
- * /flowers showcase; Corporate Events is informational and is the scroll target
- * for the Services dropdown's #corporate anchor. WhatsApp is the only enquiry
- * path — no forms, email, quote button, or pricing.
+ * Events. Custom Backdrops links to the /backdrops portfolio, Floral to the
+ * /flowers showcase and Corporate Events to the /corporate page. WhatsApp is
+ * the only enquiry path — no forms, email, quote button, or pricing.
  */
 @Component({
   selector: 'app-services',
@@ -53,8 +51,8 @@ export class Services {
       id: 'floral',
       name: 'Floral Services',
       blurb: 'Fresh, styled florals — arches, installations and arrangements for any occasion.',
-      image: '/flowers/rose-ecuador.jpg',
-      imageAlt: 'A single fresh rose, representative of our floral services',
+      image: '/flowers/floral-feature.jpg',
+      imageAlt: 'A lush wrapped bouquet, representative of our floral services',
       link: '/flowers',
       isPlaceholderImage: false,
       isCutout: true,
@@ -67,6 +65,7 @@ export class Services {
         'setups your guests will remember.',
       image: '/backdrops/backdrop-09.jpg',
       imageAlt: 'A corporate in-store event styled by Linknow Events Co.',
+      link: '/corporate',
       isPlaceholderImage: false,
       isCutout: false,
     },
