@@ -40,20 +40,18 @@
   border: 1px solid var(--color-border);
   border-radius: 4px;
   overflow: hidden;
-  // Light surface behind the letterboxed photo so contained (uncropped)
-  // images sit on a clean, consistent panel.
-  background: var(--color-surface);
 }
 
 .card__img {
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  // The 42 photos are normalized to uniform white squares, so a 1:1 tile with
-  // contain keeps the grid visually consistent while never cropping a subject
-  // (e.g. tall Bird of Paradise). White card background blends the padding.
+  // Flowers are transparent PNG/WebP cut-outs; a soft grey studio-style panel
+  // sits behind them so each bloom reads clearly and the grid looks consistent.
+  // contain never crops a subject (e.g. tall Bird of Paradise).
   object-fit: contain;
-  background: var(--color-surface);
+  background: linear-gradient(180deg, #f2f0ec 0%, #e7e3dd 100%);
+  padding: 8%;
 }
 
 .card__name {

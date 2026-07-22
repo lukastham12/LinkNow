@@ -41,6 +41,7 @@ export class Home {
       blurb: 'Bespoke backdrops designed and built for birthdays, weddings and corporate events.',
       image: '/backdrops/backdrop-02.jpg',
       imageAlt: 'A custom event backdrop built by Linknow Events Co.',
+      link: '/backdrops',
     },
     {
       name: 'Floral Services',
@@ -48,6 +49,7 @@ export class Home {
       image: '/flowers/floral-feature.jpg',
       imageAlt: 'A lush wrapped bouquet, representative of our floral services',
       isCutout: true,
+      link: '/flowers',
     },
     {
       name: 'Corporate Events',
