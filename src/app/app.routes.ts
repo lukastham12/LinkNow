@@ -4,6 +4,7 @@ import { Services } from './pages/services/services';
 import { Flowers } from './pages/flowers/flowers';
 import { Backdrops } from './pages/backdrops/backdrops';
 import { Corporate } from './pages/corporate/corporate';
+import { About } from './pages/about/about';
 import { PageSeo } from './shared/seo';
 
 // Per-page SEO (BRIEF.md §10) is carried on `data.seo` and applied during
@@ -81,7 +82,22 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
-  // Remaining pages (About) are added in later tickets. Unknown paths fall
-  // back to the homepage for now.
+  // About — who we are, what we do (balloons, backdrops, florals, parties and
+  // corporate events). Registered before the wildcard.
+  {
+    path: 'about',
+    component: About,
+    data: {
+      seo: {
+        title: 'About Linknow Events Co. — Event, Balloon & Party Décor in Singapore',
+        description:
+          'Meet Linknow Events Co., a Singapore event décor studio specialising in balloon ' +
+          'garlands, custom backdrops, floral styling and corporate event décor for parties and ' +
+          'celebrations.',
+        path: '/about',
+      } satisfies PageSeo,
+    },
+  },
+  // Unknown paths fall back to the homepage.
   { path: '**', redirectTo: '' },
 ];

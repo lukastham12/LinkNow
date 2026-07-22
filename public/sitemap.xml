@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Linknow Events Co. sitemap — the 5 existing prerendered routes only.
-  About is NOT built yet, so it is intentionally absent.
+  Linknow Events Co. sitemap — the existing prerendered routes.
   STATIC file: the domain must match SITE_URL in src/app/shared/site.ts. It is a
   placeholder until the domain is bought (BRIEF.md §9/§12) — swap both together.
 -->
@@ -32,5 +31,10 @@
     <loc>https://REPLACE-WITH-DOMAIN.example/corporate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://REPLACE-WITH-DOMAIN.example/about</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

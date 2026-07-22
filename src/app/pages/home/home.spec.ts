@@ -43,13 +43,13 @@ describe('Home', () => {
     expect(el.querySelector('.section__cta a[href="/backdrops"]')).toBeNull();
   });
 
-  it('uses the hero backdrop photo (backdrop-07) as a cover image', () => {
+  it('uses the hero backdrop photo (backdrop-02) as a cover image', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const hero = el.querySelector('.hero__img') as HTMLImageElement;
     expect(hero).toBeTruthy();
-    expect(hero.getAttribute('src')).toBe('/backdrops/backdrop-07.jpg');
+    expect(hero.getAttribute('src')).toBe('/backdrops/backdrop-02.jpg');
     // The old hydrangea cut-out is gone.
     expect(el.querySelector('.hero__flower')).toBeNull();
   });
@@ -60,8 +60,8 @@ describe('Home', () => {
     const el = fixture.nativeElement as HTMLElement;
     const serviceImgs = Array.from(el.querySelectorAll('.service__img')) as HTMLImageElement[];
     expect(serviceImgs.length).toBe(3);
-    // Custom Backdrops card uses backdrop-02 (differs from the hero, backdrop-07).
-    expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-02.jpg');
+    // Custom Backdrops card uses backdrop-07 (differs from the hero, backdrop-02).
+    expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-07.jpg');
     // Floral card uses the lush wrapped bouquet, shown whole.
     expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/floral-feature.jpg');
     expect(serviceImgs[2].getAttribute('src')).toBe('/backdrops/backdrop-09.jpg');

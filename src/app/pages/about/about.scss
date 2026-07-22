@@ -1,0 +1,270 @@
+// Shared building blocks (mirrors the other pages for a consistent look) ------
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.eyebrow--center {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.8rem;
+  border-radius: 2px;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.btn--solid {
+  background: var(--color-rose);
+  color: #fff;
+  border: 1px solid var(--color-rose);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
+.btn--ghost {
+  color: var(--color-rose);
+  border: 1px solid var(--color-hairline);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-rose);
+  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
+}
+
+// Intro (two-column on wider screens) ---------------------------------------
+
+.intro {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1rem;
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+.intro__title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.intro__lede {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  max-width: 56ch;
+  font-size: 1rem;
+}
+
+.intro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.intro__actions--center {
+  justify-content: center;
+}
+
+.intro__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+}
+
+@media (min-width: 820px) {
+  .intro {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2.5rem;
+  }
+}
+
+// Story --------------------------------------------------------------------
+
+.story {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.story__title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 600;
+}
+
+.story__body {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+// What we do / values (shared card grid) -----------------------------------
+
+.range,
+.values {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1rem;
+}
+
+.range__title,
+.values__title {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 600;
+}
+
+.range__list,
+.values__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.range__item,
+.values__item {
+  margin: 0;
+  padding: 1.25rem 1.3rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.range__name,
+.values__name {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.range__blurb,
+.values__blurb {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.values {
+  // Give the values a soft blush tint surface to break up the page rhythm
+  // (--color-blush is sanctioned for accent surfaces only; soften it against
+  // the page background so it stays airy, per the brand rules).
+  max-width: none;
+  background: color-mix(in srgb, var(--color-blush) 45%, var(--color-bg));
+}
+
+.values__list {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .range__list,
+  .values__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .range__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// How it works -------------------------------------------------------------
+
+.steps {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1rem;
+}
+
+.steps__title {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 600;
+}
+
+.steps__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  counter-reset: none;
+}
+
+.steps__item {
+  margin: 0;
+  text-align: center;
+}
+
+.steps__num {
+  display: inline-block;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-rose);
+  letter-spacing: var(--track-mid);
+}
+
+.steps__name {
+  margin: 0.5rem 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.steps__blurb {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 720px) {
+  .steps__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Outro --------------------------------------------------------------------
+
+.outro {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.outro__text {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}

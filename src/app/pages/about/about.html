@@ -1,0 +1,93 @@
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro__text">
+    <p class="eyebrow">About Us</p>
+    <h1 class="intro__title">Event, balloon &amp; party décor, crafted in Singapore</h1>
+    <p class="intro__lede">
+      Linknow Events Co. is a Singapore event décor studio. We design and build the balloon
+      garlands, custom backdrops and floral styling behind memorable celebrations — from birthdays
+      and baby showers to weddings, product launches and corporate events.
+    </p>
+    <div class="intro__actions">
+      <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+        Enquire on WhatsApp
+      </a>
+      <a class="btn btn--ghost" routerLink="/services">View our services</a>
+    </div>
+  </div>
+  <div class="intro__media">
+    <img
+      class="intro__img"
+      src="/backdrops/backdrop-10.jpg"
+      alt="A styled party setup with balloon garland and a dessert table by Linknow Events Co."
+      width="864"
+      height="1184"
+      loading="lazy"
+    />
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" aria-labelledby="story-heading">
+  <p class="eyebrow eyebrow--center">Who we are</p>
+  <h2 id="story-heading" class="story__title">Celebration is our craft</h2>
+  <p class="story__body">
+    We believe the details are what people remember — the sweep of a balloon garland, a backdrop
+    built just for the moment, flowers styled with care. Working with both families and companies
+    across Singapore, we bring a warm, high-end touch to every occasion, big or small, and take
+    care of the design, build and styling so you can simply enjoy the day.
+  </p>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="range" aria-labelledby="expertise-heading">
+  <p class="eyebrow eyebrow--center">What we do</p>
+  <h2 id="expertise-heading" class="range__title">Our expertise</h2>
+  <ul class="range__list">
+    @for (item of expertise; track item.name) {
+      <li class="range__item">
+        <h3 class="range__name">{{ item.name }}</h3>
+        <p class="range__blurb">{{ item.blurb }}</p>
+      </li>
+    }
+  </ul>
+</section>
+
+<!-- VALUES -->
+<section class="values" aria-labelledby="values-heading">
+  <p class="eyebrow eyebrow--center">Why work with us</p>
+  <h2 id="values-heading" class="values__title">What sets us apart</h2>
+  <ul class="values__list">
+    @for (value of values; track value.title) {
+      <li class="values__item">
+        <h3 class="values__name">{{ value.title }}</h3>
+        <p class="values__blurb">{{ value.blurb }}</p>
+      </li>
+    }
+  </ul>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps" aria-labelledby="steps-heading">
+  <p class="eyebrow eyebrow--center">How it works</p>
+  <h2 id="steps-heading" class="steps__title">From idea to setup</h2>
+  <ol class="steps__list">
+    @for (item of steps; track item.step) {
+      <li class="steps__item">
+        <span class="steps__num" aria-hidden="true">{{ item.step }}</span>
+        <h3 class="steps__name">{{ item.title }}</h3>
+        <p class="steps__blurb">{{ item.blurb }}</p>
+      </li>
+    }
+  </ol>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <p class="outro__text">Have a celebration in mind? Let's design it together.</p>
+  <div class="intro__actions intro__actions--center">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+</section>

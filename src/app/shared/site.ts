@@ -19,10 +19,10 @@ export const LEGAL_NAME = 'LinkNow Pte Ltd';
 // which are the primary discovery channels. Swap for a purpose-made landscape
 // (1.91:1) OG asset when one is supplied. Path is site-root-relative; made
 // absolute via absoluteUrl.
-export const DEFAULT_OG_IMAGE = '/backdrops/backdrop-07.jpg';
+export const DEFAULT_OG_IMAGE = '/backdrops/backdrop-02.jpg';
 
 // Alt text / locale for the default share image and social cards.
-export const DEFAULT_OG_IMAGE_ALT = 'A custom event backdrop styled by Linknow Events Co. in Singapore';
+export const DEFAULT_OG_IMAGE_ALT = 'A balloon-garland celebration setup styled by Linknow Events Co. in Singapore';
 export const OG_LOCALE = 'en_SG';
 
 // Brand theme colour for browser UI — the rose accent from src/styles.scss
