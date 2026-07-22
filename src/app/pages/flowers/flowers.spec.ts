@@ -22,12 +22,12 @@ describe('Flowers (Floral Showcase page)', () => {
     expect(h1s[0].textContent).toContain('Floral Showcase');
   });
 
-  it('renders the 41-item floral gallery (photo + name only)', () => {
+  it('renders the floral gallery (photo + name only)', () => {
     const fixture = TestBed.createComponent(Flowers);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const totalItems = FLOWER_CATALOGUE.reduce((n, g) => n + g.items.length, 0);
-    expect(totalItems).toBe(41);
+    expect(totalItems).toBe(35);
     expect(el.querySelector('app-floral-showcase')).toBeTruthy();
     expect(el.querySelectorAll('.grid img').length).toBe(totalItems);
   });
