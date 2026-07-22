@@ -13,9 +13,17 @@ export const SITE_URL = 'https://REPLACE-WITH-DOMAIN.example';
 export const SITE_NAME = 'Linknow Events Co.';
 export const LEGAL_NAME = 'LinkNow Pte Ltd';
 
-// Default social-share image (reuses the brand logo until a purpose-made OG
-// asset is supplied). Path is site-root-relative; made absolute via absoluteUrl.
-export const DEFAULT_OG_IMAGE = '/brand/logo.jpg';
+// Default social-share image. This brand is image-led, so the share card uses
+// a décor photo (the homepage hero backdrop) rather than the dark logo tile —
+// it makes a far stronger preview on TikTok/Instagram/WhatsApp link shares,
+// which are the primary discovery channels. Swap for a purpose-made landscape
+// (1.91:1) OG asset when one is supplied. Path is site-root-relative; made
+// absolute via absoluteUrl.
+export const DEFAULT_OG_IMAGE = '/backdrops/backdrop-07.jpg';
+
+// Alt text / locale for the default share image and social cards.
+export const DEFAULT_OG_IMAGE_ALT = 'A custom event backdrop styled by Linknow Events Co. in Singapore';
+export const OG_LOCALE = 'en_SG';
 
 // Brand theme colour for browser UI — the rose accent from src/styles.scss
 // (--color-rose). Keep in sync if the palette changes.

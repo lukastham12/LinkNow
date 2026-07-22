@@ -15,7 +15,9 @@ import {
 } from './contact';
 import {
   DEFAULT_OG_IMAGE,
+  DEFAULT_OG_IMAGE_ALT,
   LEGAL_NAME,
+  OG_LOCALE,
   SITE_NAME,
   SITE_URL,
   absoluteUrl,
@@ -77,16 +79,19 @@ export class SeoService {
     // Open Graph.
     this.setProperty('og:type', 'website');
     this.setProperty('og:site_name', SITE_NAME);
+    this.setProperty('og:locale', OG_LOCALE);
     this.setProperty('og:title', seo.title);
     this.setProperty('og:description', seo.description);
     this.setProperty('og:url', url);
     this.setProperty('og:image', image);
+    this.setProperty('og:image:alt', DEFAULT_OG_IMAGE_ALT);
 
     // Twitter card.
     this.setName('twitter:card', 'summary_large_image');
     this.setName('twitter:title', seo.title);
     this.setName('twitter:description', seo.description);
     this.setName('twitter:image', image);
+    this.setName('twitter:image:alt', DEFAULT_OG_IMAGE_ALT);
   }
 
   private setName(name: string, content: string): void {

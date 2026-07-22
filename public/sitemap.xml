@@ -7,7 +7,9 @@
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/</loc>
+    <!-- Homepage: no trailing slash, to match the canonical the app emits
+         for '/' (absoluteUrl('/') === SITE_URL). Keep these byte-identical. -->
+    <loc>https://REPLACE-WITH-DOMAIN.example</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
