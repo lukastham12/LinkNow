@@ -46,12 +46,12 @@
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  // Flowers are transparent PNG/WebP cut-outs; a soft grey studio-style panel
-  // sits behind them so each bloom reads clearly and the grid looks consistent.
-  // contain never crops a subject (e.g. tall Bird of Paradise).
-  object-fit: contain;
-  background: linear-gradient(180deg, #f2f0ec 0%, #e7e3dd 100%);
-  padding: 8%;
+  // Each flower is composited onto a uniform grey studio background at export
+  // time, so white blooms never disappear and the grid reads consistently.
+  // The images are already square with even margins baked in — fill the tile.
+  // The matching grey below only shows through if an image fails to load.
+  object-fit: cover;
+  background: #e8e4de;
 }
 
 .card__name {

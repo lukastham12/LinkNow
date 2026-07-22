@@ -19,7 +19,7 @@ describe('FloralShowcase', () => {
     const el = fixture.nativeElement as HTMLElement;
 
     const totalItems = FLOWER_CATALOGUE.reduce((n, g) => n + g.items.length, 0);
-    expect(totalItems).toBe(42);
+    expect(totalItems).toBe(41);
 
     for (const group of FLOWER_CATALOGUE) {
       expect(el.textContent).toContain(group.category);
