@@ -33,18 +33,6 @@ describe('About page', () => {
     expect(text).toMatch(/Singapore/i);
   });
 
-  it('images are lazy-loaded and carry alt text', () => {
-    const fixture = TestBed.createComponent(About);
-    fixture.detectChanges();
-    const imgs = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('img'),
-    ) as HTMLImageElement[];
-    for (const img of imgs) {
-      expect(img.getAttribute('loading')).toBe('lazy');
-      expect((img.getAttribute('alt') ?? '').trim().length).toBeGreaterThan(0);
-    }
-  });
-
   it('uses the canonical generic WhatsApp link only (no email/quote/contact/form)', () => {
     const fixture = TestBed.createComponent(About);
     fixture.detectChanges();

@@ -52,10 +52,6 @@
   max-width: 1120px;
   margin: 0 auto;
   padding: 3rem 1.25rem 1rem;
-  display: grid;
-  gap: 1.75rem;
-  grid-template-columns: 1fr;
-  align-items: center;
 }
 
 .intro__title {
@@ -80,22 +76,6 @@
 
 .intro__actions--center {
   justify-content: center;
-}
-
-.intro__img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid var(--color-border);
-}
-
-@media (min-width: 820px) {
-  .intro {
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 2.5rem;
-  }
 }
 
 // Story --------------------------------------------------------------------
