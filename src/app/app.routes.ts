@@ -16,10 +16,10 @@ export const routes: Routes = [
     component: Home,
     data: {
       seo: {
-        title: 'Linknow Events Co. — Event & Party Décor in Singapore',
+        title: 'Balloon & Party Decorations in Singapore | LinkNow Events Co.',
         description:
-          'Singapore event décor studio crafting custom backdrops, floral styling and ' +
-          'corporate event décor for birthdays, weddings and celebrations. Enquire on WhatsApp.',
+          'Balloon garlands, custom backdrops, party décor and floral styling in Singapore — ' +
+          'for birthdays, weddings and corporate events. Enquire on WhatsApp.',
         path: '/',
       } satisfies PageSeo,
     },
@@ -29,7 +29,7 @@ export const routes: Routes = [
     component: Services,
     data: {
       seo: {
-        title: 'Services — Event Décor, Backdrops & Florals in Singapore | Linknow Events Co.',
+        title: 'Event Décor Services in Singapore | LinkNow Events Co.',
         description:
           'Explore our Singapore event décor services: custom backdrops, floral services and ' +
           'corporate event styling for celebrations and formal occasions.',
@@ -44,7 +44,7 @@ export const routes: Routes = [
     component: Flowers,
     data: {
       seo: {
-        title: 'Floral Services & Arrangements in Singapore | Linknow Events Co.',
+        title: 'Event & Wedding Florals in Singapore | LinkNow Events Co.',
         description:
           'Browse our Singapore floral showcase — bespoke arrangements and floral styling for ' +
           'weddings, birthdays, corporate events and personal celebrations.',
@@ -59,7 +59,7 @@ export const routes: Routes = [
     component: Backdrops,
     data: {
       seo: {
-        title: 'Custom Event Backdrops in Singapore | Linknow Events Co.',
+        title: 'Custom Event Backdrops in Singapore | LinkNow Events Co.',
         description:
           'A portfolio of custom event backdrops built in Singapore for birthdays, weddings, ' +
           'corporate events and formal occasions. See our work and enquire on WhatsApp.',
@@ -74,7 +74,7 @@ export const routes: Routes = [
     component: Corporate,
     data: {
       seo: {
-        title: 'Corporate Event Décor & Styling in Singapore | Linknow Events Co.',
+        title: 'Corporate Event Décor in Singapore | LinkNow Events Co.',
         description:
           'Corporate event décor in Singapore — backdrops, product launches, grand openings, ' +
           'D&D and festive styling for companies and formal occasions.',
@@ -89,9 +89,9 @@ export const routes: Routes = [
     component: About,
     data: {
       seo: {
-        title: 'About Linknow Events Co. — Event, Balloon & Party Décor in Singapore',
+        title: 'About LinkNow Events Co. — Event & Party Décor in Singapore',
         description:
-          'Meet Linknow Events Co., a Singapore event décor studio specialising in balloon ' +
+          'Meet LinkNow Events Co., a Singapore event décor studio specialising in balloon ' +
           'garlands, custom backdrops, floral styling and corporate event décor for parties and ' +
           'celebrations.',
         path: '/about',

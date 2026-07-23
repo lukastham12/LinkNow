@@ -42,7 +42,7 @@ export class Services {
       name: 'Custom Backdrops',
       blurb: 'Bespoke backdrops designed and built for birthdays, weddings and corporate events.',
       image: '/backdrops/backdrop-07.jpg',
-      imageAlt: 'A custom pink-and-gold birthday backdrop by Linknow Events Co.',
+      imageAlt: 'A custom pink-and-gold birthday backdrop by LinkNow Events Co.',
       link: '/backdrops',
       isPlaceholderImage: false,
       isCutout: false,
@@ -64,7 +64,7 @@ export class Services {
         'Styling and décor for company celebrations, launches and formal occasions — polished ' +
         'setups your guests will remember.',
       image: '/backdrops/backdrop-09.jpg',
-      imageAlt: 'A corporate in-store event styled by Linknow Events Co.',
+      imageAlt: 'A corporate in-store event styled by LinkNow Events Co.',
       link: '/corporate',
       isPlaceholderImage: false,
       isCutout: false,

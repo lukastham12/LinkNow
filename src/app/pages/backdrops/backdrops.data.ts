@@ -1,5 +1,5 @@
 // Custom-backdrop portfolio photos — single source of truth for the /backdrops
-// gallery. These are REAL scene photos of Linknow builds (public/backdrops/);
+// gallery. These are REAL scene photos of LinkNow builds (public/backdrops/);
 // they are displayed as-is (no background removal). Gallery only — no prices,
 // no quantities, no per-item messages (BRIEF.md §4). WhatsApp is the sole
 // enquiry channel.
@@ -25,6 +25,6 @@ export const BACKDROPS: readonly BackdropPhoto[] = Array.from({ length: 14 }, (_
     const n = String(num).padStart(2, '0');
     return {
       src: `/backdrops/backdrop-${n}.jpg`,
-      alt: `Custom event backdrop designed and built by Linknow Events Co. — design ${num}`,
+      alt: `Custom event backdrop designed and built by LinkNow Events Co. — design ${num}`,
     };
   });

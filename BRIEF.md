@@ -6,14 +6,14 @@ _Last updated: 2026-07-18 · Owner: Product (lukastham12@gmail.com) · Status: A
 
 ## 1. Summary (the one-paragraph version)
 
-A **mobile-first marketing & showcase website** for **LinkNow Pte Ltd** (brand: **Linknow Events Co.**), a Singapore-based events décor company. The site's job is to make visitors feel the quality of our work through imagery, explain our services, build trust with portfolio + testimonials, and drive them to **enquire via WhatsApp** (the only enquiry channel — no form, no email, no contact page). There is **no online catalogue, no pricing, no logins, and no payments** — pricing is handled per enquiry. This is a marketing site, not a web app.
+A **mobile-first marketing & showcase website** for **LinkNow Pte Ltd** (brand: **LinkNow Events Co.**), a Singapore-based events décor company. The site's job is to make visitors feel the quality of our work through imagery, explain our services, build trust with portfolio + testimonials, and drive them to **enquire via WhatsApp** (the only enquiry channel — no form, no email, no contact page). There is **no online catalogue, no pricing, no logins, and no payments** — pricing is handled per enquiry. This is a marketing site, not a web app.
 
 ---
 
 ## 2. Company
 
 - **Legal name:** LinkNow Pte Ltd
-- **Brand name:** Linknow Events Co.
+- **Brand name:** LinkNow Events Co.
 - **Location / market:** Singapore only (reflect in copy and local SEO)
 - **What we do:** Three headline service lines — **custom backdrops** for celebrations and formal occasions (birthdays, weddings, corporate events), **floral services**, and **corporate events** (styling and décor for company celebrations, launches and formal occasions, e.g. the Avocaderia in-store event). _(Setup-only labour — supplying just the manpower when the client already has their materials — is still offered on request but is no longer a headline service line; it was replaced by Corporate Events, ticket 006.)_
 
@@ -101,7 +101,7 @@ _Note: **Portfolio and Testimonials are not top-level nav pages.** The top nav i
   - **Supporting text:** refined **spaced capitals**, generous letter-spacing, modest sizes.
 - **Design approach:** **Image-led + minimalist** — generous whitespace, thin hairline rose dividers, thin-outline or text buttons (no filled/glowing pills). The one solid button is a flat rose fill with white text. Let photography carry the visual weight.
 - **Accent update (Owner override, ticket 002):** the accent shifted from **gold to a soft rose/pink** family so the brand reads softer and more floral while staying minimalist, light and accessible. The site canvas stays off-white; rose is used sparingly.
-- **Logo (Owner override, ticket 002):** gold interlocking-links mark above a gold script "Linknow" and spaced-caps "EVENTS CO."
+- **Logo (Owner override, ticket 002):** gold interlocking-links mark above a gold script "LinkNow" and spaced-caps "EVENTS CO."
   - **File in use:** the **full original** `public/brand/logo.jpg` (gold mark on its black background) is used on the light UI (header/nav + footer), presented as a **small, cleanly-contained rounded mark** so the black block reads as a tidy logo, not a dark band across the UI. **This deliberately overrides the earlier rule that reserved `logo.jpg` for dark surfaces and used `logo-transparent.png` on the light UI.**
   - **Alternate file:** `public/brand/logo-transparent.png` (transparent background) remains in the repo but is not currently wired into the UI.
   - **Placement:** header/nav and footer.

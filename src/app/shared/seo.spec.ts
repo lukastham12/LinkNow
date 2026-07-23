@@ -67,7 +67,7 @@ describe('SeoService', () => {
     const json = JSON.stringify(data);
 
     const org = data['@graph'].find((n: { '@type': string }) => n['@type'] === 'Organization');
-    expect(org.name).toBe('Linknow Events Co.');
+    expect(org.name).toBe('LinkNow Events Co.');
     expect(org.areaServed.name).toBe('Singapore');
     expect(org.contactPoint.telephone).toBe('+6588090600');
     expect(org.sameAs).toContain('https://www.instagram.com/linknowsg/');

@@ -4,7 +4,7 @@ import { FLOWER_CATALOGUE } from './catalogue';
 /**
  * Reusable floral showcase gallery.
  *
- * A gallery — NOT a shop. It shows the range of flowers Linknow works with,
+ * A gallery — NOT a shop. It shows the range of flowers LinkNow works with,
  * grouped by type, as photo + name only. There is deliberately no price,
  * quantity, bundle size, cart, selection, or quote-builder anywhere (BRIEF.md
  * §4). Rendered inside the Floral Services section of the Services page.

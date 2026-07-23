@@ -1,4 +1,4 @@
-# Linknow Events Co. — allow all crawlers.
+# LinkNow Events Co. — allow all crawlers.
 # NOTE: this is a STATIC file. The domain below must match SITE_URL in
 # src/app/shared/site.ts. It is a placeholder until the domain is bought
 # (BRIEF.md §9/§12) — swap both places together.

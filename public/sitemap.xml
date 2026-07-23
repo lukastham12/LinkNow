@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Linknow Events Co. sitemap — the existing prerendered routes.
+  LinkNow Events Co. sitemap — the existing prerendered routes.
   STATIC file: the domain must match SITE_URL in src/app/shared/site.ts. It is a
   placeholder until the domain is bought (BRIEF.md §9/§12) — swap both together.
 -->

@@ -1,4 +1,4 @@
-// Canonical contact values for Linknow Events Co. (see BRIEF.md §8).
+// Canonical contact values for LinkNow Events Co. (see BRIEF.md §8).
 // Single source of truth — every component imports from here so the WhatsApp
 // number and social links are never re-typed with typos.
 //
