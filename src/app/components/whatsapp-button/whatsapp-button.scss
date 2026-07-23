@@ -11,7 +11,8 @@
   color: #ffffff;
   text-decoration: none;
   border-radius: 999px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  /* No drop-shadow (brand rule, BRIEF.md §7); the bold WhatsApp green stands
+     out against the light UI on its own. */
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   transition: transform 0.15s ease;

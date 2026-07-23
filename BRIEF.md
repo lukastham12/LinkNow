@@ -59,7 +59,7 @@ Two segments:
 | **Home** | First impression + funnel to enquiry | Hero (backdrop photo, tagline, WhatsApp CTA), services overview, **"Recent work"** teaser (links to `/services`), testimonials section, WhatsApp CTA |
 | **Services** | Explain the full offering | Card grid: Custom backdrops · **Floral services** · **Corporate events**. The Custom Backdrops card links to the **Backdrops Portfolio** page (`/backdrops`); the Floral card links to the **Floral Showcase** page (`/flowers`, the gallery); the Corporate Events card links to the **Corporate Events** page (`/corporate`). |
 | **Backdrops Portfolio** (`/backdrops`) | Show the range of custom backdrops | Responsive gallery of real backdrop builds (photo tiles only, no prices) + WhatsApp CTA. **Not a top-level nav tab** — reachable via the Services dropdown and the Custom Backdrops card. |
-| **Floral Showcase** (`/flowers`) | The floral gallery | 42-item flower gallery (photo + name only, no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Floral Services card. |
+| **Floral Showcase** (`/flowers`) | The floral gallery | 35-item flower gallery (photo + name only, no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Floral Services card. |
 | **Corporate Events** (`/corporate`) | Décor for companies & formal occasions | Intro + copy on the range (weddings — described, no photos yet — corporate backdrops, product launches, grand openings, D&D, roadshows, festive/seasonal décor), the two Avocaderia in-store photos, and a WhatsApp CTA (no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Corporate Events card. |
 | **About** | Who we are | Company story, team, what makes us different |
 
