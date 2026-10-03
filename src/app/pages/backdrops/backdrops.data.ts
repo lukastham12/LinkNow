@@ -6,8 +6,7 @@
 //
 // backdrop-08 and backdrop-09 are the Avocaderia in-store event photos; they
 // now live on the Corporate Events page (/corporate) and are intentionally
-// excluded here (ticket 007), leaving 15 gallery items (backdrop-01…17 minus
-// the two corporate shots).
+// excluded here (ticket 007).
 
 export interface BackdropPhoto {
   /** Path under public/ (served at the site root). */
@@ -16,16 +15,16 @@ export interface BackdropPhoto {
   alt: string;
 }
 
-// The Avocaderia photos moved to /corporate; the gallery skips them.
-const EXCLUDED = new Set([8, 9]);
+// Curated display order (most eye-catching/premium-looking first), not file
+// order — the strongest designs lead so first-time visitors are hooked
+// before they scroll. Re-order this list to change what leads; add a number
+// to feature a new backdrop-NN.jpg.
+const ORDER = [2, 15, 17, 12, 5, 7, 14, 1, 4, 16, 6, 3, 13, 10, 11];
 
-// 15 photos (of backdrop-01…17, minus the two corporate shots).
-export const BACKDROPS: readonly BackdropPhoto[] = Array.from({ length: 17 }, (_, i) => i + 1)
-  .filter((num) => !EXCLUDED.has(num))
-  .map((num) => {
-    const n = String(num).padStart(2, '0');
-    return {
-      src: `/backdrops/backdrop-${n}.jpg`,
-      alt: `Custom event backdrop designed and built by LinkNow Events Co. — design ${num}`,
-    };
-  });
+export const BACKDROPS: readonly BackdropPhoto[] = ORDER.map((num) => {
+  const n = String(num).padStart(2, '0');
+  return {
+    src: `/backdrops/backdrop-${n}.jpg`,
+    alt: `Custom event backdrop designed and built by LinkNow Events Co. — design ${num}`,
+  };
+});
