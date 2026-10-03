@@ -59,20 +59,6 @@
   </div>
 </section>
 
-<!-- PORTFOLIO TEASER -->
-<section class="section section--tint" aria-labelledby="portfolio-heading">
-  <p class="eyebrow eyebrow--center">Our work</p>
-  <h2 id="portfolio-heading" class="section__title">Recent work</h2>
-  <div class="portfolio">
-    @for (item of portfolio; track item.image) {
-      <img class="portfolio__img" [src]="item.image" [alt]="item.alt" loading="lazy" />
-    }
-  </div>
-  <div class="section__cta">
-    <a class="btn btn--ghost" routerLink="/services">See our services</a>
-  </div>
-</section>
-
 <!-- OUR CLIENTS -->
 <section class="section" aria-labelledby="clients-heading">
   <p class="eyebrow eyebrow--center">Our Clients</p>
@@ -85,6 +71,20 @@
       </li>
     }
   </ul>
+</section>
+
+<!-- PORTFOLIO TEASER -->
+<section class="section section--tint" aria-labelledby="portfolio-heading">
+  <p class="eyebrow eyebrow--center">Our work</p>
+  <h2 id="portfolio-heading" class="section__title">Recent work</h2>
+  <div class="portfolio">
+    @for (item of portfolio; track item.image) {
+      <img class="portfolio__img" [src]="item.image" [alt]="item.alt" loading="lazy" />
+    }
+  </div>
+  <div class="section__cta">
+    <a class="btn btn--ghost" routerLink="/services">See our services</a>
+  </div>
 </section>
 
 <!-- TESTIMONIALS -->
