@@ -8,6 +8,10 @@
   text-transform: uppercase;
 }
 
+.eyebrow--center {
+  text-align: center;
+}
+
 .btn {
   display: inline-block;
   font-size: 0.75rem;
@@ -32,47 +36,94 @@
   background: color-mix(in srgb, var(--color-rose) 88%, #000);
 }
 
-// Intro --------------------------------------------------------------------
+// Hero -----------------------------------------------------------------------
 
-.intro {
+.hero {
   max-width: 1120px;
   margin: 0 auto;
   padding: 3rem 1.25rem 1rem;
+  display: grid;
+  gap: 2rem;
+  align-items: center;
 }
 
-.intro__title {
+.hero__title {
   margin: 0 0 1rem;
-  font-size: clamp(1.9rem, 6vw, 3rem);
-  line-height: 1.15;
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  line-height: 1.2;
   font-weight: 600;
 }
 
-.intro__lede {
+.hero__lede {
   margin: 0 0 1.75rem;
   color: var(--color-text-muted);
-  max-width: 56ch;
+  max-width: 46ch;
   font-size: 1rem;
 }
 
-.intro__actions {
+.hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
-.intro__actions--center {
+.hero__actions--center {
   justify-content: center;
 }
 
-// Gallery ------------------------------------------------------------------
-
-.gallery {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 1.5rem 1.25rem 0.5rem;
+.hero__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-// Outro --------------------------------------------------------------------
+.hero__img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  margin-inline: auto;
+}
+
+// Capabilities -----------------------------------------------------------------
+
+.section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+}
+
+.section__title {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 600;
+}
+
+.capabilities {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+.capability__title {
+  margin: 0 0 0.4rem;
+  color: var(--color-rose);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.capability__blurb {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+// Outro ------------------------------------------------------------------------
 
 .outro {
   max-width: 1120px;
@@ -85,4 +136,17 @@
   margin: 0 0 1.75rem;
   color: var(--color-text-muted);
   font-size: 1rem;
+}
+
+// Responsive ---------------------------------------------------------------
+
+@media (min-width: 720px) {
+  .hero {
+    grid-template-columns: 1.1fr 1fr;
+    padding-top: 4.5rem;
+  }
+
+  .capabilities {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

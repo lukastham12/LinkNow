@@ -37,17 +37,17 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
-  // Floral Showcase is its own page, reachable via the Services dropdown and
+  // Floral Services is its own page, reachable via the Services dropdown and
   // the Floral Services card (not a top-level nav tab).
   {
     path: 'flowers',
     component: Flowers,
     data: {
       seo: {
-        title: 'Event & Wedding Florals in Singapore | LinkNow Events Co.',
+        title: 'Custom Floral Arrangements in Singapore | LinkNow Events Co.',
         description:
-          'Browse our Singapore floral showcase — bespoke arrangements and floral styling for ' +
-          'weddings, birthdays, corporate events and personal celebrations.',
+          'Bespoke floral arrangements in Singapore for any occasion — any flower, any palette, ' +
+          'styled for weddings, corporate events, birthdays and celebrations.',
         path: '/flowers',
       } satisfies PageSeo,
     },

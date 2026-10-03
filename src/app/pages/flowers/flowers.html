@@ -1,25 +1,44 @@
-<section class="intro">
-  <p class="eyebrow">Floral Services</p>
-  <h1 class="intro__title">Floral Showcase</h1>
-  <p class="intro__lede">
-    A look at the blooms we love to work with — sourced fresh for arches, installations and
-    arrangements. Every arrangement is bespoke to your event, so browse for inspiration and tell us
-    what you have in mind.
-  </p>
-  <div class="intro__actions">
-    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
-      Enquire on WhatsApp
-    </a>
+<section class="hero">
+  <div class="hero__content">
+    <p class="eyebrow">Floral Services</p>
+    <h1 class="hero__title">Custom floral arrangements for every occasion</h1>
+    <p class="hero__lede">
+      Any flower, any palette, styled to match your event — from an intimate dinner centrepiece to
+      a full floral installation. Every arrangement is designed around you, not picked off a shelf.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+        Enquire on WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="hero__media">
+    <img
+      class="hero__img"
+      src="/flowers/custom-arrangement-hero.jpg"
+      alt="A bespoke floral centrepiece of white gerberas, pink carnations and eucalyptus styled along a fine-dining table, by LinkNow Events Co."
+      width="1050"
+      height="1400"
+    />
   </div>
 </section>
 
-<section class="gallery" aria-label="Floral showcase gallery">
-  <app-floral-showcase />
+<section class="section" aria-labelledby="capabilities-heading">
+  <p class="eyebrow eyebrow--center">What we do</p>
+  <h2 id="capabilities-heading" class="section__title">Florals built around your event</h2>
+  <div class="capabilities">
+    @for (item of capabilities; track item.title) {
+      <article class="capability">
+        <h3 class="capability__title">{{ item.title }}</h3>
+        <p class="capability__blurb">{{ item.blurb }}</p>
+      </article>
+    }
+  </div>
 </section>
 
 <section class="outro">
   <p class="outro__text">Have a palette or theme in mind? Let's design your florals together.</p>
-  <div class="intro__actions intro__actions--center">
+  <div class="hero__actions hero__actions--center">
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
       Enquire on WhatsApp
     </a>
