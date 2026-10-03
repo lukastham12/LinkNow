@@ -216,11 +216,10 @@
     height: 48px;
     max-width: 180px;
     object-fit: contain;
-    opacity: 0.72;
-    transition: opacity 0.2s ease;
+    transition: filter 0.2s ease;
 
     &:hover {
-      opacity: 1;
+      filter: brightness(0.7);
     }
   }
 }
