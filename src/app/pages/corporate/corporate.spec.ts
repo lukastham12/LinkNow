@@ -48,6 +48,25 @@ describe('Corporate (Corporate Events page)', () => {
     }
   });
 
+  it('shows a brief/build/result case study for the Avocadoria work', () => {
+    const fixture = TestBed.createComponent(Corporate);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const text = el.textContent ?? '';
+    expect(text).toContain('Avocadoria');
+    expect(text).toContain('The brief');
+    expect(text).toContain('What we built');
+    expect(text).toContain('The result');
+    expect(el.querySelectorAll('.case-study__item').length).toBe(3);
+  });
+
+  it('states scope covers any custom corporate or formal event, not just the listed types', () => {
+    const fixture = TestBed.createComponent(Corporate);
+    fixture.detectChanges();
+    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
+    expect(text.toLowerCase()).toContain('any custom corporate or formal');
+  });
+
   it('uses the canonical generic WhatsApp link only (no email/quote/contact/form)', () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();

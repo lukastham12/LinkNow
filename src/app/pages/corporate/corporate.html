@@ -13,7 +13,9 @@
   </div>
 </section>
 
-<section class="showcase" aria-label="Corporate event photos">
+<section class="showcase" aria-labelledby="case-study-heading">
+  <p class="eyebrow eyebrow--center">Case Study</p>
+  <h2 id="case-study-heading" class="showcase__title">In-store styling for {{ caseStudy.client }}</h2>
   <ul class="showcase__grid">
     @for (photo of photos; track photo.src) {
       <li class="showcase__item">
@@ -21,7 +23,20 @@
       </li>
     }
   </ul>
-  <p class="showcase__caption">In-store event styled for Avocaderia.</p>
+  <div class="case-study">
+    <div class="case-study__item">
+      <h3 class="case-study__label">The brief</h3>
+      <p class="case-study__text">{{ caseStudy.brief }}</p>
+    </div>
+    <div class="case-study__item">
+      <h3 class="case-study__label">What we built</h3>
+      <p class="case-study__text">{{ caseStudy.build }}</p>
+    </div>
+    <div class="case-study__item">
+      <h3 class="case-study__label">The result</h3>
+      <p class="case-study__text">{{ caseStudy.result }}</p>
+    </div>
+  </div>
 </section>
 
 <section class="range" aria-labelledby="range-heading">
@@ -35,6 +50,10 @@
       </li>
     }
   </ul>
+  <p class="range__note">
+    Don't see your event type? We design and style for any custom corporate or formal
+    occasion — tell us what you have in mind on WhatsApp.
+  </p>
 </section>
 
 <section class="outro">

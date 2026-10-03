@@ -11,14 +11,23 @@ interface EventType {
   blurb: string;
 }
 
+interface CaseStudy {
+  client: string;
+  brief: string;
+  build: string;
+  result: string;
+}
+
 /**
  * Corporate Events page (route '/corporate').
  *
- * Informational page describing the décor we create for companies and formal
- * occasions — corporate backdrops, product launches, grand openings, dinner &
- * dance, roadshows, festive/seasonal décor, and weddings (described only; no
- * photos yet). Shows the two real Avocaderia in-store event photos. WhatsApp is
- * the only enquiry path — no forms, email, contact link, or pricing.
+ * Informational page describing the décor we create for companies, formal
+ * occasions, and any other custom event — corporate backdrops, product
+ * launches, grand openings, dinner & dance, roadshows, festive/seasonal décor,
+ * weddings, and anything bespoke beyond that list. Shows a short case study
+ * (brief/build/result) built around the two real Avocaderia in-store event
+ * photos. WhatsApp is the only enquiry path — no forms, email, contact link,
+ * or pricing.
  */
 @Component({
   selector: 'app-corporate',
@@ -41,6 +50,20 @@ export class Corporate {
       alt: 'In-store Easter event styled for Avocaderia — pastel balloon backdrop',
     },
   ];
+
+  protected readonly caseStudy: CaseStudy = {
+    client: 'Avocadoria',
+    brief:
+      'Avocadoria wanted their café storefront to feel festive and photo-worthy for the Easter ' +
+      'season — something that would catch the eye from outside and give customers a reason to ' +
+      'stop and share it.',
+    build:
+      'A pastel balloon installation and Easter-themed display built around their storefront ' +
+      'entrance, scaled to the space and designed to read well both in person and in photos.',
+    result:
+      'A warm, seasonal storefront moment that fit naturally with the café’s own branding — ' +
+      'the same disciplined, no-clutter styling we bring to every event, corporate or retail.',
+  };
 
   protected readonly eventTypes: EventType[] = [
     {
