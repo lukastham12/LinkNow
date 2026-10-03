@@ -36,8 +36,10 @@ export class Home {
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
 
-  // Organisations we've worked with — "Our Clients" credibility section.
-  protected readonly clients = CLIENTS;
+  // Organisations we've worked with — "Our Clients" spotlight. The first
+  // entry is the featured client; the rest are named in a short line below.
+  protected readonly featuredClient = CLIENTS[0];
+  protected readonly otherClients = CLIENTS.slice(1);
 
   protected readonly services: Service[] = [
     {

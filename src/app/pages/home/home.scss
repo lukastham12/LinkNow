@@ -196,32 +196,31 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-.clients__sub {
-  margin: 0 0 2rem;
-  text-align: center;
-  color: var(--color-text-muted);
-}
-
-.clients {
+.spotlight {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 2.5rem 3rem;
+  gap: 0.5rem;
+  margin: 0 auto 1.5rem;
 
   &__logo {
-    height: 88px;
-    max-width: 260px;
+    height: 80px;
+    max-width: 240px;
     object-fit: contain;
     filter: grayscale(1);
-    transition: opacity 0.2s ease;
+  }
 
-    &:hover {
-      opacity: 0.8;
-    }
+  &__name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  &__blurb {
+    margin: 0;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
   }
 }
 

@@ -62,15 +62,27 @@
 <!-- OUR CLIENTS -->
 <section class="section" aria-labelledby="clients-heading">
   <p class="eyebrow eyebrow--center">Our Clients</p>
-  <h2 id="clients-heading" class="section__title">Trusted by organisations</h2>
-  <p class="clients__sub">A selection of the organisations we've worked with.</p>
-  <ul class="clients">
-    @for (client of clients; track client.name) {
-      <li>
-        <img class="clients__logo" [src]="client.logo" [alt]="client.alt" loading="lazy" />
-      </li>
+  <h2 id="clients-heading" class="section__title">Proud to have styled for</h2>
+  <div class="spotlight">
+    <img
+      class="spotlight__logo"
+      [src]="featuredClient.logo"
+      [alt]="featuredClient.alt"
+      loading="lazy"
+    />
+    <p class="spotlight__name">{{ featuredClient.name }}</p>
+    @if (featuredClient.blurb) {
+      <p class="spotlight__blurb">{{ featuredClient.blurb }}</p>
     }
-  </ul>
+  </div>
+  @if (otherClients.length > 0) {
+    <p class="spotlight__blurb">
+      ...and local businesses like
+      @for (client of otherClients; track client.name; let last = $last) {
+        {{ client.name }}{{ last ? '' : ', ' }}
+      }
+    </p>
+  }
 </section>
 
 <!-- PORTFOLIO TEASER -->
