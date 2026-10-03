@@ -49,10 +49,9 @@ export class Home {
     },
     {
       name: 'Floral Services',
-      blurb: 'Fresh and styled florals — arches, installations and arrangements for any occasion.',
-      image: '/flowers/floral-feature.jpg',
-      imageAlt: 'A lush wrapped bouquet, representative of our floral services',
-      isCutout: true,
+      blurb: 'Custom floral arrangements — any flower, any palette, styled for any occasion.',
+      image: '/flowers/custom-arrangement-hero.jpg',
+      imageAlt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
       link: '/flowers',
     },
     {

@@ -62,8 +62,8 @@ describe('Home', () => {
     expect(serviceImgs.length).toBe(3);
     // Custom Backdrops card uses backdrop-07 (differs from the hero, backdrop-02).
     expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-07.jpg');
-    // Floral card uses the lush wrapped bouquet, shown whole.
-    expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/floral-feature.jpg');
+    // Floral card uses the bespoke arrangement hero photo.
+    expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/custom-arrangement-hero.jpg');
     expect(serviceImgs[2].getAttribute('src')).toBe('/backdrops/backdrop-09.jpg');
     const tiles = Array.from(el.querySelectorAll('.portfolio__img')) as HTMLImageElement[];
     expect(tiles.length).toBe(6);
