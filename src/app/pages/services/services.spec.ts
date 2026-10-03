@@ -26,6 +26,14 @@ describe('Services', () => {
     expect(text).not.toContain('Setup-Only Labour');
   });
 
+  it('reassures on budget without quoting any price (no $/SGD figure)', () => {
+    const fixture = TestBed.createComponent(Services);
+    fixture.detectChanges();
+    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
+    expect(text.toLowerCase()).toContain('packages for every budget');
+    expect(text).not.toMatch(/\$|SGD/);
+  });
+
   it('renders a 3-card service grid, each with an image', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
