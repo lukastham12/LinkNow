@@ -6,7 +6,8 @@
 //
 // backdrop-08 and backdrop-09 are the Avocaderia in-store event photos; they
 // now live on the Corporate Events page (/corporate) and are intentionally
-// excluded here (ticket 007), leaving 12 gallery items.
+// excluded here (ticket 007), leaving 15 gallery items (backdrop-01…17 minus
+// the two corporate shots).
 
 export interface BackdropPhoto {
   /** Path under public/ (served at the site root). */
@@ -18,8 +19,8 @@ export interface BackdropPhoto {
 // The Avocaderia photos moved to /corporate; the gallery skips them.
 const EXCLUDED = new Set([8, 9]);
 
-// 12 photos (of backdrop-01…14, minus the two corporate shots).
-export const BACKDROPS: readonly BackdropPhoto[] = Array.from({ length: 14 }, (_, i) => i + 1)
+// 15 photos (of backdrop-01…17, minus the two corporate shots).
+export const BACKDROPS: readonly BackdropPhoto[] = Array.from({ length: 17 }, (_, i) => i + 1)
   .filter((num) => !EXCLUDED.has(num))
   .map((num) => {
     const n = String(num).padStart(2, '0');
