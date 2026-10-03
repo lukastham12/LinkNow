@@ -19,9 +19,4 @@ import { BACKDROPS } from './backdrops.data';
 export class Backdrops {
   protected readonly whatsappHref = WHATSAPP_HREF;
   protected readonly backdrops = BACKDROPS;
-
-  // Repeating tile-size rhythm for the bento grid — so the whole portfolio
-  // reads as one varied mosaic (bigger tiles for visual anchors) without
-  // tagging individual photos. Adding a photo just extends the pattern.
-  protected readonly bentoPattern = ['big', 'normal', 'normal', 'tall', 'normal', 'wide', 'normal', 'normal'];
 }
