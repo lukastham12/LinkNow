@@ -15,8 +15,8 @@
 
 <section class="gallery" aria-label="Custom backdrops gallery">
   <ul class="grid">
-    @for (photo of backdrops; track photo.src) {
-      <li class="grid__item">
+    @for (photo of backdrops; track photo.src; let i = $index) {
+      <li class="grid__item" [class]="'grid__item--' + bentoPattern[i % bentoPattern.length]">
         <img class="grid__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
       </li>
     }

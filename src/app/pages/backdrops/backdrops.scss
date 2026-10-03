@@ -72,40 +72,64 @@
   padding: 1.5rem 1.25rem 0.5rem;
 }
 
+// Bento mosaic: a dense grid mixing tile sizes so the whole portfolio reads
+// at a glance with minimal scrolling, instead of one-at-a-time thumbnails.
 .grid {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 0.75rem;
+  gap: 0.6rem;
+  grid-auto-flow: dense;
+  grid-auto-rows: 120px;
   // Mobile-first: two columns, then more on wider screens.
   grid-template-columns: repeat(2, 1fr);
 }
 
 .grid__item {
   margin: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.grid__item--big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.grid__item--wide {
+  grid-column: span 2;
+}
+
+.grid__item--tall {
+  grid-row: span 2;
 }
 
 .grid__img {
   display: block;
   width: 100%;
-  // Consistent tiles for varied source photos; real scenes shown as-is.
-  aspect-ratio: 4 / 5;
+  height: 100%;
   object-fit: cover;
-  border-radius: 4px;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
+  transition: transform 0.3s ease;
+}
+
+.grid__item:hover .grid__img {
+  transform: scale(1.04);
 }
 
 @media (min-width: 640px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 150px;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (min-width: 900px) {
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 170px;
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
