@@ -197,7 +197,7 @@
 }
 
 .clients__sub {
-  margin: 0 0 2.5rem;
+  margin: 0 0 2rem;
   text-align: center;
   color: var(--color-text-muted);
 }
@@ -216,10 +216,11 @@
     height: 48px;
     max-width: 180px;
     object-fit: contain;
-    transition: filter 0.2s ease;
+    filter: grayscale(1);
+    transition: opacity 0.2s ease;
 
     &:hover {
-      filter: brightness(0.7);
+      opacity: 0.8;
     }
   }
 }
