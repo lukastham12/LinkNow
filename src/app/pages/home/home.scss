@@ -196,6 +196,35 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.clients__sub {
+  margin: -1.25rem 0 2.5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.clients {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2.5rem 3rem;
+
+  &__logo {
+    height: 34px;
+    max-width: 140px;
+    object-fit: contain;
+    opacity: 0.72;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
 .testimonials {
   display: grid;
   gap: 1.5rem;

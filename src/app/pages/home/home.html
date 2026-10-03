@@ -73,6 +73,20 @@
   </div>
 </section>
 
+<!-- OUR CLIENTS -->
+<section class="section" aria-labelledby="clients-heading">
+  <p class="eyebrow eyebrow--center">Our Clients</p>
+  <h2 id="clients-heading" class="section__title">Trusted by organisations</h2>
+  <p class="clients__sub">Organisations that trust and work with us.</p>
+  <ul class="clients">
+    @for (client of clients; track client.name) {
+      <li>
+        <img class="clients__logo" [src]="client.logo" [alt]="client.alt" loading="lazy" />
+      </li>
+    }
+  </ul>
+</section>
+
 <!-- TESTIMONIALS -->
 <section class="section" aria-labelledby="testimonials-heading">
   <p class="eyebrow eyebrow--center">Testimonials</p>

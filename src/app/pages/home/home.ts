@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
+import { CLIENTS } from '../../shared/clients';
 
 interface Service {
   name: string;
@@ -34,6 +35,9 @@ export class Home {
 
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
+
+  // Organisations we've worked with — "Our Clients" credibility section.
+  protected readonly clients = CLIENTS;
 
   protected readonly services: Service[] = [
     {

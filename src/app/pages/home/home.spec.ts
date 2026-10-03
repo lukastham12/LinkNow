@@ -97,4 +97,17 @@ describe('Home', () => {
     // The first reviewer's name must not appear anywhere on the page.
     expect(el.textContent ?? '').not.toContain('Lisha Soh');
   });
+
+  it('shows the "Our Clients" section with logos and meaningful alt text', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent ?? '').toContain('Our Clients');
+    const logos = Array.from(el.querySelectorAll('.clients__logo')) as HTMLImageElement[];
+    expect(logos.length).toBeGreaterThanOrEqual(2);
+    for (const logo of logos) {
+      expect((logo.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
+      expect(logo.getAttribute('src')).toMatch(/^\/brand\/clients\//);
+    }
+  });
 });
