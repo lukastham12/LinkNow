@@ -80,7 +80,7 @@
 .portfolio__img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 4px;
   border: 1px solid var(--color-border);
@@ -197,17 +197,19 @@
 
 .portfolio {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, 1fr);
 }
 
-// Corporate teaser — same case-card style as the /corporate use-case grid.
+// Corporate teaser — same case-card style as the /corporate use-case grid,
+// but kept small (2-up, square) so the homepage teaser stays short.
 .cases {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 1rem;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .cases__item {
@@ -226,31 +228,32 @@
 .case-card__img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
 .case-card__label {
   position: absolute;
-  left: 0.75rem;
-  bottom: 0.75rem;
-  right: 0.75rem;
+  left: 0.4rem;
+  bottom: 0.4rem;
+  right: 0.4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.4rem;
   background: #fff;
   color: var(--color-text);
-  padding: 0.75rem 0.9rem;
+  padding: 0.45rem 0.55rem;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.72rem;
+  line-height: 1.2;
   border-radius: 3px;
 }
 
 .case-card__arrow {
   flex: none;
-  width: 18px;
-  height: 18px;
+  width: 13px;
+  height: 13px;
   color: var(--color-rose);
 }
 
