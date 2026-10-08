@@ -77,9 +77,16 @@
 <section class="section section--tint" aria-labelledby="portfolio-heading">
   <p class="eyebrow eyebrow--center">Our work</p>
   <h2 id="portfolio-heading" class="section__title">Recent work</h2>
-  <div class="portfolio">
-    @for (item of portfolio; track item.image) {
-      <img class="portfolio__img" [src]="item.image" [alt]="item.alt" loading="lazy" />
+  <div class="portfolio-groups">
+    @for (group of portfolioGroups; track group.label) {
+      <div class="portfolio-group">
+        <h3 class="eyebrow eyebrow--center">{{ group.label }}</h3>
+        <div class="portfolio">
+          @for (item of group.items; track item.image) {
+            <img class="portfolio__img" [src]="item.image" [alt]="item.alt" loading="lazy" />
+          }
+        </div>
+      </div>
     }
   </div>
   <div class="section__cta">

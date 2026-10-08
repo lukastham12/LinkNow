@@ -66,13 +66,23 @@ describe('Home', () => {
     expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/custom-arrangement-hero.jpg');
     expect(serviceImgs[2].getAttribute('src')).toBe('/backdrops/backdrop-09.jpg');
     const tiles = Array.from(el.querySelectorAll('.portfolio__img')) as HTMLImageElement[];
-    expect(tiles.length).toBe(6);
+    expect(tiles.length).toBe(4);
     for (const img of tiles) {
-      expect(img.getAttribute('src')).toMatch(/\/backdrops\/backdrop-\d{2}\.jpg$/);
+      expect(img.getAttribute('src')).toMatch(/^\/(backdrops|corporate)\//);
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
     }
     // No leftover placeholder panels.
     expect(el.querySelector('.ph')).toBeNull();
+  });
+
+  it('splits "Recent work" into Retail customers and Corporate & organisations groups', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const labels = Array.from(el.querySelectorAll('.portfolio-group')).map(
+      (g) => g.querySelector('h3')?.textContent?.trim(),
+    );
+    expect(labels).toEqual(['Retail customers', 'Corporate & organisations']);
   });
 
   it('links the Corporate Events service card to /corporate', () => {

@@ -21,6 +21,11 @@ interface PortfolioTile {
   alt: string;
 }
 
+interface PortfolioGroup {
+  label: string;
+  items: PortfolioTile[];
+}
+
 /** Homepage (route ''). Sections: hero, services, portfolio teaser,
  *  testimonials, enquiry strip. WhatsApp is the only enquiry channel — no
  *  contact/quote links. */
@@ -65,13 +70,34 @@ export class Home {
     },
   ];
 
-  // A varied teaser set of real backdrop builds; the full set lives on /backdrops.
-  protected readonly portfolio: PortfolioTile[] = [
-    { image: '/backdrops/backdrop-05.jpg', alt: 'Custom event backdrop by LinkNow Events Co.' },
-    { image: '/backdrops/backdrop-18.jpg', alt: 'Custom event backdrop by LinkNow Events Co.' },
-    { image: '/backdrops/backdrop-19.jpg', alt: 'Custom event backdrop by LinkNow Events Co.' },
-    { image: '/backdrops/backdrop-04.jpg', alt: 'Custom event backdrop by LinkNow Events Co.' },
-    { image: '/backdrops/backdrop-12.jpg', alt: 'Custom event backdrop by LinkNow Events Co.' },
-    { image: '/backdrops/backdrop-20.jpg', alt: 'Custom event backdrop by LinkNow Events Co.' },
+  // Recent work, split by audience — a retail teaser and a corporate teaser.
+  // Full galleries live on /backdrops and /corporate.
+  protected readonly portfolioGroups: PortfolioGroup[] = [
+    {
+      label: 'Retail customers',
+      items: [
+        {
+          image: '/backdrops/backdrop-20.jpg',
+          alt: "A Minecraft-themed birthday backdrop built by LinkNow Events Co. for Enzo's 8th birthday",
+        },
+        {
+          image: '/backdrops/backdrop-02.jpg',
+          alt: "A balloon-garland celebration setup styled by LinkNow Events Co. for Daxton's 100 Days",
+        },
+      ],
+    },
+    {
+      label: 'Corporate & organisations',
+      items: [
+        {
+          image: '/corporate/peoples-association-01.jpg',
+          alt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
+        },
+        {
+          image: '/backdrops/backdrop-08.jpg',
+          alt: 'In-store Easter event styled by LinkNow Events Co. for Avocadoria',
+        },
+      ],
+    },
   ];
 }
