@@ -77,7 +77,7 @@ export class Home {
   // use-case cards shown on /corporate, linking straight to each client's
   // case-study page).
   protected readonly retail: PortfolioGroup = {
-    label: 'Retail customers',
+    label: 'Customers',
     ctaLink: '/backdrops',
     items: [
       {

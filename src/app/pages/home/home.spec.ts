@@ -64,7 +64,7 @@ describe('Home', () => {
     expect(el.querySelector('.ph')).toBeNull();
   });
 
-  it('splits "Recent work" vertically into Retail customers (left) and Corporate & organisations (right)', () => {
+  it('splits "Recent work" vertically into Customers (left) and Corporate & organisations (right)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -72,7 +72,7 @@ describe('Home', () => {
     const groups = Array.from(el.querySelectorAll('.portfolio-group'));
     expect(groups.length).toBe(2);
     const labels = groups.map((g) => g.querySelector('h3')?.textContent?.trim());
-    expect(labels).toEqual(['Retail customers', 'Corporate & organisations']);
+    expect(labels).toEqual(['Customers', 'Corporate & organisations']);
   });
 
   it('gives each "Recent work" sub-section its own "See more" link to the full gallery', () => {
