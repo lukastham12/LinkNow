@@ -4,6 +4,7 @@ import { Services } from './pages/services/services';
 import { Flowers } from './pages/flowers/flowers';
 import { Backdrops } from './pages/backdrops/backdrops';
 import { Corporate } from './pages/corporate/corporate';
+import { CorporateCaseStudyPage } from './pages/corporate-case-study/corporate-case-study';
 import { About } from './pages/about/about';
 import { PageSeo } from './shared/seo';
 
@@ -79,6 +80,64 @@ export const routes: Routes = [
           'Corporate event décor in Singapore — backdrops, product launches, grand openings, ' +
           'D&D and festive styling for companies and formal occasions.',
         path: '/corporate',
+      } satisfies PageSeo,
+    },
+  },
+  // Corporate case-study pages — one static route per client use-case shown
+  // on the /corporate grid. Registered before the wildcard.
+  {
+    path: 'corporate/peoples-association',
+    component: CorporateCaseStudyPage,
+    data: {
+      slug: 'peoples-association',
+      seo: {
+        title: "People's Association Open House Décor | LinkNow Events Co.",
+        description:
+          "A case study on styling People's Association's Open House — balloon pillars, " +
+          'ribbon-cutting and on-site balloon art, by LinkNow Events Co.',
+        path: '/corporate/peoples-association',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'corporate/awwa',
+    component: CorporateCaseStudyPage,
+    data: {
+      slug: 'awwa',
+      seo: {
+        title: "AWWA Children's Day Bouncy Castle | LinkNow Events Co.",
+        description:
+          "A case study on AWWA's Children's Day engagement — a themed bouncy castle delivered " +
+          'end-to-end by LinkNow Events Co.',
+        path: '/corporate/awwa',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'corporate/bucket-house',
+    component: CorporateCaseStudyPage,
+    data: {
+      slug: 'bucket-house',
+      seo: {
+        title: "Bucket House Preschool Children's Day Styling | LinkNow Events Co.",
+        description:
+          "A case study on Bucket House Preschool's Children's Day celebration — balloon " +
+          'twisting and floral styling by LinkNow Events Co.',
+        path: '/corporate/bucket-house',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'corporate/avocadoria',
+    component: CorporateCaseStudyPage,
+    data: {
+      slug: 'avocadoria',
+      seo: {
+        title: 'Avocadoria Easter Storefront Styling | LinkNow Events Co.',
+        description:
+          "A case study on Avocadoria's in-store Easter event — a pastel balloon installation " +
+          'styled by LinkNow Events Co.',
+        path: '/corporate/avocadoria',
       } satisfies PageSeo,
     },
   },

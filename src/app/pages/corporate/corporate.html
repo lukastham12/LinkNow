@@ -19,7 +19,7 @@
   <ul class="cases__grid">
     @for (study of caseStudies; track study.slug) {
       <li class="cases__item">
-        <a class="case-card" [href]="'#' + study.slug">
+        <a class="case-card" [routerLink]="['/corporate', study.slug]">
           <img
             class="case-card__img"
             [src]="study.headline.src"
@@ -49,34 +49,6 @@
     }
   </ul>
 </section>
-
-@for (study of caseStudies; track study.slug) {
-  <section class="showcase" [id]="study.slug" [attr.aria-labelledby]="study.slug + '-heading'">
-    <p class="eyebrow eyebrow--center">Case Study</p>
-    <h2 [id]="study.slug + '-heading'" class="showcase__title">{{ study.client }}</h2>
-    <ul class="showcase__grid">
-      @for (photo of study.photos; track photo.src) {
-        <li class="showcase__item">
-          <img class="showcase__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
-        </li>
-      }
-    </ul>
-    <div class="case-study">
-      <div class="case-study__item">
-        <h3 class="case-study__label">The brief</h3>
-        <p class="case-study__text">{{ study.brief }}</p>
-      </div>
-      <div class="case-study__item">
-        <h3 class="case-study__label">What we built</h3>
-        <p class="case-study__text">{{ study.build }}</p>
-      </div>
-      <div class="case-study__item">
-        <h3 class="case-study__label">The result</h3>
-        <p class="case-study__text">{{ study.result }}</p>
-      </div>
-    </div>
-  </section>
-}
 
 <section class="range" aria-labelledby="range-heading">
   <p class="eyebrow eyebrow--center">What we cover</p>

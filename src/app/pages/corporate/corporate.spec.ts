@@ -1,10 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { Corporate } from './corporate';
 
 describe('Corporate (Corporate Events page)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Corporate],
+      providers: [provideRouter([])],
     }).compileComponents();
   });
 
@@ -33,7 +35,7 @@ describe('Corporate (Corporate Events page)', () => {
     expect(text).toMatch(/festive/i);
   });
 
-  it('shows a 4-card use-case grid (People\'s Association, AWWA, Bucket House, Avocadoria)', () => {
+  it("shows a 4-card use-case grid (People's Association, AWWA, Bucket House, Avocadoria), each linking to its own page", () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -46,9 +48,14 @@ describe('Corporate (Corporate Events page)', () => {
     expect(labels.some((l) => l.includes('AWWA'))).toBeTrue();
     expect(labels.some((l) => l.includes('Bucket House'))).toBeTrue();
     expect(labels.some((l) => l.includes('Avocadoria'))).toBeTrue();
+
+    const hrefs = cards.map((c) => c.getAttribute('href'));
+    expect(hrefs).toContain('/corporate/peoples-association');
+    expect(hrefs).toContain('/corporate/awwa');
+    expect(hrefs).toContain('/corporate/bucket-house');
+    expect(hrefs).toContain('/corporate/avocadoria');
+
     for (const card of cards) {
-      const href = card.getAttribute('href') ?? '';
-      expect(href.startsWith('#')).toBeTrue();
       const img = card.querySelector('.case-card__img') as HTMLImageElement;
       expect(img).toBeTruthy();
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
@@ -56,82 +63,14 @@ describe('Corporate (Corporate Events page)', () => {
     }
   });
 
-  it('shows a brief/build/result case study section for each of the 4 clients', () => {
+  it('does NOT render case-study brief/build/result content on this page (it now lives on the dedicated pages)', () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.case-study')).toBeNull();
     const text = el.textContent ?? '';
-    expect(text).toContain("People's Association");
-    expect(text).toContain('AWWA');
-    expect(text).toContain('Bucket House Preschool');
-    expect(text).toContain('Avocadoria');
-
-    const sections = Array.from(el.querySelectorAll('.showcase')) as HTMLElement[];
-    expect(sections.length).toBe(4);
-    for (const section of sections) {
-      expect(section.querySelector('.case-study__item:nth-child(1)')?.textContent).toContain(
-        'The brief',
-      );
-      const items = section.querySelectorAll('.case-study__item');
-      expect(items.length).toBe(3);
-      const itemText = Array.from(items)
-        .map((i) => i.textContent)
-        .join(' ');
-      expect(itemText).toContain('The brief');
-      expect(itemText).toContain('What we built');
-      expect(itemText).toContain('The result');
-    }
-  });
-
-  it('shows the Avocadoria case study with its two in-store photos', () => {
-    const fixture = TestBed.createComponent(Corporate);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const section = el.querySelector('#avocadoria') as HTMLElement;
-    expect(section).toBeTruthy();
-    const imgs = Array.from(section.querySelectorAll('.showcase__img')) as HTMLImageElement[];
-    expect(imgs.length).toBe(2);
-    const srcs = imgs.map((i) => i.getAttribute('src'));
-    expect(srcs).toContain('/backdrops/backdrop-08.jpg');
-    expect(srcs).toContain('/backdrops/backdrop-09.jpg');
-    for (const img of imgs) {
-      expect(img.getAttribute('loading')).toBe('lazy');
-      expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
-    }
-  });
-
-  it('shows the People\'s Association case study referencing the Open House ribbon-cutting', () => {
-    const fixture = TestBed.createComponent(Corporate);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const section = el.querySelector('#peoples-association') as HTMLElement;
-    expect(section).toBeTruthy();
-    const text = section.textContent ?? '';
-    expect(text).toMatch(/open house/i);
-    expect(text).toMatch(/ribbon/i);
-    expect(text).toMatch(/balloon/i);
-  });
-
-  it('shows the AWWA case study referencing the Children\'s Day bouncy castle', () => {
-    const fixture = TestBed.createComponent(Corporate);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const section = el.querySelector('#awwa') as HTMLElement;
-    expect(section).toBeTruthy();
-    const text = section.textContent ?? '';
-    expect(text).toMatch(/children's day/i);
-    expect(text).toMatch(/bouncy castle/i);
-  });
-
-  it('shows the Bucket House case study referencing balloon twisting for Children\'s Day', () => {
-    const fixture = TestBed.createComponent(Corporate);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const section = el.querySelector('#bucket-house') as HTMLElement;
-    expect(section).toBeTruthy();
-    const text = section.textContent ?? '';
-    expect(text).toMatch(/children's day/i);
-    expect(text).toMatch(/balloon.twisting/i);
+    expect(text).not.toContain('The brief');
+    expect(text).not.toContain('What we built');
   });
 
   it('states scope covers any custom corporate or formal event, not just the listed types', () => {
