@@ -6,7 +6,8 @@
 //
 // backdrop-08 and backdrop-09 are the Avocaderia in-store event photos; they
 // now live on the Corporate Events page (/corporate) and are intentionally
-// excluded here (ticket 007).
+// excluded here (ticket 007), leaving 18 gallery items (backdrop-01…20
+// minus the two corporate shots).
 
 export interface BackdropPhoto {
   /** Path under public/ (served at the site root). */
@@ -19,7 +20,7 @@ export interface BackdropPhoto {
 // order — the strongest designs lead so first-time visitors are hooked
 // before they scroll. Re-order this list to change what leads; add a number
 // to feature a new backdrop-NN.jpg.
-const ORDER = [2, 15, 17, 12, 5, 7, 14, 1, 4, 16, 6, 3, 13, 10, 11];
+const ORDER = [2, 18, 19, 15, 17, 12, 5, 7, 14, 20, 1, 4, 16, 6, 3, 13, 10, 11];
 
 export const BACKDROPS: readonly BackdropPhoto[] = ORDER.map((num) => {
   const n = String(num).padStart(2, '0');
