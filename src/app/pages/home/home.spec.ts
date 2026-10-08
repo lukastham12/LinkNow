@@ -32,57 +32,81 @@ describe('Home', () => {
     expect(waLinks.length).toBeGreaterThan(0);
   });
 
-  it('links the "Recent work" teaser to /services', () => {
-    const fixture = TestBed.createComponent(Home);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent ?? '').toContain('Recent work');
-    const cta = el.querySelector('.section__cta a[href="/services"]');
-    expect(cta).toBeTruthy();
-    // The teaser no longer points at the /backdrops portfolio.
-    expect(el.querySelector('.section__cta a[href="/backdrops"]')).toBeNull();
-  });
-
-  it('uses the hero backdrop photo (backdrop-02) as a cover image', () => {
+  it('uses the Minecraft backdrop photo as the hero cover image', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const hero = el.querySelector('.hero__img') as HTMLImageElement;
     expect(hero).toBeTruthy();
-    expect(hero.getAttribute('src')).toBe('/backdrops/backdrop-02.jpg');
+    expect(hero.getAttribute('src')).toBe('/backdrops/hero-minecraft.jpg');
+    expect((hero.getAttribute('alt') ?? '').toLowerCase()).toContain('minecraft');
     // The old hydrangea cut-out is gone.
     expect(el.querySelector('.hero__flower')).toBeNull();
   });
 
-  it('renders real décor images in the service cards and portfolio teaser', () => {
+  it('renders real décor images in the service cards and the retail portfolio teaser', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const serviceImgs = Array.from(el.querySelectorAll('.service__img')) as HTMLImageElement[];
     expect(serviceImgs.length).toBe(3);
-    // Custom Backdrops card uses backdrop-07 (differs from the hero, backdrop-02).
     expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-07.jpg');
-    // Floral card uses the bespoke arrangement hero photo.
     expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/custom-arrangement-hero.jpg');
     expect(serviceImgs[2].getAttribute('src')).toBe('/backdrops/backdrop-09.jpg');
+
     const tiles = Array.from(el.querySelectorAll('.portfolio__img')) as HTMLImageElement[];
-    expect(tiles.length).toBe(4);
+    expect(tiles.length).toBe(2);
     for (const img of tiles) {
-      expect(img.getAttribute('src')).toMatch(/^\/(backdrops|corporate)\//);
+      expect(img.getAttribute('src')).toMatch(/^\/backdrops\//);
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
     }
     // No leftover placeholder panels.
     expect(el.querySelector('.ph')).toBeNull();
   });
 
-  it('splits "Recent work" into Retail customers and Corporate & organisations groups', () => {
+  it('splits "Recent work" vertically into Retail customers (left) and Corporate & organisations (right)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const labels = Array.from(el.querySelectorAll('.portfolio-group')).map(
-      (g) => g.querySelector('h3')?.textContent?.trim(),
-    );
+    expect(el.textContent ?? '').toContain('Recent work');
+    const groups = Array.from(el.querySelectorAll('.portfolio-group'));
+    expect(groups.length).toBe(2);
+    const labels = groups.map((g) => g.querySelector('h3')?.textContent?.trim());
     expect(labels).toEqual(['Retail customers', 'Corporate & organisations']);
+  });
+
+  it('gives each "Recent work" sub-section its own "See more" link to the full gallery', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const groups = Array.from(el.querySelectorAll('.portfolio-group'));
+    const ctas = groups.map(
+      (g) => g.querySelector('.section__cta a') as HTMLAnchorElement | null,
+    );
+    expect(ctas.every((a) => a?.textContent?.trim() === 'See more')).toBeTrue();
+    expect(ctas[0]?.getAttribute('href')).toBe('/backdrops');
+    expect(ctas[1]?.getAttribute('href')).toBe('/corporate');
+  });
+
+  it("shows the People's Association and Avocadoria use-case cards, styled and linked exactly like /corporate", () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const cards = Array.from(el.querySelectorAll('.case-card')) as HTMLAnchorElement[];
+    expect(cards.length).toBe(2);
+    const hrefs = cards.map((c) => c.getAttribute('href'));
+    expect(hrefs).toEqual(['/corporate/peoples-association', '/corporate/avocadoria']);
+    const labels = Array.from(el.querySelectorAll('.case-card__label')).map((n) =>
+      (n.textContent ?? '').trim(),
+    );
+    expect(labels.some((l) => l.includes("People's Association"))).toBeTrue();
+    expect(labels.some((l) => l.includes('Avocadoria'))).toBeTrue();
+    for (const card of cards) {
+      const img = card.querySelector('.case-card__img') as HTMLImageElement;
+      expect(img).toBeTruthy();
+      expect(img.getAttribute('loading')).toBe('lazy');
+      expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
+    }
   });
 
   it('links the Corporate Events service card to /corporate', () => {

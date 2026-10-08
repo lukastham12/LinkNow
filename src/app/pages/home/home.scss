@@ -192,13 +192,66 @@
 
 .portfolio-groups {
   display: grid;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .portfolio {
   display: grid;
   gap: 0.75rem;
   grid-template-columns: repeat(2, 1fr);
+}
+
+// Corporate teaser — same case-card style as the /corporate use-case grid.
+.cases {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.cases__item {
+  margin: 0;
+}
+
+.case-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.case-card__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.case-card__label {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: #fff;
+  color: var(--color-text);
+  padding: 0.75rem 0.9rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 3px;
+}
+
+.case-card__arrow {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--color-rose);
 }
 
 .clients__sub {
@@ -305,11 +358,12 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .portfolio {
+  .testimonials {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .testimonials {
-    grid-template-columns: repeat(3, 1fr);
+  .portfolio-groups {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 }

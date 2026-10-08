@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
+import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
 
 interface Service {
   name: string;
@@ -23,6 +24,7 @@ interface PortfolioTile {
 
 interface PortfolioGroup {
   label: string;
+  ctaLink: string;
   items: PortfolioTile[];
 }
 
@@ -70,34 +72,28 @@ export class Home {
     },
   ];
 
-  // Recent work, split by audience — a retail teaser and a corporate teaser.
-  // Full galleries live on /backdrops and /corporate.
-  protected readonly portfolioGroups: PortfolioGroup[] = [
-    {
-      label: 'Retail customers',
-      items: [
-        {
-          image: '/backdrops/backdrop-20.jpg',
-          alt: "A Minecraft-themed birthday backdrop built by LinkNow Events Co. for Enzo's 8th birthday",
-        },
-        {
-          image: '/backdrops/backdrop-02.jpg',
-          alt: "A balloon-garland celebration setup styled by LinkNow Events Co. for Daxton's 100 Days",
-        },
-      ],
-    },
-    {
-      label: 'Corporate & organisations',
-      items: [
-        {
-          image: '/corporate/peoples-association-01.jpg',
-          alt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
-        },
-        {
-          image: '/backdrops/backdrop-08.jpg',
-          alt: 'In-store Easter event styled by LinkNow Events Co. for Avocadoria',
-        },
-      ],
-    },
-  ];
+  // Recent work, split by audience — a retail teaser (plain gallery tiles,
+  // linking to the full /backdrops gallery) and a corporate teaser (the same
+  // use-case cards shown on /corporate, linking straight to each client's
+  // case-study page).
+  protected readonly retail: PortfolioGroup = {
+    label: 'Retail customers',
+    ctaLink: '/backdrops',
+    items: [
+      {
+        image: '/backdrops/backdrop-20.jpg',
+        alt: "A Minecraft-themed birthday backdrop built by LinkNow Events Co. for Enzo's 8th birthday",
+      },
+      {
+        image: '/backdrops/backdrop-02.jpg',
+        alt: "A balloon-garland celebration setup styled by LinkNow Events Co. for Daxton's 100 Days",
+      },
+    ],
+  };
+
+  // Same client case studies shown on /corporate — People's Association and
+  // Avocadoria — reused here so the card style and link target match exactly.
+  protected readonly corporateCases = CORPORATE_CASE_STUDIES.filter(
+    (c) => c.slug === 'peoples-association' || c.slug === 'avocadoria',
+  );
 }

@@ -16,10 +16,10 @@
   <div class="hero__media">
     <img
       class="hero__img"
-      src="/backdrops/backdrop-02.jpg"
-      alt="A balloon-garland celebration setup — navy, green and cream balloons with a striped awning, rocking horse and bear cut-out — styled by LinkNow Events Co."
-      width="1400"
-      height="1282"
+      src="/backdrops/hero-minecraft.jpg"
+      alt="A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow Events Co. for Enzo's 8th birthday"
+      width="1200"
+      height="1240"
     />
   </div>
 </section>
@@ -78,19 +78,55 @@
   <p class="eyebrow eyebrow--center">Our work</p>
   <h2 id="portfolio-heading" class="section__title">Recent work</h2>
   <div class="portfolio-groups">
-    @for (group of portfolioGroups; track group.label) {
-      <div class="portfolio-group">
-        <h3 class="eyebrow eyebrow--center">{{ group.label }}</h3>
-        <div class="portfolio">
-          @for (item of group.items; track item.image) {
-            <img class="portfolio__img" [src]="item.image" [alt]="item.alt" loading="lazy" />
-          }
-        </div>
+    <div class="portfolio-group">
+      <h3 class="eyebrow eyebrow--center">{{ retail.label }}</h3>
+      <div class="portfolio">
+        @for (item of retail.items; track item.image) {
+          <img class="portfolio__img" [src]="item.image" [alt]="item.alt" loading="lazy" />
+        }
       </div>
-    }
-  </div>
-  <div class="section__cta">
-    <a class="btn btn--ghost" routerLink="/services">See our services</a>
+      <div class="section__cta">
+        <a class="btn btn--ghost" [routerLink]="retail.ctaLink">See more</a>
+      </div>
+    </div>
+    <div class="portfolio-group">
+      <h3 class="eyebrow eyebrow--center">Corporate &amp; organisations</h3>
+      <ul class="cases">
+        @for (study of corporateCases; track study.slug) {
+          <li class="cases__item">
+            <a class="case-card" [routerLink]="['/corporate', study.slug]">
+              <img
+                class="case-card__img"
+                [src]="study.headline.src"
+                [alt]="study.headline.alt"
+                loading="lazy"
+              />
+              <span class="case-card__label">
+                {{ study.client }}
+                <svg
+                  class="case-card__arrow"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M7 17L17 7M17 7H9M17 7V15"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                  />
+                </svg>
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+      <div class="section__cta">
+        <a class="btn btn--ghost" routerLink="/corporate">See more</a>
+      </div>
+    </div>
   </div>
 </section>
 
