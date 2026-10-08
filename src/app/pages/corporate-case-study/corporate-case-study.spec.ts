@@ -47,6 +47,13 @@ describe('CorporateCaseStudyPage', () => {
     const back = el.querySelector('a.back') as HTMLAnchorElement;
     expect(back).toBeTruthy();
     expect(back.getAttribute('href')).toBe('/corporate');
+
+    const imgs = Array.from(el.querySelectorAll('.showcase__img')) as HTMLImageElement[];
+    expect(imgs.length).toBe(2);
+    expect(imgs.map((i) => i.getAttribute('src'))).toEqual([
+      '/corporate/peoples-association-01.jpg',
+      '/corporate/peoples-association-02.jpg',
+    ]);
   });
 
   it('renders the AWWA case study referencing the bouncy castle', async () => {
@@ -69,6 +76,11 @@ describe('CorporateCaseStudyPage', () => {
       expect(img.getAttribute('loading')).toBe('lazy');
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
     }
+    // The floral/balloon display photo now shows first, the entertainer shot second.
+    expect(imgs.map((i) => i.getAttribute('src'))).toEqual([
+      '/corporate/bucket-house-02.jpg',
+      '/corporate/bucket-house-01.jpg',
+    ]);
   });
 
   it('renders the Avocadoria case study with its two in-store photos', async () => {

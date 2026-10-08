@@ -30,6 +30,10 @@ export const CORPORATE_CASE_STUDIES: readonly CorporateCaseStudy[] = [
         src: '/corporate/peoples-association-01.jpg',
         alt: "Balloon pillar entrance and ribbon-cutting setup for a People's Association Open House",
       },
+      {
+        src: '/corporate/peoples-association-02.jpg',
+        alt: "Guests taking photos with the LinkNow team at a People's Association Open House",
+      },
     ],
     brief:
       "People's Association needed a welcoming, grassroots-ready entrance for an Open House — " +
@@ -74,12 +78,12 @@ export const CORPORATE_CASE_STUDIES: readonly CorporateCaseStudy[] = [
     },
     photos: [
       {
-        src: '/corporate/bucket-house-01.jpg',
-        alt: "Balloon twisting entertainer at Bucket House Preschool's Children's Day celebration",
-      },
-      {
         src: '/corporate/bucket-house-02.jpg',
         alt: 'Balloon and floral display styled for Bucket House Preschool',
+      },
+      {
+        src: '/corporate/bucket-house-01.jpg',
+        alt: "Balloon twisting entertainer at Bucket House Preschool's Children's Day celebration",
       },
     ],
     brief:
