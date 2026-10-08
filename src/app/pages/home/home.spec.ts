@@ -98,21 +98,24 @@ describe('Home', () => {
     expect(el.textContent ?? '').not.toContain('Lisha Soh');
   });
 
-  it('shows every "Our Clients" entry with equal weight — logo, name and blurb, no featured/secondary split', () => {
+  it('shows the "Our Clients" logo row — all 4 logos, no names/descriptions shown', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent ?? '').toContain('Our Clients');
-    const cards = Array.from(el.querySelectorAll('.client-card'));
-    expect(cards.length).toBe(2);
-    for (const card of cards) {
-      const logo = card.querySelector('.client-card__logo') as HTMLImageElement | null;
-      expect(logo).toBeTruthy();
-      expect((logo?.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
-      expect(logo?.getAttribute('src')).toMatch(/^\/brand\/clients\//);
-      expect((card.querySelector('.client-card__blurb')?.textContent ?? '').length).toBeGreaterThan(0);
+    const logos = Array.from(el.querySelectorAll('.clients__logo')) as HTMLImageElement[];
+    expect(logos.length).toBe(4);
+    for (const logo of logos) {
+      expect((logo.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
+      expect(logo.getAttribute('src')).toMatch(/^\/brand\/clients\//);
     }
-    expect(el.textContent ?? '').toContain("People's Association");
-    expect(el.textContent ?? '').toContain('Avocadoria');
+    // Order: People's Association, AWWA, Bucket House, Avocadoria.
+    const srcs = logos.map((l) => l.getAttribute('src'));
+    expect(srcs).toEqual([
+      '/brand/clients/peoples-association.png',
+      '/brand/clients/awwa.png',
+      '/brand/clients/bucket-house.png',
+      '/brand/clients/avocadoria.png',
+    ]);
   });
 });

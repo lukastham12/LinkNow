@@ -196,30 +196,32 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-.client-cards {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: 1fr;
+.clients__sub {
+  margin: 0 0 2rem;
+  text-align: center;
+  color: var(--color-text-muted);
 }
 
-.client-card {
-  text-align: center;
+.clients {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2.5rem 3rem;
 
   &__logo {
     height: 64px;
+    max-width: 200px;
     object-fit: contain;
     filter: grayscale(1);
-    margin: 0 auto 0.75rem;
-  }
+    transition: opacity 0.2s ease;
 
-  &__name {
-    margin: 0 0 0.3rem;
-    font-weight: 600;
-  }
-
-  &__blurb {
-    margin: 0;
-    color: var(--color-text-muted);
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 
@@ -304,9 +306,5 @@
 
   .testimonials {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .client-cards {
-    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -62,16 +62,15 @@
 <!-- OUR CLIENTS -->
 <section class="section" aria-labelledby="clients-heading">
   <p class="eyebrow eyebrow--center">Our Clients</p>
-  <h2 id="clients-heading" class="section__title">Organisations we've worked with</h2>
-  <div class="client-cards">
+  <h2 id="clients-heading" class="section__title">Trusted by organisations</h2>
+  <p class="clients__sub">A selection of the organisations we've worked with.</p>
+  <ul class="clients">
     @for (client of clients; track client.name) {
-      <article class="testimonial client-card">
-        <img class="client-card__logo" [src]="client.logo" [alt]="client.alt" loading="lazy" />
-        <p class="client-card__name">{{ client.name }}</p>
-        <p class="client-card__blurb">{{ client.blurb }}</p>
-      </article>
+      <li>
+        <img class="clients__logo" [src]="client.logo" [alt]="client.alt" loading="lazy" />
+      </li>
     }
-  </div>
+  </ul>
 </section>
 
 <!-- PORTFOLIO TEASER -->

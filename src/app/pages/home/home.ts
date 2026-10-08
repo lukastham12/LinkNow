@@ -36,7 +36,7 @@ export class Home {
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
 
-  // Organisations we've worked with — every client gets equal billing.
+  // Organisations we've worked with — logo row only.
   protected readonly clients = CLIENTS;
 
   protected readonly services: Service[] = [
