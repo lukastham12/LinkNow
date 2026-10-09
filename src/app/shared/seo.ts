@@ -135,7 +135,7 @@ export class SeoService {
           logo: absoluteUrl('/brand/logo.jpg'),
           image: absoluteUrl('/brand/logo.jpg'),
           description:
-            'Singapore event décor studio creating custom backdrops, floral ' +
+            'Singapore event decor studio creating custom backdrops, floral ' +
             'services and corporate event styling for celebrations and formal occasions.',
           areaServed: { '@type': 'Country', name: 'Singapore' },
           contactPoint: {

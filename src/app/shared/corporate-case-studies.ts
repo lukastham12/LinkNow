@@ -60,7 +60,7 @@ export const CORPORATE_CASE_STUDIES: readonly CorporateCaseStudy[] = [
     ],
     brief:
       "AWWA wanted a Children's Day engagement that would genuinely excite the kids — a hands-on " +
-      'attraction, not just static décor.',
+      'attraction, not just static decor.',
     build:
       'A themed inflatable bouncy castle with a slide, delivered end-to-end: site-suitable setup, ' +
       'safety matting, full inflation and power run-through, on-site supervision for the duration of ' +

@@ -50,7 +50,7 @@ export class Services {
     {
       id: 'floral',
       name: 'ROM & Wedding Services',
-      blurb: 'Floral styling and décor for your ROM ceremony or wedding day — any flower, any palette.',
+      blurb: 'Floral styling and decor for your ROM ceremony or wedding day — any flower, any palette.',
       image: '/flowers/custom-arrangement-hero.jpg',
       imageAlt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
       link: '/flowers',
@@ -61,7 +61,7 @@ export class Services {
       id: 'corporate',
       name: 'Corporate Events',
       blurb:
-        'Styling and décor for company celebrations, launches and formal occasions — polished ' +
+        'Styling and decor for company celebrations, launches and formal occasions — polished ' +
         'setups your guests will remember.',
       image: '/corporate/peoples-association-01.jpg',
       imageAlt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",

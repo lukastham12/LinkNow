@@ -13,7 +13,7 @@ export const SITE_NAME = 'LinkNow Events Co.';
 export const LEGAL_NAME = 'LinkNow Pte Ltd';
 
 // Default social-share image. This brand is image-led, so the share card uses
-// a décor photo (the homepage hero backdrop) rather than the dark logo tile —
+// a decor photo (the homepage hero backdrop) rather than the dark logo tile —
 // it makes a far stronger preview on TikTok/Instagram/WhatsApp link shares,
 // which are the primary discovery channels. Swap for a purpose-made landscape
 // (1.91:1) OG asset when one is supplied. Path is site-root-relative; made

@@ -11,9 +11,9 @@ interface EventType {
 /**
  * Corporate Events page (route '/corporate').
  *
- * Informational page describing the décor we create for companies, formal
+ * Informational page describing the decor we create for companies, formal
  * occasions, and any other custom event — corporate backdrops, product
- * launches, grand openings, dinner & dance, roadshows, festive/seasonal décor,
+ * launches, grand openings, dinner & dance, roadshows, festive/seasonal decor,
  * weddings, and anything bespoke beyond that list. Leads with a 4-client
  * use-case grid (People's Association, AWWA, Bucket House Preschool,
  * Avocadoria), each card linking through to its own case-study page
@@ -47,7 +47,7 @@ export class Corporate {
     },
     {
       name: 'Grand openings',
-      blurb: 'Ribbon-ready entrances and celebratory décor to mark the day in style.',
+      blurb: 'Ribbon-ready entrances and celebratory decor to mark the day in style.',
     },
     {
       name: 'Dinner & dance (D&D)',
@@ -58,7 +58,7 @@ export class Corporate {
       blurb: 'Portable, eye-catching setups that travel and stand out across venues.',
     },
     {
-      name: 'Festive & seasonal décor',
+      name: 'Festive & seasonal decor',
       blurb: 'Seasonal styling for offices and events — warm, on-brand and beautifully finished.',
     },
   ];
