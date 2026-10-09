@@ -34,7 +34,7 @@ export const routes: Routes = [
         description:
           'Explore our Singapore event décor services: custom backdrops, floral services and ' +
           'corporate event styling for celebrations and formal occasions.',
-        path: '/services',
+        path: '/services/',
       } satisfies PageSeo,
     },
   },
@@ -49,7 +49,7 @@ export const routes: Routes = [
         description:
           'Bespoke floral arrangements in Singapore for any occasion — any flower, any palette, ' +
           'styled for weddings, corporate events, birthdays and celebrations.',
-        path: '/flowers',
+        path: '/flowers/',
       } satisfies PageSeo,
     },
   },
@@ -64,7 +64,7 @@ export const routes: Routes = [
         description:
           'A portfolio of custom event backdrops built in Singapore for birthdays, weddings, ' +
           'corporate events and formal occasions. See our work and enquire on WhatsApp.',
-        path: '/backdrops',
+        path: '/backdrops/',
       } satisfies PageSeo,
     },
   },
@@ -79,7 +79,7 @@ export const routes: Routes = [
         description:
           'Corporate event décor in Singapore — backdrops, product launches, grand openings, ' +
           'D&D and festive styling for companies and formal occasions.',
-        path: '/corporate',
+        path: '/corporate/',
       } satisfies PageSeo,
     },
   },
@@ -95,7 +95,7 @@ export const routes: Routes = [
         description:
           "A case study on styling People's Association's Open House — balloon pillars, " +
           'ribbon-cutting and on-site balloon art, by LinkNow Events Co.',
-        path: '/corporate/peoples-association',
+        path: '/corporate/peoples-association/',
       } satisfies PageSeo,
     },
   },
@@ -109,7 +109,7 @@ export const routes: Routes = [
         description:
           "A case study on AWWA's Children's Day engagement — a themed bouncy castle delivered " +
           'end-to-end by LinkNow Events Co.',
-        path: '/corporate/awwa',
+        path: '/corporate/awwa/',
       } satisfies PageSeo,
     },
   },
@@ -123,7 +123,7 @@ export const routes: Routes = [
         description:
           "A case study on Bucket House Preschool's Children's Day celebration — balloon " +
           'twisting and floral styling by LinkNow Events Co.',
-        path: '/corporate/bucket-house',
+        path: '/corporate/bucket-house/',
       } satisfies PageSeo,
     },
   },
@@ -137,7 +137,7 @@ export const routes: Routes = [
         description:
           "A case study on Avocadoria's in-store Easter event — a pastel balloon installation " +
           'styled by LinkNow Events Co.',
-        path: '/corporate/avocadoria',
+        path: '/corporate/avocadoria/',
       } satisfies PageSeo,
     },
   },
@@ -153,7 +153,7 @@ export const routes: Routes = [
           'Meet LinkNow Events Co., a Singapore event décor studio specialising in balloon ' +
           'garlands, custom backdrops, floral styling and corporate event décor for parties and ' +
           'celebrations.',
-        path: '/about',
+        path: '/about/',
       } satisfies PageSeo,
     },
   },
