@@ -95,32 +95,12 @@
       <ul class="cases">
         @for (study of corporateCases; track study.slug) {
           <li class="cases__item">
-            <a class="case-card" [routerLink]="['/corporate', study.slug]">
-              <img
-                class="case-card__img"
-                [src]="study.headline.src"
-                [alt]="study.headline.alt"
-                loading="lazy"
-              />
-              <span class="case-card__label">
-                {{ study.client }}
-                <svg
-                  class="case-card__arrow"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path
-                    d="M7 17L17 7M17 7H9M17 7V15"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    fill="none"
-                  />
-                </svg>
-              </span>
-            </a>
+            <app-case-card
+              [photo]="study.headline"
+              [label]="study.client"
+              [link]="['/corporate', study.slug]"
+              [compact]="true"
+            />
           </li>
         }
       </ul>

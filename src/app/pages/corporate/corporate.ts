@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { WHATSAPP_HREF } from '../../shared/contact';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
+import { CaseCard } from '../../components/case-card/case-card';
 
 interface EventType {
   name: string;
@@ -22,7 +22,7 @@ interface EventType {
  */
 @Component({
   selector: 'app-corporate',
-  imports: [RouterLink],
+  imports: [CaseCard],
   templateUrl: './corporate.html',
   styleUrl: './corporate.scss',
 })

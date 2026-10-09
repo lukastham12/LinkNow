@@ -4,6 +4,7 @@ import { WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
+import { CaseCard } from '../../components/case-card/case-card';
 
 interface Service {
   name: string;
@@ -33,7 +34,7 @@ interface PortfolioGroup {
  *  contact/quote links. */
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, CaseCard],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

@@ -1,8 +1,12 @@
 // Shared building blocks --------------------------------------------------
 
-.eyebrow {
-  margin: 0 0 0.75rem;
+%muted {
   color: var(--color-text-muted);
+}
+
+.eyebrow {
+  @extend %muted;
+  margin: 0 0 0.75rem;
   font-size: 0.68rem;
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
@@ -21,9 +25,9 @@
   padding: 0.85rem 1.8rem;
   border-radius: 2px;
   transition:
-    border-color 0.25s ease,
-    background-color 0.25s ease,
-    color 0.25s ease;
+    border-color 0.25s,
+    background-color 0.25s,
+    color 0.25s;
 }
 
 .btn--solid {
@@ -88,9 +92,14 @@
 
 // Layout -------------------------------------------------------------------
 
-.hero {
+.hero,
+.section,
+.enquiry {
   max-width: 1120px;
   margin: 0 auto;
+}
+
+.hero {
   padding: 3rem 1.25rem 1rem;
   display: grid;
   gap: 2rem;
@@ -105,8 +114,8 @@
 }
 
 .hero__sub {
+  @extend %muted;
   margin: 0 0 1.75rem;
-  color: var(--color-text-muted);
   max-width: 46ch;
   font-size: 1rem;
 }
@@ -122,8 +131,6 @@
 }
 
 .section {
-  max-width: 1120px;
-  margin: 0 auto;
   padding: 3.5rem 1.25rem;
 }
 
@@ -138,11 +145,15 @@
   margin-inline: auto;
 }
 
+.section__title,
+.enquiry__title {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 600;
+}
+
 .section__title {
   margin: 0 0 2rem;
   text-align: center;
-  font-size: clamp(1.5rem, 4vw, 2.1rem);
-  font-weight: 600;
 }
 
 .section__cta {
@@ -150,10 +161,14 @@
   text-align: center;
 }
 
-.services {
+.services,
+.testimonials {
   display: grid;
-  gap: 2rem;
   grid-template-columns: 1fr;
+}
+
+.services {
+  gap: 2rem;
 }
 
 .service--link {
@@ -185,8 +200,8 @@
 }
 
 .service__blurb {
+  @extend %muted;
   margin: 0;
-  color: var(--color-text-muted);
   font-size: 0.92rem;
 }
 
@@ -195,72 +210,27 @@
   gap: 2.5rem;
 }
 
-.portfolio {
+.portfolio,
+.cases {
   display: grid;
   gap: 0.6rem;
   grid-template-columns: repeat(2, 1fr);
 }
 
-// Corporate teaser — same case-card style as the /corporate use-case grid,
-// but kept small (2-up, square) so the homepage teaser stays short.
 .cases {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: 0.6rem;
-  grid-template-columns: repeat(2, 1fr);
 }
 
 .cases__item {
   margin: 0;
 }
 
-.case-card {
-  position: relative;
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.case-card__img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-}
-
-.case-card__label {
-  position: absolute;
-  left: 0.4rem;
-  bottom: 0.4rem;
-  right: 0.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.4rem;
-  background: #fff;
-  color: var(--color-text);
-  padding: 0.45rem 0.55rem;
-  font-weight: 600;
-  font-size: 0.72rem;
-  line-height: 1.2;
-  border-radius: 3px;
-}
-
-.case-card__arrow {
-  flex: none;
-  width: 13px;
-  height: 13px;
-  color: var(--color-rose);
-}
-
 .clients__sub {
+  @extend %muted;
   margin: 0 0 2rem;
   text-align: center;
-  color: var(--color-text-muted);
 }
 
 .clients {
@@ -287,9 +257,7 @@
 }
 
 .testimonials {
-  display: grid;
   gap: 1.5rem;
-  grid-template-columns: 1fr;
 }
 
 .testimonial {
@@ -314,35 +282,31 @@
 }
 
 .testimonial__author {
-  color: var(--color-text-muted);
+  @extend %muted;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
 }
 
 .placeholder-note {
+  @extend %muted;
   margin: 1.5rem 0 0;
   text-align: center;
-  color: var(--color-text-muted);
   font-size: 0.72rem;
   font-style: italic;
 }
 
 .enquiry {
-  max-width: 1120px;
-  margin: 0 auto;
   padding: 3.5rem 1.25rem 1rem;
   text-align: center;
 }
 
 .enquiry__title {
   margin: 0 0 0.5rem;
-  font-size: clamp(1.5rem, 4vw, 2.1rem);
-  font-weight: 600;
 }
 
 .enquiry__sub {
+  @extend %muted;
   margin: 0 0 1.75rem;
-  color: var(--color-text-muted);
 }
 
 // Responsive ---------------------------------------------------------------
@@ -357,10 +321,7 @@
     height: 480px;
   }
 
-  .services {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
+  .services,
   .testimonials {
     grid-template-columns: repeat(3, 1fr);
   }
