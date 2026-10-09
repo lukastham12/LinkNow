@@ -18,8 +18,9 @@ describe('absoluteUrl', () => {
     expect(absoluteUrl('https://example.com/x.jpg')).toBe('https://example.com/x.jpg');
   });
 
-  it('does not hard-code a real production domain (placeholder until owned)', () => {
-    expect(SITE_URL).toContain('REPLACE-WITH-DOMAIN');
+  it('uses the real production domain, not the pre-launch placeholder', () => {
+    expect(SITE_URL).toBe('https://linknowsg.com');
+    expect(SITE_URL).not.toContain('REPLACE-WITH-DOMAIN');
   });
 });
 

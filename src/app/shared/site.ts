@@ -3,11 +3,10 @@
 // urls, the sitemap, JSON-LD) must reference SITE_URL from here — do not
 // hard-code a domain anywhere else.
 //
-// ⚠️ TODO (BRIEF.md §9/§12): the production domain is not owned yet. Swap this
-// single placeholder when the domain is purchased. NOTE: `public/robots.txt`
-// and `public/sitemap.xml` are STATIC files and therefore repeat the domain
-// literally — update those two files to match when you change SITE_URL.
-export const SITE_URL = 'https://REPLACE-WITH-DOMAIN.example';
+// Production domain (BRIEF.md §9/§12). NOTE: `public/robots.txt` and
+// `public/sitemap.xml` are STATIC files and therefore repeat the domain
+// literally — keep those two files in sync if this ever changes.
+export const SITE_URL = 'https://linknowsg.com';
 
 // Brand identity (canonical — see BRIEF.md §2/§7).
 export const SITE_NAME = 'LinkNow Events Co.';

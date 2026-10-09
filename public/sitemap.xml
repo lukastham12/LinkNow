@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   LinkNow Events Co. sitemap — the existing prerendered routes.
-  STATIC file: the domain must match SITE_URL in src/app/shared/site.ts. It is a
-  placeholder until the domain is bought (BRIEF.md §9/§12) — swap both together.
+  STATIC file: the domain must match SITE_URL in src/app/shared/site.ts —
+  keep both in sync if it ever changes.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <!-- Homepage: no trailing slash, to match the canonical the app emits
          for '/' (absoluteUrl('/') === SITE_URL). Keep these byte-identical. -->
-    <loc>https://REPLACE-WITH-DOMAIN.example</loc>
+    <loc>https://linknowsg.com</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/services</loc>
+    <loc>https://linknowsg.com/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/backdrops</loc>
+    <loc>https://linknowsg.com/backdrops</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/flowers</loc>
+    <loc>https://linknowsg.com/flowers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/corporate</loc>
+    <loc>https://linknowsg.com/corporate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/about</loc>
+    <loc>https://linknowsg.com/corporate/peoples-association</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/corporate/awwa</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/corporate/bucket-house</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/corporate/avocadoria</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/about</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
