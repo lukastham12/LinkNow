@@ -51,13 +51,13 @@ export class Home {
     {
       name: 'Custom Backdrops',
       blurb: 'Bespoke backdrops designed and built for birthdays, weddings and corporate events.',
-      image: '/backdrops/backdrop-07.jpg',
-      imageAlt: 'A custom pink-and-gold event backdrop built by LinkNow Events Co.',
+      image: '/backdrops/backdrop-25.jpg',
+      imageAlt: "A Winnie the Pooh-themed gender reveal backdrop, \"Our Little Hunny is on the way\", built by LinkNow Events Co.",
       link: '/backdrops',
     },
     {
-      name: 'Floral Services',
-      blurb: 'Custom floral arrangements — any flower, any palette, styled for any occasion.',
+      name: 'ROM & Wedding Services',
+      blurb: 'Floral styling and décor for your ROM ceremony or wedding day — any flower, any palette.',
       image: '/flowers/custom-arrangement-hero.jpg',
       imageAlt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
       link: '/flowers',

@@ -21,7 +21,7 @@ export interface BackdropPhoto {
 // before they scroll. Re-order this list to change what leads; add a number
 // to feature a new backdrop-NN.jpg.
 const ORDER = [
-  2, 22, 21, 23, 18, 19, 24, 15, 17, 12, 5, 7, 14, 20, 1, 4, 16, 6, 3, 13, 10, 11,
+  25, 2, 22, 21, 23, 18, 19, 24, 15, 17, 12, 5, 7, 14, 20, 1, 4, 16, 6, 3, 13, 10, 11,
 ];
 
 export const BACKDROPS: readonly BackdropPhoto[] = ORDER.map((num) => {

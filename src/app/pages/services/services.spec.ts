@@ -21,16 +21,16 @@ describe('Services', () => {
     expect(el.querySelectorAll('h1').length).toBe(1);
     const text = el.textContent ?? '';
     expect(text).toContain('Custom Backdrops');
-    expect(text).toContain('Floral Services');
+    expect(text).toContain('ROM & Wedding Services');
     expect(text).toContain('Corporate Events');
     expect(text).not.toContain('Setup-Only Labour');
   });
 
-  it('reassures on budget without quoting any price (no $/SGD figure)', () => {
+  it('invites a no-obligation WhatsApp quote without quoting any price (no $/SGD figure)', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(text.toLowerCase()).toContain('packages for every budget');
+    expect(text.toLowerCase()).toContain('message us for a quick, no-obligation quote');
     expect(text).not.toMatch(/\$|SGD/);
   });
 

@@ -22,13 +22,13 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(h1s[0].textContent).toContain('Custom Backdrops');
   });
 
-  it('lists all 22 backdrop photos with descriptive alt text, lazy-loaded', () => {
-    expect(BACKDROPS.length).toBe(22);
+  it('lists all 23 backdrop photos with descriptive alt text, lazy-loaded', () => {
+    expect(BACKDROPS.length).toBe(23);
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const imgs = Array.from(el.querySelectorAll('.grid__img')) as HTMLImageElement[];
-    expect(imgs.length).toBe(22);
+    expect(imgs.length).toBe(23);
     for (const img of imgs) {
       expect(img.getAttribute('src')).toMatch(/\/backdrops\/backdrop-\d{2}\.jpg$/);
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);

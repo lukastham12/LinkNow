@@ -19,7 +19,7 @@ describe('Home', () => {
     fixture.detectChanges();
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
     expect(text).toContain('Custom Backdrops');
-    expect(text).toContain('Floral Services');
+    expect(text).toContain('ROM & Wedding Services');
     expect(text).toContain('Corporate Events');
     expect(text).not.toContain('Setup-Only Labour');
   });
@@ -50,7 +50,7 @@ describe('Home', () => {
     const el = fixture.nativeElement as HTMLElement;
     const serviceImgs = Array.from(el.querySelectorAll('.service__img')) as HTMLImageElement[];
     expect(serviceImgs.length).toBe(3);
-    expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-07.jpg');
+    expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-25.jpg');
     expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/custom-arrangement-hero.jpg');
     expect(serviceImgs[2].getAttribute('src')).toBe('/backdrops/backdrop-09.jpg');
 
