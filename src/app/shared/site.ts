@@ -28,11 +28,11 @@ export const OG_LOCALE = 'en_SG';
 // (--color-rose). Keep in sync if the palette changes.
 export const THEME_COLOR = '#a63f57';
 
-// ⚠️ TODO (BRIEF.md §6/§12): Google Analytics 4 Measurement ID. Left EMPTY on
-// purpose — analytics does NOT load until a real GA4 id (format 'G-XXXXXXXXXX')
-// is set here. The wiring is in place (see AnalyticsService); the owner only
-// needs to drop their id into this one constant.
-export const GA_MEASUREMENT_ID = '';
+// Google Analytics 4 Measurement ID (BRIEF.md §6/§12). AnalyticsService loads
+// gtag.js in the browser and fires a page_view on every Angular route change
+// (not just the first load), which a static <script> tag in index.html would
+// miss for a single-page app.
+export const GA_MEASUREMENT_ID = 'G-MNXLZPFKX7';
 
 /**
  * Turn a site-root-relative path (e.g. '/services') or an already-absolute URL
