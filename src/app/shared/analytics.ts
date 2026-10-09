@@ -46,7 +46,19 @@ export class AnalyticsService {
     this.doc.head.appendChild(loader);
 
     win.dataLayer = win.dataLayer ?? [];
-    const gtag = (...args: GtagArgs) => win.dataLayer!.push(args);
+    // gtag.js only dispatches hits for entries shaped like a real `arguments`
+    // object (what the classic `function(){ dataLayer.push(arguments); }`
+    // snippet produces). An arrow function with a rest parameter pushes a
+    // plain Array instead — gtag.js silently accepts it into the dataLayer
+    // but never sends the hit, so this must stay a `function` using
+    // `arguments`, not `(...args) => ...`.
+    // Signature only exists to type the call sites below; real values come
+    // from `arguments` at runtime (see note above).
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    function gtag(..._args: GtagArgs): void {
+      // eslint-disable-next-line prefer-rest-params
+      win!.dataLayer!.push(arguments as unknown as GtagArgs);
+    }
     gtag('js', new Date());
     // send_page_view: false — we emit page_view ourselves on each route change
     // so client-side navigations are counted, not just the first load.
