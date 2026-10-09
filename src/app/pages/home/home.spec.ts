@@ -44,7 +44,7 @@ describe('Home', () => {
     expect(el.querySelector('.hero__flower')).toBeNull();
   });
 
-  it('renders real décor images in the service cards and the retail portfolio teaser', () => {
+  it('renders real decor images in the service cards and the retail portfolio teaser', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;

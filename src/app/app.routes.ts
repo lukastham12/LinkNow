@@ -17,9 +17,9 @@ export const routes: Routes = [
     component: Home,
     data: {
       seo: {
-        title: 'Event & Corporate Décor in Singapore | LinkNow Pte Ltd',
+        title: 'Event & Corporate Decor in Singapore | LinkNow Pte Ltd',
         description:
-          'Custom event décor in Singapore for birthdays, festive celebrations and corporate ' +
+          'Custom event decor in Singapore for birthdays, festive celebrations and corporate ' +
           'events — balloon garlands, backdrops and florals. Enquire on WhatsApp.',
         path: '/',
       } satisfies PageSeo,
@@ -30,9 +30,9 @@ export const routes: Routes = [
     component: Services,
     data: {
       seo: {
-        title: 'Event Décor Services in Singapore | LinkNow Pte Ltd',
+        title: 'Event Decor Services in Singapore | LinkNow Pte Ltd',
         description:
-          'Explore our Singapore event décor services: custom backdrops, floral services and ' +
+          'Explore our Singapore event decor services: custom backdrops, floral services and ' +
           'corporate event styling for celebrations and formal occasions.',
         path: '/services/',
       } satisfies PageSeo,
@@ -75,9 +75,9 @@ export const routes: Routes = [
     component: Corporate,
     data: {
       seo: {
-        title: 'Corporate Event Décor in Singapore | LinkNow Pte Ltd',
+        title: 'Corporate Event Decor in Singapore | LinkNow Pte Ltd',
         description:
-          'Corporate event décor in Singapore — backdrops, product launches, grand openings, ' +
+          'Corporate event decor in Singapore — backdrops, product launches, grand openings, ' +
           'D&D and festive styling for companies and formal occasions.',
         path: '/corporate/',
       } satisfies PageSeo,
@@ -91,7 +91,7 @@ export const routes: Routes = [
     data: {
       slug: 'peoples-association',
       seo: {
-        title: "People's Association Open House Décor | LinkNow Pte Ltd",
+        title: "People's Association Open House Decor | LinkNow Pte Ltd",
         description:
           "A case study on styling People's Association's Open House — balloon pillars, " +
           'ribbon-cutting and on-site balloon art, by LinkNow Events Co.',
@@ -148,10 +148,10 @@ export const routes: Routes = [
     component: About,
     data: {
       seo: {
-        title: 'About LinkNow Pte Ltd — Event & Party Décor in Singapore',
+        title: 'About LinkNow Pte Ltd — Event & Party Decor in Singapore',
         description:
-          'Meet LinkNow Events Co., a Singapore event décor studio specialising in balloon ' +
-          'garlands, custom backdrops, floral styling and corporate event décor for parties and ' +
+          'Meet LinkNow Events Co., a Singapore event decor studio specialising in balloon ' +
+          'garlands, custom backdrops, floral styling and corporate event decor for parties and ' +
           'celebrations.',
         path: '/about/',
       } satisfies PageSeo,
