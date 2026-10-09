@@ -67,8 +67,8 @@ export class Home {
       blurb:
         'Styling and décor for company celebrations, launches and formal occasions — polished ' +
         'setups your guests will remember.',
-      image: '/backdrops/backdrop-09.jpg',
-      imageAlt: 'A corporate in-store event styled by LinkNow Events Co.',
+      image: '/corporate/peoples-association-01.jpg',
+      imageAlt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
       link: '/corporate',
     },
   ];

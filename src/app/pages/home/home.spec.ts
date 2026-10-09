@@ -52,7 +52,7 @@ describe('Home', () => {
     expect(serviceImgs.length).toBe(3);
     expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-25.jpg');
     expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/custom-arrangement-hero.jpg');
-    expect(serviceImgs[2].getAttribute('src')).toBe('/backdrops/backdrop-09.jpg');
+    expect(serviceImgs[2].getAttribute('src')).toBe('/corporate/peoples-association-01.jpg');
 
     const tiles = Array.from(el.querySelectorAll('.portfolio__img')) as HTMLImageElement[];
     expect(tiles.length).toBe(2);

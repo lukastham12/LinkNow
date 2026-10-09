@@ -100,8 +100,8 @@ export const CORPORATE_CASE_STUDIES: readonly CorporateCaseStudy[] = [
     slug: 'avocadoria',
     client: 'Avocadoria',
     headline: {
-      src: '/corporate/peoples-association-01.jpg',
-      alt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
+      src: '/backdrops/backdrop-08.jpg',
+      alt: 'In-store Easter event styled for Avocadoria — storefront view',
     },
     photos: [
       {
