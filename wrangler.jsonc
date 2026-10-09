@@ -1,0 +1,15 @@
+{
+  // Cloudflare Workers (static assets) deployment config for the LinkNow
+  // Events Co. site. Every route is prerendered to static HTML at build
+  // time (see src/app/app.routes.server.ts), so this serves the build
+  // output directly — no Worker script/runtime logic needed.
+  "name": "linknow",
+  "compatibility_date": "2024-09-23",
+  "assets": {
+    "directory": "./dist/linknow/browser",
+    // Unmatched paths fall back to index.html so the Angular router's own
+    // wildcard route (redirect to '/') handles them client-side, matching
+    // local/dev-server behaviour.
+    "not_found_handling": "single-page-application"
+  }
+}
