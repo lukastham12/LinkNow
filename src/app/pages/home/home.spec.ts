@@ -20,7 +20,7 @@ describe('Home', () => {
     const el = fixture.nativeElement as HTMLElement;
     const h1s = Array.from(el.querySelectorAll('h1'));
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent?.trim()).toBe('Event decorations for every celebration in Singapore');
+    expect(h1s[0].textContent?.trim()).toBe("Event decorations for anything you're planning in Singapore");
   });
 
   it('hero subheadline says what we do (incl. custom requests) and why to engage us', () => {
