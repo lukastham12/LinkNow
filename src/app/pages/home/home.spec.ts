@@ -23,15 +23,15 @@ describe('Home', () => {
     expect(h1s[0].textContent?.trim()).toBe('Event decorations for every celebration in Singapore');
   });
 
-  it('hero subheadline names the actual services on offer, not just occasions', () => {
+  it('hero subheadline says what we do (incl. custom requests) and why to engage us', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const sub = el.querySelector('.hero__sub');
     expect(sub?.textContent?.replace(/\s+/g, ' ').trim()).toBe(
-      'Balloon garlands, custom backdrops, floral styling and corporate event decor — plus ' +
-        'food stations, bouncy castles and other party add-ons. One team designs, builds, ' +
-        'styles and clears it all away.',
+      "Balloon decor, custom backdrops, florals and corporate styling — and if your event " +
+        "isn't on the list, we'll still make it happen. Premium craftsmanship, honest " +
+        'pricing and a team you can rely on.',
     );
   });
 
