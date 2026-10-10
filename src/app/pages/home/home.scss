@@ -4,11 +4,8 @@
   color: var(--color-text-muted);
 }
 
-// Shared by every clickable card (.service--link, .occasion, .addon — each
-// also carries this class in the template): plain link styling, lift on
-// hover/focus, visible focus ring. A real shared class rather than a
-// placeholder %-extend, since extending from 3 classes at once would
-// otherwise triple the compiled selector list for every rule below.
+// Shared by every clickable card (just .service--link on this page): plain
+// link styling, lift on hover/focus, visible focus ring.
 .card-lift {
   display: block;
   text-decoration: none;
@@ -167,8 +164,6 @@
   text-align: center;
 }
 
-// Shared by the occasions/add-ons section intros AND the "we also style…"
-// line below the occasions grid.
 .section__intro {
   @extend %muted;
   max-width: 56ch;
@@ -200,35 +195,6 @@
   @extend %muted;
   margin: 0;
   font-size: 0.92rem;
-}
-
-// Events we style (occasions) + Other Services We Provide (add-ons) --------
-// Both reuse .service__img/.service__name/.service__blurb above for the tile
-// photo/title/description — only the grid and card shell differ.
-
-.occasions,
-.addons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-}
-
-
-.addon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-}
-
-.addon__icon {
-  display: block;
-  margin-bottom: 0.85rem;
-  color: var(--color-rose);
 }
 
 .portfolio-groups {
@@ -308,15 +274,3 @@
   }
 }
 
-// Occasions stay 2 columns through tablet, and only go to 3 on desktop;
-// "Other Services" stay 2 columns until the same desktop breakpoint, then
-// go 4 across (one row).
-@media (min-width: 960px) {
-  .occasions {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .addons {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}

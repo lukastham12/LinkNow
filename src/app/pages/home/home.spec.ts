@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Home } from './home';
-import { OCCASIONS } from '../../shared/occasions';
-import { ADDONS } from '../../shared/addons';
 
 describe('Home', () => {
   beforeEach(async () => {
@@ -58,7 +56,7 @@ describe('Home', () => {
     expect(hero.getAttribute('src')).toBe('/backdrops/hero-minecraft.jpg');
   });
 
-  it('"Events we style" renders all grouped occasion tiles, each a WhatsApp link', () => {
+  it('"Events we style" shows exactly 4 cards — one consolidated section, no duplicate "Our services"', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -66,129 +64,40 @@ describe('Home', () => {
     expect(section).toBeTruthy();
     expect(section.querySelector('h2')?.textContent?.trim()).toBe('Events we style');
 
-    const tiles = Array.from(section.querySelectorAll('.occasion')) as HTMLAnchorElement[];
-    expect(tiles.length).toBe(OCCASIONS.length);
-    expect(tiles.length).toBe(6);
+    // Shout-out copy: lists examples but is explicit that it's not limited to them.
+    expect(section.textContent ?? '').toContain('Birthdays, naming ceremonies, 100 days');
+    expect(section.textContent ?? '').toContain('open to styling any celebration or custom request');
 
-    for (const [i, tile] of tiles.entries()) {
-      expect(tile.getAttribute('target')).toBe('_blank');
-      expect(tile.getAttribute('rel')).toBe('noopener noreferrer');
-      expect(tile.getAttribute('href')).toContain('wa.me/6588090600');
-      expect(tile.querySelector('h3')?.textContent?.trim()).toBe(OCCASIONS[i].title);
-    }
+    const cards = Array.from(section.querySelectorAll('a.service--link')) as HTMLAnchorElement[];
+    expect(cards.length).toBe(4);
 
-    // The "other" tile has no photo — falls back to a placeholder, never a broken <img>.
-    const otherTile = tiles[tiles.length - 1];
-    expect(otherTile.querySelector('h3')?.textContent?.trim()).toBe('Something else?');
-    expect(otherTile.querySelector('img')).toBeNull();
-    expect(otherTile.querySelector('.service__img')).toBeTruthy();
+    const names = cards.map((c) => c.querySelector('h3')?.textContent?.trim());
+    expect(names).toEqual([
+      'Birthdays & Celebrations',
+      'Weddings & ROM',
+      'Other Services',
+      'Corporate Events',
+    ]);
 
-    // Every other tile has a real <img> with alt text — no broken images.
-    for (const tile of tiles.slice(0, -1)) {
-      const img = tile.querySelector('img');
+    const links = cards.map((c) => c.getAttribute('href'));
+    expect(links).toEqual(['/backdrops', '/flowers', '/extras', '/corporate']);
+
+    for (const card of cards) {
+      const img = card.querySelector('img');
       expect(img).toBeTruthy();
       expect((img?.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
       expect(img?.getAttribute('loading')).toBe('lazy');
     }
 
-    expect(section.textContent ?? '').toContain('anniversaries, proposals, graduations');
-
-    // Occasions grouped per owner request: birthdays/naming/gender-reveal/baby
-    // showers combined, weddings/ROM/bachelor combined; festive, openings and
-    // corporate stay on their own.
-    const titles = tiles.map((t) => t.querySelector('h3')?.textContent?.trim());
-    expect(titles).toEqual([
-      'Birthdays & Baby Celebrations',
-      'Weddings, ROM & Bachelor Parties',
-      'Festive Celebrations',
-      'Grand Openings & Open Houses',
-      'Corporate Events',
-      'Something else?',
-    ]);
-  });
-
-  it('"Our services" shows exactly the 4 R3 cards, in order, with the right links — no ROM & Wedding Services', () => {
-    const fixture = TestBed.createComponent(Home);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const cards = Array.from(el.querySelectorAll('a.service--link')) as HTMLAnchorElement[];
-    expect(cards.length).toBe(4);
-
-    const names = cards.map((c) => c.querySelector('h3')?.textContent?.trim());
-    expect(names).toEqual([
-      'Balloon Decorations',
-      'Backdrops & Party Styling',
-      'Floral Styling & Bouquets',
-      'Corporate & Community Events',
-    ]);
-
-    const links = cards.map((c) => c.getAttribute('href'));
-    expect(links).toEqual(['/backdrops', '/backdrops', '/flowers', '/corporate']);
-
-    expect(el.textContent ?? '').not.toContain('ROM & Wedding Services');
-
-    const imgs = cards.map((c) => c.querySelector('img')?.getAttribute('src'));
-    expect(imgs).toEqual([
-      '/backdrops/backdrop-18.jpg',
-      '/backdrops/backdrop-22.jpg',
-      '/flowers/custom-arrangement-hero.jpg',
-      '/corporate/awwa-01.jpg',
-    ]);
-  });
-
-  it('"Other Services We Provide" shows all 4 items (food station combined) with icons and working WhatsApp links, plus the button', () => {
-    const fixture = TestBed.createComponent(Home);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent ?? '').toContain('Other Services We Provide');
-
-    const items = Array.from(el.querySelectorAll('a.addon')) as HTMLAnchorElement[];
-    expect(items.length).toBe(ADDONS.length);
-    expect(items.length).toBe(4);
-
-    const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
-    expect(titles).toEqual(['Food Station', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
-
-    for (const [i, item] of items.entries()) {
-      expect(item.getAttribute('target')).toBe('_blank');
-      expect(item.getAttribute('href')).toContain('wa.me/6588090600');
-      expect(item.querySelector('svg')).toBeTruthy();
-      expect(item.querySelector('h3')?.textContent?.trim()).toBe(ADDONS[i].title);
-    }
-
-    // Food Station's WhatsApp message covers popcorn, ice cream and candy floss together.
-    const foodStationHref = decodeURIComponent(items[0].getAttribute('href') ?? '');
-    expect(foodStationHref).toContain('popcorn, ice cream or candy floss');
-
-    const addonsButton = Array.from(el.querySelectorAll('a.btn--ghost')).find(
-      (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
-    ) as HTMLAnchorElement | undefined;
-    expect(addonsButton).toBeTruthy();
-    expect(addonsButton?.getAttribute('href')).toContain('wa.me/6588090600');
-  });
-
-  it('does not show the old "One booking, one team" pink bundle band anymore', () => {
-    const fixture = TestBed.createComponent(Home);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
+    // There is only one such section on the page now — no separate
+    // "Our services" / "Other Services We Provide" / bundle band.
+    expect(el.querySelectorAll('#services-heading').length).toBe(0);
+    expect(el.querySelectorAll('#addons-heading').length).toBe(0);
     expect(el.querySelector('#bundle-heading')).toBeNull();
     expect(el.textContent ?? '').not.toContain('One booking, one team');
   });
 
-  it('places "Other Services We Provide" right after "Events we style" and before "Our services"', () => {
-    const fixture = TestBed.createComponent(Home);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const sections = Array.from(el.querySelectorAll('section'));
-    const occasionsIndex = sections.findIndex((s) => s.id === 'occasions');
-    const addonsIndex = sections.findIndex((s) => s.querySelector('#addons-heading'));
-    const servicesIndex = sections.findIndex((s) => s.querySelector('#services-heading'));
-    expect(occasionsIndex).toBeGreaterThanOrEqual(0);
-    expect(addonsIndex).toBeGreaterThan(occasionsIndex);
-    expect(servicesIndex).toBeGreaterThan(addonsIndex);
-  });
-
-  it('fires a whatsapp_click GA event (section + item) when a new WhatsApp link is clicked, without blocking navigation', () => {
+  it('fires a whatsapp_click GA event for the hero CTA, without blocking navigation', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const instance = fixture.componentInstance as unknown as {
@@ -199,14 +108,6 @@ describe('Home', () => {
     const heroWa = el.querySelector('.hero a.btn--solid') as HTMLAnchorElement;
     heroWa.click();
     expect(spy).toHaveBeenCalledWith('hero', 'generic');
-
-    const occasionTile = el.querySelector('.occasion') as HTMLAnchorElement;
-    occasionTile.click();
-    expect(spy).toHaveBeenCalledWith('occasions', OCCASIONS[0].id);
-
-    const addonItem = el.querySelector('a.addon') as HTMLAnchorElement;
-    addonItem.click();
-    expect(spy).toHaveBeenCalledWith('addons', ADDONS[0].id);
   });
 
   it('renders real decor images in the service cards and the retail portfolio teaser', () => {

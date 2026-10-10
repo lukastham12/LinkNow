@@ -6,6 +6,7 @@ import { Backdrops } from './pages/backdrops/backdrops';
 import { Corporate } from './pages/corporate/corporate';
 import { CorporateCaseStudyPage } from './pages/corporate-case-study/corporate-case-study';
 import { About } from './pages/about/about';
+import { Extras } from './pages/extras/extras';
 import { PageSeo } from './shared/seo';
 
 // Per-page SEO (BRIEF.md §10) is carried on `data.seo` and applied during
@@ -154,6 +155,22 @@ export const routes: Routes = [
           'garlands, custom backdrops, floral styling and corporate event decor for parties and ' +
           'celebrations.',
         path: '/about/',
+      } satisfies PageSeo,
+    },
+  },
+  // Party add-ons & extras (food station, bouncy castle, balloon sculpting,
+  // party hosting) — owner-requested destination for the homepage's "Other
+  // Services" card. Registered before the wildcard.
+  {
+    path: 'extras',
+    component: Extras,
+    data: {
+      seo: {
+        title: 'Party Add-Ons & Extras in Singapore | LinkNow Events Co.',
+        description:
+          'Food stations, bouncy castles, balloon sculpting and party hosting to add to your ' +
+          'event decor booking in Singapore. Enquire on WhatsApp.',
+        path: '/extras/',
       } satisfies PageSeo,
     },
   },

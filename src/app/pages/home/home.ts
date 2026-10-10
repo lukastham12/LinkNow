@@ -4,8 +4,6 @@ import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
-import { OCCASIONS } from '../../shared/occasions';
-import { ADDONS, ADDONS_WA_LINK } from '../../shared/addons';
 import { AnalyticsService } from '../../shared/analytics';
 import { CaseCard } from '../../components/case-card/case-card';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
@@ -29,9 +27,9 @@ interface PortfolioGroup {
   items: PortfolioTile[];
 }
 
-/** Homepage (route ''). Sections: hero, occasions, services, add-ons, bundle
- *  band, clients, portfolio teaser, testimonials, enquiry strip. WhatsApp is
- *  the only enquiry channel — no contact/quote links. */
+/** Homepage (route ''). Sections: hero, events we style, clients, portfolio
+ *  teaser, testimonials, enquiry strip. WhatsApp is the only enquiry
+ *  channel — no contact/quote links. */
 @Component({
   selector: 'app-home',
   imports: [RouterLink, CaseCard, ReviewsCarousel],
@@ -42,16 +40,8 @@ export class Home {
   private readonly analytics = inject(AnalyticsService);
 
   protected readonly whatsappHref = WHATSAPP_HREF;
-  // Homepage redesign (v1.0, 10 Oct 2026): hero primary CTA and the bundle
-  // band use this slightly different generic message — see contact.ts.
+  // Hero's primary CTA uses this slightly different generic message — see contact.ts.
   protected readonly eventWhatsappHref = WHATSAPP_EVENT_HREF;
-
-  // "Events we style" — one data array driving all 9 tiles (shared/occasions.ts).
-  protected readonly occasions = OCCASIONS;
-
-  // "Add to your event" — one data array driving all 5 add-ons (shared/addons.ts).
-  protected readonly addons = ADDONS;
-  protected readonly addonsWaLink = ADDONS_WA_LINK;
 
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
@@ -59,41 +49,43 @@ export class Home {
   // Organisations we've worked with — logo row only.
   protected readonly clients = CLIENTS;
 
-  // Exactly 4 featured services (Homepage redesign R3) — order matters.
+  // "Events we style" — one combined section (owner request, 10 Oct 2026:
+  // the previous separate "Events we style" / "Our services" / "Other
+  // Services We Provide" sections were redundant). Occasions are grouped
+  // under whichever existing page actually shows that kind of work, so
+  // every card is a genuine destination, not a dead end — and the intro
+  // line makes clear this list isn't exhaustive.
   protected readonly services: Service[] = [
     {
-      name: 'Balloon Decorations',
+      name: 'Birthdays & Celebrations',
       blurb:
-        'Organic garlands, arches, columns and balloon walls in your colours and theme — for ' +
-        'any venue, big or small.',
-      image: '/backdrops/backdrop-18.jpg',
-      imageAlt: 'A blue and gold organic balloon garland arch built by LinkNow Events Co.',
+        "Birthdays, naming ceremonies, 100 days and more — you name the celebration, we'll " +
+        'style it.',
+      image: '/backdrops/backdrop-20.jpg',
+      imageAlt: "A Minecraft-themed birthday backdrop built by LinkNow Events Co. for Enzo's 8th birthday",
       link: '/backdrops',
     },
     {
-      name: 'Backdrops & Party Styling',
-      blurb:
-        'Themed backdrops, cake table styling, props and name boards, designed around your ' +
-        'celebration.',
-      image: '/backdrops/backdrop-22.jpg',
-      imageAlt:
-        'A themed birthday backdrop with character cut-outs, a name board and a balloon garland ' +
-        'by LinkNow Events Co.',
-      link: '/backdrops',
-    },
-    {
-      name: 'Floral Styling & Bouquets',
-      blurb:
-        'Fresh and soap-flower arrangements — from ROM tables and wedding decor to gift bouquets.',
+      name: 'Weddings & ROM',
+      blurb: 'Floral and backdrop styling for your big day.',
       image: '/flowers/custom-arrangement-hero.jpg',
       imageAlt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
       link: '/flowers',
     },
     {
-      name: 'Corporate & Community Events',
-      blurb: 'Grand openings, open houses, family days and company celebrations, styled end to end.',
+      name: 'Other Services',
+      blurb: 'Food stations, bouncy castles, balloon sculpting and more to add to your event.',
       image: '/corporate/awwa-01.jpg',
       imageAlt: "A themed bouncy castle set up for AWWA's Children's Day engagement",
+      link: '/extras',
+    },
+    {
+      name: 'Corporate Events',
+      blurb:
+        'Any custom corporate event — product launches, grand openings, company days. You ' +
+        'name it, we style it.',
+      image: '/corporate/peoples-association-01.jpg',
+      imageAlt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
       link: '/corporate',
     },
   ];
@@ -124,9 +116,9 @@ export class Home {
   );
 
   /**
-   * GA4 click tracking for the redesign's WhatsApp links (A1). Fired
-   * fire-and-forget from (click) alongside the anchor's own default action —
-   * never blocks or delays WhatsApp opening (A3).
+   * GA4 click tracking for the hero's WhatsApp CTA. Fired fire-and-forget
+   * from (click) alongside the anchor's own default action — never blocks
+   * or delays WhatsApp opening.
    */
   protected trackWhatsappClick(section: string, item: string): void {
     this.analytics.trackEvent('whatsapp_click', { section, item });
