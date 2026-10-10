@@ -2,16 +2,23 @@
 <section class="hero">
   <div class="hero__content">
     <p class="eyebrow">Event &amp; Corporate Decor · Singapore</p>
-    <h1 class="hero__title">Custom decor for every celebration, from birthdays to corporate events</h1>
+    <h1 class="hero__title">Event decorations for anything you're planning in Singapore</h1>
     <p class="hero__sub">
-      Birthday parties, festive celebrations and corporate events — designed, built and styled
-      across Singapore by LinkNow Pte Ltd.
+      Balloon decor, custom backdrops, florals and corporate styling — and if your event isn't
+      on the list, we'll still make it happen. Premium craftsmanship, honest pricing and a team
+      you can rely on.
     </p>
     <div class="hero__actions">
-      <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      <a
+        class="btn btn--solid"
+        [href]="eventWhatsappHref"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="trackWhatsappClick('hero', 'generic')"
+      >
         Enquire on WhatsApp
       </a>
-      <a class="btn btn--ghost" routerLink="/services">View our services</a>
+      <a class="btn btn--ghost" href="#occasions">See what we do</a>
     </div>
   </div>
   <div class="hero__media">
@@ -25,46 +32,13 @@
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section" aria-labelledby="services-heading">
-  <p class="eyebrow eyebrow--center">What we do</p>
-  <h2 id="services-heading" class="section__title">Our services</h2>
-  <div class="services">
-    @for (service of services; track service.name) {
-      @if (service.link) {
-        <a class="service service--link" [routerLink]="service.link">
-          <img
-            class="service__img"
-            [class.service__img--contain]="service.isCutout"
-            [src]="service.image"
-            [alt]="service.imageAlt"
-            loading="lazy"
-          />
-          <h3 class="service__name">{{ service.name }}</h3>
-          <p class="service__blurb">{{ service.blurb }}</p>
-        </a>
-      } @else {
-        <article class="service">
-          <img
-            class="service__img"
-            [class.service__img--contain]="service.isCutout"
-            [src]="service.image"
-            [alt]="service.imageAlt"
-            loading="lazy"
-          />
-          <h3 class="service__name">{{ service.name }}</h3>
-          <p class="service__blurb">{{ service.blurb }}</p>
-        </article>
-      }
-    }
-  </div>
-</section>
+<app-events-we-style />
 
 <!-- OUR CLIENTS -->
 <section class="section" aria-labelledby="clients-heading">
   <p class="eyebrow eyebrow--center">Our Clients</p>
   <h2 id="clients-heading" class="section__title">Trusted by organisations</h2>
-  <p class="clients__sub">A selection of the organisations we've worked with.</p>
+  <p style="margin: 0 0 2rem; text-align: center; color: var(--color-text-muted)">A selection of the organisations we've worked with.</p>
   <ul class="clients">
     @for (client of clients; track client.name) {
       <li>
@@ -94,7 +68,7 @@
       <h3 class="eyebrow eyebrow--center">Corporate &amp; organisations</h3>
       <ul class="cases">
         @for (study of corporateCases; track study.slug) {
-          <li class="cases__item">
+          <li style="margin: 0">
             <app-case-card
               [photo]="study.headline"
               [label]="study.client"
@@ -116,19 +90,9 @@
   <p class="eyebrow eyebrow--center">Testimonials</p>
   <h2 id="testimonials-heading" class="section__title">Client Testimonials</h2>
   @if (testimonials.length > 0) {
-    <div class="testimonials">
-      @for (t of testimonials; track t.quote) {
-        <figure class="testimonial">
-          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">
-            <span aria-hidden="true">★★★★★</span>
-          </div>
-          <blockquote class="testimonial__quote">“{{ t.quote }}”</blockquote>
-          <figcaption class="testimonial__author">Verified Google review</figcaption>
-        </figure>
-      }
-    </div>
+    <app-reviews-carousel [reviews]="testimonials" />
   } @else {
-    <p class="placeholder-note">
+    <p style="margin: 1.5rem 0 0; text-align: center; font-size: 0.72rem; font-style: italic; color: var(--color-text-muted)">
       Our 5-star Google reviews are coming soon. In the meantime, message us on WhatsApp to hear
       about recent events.
     </p>
@@ -139,7 +103,7 @@
 <section class="enquiry" aria-labelledby="enquiry-heading">
   <h2 id="enquiry-heading" class="enquiry__title">Planning something?</h2>
   <p class="enquiry__sub">Tell us about your event and we'll help bring it to life.</p>
-  <div class="hero__actions hero__actions--center">
+  <div class="hero__actions" style="justify-content: center">
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
       Enquire on WhatsApp
     </a>

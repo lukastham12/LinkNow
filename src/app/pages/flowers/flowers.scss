@@ -106,21 +106,39 @@
 
 .capabilities {
   display: grid;
-  gap: 2rem;
-  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.capability {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.capability__icon {
+  display: block;
+  margin-bottom: 0.85rem;
+  color: var(--color-rose);
 }
 
 .capability__title {
   margin: 0 0 0.4rem;
   color: var(--color-rose);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   letter-spacing: 0.02em;
 }
 
 .capability__blurb {
   margin: 0;
   color: var(--color-text-muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 // Outro ------------------------------------------------------------------------
@@ -145,8 +163,10 @@
     grid-template-columns: 1.1fr 1fr;
     padding-top: 4.5rem;
   }
+}
 
+@media (min-width: 960px) {
   .capabilities {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }

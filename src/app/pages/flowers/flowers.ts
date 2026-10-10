@@ -1,19 +1,26 @@
 import { Component } from '@angular/core';
 import { WHATSAPP_HREF } from '../../shared/contact';
 
-interface FloralCapability {
+type WeddingCapabilityIcon = 'flower' | 'arch' | 'balloon' | 'table';
+
+interface WeddingCapability {
   title: string;
   blurb: string;
+  icon: WeddingCapabilityIcon;
 }
 
 /**
- * Floral Services page (route '/flowers').
+ * Wedding & ROM Styling page (route '/flowers').
  *
  * Its own page (not a top-level nav tab): reachable via the Services dropdown
- * and the Floral Services card on /services. Positions florals as a fully
- * bespoke service — any flower, any palette, any occasion — rather than a
- * fixed catalogue of stock, since there is no price/quantity/cart anywhere
- * (BRIEF.md §4). WhatsApp is the only enquiry path.
+ * and the matching card on /services. Floral styling is our specialty and
+ * leads the page, but the focus is the full wedding/ROM decor job — backdrops,
+ * balloon accents and table styling alongside the florals — so one team
+ * covers the whole day (owner request, 10 Oct 2026; previously this page was
+ * floral-only). Capabilities are shown as plain, unclickable cards (same
+ * pattern as the homepage's "Other Services We Provide") with a single
+ * WhatsApp enquiry button below the grid, not per-card links. No fixed
+ * packages/catalogue anywhere (BRIEF.md §4). WhatsApp is the only enquiry path.
  */
 @Component({
   selector: 'app-flowers',
@@ -24,30 +31,29 @@ interface FloralCapability {
 export class Flowers {
   protected readonly whatsappHref = WHATSAPP_HREF;
 
-  protected readonly capabilities: FloralCapability[] = [
+  protected readonly capabilities: WeddingCapability[] = [
     {
-      title: 'Any flower, any palette',
+      title: 'Floral styling — our specialty',
       blurb:
-        "We're not limited to a fixed selection — tell us the blooms or colour scheme you have " +
-        'in mind and we source and style around it.',
+        'Bouquets, ceremony arrangements and reception florals in any flower, any palette — ' +
+        'fresh or soap flower, tailored to your colour story.',
+      icon: 'flower',
     },
     {
-      title: 'Styled for any occasion',
-      blurb:
-        'Weddings, corporate events, product launches, birthdays and festive celebrations — ' +
-        'florals designed to match the occasion.',
+      title: 'Backdrops & ceremony styling',
+      blurb: 'Arches, aisles, ROM backdrops and stage styling designed around your theme.',
+      icon: 'arch',
     },
     {
-      title: 'Arches, installations & tablescapes',
+      title: 'Balloon accents & installations',
       blurb:
-        'From statement floral arches to fine, hand-tied centrepieces for a seated dinner — ' +
-        'scaled to your venue and event.',
+        'Balloon garlands and columns that complement your florals for a fuller, more festive look.',
+      icon: 'balloon',
     },
     {
-      title: 'Fully bespoke, start to finish',
-      blurb:
-        "No fixed templates — share your vision on WhatsApp and we'll design it together from " +
-        'scratch.',
+      title: 'Table & venue styling',
+      blurb: 'Centrepieces, signage corners and tablescapes styled for your reception.',
+      icon: 'table',
     },
   ];
 }

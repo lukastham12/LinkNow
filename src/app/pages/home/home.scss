@@ -59,35 +59,19 @@
 .hero__img {
   display: block;
   width: 100%;
-  height: 320px;
+  height: 200px;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid var(--color-border);
 }
 
-.service__img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-  margin-bottom: 1rem;
-}
-
-// Cut-out/product photos on white show whole, not cropped.
-.service__img--contain {
-  object-fit: contain;
-  background: var(--color-surface);
-}
-
 .portfolio__img {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 4px;
   border: 1px solid var(--color-border);
+  aspect-ratio: 1 / 1;
 }
 
 // Layout -------------------------------------------------------------------
@@ -100,9 +84,9 @@
 }
 
 .hero {
-  padding: 3rem 1.25rem 1rem;
+  padding: 1.5rem 1.25rem 0.5rem;
   display: grid;
-  gap: 2rem;
+  gap: 1.25rem;
   align-items: center;
 }
 
@@ -126,12 +110,8 @@
   gap: 0.75rem;
 }
 
-.hero__actions--center {
-  justify-content: center;
-}
-
 .section {
-  padding: 3.5rem 1.25rem;
+  padding: 1.5rem 1.25rem;
 }
 
 .section--tint {
@@ -156,53 +136,17 @@
   text-align: center;
 }
 
+.section__intro {
+  @extend %muted;
+  max-width: 56ch;
+  margin: 0 auto 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
 .section__cta {
   margin-top: 2rem;
   text-align: center;
-}
-
-.services,
-.testimonials {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.services {
-  gap: 2rem;
-}
-
-.service--link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s ease;
-}
-
-.service--link:hover,
-.service--link:focus-visible {
-  transform: translateY(-3px);
-  outline: none;
-}
-
-.service--link:focus-visible {
-  outline: 2px solid var(--color-rose);
-  outline-offset: 3px;
-}
-
-.service--link .service__name {
-  color: var(--color-rose);
-}
-
-.service__name {
-  margin: 0 0 0.4rem;
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
-}
-
-.service__blurb {
-  @extend %muted;
-  margin: 0;
-  font-size: 0.92rem;
 }
 
 .portfolio-groups {
@@ -221,16 +165,6 @@
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.cases__item {
-  margin: 0;
-}
-
-.clients__sub {
-  @extend %muted;
-  margin: 0 0 2rem;
-  text-align: center;
 }
 
 .clients {
@@ -256,45 +190,6 @@
   }
 }
 
-.testimonials {
-  gap: 1.5rem;
-}
-
-.testimonial {
-  margin: 0;
-  padding: 1.5rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-}
-
-.testimonial__stars {
-  margin: 0 0 0.6rem;
-  color: var(--color-rose);
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-}
-
-.testimonial__quote {
-  margin: 0 0 0.75rem;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.testimonial__author {
-  @extend %muted;
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
-}
-
-.placeholder-note {
-  @extend %muted;
-  margin: 1.5rem 0 0;
-  text-align: center;
-  font-size: 0.72rem;
-  font-style: italic;
-}
-
 .enquiry {
   padding: 3.5rem 1.25rem 1rem;
   text-align: center;
@@ -314,16 +209,16 @@
 @media (min-width: 720px) {
   .hero {
     grid-template-columns: 1.1fr 1fr;
-    padding-top: 4.5rem;
+    padding: 4.5rem 1.25rem 1rem;
+    gap: 2rem;
   }
 
   .hero__img {
     height: 480px;
   }
 
-  .services,
-  .testimonials {
-    grid-template-columns: repeat(3, 1fr);
+  .section {
+    padding: 3.5rem 1.25rem;
   }
 
   .portfolio-groups {
@@ -331,3 +226,4 @@
     gap: 2rem;
   }
 }
+

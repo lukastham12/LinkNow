@@ -2,8 +2,7 @@
   <p class="eyebrow">Our Services</p>
   <h1 class="intro__title">What we create</h1>
   <p class="intro__lede">
-    Three ways we help bring your celebration to life — from concept to install. Every project is
-    bespoke, so tell us what you have in mind and we'll take it from there.
+    From concept to install — tell us what you have in mind and we'll take it from there.
   </p>
   <div class="intro__actions">
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
@@ -13,56 +12,4 @@
   <p class="intro__note">Message us for a quick, no-obligation quote.</p>
 </section>
 
-<section class="grid-section" aria-label="Our services">
-  <ul class="cards">
-    @for (card of cards; track card.id) {
-      <li class="cards__item" [id]="card.id">
-        @if (card.link) {
-          <a class="card" [routerLink]="card.link" [attr.aria-label]="'Explore ' + card.name">
-            <span class="card__media">
-              <img
-                class="card__img"
-                [class.card__img--placeholder]="card.isPlaceholderImage"
-                [class.card__img--cover]="!card.isCutout"
-                [src]="card.image"
-                [alt]="card.imageAlt"
-                loading="lazy"
-              />
-            </span>
-            <span class="card__body">
-              <span class="card__name">{{ card.name }}</span>
-              <span class="card__blurb">{{ card.blurb }}</span>
-              <span class="card__explore" aria-hidden="true">Explore &rarr;</span>
-            </span>
-          </a>
-        } @else {
-          <div class="card card--static">
-            <span class="card__media">
-              <img
-                class="card__img"
-                [class.card__img--placeholder]="card.isPlaceholderImage"
-                [class.card__img--cover]="!card.isCutout"
-                [src]="card.image"
-                [alt]="card.imageAlt"
-                loading="lazy"
-              />
-            </span>
-            <span class="card__body">
-              <span class="card__name">{{ card.name }}</span>
-              <span class="card__blurb">{{ card.blurb }}</span>
-            </span>
-          </div>
-        }
-      </li>
-    }
-  </ul>
-</section>
-
-<section class="outro">
-  <p class="outro__text">Have an event in mind? Let's design it together.</p>
-  <div class="intro__actions intro__actions--center">
-    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
-      Enquire on WhatsApp
-    </a>
-  </div>
-</section>
+<app-events-we-style />

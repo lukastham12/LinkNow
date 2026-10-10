@@ -1,0 +1,17 @@
+<div class="marquee">
+  <div
+    class="marquee__track"
+    [class.marquee__track--static]="reviews.length <= 1"
+    [style.animation-duration.s]="animationSeconds"
+  >
+    @for (review of loopedReviews; track $index; let i = $index) {
+      <figure class="testimonial" [attr.aria-hidden]="i >= reviews.length ? 'true' : null">
+        <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">
+          <span aria-hidden="true">★★★★★</span>
+        </div>
+        <blockquote class="testimonial__quote">&ldquo;{{ review.quote }}&rdquo;</blockquote>
+        <figcaption class="testimonial__author">Verified Google review</figcaption>
+      </figure>
+    }
+  </div>
+</div>

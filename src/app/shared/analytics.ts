@@ -26,6 +26,28 @@ export class AnalyticsService {
   }
 
   /**
+   * Build a gtag()-shaped function bound to this window's dataLayer. gtag.js
+   * only dispatches hits for entries shaped like a real `arguments` object
+   * (what the classic `function(){ dataLayer.push(arguments); }` snippet
+   * produces) — an arrow function with a rest parameter pushes a plain Array
+   * instead, which gtag.js silently accepts into the dataLayer but never
+   * turns into a hit. Each call below gets its own `arguments` object, so
+   * this factory is safe to share across call sites without reintroducing
+   * that bug.
+   */
+  private makeGtag(win: Window & { dataLayer?: GtagArgs[] }): (...args: GtagArgs) => void {
+    win.dataLayer = win.dataLayer ?? [];
+    const dataLayer = win.dataLayer;
+    // Signature only exists to type call sites; real values come from
+    // `arguments` at runtime (see note above).
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return function gtag(..._args: GtagArgs): void {
+      // eslint-disable-next-line prefer-rest-params
+      dataLayer.push(arguments as unknown as GtagArgs);
+    };
+  }
+
+  /**
    * Load gtag once and start reporting SPA page views. No-op unless enabled,
    * so it is safe to call unconditionally from the root component.
    */
@@ -45,20 +67,7 @@ export class AnalyticsService {
     loader.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
     this.doc.head.appendChild(loader);
 
-    win.dataLayer = win.dataLayer ?? [];
-    // gtag.js only dispatches hits for entries shaped like a real `arguments`
-    // object (what the classic `function(){ dataLayer.push(arguments); }`
-    // snippet produces). An arrow function with a rest parameter pushes a
-    // plain Array instead — gtag.js silently accepts it into the dataLayer
-    // but never sends the hit, so this must stay a `function` using
-    // `arguments`, not `(...args) => ...`.
-    // Signature only exists to type the call sites below; real values come
-    // from `arguments` at runtime (see note above).
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    function gtag(..._args: GtagArgs): void {
-      // eslint-disable-next-line prefer-rest-params
-      win!.dataLayer!.push(arguments as unknown as GtagArgs);
-    }
+    const gtag = this.makeGtag(win);
     gtag('js', new Date());
     // send_page_view: false — we emit page_view ourselves on each route change
     // so client-side navigations are counted, not just the first load.
@@ -73,5 +82,22 @@ export class AnalyticsService {
           page_title: this.doc.title,
         });
       });
+  }
+
+  /**
+   * Fire a custom GA4 event (e.g. `whatsapp_click`). No-op if analytics isn't
+   * enabled (no real GA4 id configured) or we're not in the browser — never
+   * throws, never awaits anything, so callers can fire-and-forget this from a
+   * click handler without delaying the action the click itself performs.
+   */
+  trackEvent(name: string, params: Record<string, string>): void {
+    if (!this.enabled) {
+      return;
+    }
+    const win = this.doc.defaultView as (Window & { dataLayer?: GtagArgs[] }) | null;
+    if (!win) {
+      return;
+    }
+    this.makeGtag(win)('event', name, params);
   }
 }

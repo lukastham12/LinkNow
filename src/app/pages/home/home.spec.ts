@@ -14,54 +14,89 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
-  it('shows the three service lines (with Corporate Events, not Setup-Only Labour)', () => {
-    const fixture = TestBed.createComponent(Home);
-    fixture.detectChanges();
-    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(text).toContain('Custom Backdrops');
-    expect(text).toContain('ROM & Wedding Services');
-    expect(text).toContain('Corporate Events');
-    expect(text).not.toContain('Setup-Only Labour');
-  });
-
-  it('has WhatsApp CTAs using the canonical link', () => {
+  it('has exactly one H1, matching the Homepage redesign copy exactly (R1.1)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const waLinks = Array.from(el.querySelectorAll('a[href*="wa.me/6588090600"]'));
-    expect(waLinks.length).toBeGreaterThan(0);
+    const h1s = Array.from(el.querySelectorAll('h1'));
+    expect(h1s.length).toBe(1);
+    expect(h1s[0].textContent?.trim()).toBe("Event decorations for anything you're planning in Singapore");
   });
 
-  it('uses the Minecraft backdrop photo as the hero cover image', () => {
+  it('hero subheadline says what we do (incl. custom requests) and why to engage us', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const sub = el.querySelector('.hero__sub');
+    expect(sub?.textContent?.replace(/\s+/g, ' ').trim()).toBe(
+      "Balloon decor, custom backdrops, florals and corporate styling — and if your event " +
+        "isn't on the list, we'll still make it happen. Premium craftsmanship, honest " +
+        'pricing and a team you can rely on.',
+    );
+  });
+
+  it('hero has a WhatsApp primary CTA and a "See what we do" anchor to #occasions (R1.3/R1.4)', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const hero = el.querySelector('.hero') as HTMLElement;
+    const wa = hero.querySelector('a.btn--solid') as HTMLAnchorElement;
+    expect(wa.getAttribute('href')).toContain('wa.me/6588090600');
+    expect(wa.getAttribute('target')).toBe('_blank');
+    const seeMore = hero.querySelector('a.btn--ghost') as HTMLAnchorElement;
+    expect(seeMore.getAttribute('href')).toBe('#occasions');
+    expect(seeMore.textContent?.trim()).toBe('See what we do');
+  });
+
+  it('uses the Minecraft backdrop photo as the hero banner image, unchanged (R1.5)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const hero = el.querySelector('.hero__img') as HTMLImageElement;
     expect(hero).toBeTruthy();
     expect(hero.getAttribute('src')).toBe('/backdrops/hero-minecraft.jpg');
-    expect((hero.getAttribute('alt') ?? '').toLowerCase()).toContain('minecraft');
-    // The old hydrangea cut-out is gone.
-    expect(el.querySelector('.hero__flower')).toBeNull();
+  });
+
+  it('renders the shared "Events we style" section (via app-events-we-style), no old pink bundle band', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const section = el.querySelector('#occasions') as HTMLElement;
+    expect(section).toBeTruthy();
+    expect(section.querySelector('h2')?.textContent?.trim()).toBe('Events we style');
+
+    const cards = Array.from(section.querySelectorAll('a.service--link')) as HTMLAnchorElement[];
+    expect(cards.length).toBe(3);
+
+    // No separate "Our services" section or old pink bundle band.
+    expect(el.querySelectorAll('#services-heading').length).toBe(0);
+    expect(el.querySelector('#bundle-heading')).toBeNull();
+    expect(el.textContent ?? '').not.toContain('One booking, one team');
+  });
+
+  it('fires a whatsapp_click GA event for the hero CTA, without blocking navigation', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const instance = fixture.componentInstance as unknown as {
+      trackWhatsappClick: (section: string, item: string) => void;
+    };
+    const spy = spyOn(instance, 'trackWhatsappClick');
+    const el = fixture.nativeElement as HTMLElement;
+    const heroWa = el.querySelector('.hero a.btn--solid') as HTMLAnchorElement;
+    heroWa.click();
+    expect(spy).toHaveBeenCalledWith('hero', 'generic');
   });
 
   it('renders real decor images in the service cards and the retail portfolio teaser', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const serviceImgs = Array.from(el.querySelectorAll('.service__img')) as HTMLImageElement[];
-    expect(serviceImgs.length).toBe(3);
-    expect(serviceImgs[0].getAttribute('src')).toBe('/backdrops/backdrop-25.jpg');
-    expect(serviceImgs[1].getAttribute('src')).toBe('/flowers/custom-arrangement-hero.jpg');
-    expect(serviceImgs[2].getAttribute('src')).toBe('/corporate/peoples-association-01.jpg');
-
     const tiles = Array.from(el.querySelectorAll('.portfolio__img')) as HTMLImageElement[];
     expect(tiles.length).toBe(2);
     for (const img of tiles) {
       expect(img.getAttribute('src')).toMatch(/^\/backdrops\//);
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
     }
-    // No leftover placeholder panels.
-    expect(el.querySelector('.ph')).toBeNull();
   });
 
   it('splits "Recent work" vertically into Customers (left) and Corporate & organisations (right)', () => {
@@ -107,15 +142,6 @@ describe('Home', () => {
       expect(img.getAttribute('loading')).toBe('lazy');
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
     }
-  });
-
-  it('links the Corporate Events service card to /corporate', () => {
-    const fixture = TestBed.createComponent(Home);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const card = el.querySelector('a.service--link[href="/corporate"]') as HTMLAnchorElement;
-    expect(card).toBeTruthy();
-    expect(card.textContent ?? '').toContain('Corporate Events');
   });
 
   it('shows testimonials as "Verified Google review" and never the reviewer name', () => {

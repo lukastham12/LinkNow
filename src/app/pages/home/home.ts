@@ -1,22 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { WHATSAPP_HREF } from '../../shared/contact';
+import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
+import { AnalyticsService } from '../../shared/analytics';
 import { CaseCard } from '../../components/case-card/case-card';
-
-interface Service {
-  name: string;
-  blurb: string;
-  image: string;
-  imageAlt: string;
-  // Present when the card navigates somewhere (e.g. Corporate Events → /corporate).
-  link?: string;
-  // Cut-out/product photos on white show whole (object-fit: contain); real
-  // scene photos fill the tile (object-fit: cover).
-  isCutout?: boolean;
-}
+import { EventsWeStyle } from '../../components/events-we-style/events-we-style';
+import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 
 interface PortfolioTile {
   image: string;
@@ -29,49 +20,27 @@ interface PortfolioGroup {
   items: PortfolioTile[];
 }
 
-/** Homepage (route ''). Sections: hero, services, portfolio teaser,
- *  testimonials, enquiry strip. WhatsApp is the only enquiry channel — no
- *  contact/quote links. */
+/** Homepage (route ''). Sections: hero, events we style, clients, portfolio
+ *  teaser, testimonials, enquiry strip. WhatsApp is the only enquiry
+ *  channel — no contact/quote links. */
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CaseCard],
+  imports: [RouterLink, CaseCard, EventsWeStyle, ReviewsCarousel],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
+  private readonly analytics = inject(AnalyticsService);
+
   protected readonly whatsappHref = WHATSAPP_HREF;
+  // Hero's primary CTA uses this slightly different generic message — see contact.ts.
+  protected readonly eventWhatsappHref = WHATSAPP_EVENT_HREF;
 
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
 
   // Organisations we've worked with — logo row only.
   protected readonly clients = CLIENTS;
-
-  protected readonly services: Service[] = [
-    {
-      name: 'Custom Backdrops',
-      blurb: 'Bespoke backdrops designed and built for birthdays, weddings and corporate events.',
-      image: '/backdrops/backdrop-25.jpg',
-      imageAlt: "A Winnie the Pooh-themed gender reveal backdrop, \"Our Little Hunny is on the way\", built by LinkNow Events Co.",
-      link: '/backdrops',
-    },
-    {
-      name: 'ROM & Wedding Services',
-      blurb: 'Floral styling and decor for your ROM ceremony or wedding day — any flower, any palette.',
-      image: '/flowers/custom-arrangement-hero.jpg',
-      imageAlt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
-      link: '/flowers',
-    },
-    {
-      name: 'Corporate Events',
-      blurb:
-        'Styling and decor for company celebrations, launches and formal occasions — polished ' +
-        'setups your guests will remember.',
-      image: '/corporate/peoples-association-01.jpg',
-      imageAlt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
-      link: '/corporate',
-    },
-  ];
 
   // Recent work, split by audience — a retail teaser (plain gallery tiles,
   // linking to the full /backdrops gallery) and a corporate teaser (the same
@@ -97,4 +66,13 @@ export class Home {
   protected readonly corporateCases = CORPORATE_CASE_STUDIES.filter(
     (c) => c.slug === 'peoples-association' || c.slug === 'avocadoria',
   );
+
+  /**
+   * GA4 click tracking for the hero's WhatsApp CTA. Fired fire-and-forget
+   * from (click) alongside the anchor's own default action — never blocks
+   * or delays WhatsApp opening.
+   */
+  protected trackWhatsappClick(section: string, item: string): void {
+    this.analytics.trackEvent('whatsapp_click', { section, item });
+  }
 }
