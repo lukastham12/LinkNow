@@ -23,14 +23,15 @@ describe('Home', () => {
     expect(h1s[0].textContent?.trim()).toBe('Event decorations for every celebration in Singapore');
   });
 
-  it('hero subheadline matches R1.2 exactly', () => {
+  it('hero subheadline names the actual services on offer, not just occasions', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const sub = el.querySelector('.hero__sub');
     expect(sub?.textContent?.replace(/\s+/g, ' ').trim()).toBe(
-      "Birthdays, baby showers, weddings, festive open houses and corporate events — balloons, " +
-        'backdrops and party add-ons, all designed, set up and taken down by one team.',
+      'Balloon garlands, custom backdrops, floral styling and corporate event decor — plus ' +
+        'food stations, bouncy castles and other party add-ons. One team designs, builds, ' +
+        'styles and clears it all away.',
     );
   });
 
