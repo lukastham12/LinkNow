@@ -14,16 +14,11 @@ describe('Services', () => {
     expect(TestBed.createComponent(Services).componentInstance).toBeTruthy();
   });
 
-  it('has a single h1 and shows the three service lines', () => {
+  it('has a single h1', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.querySelectorAll('h1').length).toBe(1);
-    const text = el.textContent ?? '';
-    expect(text).toContain('Custom Backdrops');
-    expect(text).toContain('ROM & Wedding Services');
-    expect(text).toContain('Corporate Events');
-    expect(text).not.toContain('Setup-Only Labour');
   });
 
   it('invites a no-obligation WhatsApp quote without quoting any price (no $/SGD figure)', () => {
@@ -34,39 +29,29 @@ describe('Services', () => {
     expect(text).not.toMatch(/\$|SGD/);
   });
 
-  it('renders a 3-card service grid, each with an image', () => {
+  it('shows the same "Events we style" section as the homepage, linking to /backdrops, /flowers and /corporate', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const cards = Array.from(el.querySelectorAll('.card'));
+    const section = el.querySelector('#occasions') as HTMLElement;
+    expect(section).toBeTruthy();
+    expect(section.querySelector('h2')?.textContent?.trim()).toBe('Events we style');
+
+    const cards = Array.from(section.querySelectorAll('a.service--link')) as HTMLAnchorElement[];
     expect(cards.length).toBe(3);
-    for (const card of cards) {
-      expect(card.querySelector('img.card__img')).toBeTruthy();
-    }
+    const hrefs = cards.map((a) => a.getAttribute('href'));
+    expect(hrefs).toEqual(['/backdrops', '/flowers', '/corporate']);
   });
 
-  it('links Custom Backdrops → /backdrops, Floral → /flowers and Corporate → /corporate', () => {
+  it('shows the same "Other Services We Provide" section as the homepage, as plain unclickable cards', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const linkedCards = Array.from(el.querySelectorAll('a.card')) as HTMLAnchorElement[];
-    expect(linkedCards.length).toBe(3);
-    const hrefs = linkedCards.map((a) => a.getAttribute('href'));
-    expect(hrefs).toContain('/backdrops');
-    expect(hrefs).toContain('/flowers');
-    expect(hrefs).toContain('/corporate');
-    const backdrops = linkedCards.find((a) => (a.textContent ?? '').includes('Custom Backdrops'));
-    expect(backdrops?.getAttribute('href')).toBe('/backdrops');
-    const corporate = linkedCards.find((a) => (a.textContent ?? '').includes('Corporate Events'));
-    expect(corporate?.getAttribute('href')).toBe('/corporate');
-  });
-
-  it('exposes #backdrops and #corporate anchor targets for the Services dropdown', () => {
-    const fixture = TestBed.createComponent(Services);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('#backdrops')).toBeTruthy();
-    expect(el.querySelector('#corporate')).toBeTruthy();
+    const items = Array.from(el.querySelectorAll('.addon'));
+    expect(items.length).toBe(4);
+    expect(el.querySelectorAll('a.addon').length).toBe(0);
+    const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
+    expect(titles).toEqual(['Food Station', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
   });
 
   it('does not embed the floral gallery (it now lives on /flowers)', () => {
@@ -84,9 +69,6 @@ describe('Services', () => {
       el.querySelectorAll('a[href*="wa.me/6588090600"]'),
     ) as HTMLAnchorElement[];
     expect(waLinks.length).toBeGreaterThan(0);
-    for (const a of waLinks) {
-      expect(a.href).toContain('enquire%20about%20your%20services');
-    }
     // No contact route, no mailto, no forms.
     expect(el.querySelector('a[href="/contact"]')).toBeNull();
     expect(el.querySelector('a[href^="mailto:"]')).toBeNull();

@@ -37,7 +37,7 @@
 .intro {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 3rem 1.25rem 1rem;
+  padding: 1.5rem 1.25rem 0.5rem;
 }
 
 .intro__title {
@@ -60,146 +60,14 @@
   gap: 0.75rem;
 }
 
-.intro__actions--center {
-  justify-content: center;
-}
-
 .intro__note {
   margin: 1rem 0 0;
   color: var(--color-text-muted);
   font-size: 0.85rem;
 }
 
-// Service card grid --------------------------------------------------------
-
-.grid-section {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 1.5rem 1.25rem 0.5rem;
-}
-
-.cards {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1.5rem;
-  // Mobile-first: single column, then responsive tracks.
-  grid-template-columns: 1fr;
-}
-
-.cards__item {
-  margin: 0;
-  // Offset so the sticky header doesn't cover a card scrolled to via the
-  // Services dropdown's #corporate anchor.
-  scroll-margin-top: 5rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  text-decoration: none;
-  color: inherit;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  overflow: hidden;
-  // Subtle hover lift — no heavy shadow (minimalist/light).
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
-}
-
-// Only the interactive (linked) card lifts/highlights on hover.
-a.card:hover,
-a.card:focus-visible {
-  transform: translateY(-4px);
-  border-color: var(--color-rose);
-  outline: none;
-}
-
-a.card:focus-visible {
-  outline: 2px solid var(--color-rose);
-  outline-offset: 2px;
-}
-
-.card--static {
-  cursor: default;
-}
-
-.card__media {
-  display: block;
-  background: var(--color-surface);
-}
-
-.card__img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  // Default: flower cut-outs sit on white — contain shows the whole bloom.
-  object-fit: contain;
-  background: var(--color-surface);
-}
-
-// Real backdrop scene photos fill the tile (shown as-is, no background removal).
-.card__img--cover {
-  object-fit: cover;
-}
-
-.card__img--placeholder {
-  background: var(--color-bg);
-}
-
-.card__body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 1.1rem 1.2rem 1.3rem;
-}
-
-.card__name {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.card__blurb {
-  color: var(--color-text-muted);
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-.card__explore {
-  margin-top: 0.4rem;
-  color: var(--color-rose);
-  font-size: 0.72rem;
-  letter-spacing: var(--track-mid);
-  text-transform: uppercase;
-}
-
-@media (min-width: 640px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
+@media (min-width: 720px) {
+  .intro {
+    padding: 4.5rem 1.25rem 1rem;
   }
-}
-
-@media (min-width: 900px) {
-  .cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-// Outro --------------------------------------------------------------------
-
-.outro {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 3.5rem 1.25rem 1rem;
-  text-align: center;
-}
-
-.outro__text {
-  margin: 0 0 1.75rem;
-  color: var(--color-text-muted);
-  font-size: 1rem;
 }

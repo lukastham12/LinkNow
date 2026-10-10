@@ -48,7 +48,7 @@ describe('Home', () => {
     expect(seeMore.textContent?.trim()).toBe('See what we do');
   });
 
-  it('uses the Minecraft backdrop photo as the hero cover image, unchanged (R1.5)', () => {
+  it('uses the Minecraft backdrop photo as the hero banner image, unchanged (R1.5)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -57,7 +57,7 @@ describe('Home', () => {
     expect(hero.getAttribute('src')).toBe('/backdrops/hero-minecraft.jpg');
   });
 
-  it('"Events we style" shows exactly 3 cards — no duplicate "Our services", no "Other Services" card', () => {
+  it('renders the shared "Events we style" section (via app-events-we-style), no old pink bundle band', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -65,26 +65,8 @@ describe('Home', () => {
     expect(section).toBeTruthy();
     expect(section.querySelector('h2')?.textContent?.trim()).toBe('Events we style');
 
-    // Shout-out copy: lists examples but is explicit that it's not limited to them.
-    expect(section.textContent ?? '').toContain('Birthdays, naming ceremonies, 100 days');
-    expect(section.textContent ?? '').toContain('open to styling any celebration or custom request');
-
     const cards = Array.from(section.querySelectorAll('a.service--link')) as HTMLAnchorElement[];
     expect(cards.length).toBe(3);
-
-    const names = cards.map((c) => c.querySelector('h3')?.textContent?.trim());
-    expect(names).toEqual(['Birthdays & Celebrations', 'Weddings & ROM', 'Corporate Events']);
-    expect(names).not.toContain('Other Services');
-
-    const links = cards.map((c) => c.getAttribute('href'));
-    expect(links).toEqual(['/backdrops', '/flowers', '/corporate']);
-
-    for (const card of cards) {
-      const img = card.querySelector('img');
-      expect(img).toBeTruthy();
-      expect((img?.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
-      expect(img?.getAttribute('loading')).toBe('lazy');
-    }
 
     // No separate "Our services" section or old pink bundle band.
     expect(el.querySelectorAll('#services-heading').length).toBe(0);
@@ -92,43 +74,7 @@ describe('Home', () => {
     expect(el.textContent ?? '').not.toContain('One booking, one team');
   });
 
-  it('"Other Services We Provide" sits directly below "Events we style", with all 4 items as plain cards (not individual WhatsApp links)', () => {
-    const fixture = TestBed.createComponent(Home);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-
-    const sections = Array.from(el.querySelectorAll('section'));
-    const occasionsIndex = sections.findIndex((s) => s.id === 'occasions');
-    const addonsIndex = sections.findIndex((s) => s.querySelector('#addons-heading'));
-    expect(occasionsIndex).toBeGreaterThanOrEqual(0);
-    expect(addonsIndex).toBe(occasionsIndex + 1);
-
-    const addonsSection = sections[addonsIndex];
-    expect(addonsSection.querySelector('h2')?.textContent?.trim()).toBe(
-      'Other Services We Provide',
-    );
-
-    // Cards are informational only — no per-card WhatsApp link.
-    const items = Array.from(addonsSection.querySelectorAll('.addon'));
-    expect(items.length).toBe(4);
-    expect(addonsSection.querySelectorAll('a.addon').length).toBe(0);
-    const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
-    expect(titles).toEqual(['Food Station', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
-
-    for (const item of items) {
-      expect(item.querySelector('svg')).toBeTruthy();
-    }
-
-    // The one WhatsApp CTA for the whole section, at the bottom.
-    const addonsButton = Array.from(addonsSection.querySelectorAll('a.btn--ghost')).find(
-      (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
-    ) as HTMLAnchorElement | undefined;
-    expect(addonsButton).toBeTruthy();
-    expect(addonsButton?.getAttribute('href')).toContain('wa.me/6588090600');
-    expect(addonsButton?.getAttribute('target')).toBe('_blank');
-  });
-
-  it('fires a whatsapp_click GA event for the hero CTA and the add-ons button, without blocking navigation', () => {
+  it('fires a whatsapp_click GA event for the hero CTA, without blocking navigation', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const instance = fixture.componentInstance as unknown as {
@@ -139,12 +85,6 @@ describe('Home', () => {
     const heroWa = el.querySelector('.hero a.btn--solid') as HTMLAnchorElement;
     heroWa.click();
     expect(spy).toHaveBeenCalledWith('hero', 'generic');
-
-    const addonsButton = Array.from(el.querySelectorAll('a.btn--ghost')).find(
-      (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
-    ) as HTMLAnchorElement;
-    addonsButton.click();
-    expect(spy).toHaveBeenCalledWith('addons', 'generic');
   });
 
   it('renders real decor images in the service cards and the retail portfolio teaser', () => {

@@ -1,0 +1,73 @@
+<!-- EVENTS WE STYLE -->
+<section class="section" id="occasions" aria-labelledby="occasions-heading">
+  <p class="eyebrow eyebrow--center">Occasions</p>
+  <h2 id="occasions-heading" class="section__title">Events we style</h2>
+  <p class="section__intro">
+    Birthdays, naming ceremonies, 100 days and more — you name the event, we'll style it. Not
+    seeing yours listed? We're open to styling any celebration or custom request, just ask.
+  </p>
+  <div class="services">
+    @for (service of services; track service.name) {
+      <a class="service service--link card-lift" [routerLink]="service.link">
+        <img class="service__img" [src]="service.image" [alt]="service.imageAlt" loading="lazy" />
+        <h3 class="service__name">{{ service.name }}</h3>
+        <p class="service__blurb">{{ service.blurb }}</p>
+      </a>
+    }
+  </div>
+</section>
+
+<!-- OTHER SERVICES WE PROVIDE -->
+<section class="section section--tint" aria-labelledby="addons-heading">
+  <p class="eyebrow eyebrow--center">Extras</p>
+  <h2 id="addons-heading" class="section__title">Other Services We Provide</h2>
+  <p class="section__intro">Make it a full party — add any of these to your decor booking.</p>
+  <div class="addons">
+    @for (addon of addons; track addon.id) {
+      <article class="addon">
+        <span class="addon__icon" aria-hidden="true">
+          @switch (addon.icon) {
+            @case ('popcorn') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 10l-1.2 9.5a1 1 0 0 0 1 1.1h10.4a1 1 0 0 0 1-1.1L17 10" />
+                <path d="M6.5 10h11l.6-3a2 2 0 0 0-2-2.4c-.4 0-.8.1-1.1.4A2.6 2.6 0 0 0 12 3.5a2.6 2.6 0 0 0-3 1.5c-.3-.3-.7-.4-1.1-.4a2 2 0 0 0-2 2.4z" />
+                <path d="M10 10v10.5M14 10v10.5" />
+              </svg>
+            }
+            @case ('castle') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 21V9l2-2V5h2v2l1.5-1.5L11 7V5h2v2l1.5-1.5L16 7V5h2v2l2 2v12z" />
+                <path d="M4 21h16M9 21v-5a3 3 0 0 1 6 0v5" />
+              </svg>
+            }
+            @case ('balloon') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a6 6 0 0 1 2 11.6c-.3.9-.5 2-.5 2.9a1.5 1.5 0 0 1-3 0c0-.9-.2-2-.5-2.9A6 6 0 0 1 12 2z" />
+                <path d="M11 16.5s-1.5.7-1.5 2 1.5 1 1.5 2" />
+              </svg>
+            }
+            @case ('microphone') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="2" width="6" height="11" rx="3" />
+                <path d="M5 11a7 7 0 0 0 14 0M12 18v4M9 22h6" />
+              </svg>
+            }
+          }
+        </span>
+        <h3 class="service__name">{{ addon.title }}</h3>
+        <p class="service__blurb">{{ addon.line }}</p>
+      </article>
+    }
+  </div>
+  <div class="section__cta">
+    <a
+      class="btn btn--ghost"
+      [href]="addonsWaLink"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="trackWhatsappClick('addons', 'generic')"
+    >
+      Ask about add-ons on WhatsApp
+    </a>
+  </div>
+</section>

@@ -4,18 +4,10 @@ import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
-import { ADDONS, ADDONS_WA_LINK } from '../../shared/addons';
 import { AnalyticsService } from '../../shared/analytics';
 import { CaseCard } from '../../components/case-card/case-card';
+import { EventsWeStyle } from '../../components/events-we-style/events-we-style';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
-
-interface Service {
-  name: string;
-  blurb: string;
-  image: string;
-  imageAlt: string;
-  link: string;
-}
 
 interface PortfolioTile {
   image: string;
@@ -33,7 +25,7 @@ interface PortfolioGroup {
  *  channel — no contact/quote links. */
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CaseCard, ReviewsCarousel],
+  imports: [RouterLink, CaseCard, EventsWeStyle, ReviewsCarousel],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -49,46 +41,6 @@ export class Home {
 
   // Organisations we've worked with — logo row only.
   protected readonly clients = CLIENTS;
-
-  // "Events we style" — one combined section (owner request, 10 Oct 2026:
-  // the previous separate "Events we style" / "Our services" sections were
-  // redundant). Occasions are grouped under whichever existing page
-  // actually shows that kind of work, so every card is a genuine
-  // destination, not a dead end — and the intro line makes clear this
-  // list isn't exhaustive.
-  protected readonly services: Service[] = [
-    {
-      name: 'Birthdays & Celebrations',
-      blurb:
-        "Birthdays, naming ceremonies, 100 days and more — you name the celebration, we'll " +
-        'style it.',
-      image: '/backdrops/backdrop-20.jpg',
-      imageAlt: "A Minecraft-themed birthday backdrop built by LinkNow Events Co. for Enzo's 8th birthday",
-      link: '/backdrops',
-    },
-    {
-      name: 'Weddings & ROM',
-      blurb: 'Floral and backdrop styling for your big day.',
-      image: '/flowers/custom-arrangement-hero.jpg',
-      imageAlt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
-      link: '/flowers',
-    },
-    {
-      name: 'Corporate Events',
-      blurb:
-        'Any custom corporate event — product launches, grand openings, company days. You ' +
-        'name it, we style it.',
-      image: '/corporate/peoples-association-01.jpg',
-      imageAlt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
-      link: '/corporate',
-    },
-  ];
-
-  // "Other Services We Provide" — the things that don't have their own photo
-  // gallery (food station, bouncy castle, balloon sculpting, party
-  // hosting), shown directly below "Events we style" (owner request).
-  protected readonly addons = ADDONS;
-  protected readonly addonsWaLink = ADDONS_WA_LINK;
 
   // Recent work, split by audience — a retail teaser (plain gallery tiles,
   // linking to the full /backdrops gallery) and a corporate teaser (the same
