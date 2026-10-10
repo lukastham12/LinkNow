@@ -38,17 +38,17 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
-  // Floral Services is its own page, reachable via the Services dropdown and
-  // the Floral Services card (not a top-level nav tab).
+  // Wedding & ROM Styling is its own page, reachable via the Services
+  // dropdown and the matching card (not a top-level nav tab).
   {
     path: 'flowers',
     component: Flowers,
     data: {
       seo: {
-        title: 'Custom Floral Arrangements in Singapore | LinkNow Pte Ltd',
+        title: 'Wedding & ROM Styling in Singapore | LinkNow Pte Ltd',
         description:
-          'Bespoke floral arrangements in Singapore for any occasion — any flower, any palette, ' +
-          'styled for weddings, corporate events, birthdays and celebrations.',
+          'Full wedding and ROM styling in Singapore — florals, backdrops, balloon accents and ' +
+          'table styling, all designed around your day. Enquire on WhatsApp.',
         path: '/flowers/',
       } satisfies PageSeo,
     },

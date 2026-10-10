@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Flowers } from './flowers';
 
-describe('Flowers (Floral Services page)', () => {
+describe('Flowers (Wedding & ROM Styling page)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Flowers],
@@ -12,13 +12,15 @@ describe('Flowers (Floral Services page)', () => {
     expect(TestBed.createComponent(Flowers).componentInstance).toBeTruthy();
   });
 
-  it('has a single h1 introducing custom/bespoke floral services', () => {
+  it('has a single h1 focused on wedding & ROM styling, not just florals', () => {
     const fixture = TestBed.createComponent(Flowers);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = el.querySelectorAll('h1');
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent?.toLowerCase()).toContain('custom');
+    const text = h1s[0].textContent?.toLowerCase() ?? '';
+    expect(text).toContain('wedding');
+    expect(text).toContain('rom');
   });
 
   it('shows the single bespoke hero photo (no flower catalogue grid)', () => {
@@ -33,15 +35,22 @@ describe('Flowers (Floral Services page)', () => {
     expect(el.querySelector('app-floral-showcase')).toBeNull();
   });
 
-  it('presents floral services as bespoke capabilities, not a fixed catalogue', () => {
+  it('leads with florals as the specialty, but covers the full wedding/ROM styling job', () => {
     const fixture = TestBed.createComponent(Flowers);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const cards = el.querySelectorAll('.capability');
-    expect(cards.length).toBeGreaterThanOrEqual(3);
-    const text = el.textContent ?? '';
-    expect(text.toLowerCase()).toContain('any flower');
-    expect(text.toLowerCase()).toContain('any occasion');
+    expect(cards.length).toBeGreaterThanOrEqual(4);
+
+    const titles = Array.from(cards).map((c) => c.querySelector('.capability__title')?.textContent);
+    expect(titles[0]).toContain('Floral styling');
+    expect(titles[0]).toContain('specialty');
+
+    const text = (el.textContent ?? '').toLowerCase();
+    // Not floral-only: backdrops, balloons and table styling are also covered.
+    expect(text).toContain('backdrop');
+    expect(text).toContain('balloon');
+    expect(text).toContain('table');
   });
 
   it('uses the canonical generic WhatsApp link only (no email/quote/contact)', () => {

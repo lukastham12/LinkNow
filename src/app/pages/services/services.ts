@@ -22,10 +22,10 @@ interface ServiceCard {
  * Services overview page (route '/services').
  *
  * A modern card grid (image + title + one-line blurb) for the three service
- * lines from BRIEF.md §2: Custom Backdrops, Floral Services and Corporate
- * Events. Custom Backdrops links to the /backdrops portfolio, Floral to the
- * /flowers showcase and Corporate Events to the /corporate page. WhatsApp is
- * the only enquiry path — no forms, email, quote button, or pricing.
+ * lines from BRIEF.md §2: Custom Backdrops, Weddings & ROM and Corporate
+ * Events. Custom Backdrops links to the /backdrops portfolio, Weddings & ROM
+ * to the /flowers page and Corporate Events to the /corporate page. WhatsApp
+ * is the only enquiry path — no forms, email, quote button, or pricing.
  */
 @Component({
   selector: 'app-services',

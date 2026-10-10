@@ -27,11 +27,12 @@ export const TIKTOK_URL = 'https://www.tiktok.com/@linknowsg';
 
 // Primary navigation used by the header (and footer).
 //
-// Floral is NOT a top-level tab (WhatsApp-only site, no Contact tab): the
-// Floral Showcase page (/flowers) is reachable only via the "Services"
-// dropdown and the Floral Services card on /services. The Services item
-// therefore carries `children` — the header renders them as an accessible
-// dropdown/submenu, while the footer ignores them and just lists the top level.
+// Weddings & ROM is NOT a top-level tab (WhatsApp-only site, no Contact
+// tab): the Wedding & ROM styling page (/flowers) is reachable only via
+// the "Services" dropdown and the matching card on /services. The
+// Services item therefore carries `children` — the header renders them as
+// an accessible dropdown/submenu, while the footer ignores them and just
+// lists the top level.
 export interface NavChild {
   label: string;
   path: string;
@@ -52,7 +53,7 @@ export const NAV_LINKS: readonly NavLink[] = [
     path: '/services',
     children: [
       { label: 'Custom Backdrops', path: '/backdrops' },
-      { label: 'Floral Services', path: '/flowers' },
+      { label: 'Weddings & ROM', path: '/flowers' },
       { label: 'Corporate Events', path: '/corporate' },
     ],
   },
