@@ -92,7 +92,7 @@ describe('Home', () => {
     expect(el.textContent ?? '').not.toContain('One booking, one team');
   });
 
-  it('"Other Services We Provide" sits directly below "Events we style", with all 4 items and working WhatsApp links', () => {
+  it('"Other Services We Provide" sits directly below "Events we style", with all 4 items as plain cards (not individual WhatsApp links)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -108,25 +108,27 @@ describe('Home', () => {
       'Other Services We Provide',
     );
 
-    const items = Array.from(addonsSection.querySelectorAll('a.addon')) as HTMLAnchorElement[];
+    // Cards are informational only — no per-card WhatsApp link.
+    const items = Array.from(addonsSection.querySelectorAll('.addon'));
     expect(items.length).toBe(4);
+    expect(addonsSection.querySelectorAll('a.addon').length).toBe(0);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
     expect(titles).toEqual(['Food Station', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
 
     for (const item of items) {
-      expect(item.getAttribute('target')).toBe('_blank');
-      expect(item.getAttribute('href')).toContain('wa.me/6588090600');
       expect(item.querySelector('svg')).toBeTruthy();
     }
 
+    // The one WhatsApp CTA for the whole section, at the bottom.
     const addonsButton = Array.from(addonsSection.querySelectorAll('a.btn--ghost')).find(
       (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
     ) as HTMLAnchorElement | undefined;
     expect(addonsButton).toBeTruthy();
     expect(addonsButton?.getAttribute('href')).toContain('wa.me/6588090600');
+    expect(addonsButton?.getAttribute('target')).toBe('_blank');
   });
 
-  it('fires a whatsapp_click GA event for the hero CTA and the add-on items, without blocking navigation', () => {
+  it('fires a whatsapp_click GA event for the hero CTA and the add-ons button, without blocking navigation', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const instance = fixture.componentInstance as unknown as {
@@ -138,9 +140,11 @@ describe('Home', () => {
     heroWa.click();
     expect(spy).toHaveBeenCalledWith('hero', 'generic');
 
-    const addonItem = el.querySelector('a.addon') as HTMLAnchorElement;
-    addonItem.click();
-    expect(spy).toHaveBeenCalledWith('addons', 'food-station');
+    const addonsButton = Array.from(el.querySelectorAll('a.btn--ghost')).find(
+      (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
+    ) as HTMLAnchorElement;
+    addonsButton.click();
+    expect(spy).toHaveBeenCalledWith('addons', 'generic');
   });
 
   it('renders real decor images in the service cards and the retail portfolio teaser', () => {

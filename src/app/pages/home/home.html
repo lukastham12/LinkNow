@@ -58,14 +58,7 @@
   <p class="section__intro">Make it a full party — add any of these to your decor booking.</p>
   <div class="addons">
     @for (addon of addons; track addon.id) {
-      <a
-        class="addon card-lift"
-        [href]="addon.waLink"
-        target="_blank"
-        rel="noopener noreferrer"
-        [attr.aria-label]="'Enquire about ' + addon.title + ' on WhatsApp'"
-        (click)="trackWhatsappClick('addons', addon.id)"
-      >
+      <article class="addon">
         <span class="addon__icon" aria-hidden="true">
           @switch (addon.icon) {
             @case ('popcorn') {
@@ -97,7 +90,7 @@
         </span>
         <h3 class="service__name">{{ addon.title }}</h3>
         <p class="service__blurb">{{ addon.line }}</p>
-      </a>
+      </article>
     }
   </div>
   <div class="section__cta">
