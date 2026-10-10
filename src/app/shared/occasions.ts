@@ -1,9 +1,10 @@
 // "Events we style" homepage section data (Homepage — Services & Occasions
-// Redesign v1.0, 10 Oct 2026, §7). One array so adding, removing or
-// reordering an occasion is a one-line change (R2.7). All images are
-// existing repo photos (BRIEF.md: no new images) — the "other" tile has no
-// photo by design (R2.6/R2.8) and the component falls back to a styled
-// placeholder for any occasion without an image.
+// Redesign v1.0, 10 Oct 2026, §7; occasions later grouped per owner
+// request 10 Oct 2026 — see summary in chat). One array so adding,
+// removing or reordering an occasion is a one-line change (R2.7). All
+// images are existing repo photos (BRIEF.md: no new images) — the "other"
+// tile has no photo by design (R2.6/R2.8) and the component falls back to
+// a styled placeholder for any occasion without an image.
 
 import { whatsappLink } from './contact';
 
@@ -25,44 +26,22 @@ function occasionWaLink(occasion: string): string {
 
 export const OCCASIONS: readonly Occasion[] = [
   {
-    id: 'birthdays',
-    title: 'Birthdays',
-    description: "Kids' parties to milestone 21sts and 50ths.",
+    id: 'birthdays-babies',
+    title: 'Birthdays & Baby Celebrations',
+    description: 'Birthdays, naming ceremonies, gender reveals and baby showers.',
     image: '/backdrops/backdrop-20.jpg',
     imageAlt: 'Minecraft-themed birthday backdrop with balloon decorations by LinkNow Events Co.',
-    waLink: occasionWaLink('birthday'),
+    waLink: occasionWaLink(
+      'birthday, naming ceremony, gender reveal or baby shower',
+    ),
   },
   {
-    id: 'baby-milestones',
-    title: '1st Birthday & 100 Days',
-    description: "Sweet setups for baby's big milestones.",
-    image: '/backdrops/backdrop-02.jpg',
-    imageAlt: "Balloon-garland celebration setup for a baby's 100 Days by LinkNow Events Co.",
-    waLink: occasionWaLink('1st birthday or 100 days celebration'),
-  },
-  {
-    id: 'baby-shower',
-    title: 'Baby Showers & Gender Reveals',
-    description: 'Soft, themed décor for the mum-to-be.',
-    image: '/backdrops/backdrop-25.jpg',
-    imageAlt: 'Winnie the Pooh-themed gender reveal backdrop by LinkNow Events Co.',
-    waLink: occasionWaLink('baby shower or gender reveal'),
-  },
-  {
-    id: 'weddings',
-    title: 'Weddings & ROM',
-    description: 'Floral and backdrop styling for your big day.',
+    id: 'weddings-bachelor',
+    title: 'Weddings, ROM & Bachelor Parties',
+    description: 'Styling for your wedding, ROM, or bachelor/bachelorette night.',
     image: '/flowers/custom-arrangement-hero.jpg',
     imageAlt: 'Bespoke floral centrepiece styled for a wedding table by LinkNow Events Co.',
-    waLink: occasionWaLink('wedding or ROM'),
-  },
-  {
-    id: 'bachelor',
-    title: 'Bachelor & Bachelorette Parties',
-    description: 'Fun, photo-ready setups for the night.',
-    image: '/backdrops/backdrop-15.jpg',
-    imageAlt: 'Gold balloon-garland backdrop for a milestone adult birthday by LinkNow Events Co.',
-    waLink: occasionWaLink('bachelor or bachelorette party'),
+    waLink: occasionWaLink('wedding, ROM, or bachelor/bachelorette party'),
   },
   {
     id: 'festive',
@@ -82,7 +61,7 @@ export const OCCASIONS: readonly Occasion[] = [
   },
   {
     id: 'corporate',
-    title: 'Corporate & Community Events',
+    title: 'Corporate Events',
     description: 'Family days, launches, school and CC events.',
     image: '/corporate/bucket-house-01.jpg',
     imageAlt: "Balloon-twisting entertainer at a preschool Children's Day event by LinkNow Events Co.",

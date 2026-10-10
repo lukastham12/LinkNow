@@ -42,7 +42,6 @@
     @for (occasion of occasions; track occasion.id) {
       <a
         class="occasion card-lift"
-        [class.occasion--wide]="occasion.id === 'other'"
         [href]="occasion.waLink"
         target="_blank"
         rel="noopener noreferrer"
@@ -73,25 +72,10 @@
   </p>
 </section>
 
-<!-- SERVICES -->
-<section class="section" aria-labelledby="services-heading">
-  <p class="eyebrow eyebrow--center">What we do</p>
-  <h2 id="services-heading" class="section__title">Our services</h2>
-  <div class="services">
-    @for (service of services; track service.name) {
-      <a class="service service--link card-lift" [routerLink]="service.link">
-        <img class="service__img" [src]="service.image" [alt]="service.imageAlt" loading="lazy" />
-        <h3 class="service__name">{{ service.name }}</h3>
-        <p class="service__blurb">{{ service.blurb }}</p>
-      </a>
-    }
-  </div>
-</section>
-
-<!-- ADD TO YOUR EVENT (ADD-ONS) -->
+<!-- OTHER SERVICES WE PROVIDE -->
 <section class="section section--tint" aria-labelledby="addons-heading">
   <p class="eyebrow eyebrow--center">Extras</p>
-  <h2 id="addons-heading" class="section__title">Add to your event</h2>
+  <h2 id="addons-heading" class="section__title">Other Services We Provide</h2>
   <p class="section__intro">Make it a full party — add any of these to your decor booking.</p>
   <div class="addons">
     @for (addon of addons; track addon.id) {
@@ -110,14 +94,6 @@
                 <path d="M7 10l-1.2 9.5a1 1 0 0 0 1 1.1h10.4a1 1 0 0 0 1-1.1L17 10" />
                 <path d="M6.5 10h11l.6-3a2 2 0 0 0-2-2.4c-.4 0-.8.1-1.1.4A2.6 2.6 0 0 0 12 3.5a2.6 2.6 0 0 0-3 1.5c-.3-.3-.7-.4-1.1-.4a2 2 0 0 0-2 2.4z" />
                 <path d="M10 10v10.5M14 10v10.5" />
-              </svg>
-            }
-            @case ('candy-floss') {
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 12v9M9.5 21h5" />
-                <circle cx="9" cy="7" r="4" />
-                <circle cx="15" cy="7" r="4" />
-                <circle cx="12" cy="5" r="4" />
               </svg>
             }
             @case ('castle') {
@@ -158,22 +134,19 @@
   </div>
 </section>
 
-<!-- ONE BOOKING, ONE TEAM (BUNDLE) -->
-<section class="section section--tint bundle" aria-labelledby="bundle-heading">
-  <h2 id="bundle-heading" class="bundle__title">One booking, one team.</h2>
-  <p class="bundle__text">
-    Combine decor, a live station and a bouncy castle in one package — no juggling multiple
-    vendors.
-  </p>
-  <a
-    class="btn btn--solid"
-    [href]="eventWhatsappHref"
-    target="_blank"
-    rel="noopener noreferrer"
-    (click)="trackWhatsappClick('bundle', 'generic')"
-  >
-    Plan my event on WhatsApp
-  </a>
+<!-- SERVICES -->
+<section class="section" aria-labelledby="services-heading">
+  <p class="eyebrow eyebrow--center">What we do</p>
+  <h2 id="services-heading" class="section__title">Our services</h2>
+  <div class="services">
+    @for (service of services; track service.name) {
+      <a class="service service--link card-lift" [routerLink]="service.link">
+        <img class="service__img" [src]="service.image" [alt]="service.imageAlt" loading="lazy" />
+        <h3 class="service__name">{{ service.name }}</h3>
+        <p class="service__blurb">{{ service.blurb }}</p>
+      </a>
+    }
+  </div>
 </section>
 
 <!-- OUR CLIENTS -->

@@ -1,12 +1,13 @@
-// "Add to your event" homepage section data (Homepage — Services & Occasions
-// Redesign v1.0, 10 Oct 2026, §R4). One array so adding, removing or
-// reordering an add-on is a one-line change (R4.7). No photos — these are
-// icon + title + line items by design (R4.2); icon names map to the inline
-// SVGs rendered by AddonCard.
+// "Other Services We Provide" homepage section data (Homepage — Services &
+// Occasions Redesign v1.0, 10 Oct 2026, §R4; food items grouped into one
+// "Food Station" entry per owner request 10 Oct 2026 — see summary in
+// chat). One array so adding, removing or reordering an item is a
+// one-line change (R4.7). No photos — these are icon + title + line items
+// by design (R4.2); icon names map to the inline SVGs rendered in home.html.
 
 import { whatsappLink } from './contact';
 
-export type AddOnIcon = 'popcorn' | 'candy-floss' | 'castle' | 'balloon' | 'microphone';
+export type AddOnIcon = 'popcorn' | 'castle' | 'balloon' | 'microphone';
 
 export interface AddOn {
   id: string;
@@ -22,18 +23,11 @@ function addOnWaLink(addOn: string): string {
 
 export const ADDONS: readonly AddOn[] = [
   {
-    id: 'popcorn',
-    title: 'Live Popcorn Station',
-    line: 'Freshly popped on the spot — a hit with every crowd.',
+    id: 'food-station',
+    title: 'Food Station',
+    line: 'Popcorn, ice cream or candy floss — freshly made on the spot.',
     icon: 'popcorn',
-    waLink: addOnWaLink('live popcorn station'),
-  },
-  {
-    id: 'candy-floss',
-    title: 'Candy Floss Station',
-    line: 'Spun fresh in your colours, a sweet crowd favourite.',
-    icon: 'candy-floss',
-    waLink: addOnWaLink('candy floss station'),
+    waLink: addOnWaLink('food station (popcorn, ice cream or candy floss)'),
   },
   {
     id: 'bouncy-castle',
@@ -59,6 +53,6 @@ export const ADDONS: readonly AddOn[] = [
 ];
 
 export const ADDONS_WA_LINK = whatsappLink(
-  "Hi LinkNow, I'd like to ask about your party add-ons (popcorn, candy floss, bouncy castle, " +
-    'balloon sculpting, party hosting).',
+  "Hi LinkNow, I'd like to ask about your other services (food station, bouncy castle, balloon " +
+    'sculpting, party hosting).',
 );

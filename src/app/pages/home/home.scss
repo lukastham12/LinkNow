@@ -202,7 +202,7 @@
   font-size: 0.92rem;
 }
 
-// Events we style (occasions) + Add to your event (add-ons) ----------------
+// Events we style (occasions) + Other Services We Provide (add-ons) --------
 // Both reuse .service__img/.service__name/.service__blurb above for the tile
 // photo/title/description — only the grid and card shell differ.
 
@@ -213,10 +213,6 @@
   gap: 1.25rem;
 }
 
-
-.occasion--wide {
-  grid-column: 1 / -1;
-}
 
 .addon {
   display: flex;
@@ -229,33 +225,10 @@
   border-radius: 4px;
 }
 
-.addon:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-}
-
 .addon__icon {
   display: block;
   margin-bottom: 0.85rem;
   color: var(--color-rose);
-}
-
-// One booking, one team (bundle band). Markup carries "section section--tint
-// bundle" — reuses the existing tinted-strip layout, just a different
-// (blush, not grey) background tint — never text/button fill, see
-// --color-blush note in styles.scss.
-.bundle {
-  text-align: center;
-  background: var(--color-blush);
-}
-
-.bundle__title {
-  font-size: clamp(1.3rem, 3.5vw, 1.6rem);
-  font-weight: 600;
-}
-
-.bundle__text {
-  @extend %muted;
-  margin: 0 0 1.5rem;
 }
 
 .portfolio-groups {
@@ -304,8 +277,7 @@
   text-align: center;
 }
 
-.enquiry__title,
-.bundle__title {
+.enquiry__title {
   margin: 0 0 0.5rem;
 }
 
@@ -336,19 +308,15 @@
   }
 }
 
-// Occasions stay 2 columns through tablet, and only go to 3 on desktop
-// (R2.2); add-ons stay 2 columns until the same desktop breakpoint, then go
-// 5 across (R4.6).
+// Occasions stay 2 columns through tablet, and only go to 3 on desktop;
+// "Other Services" stay 2 columns until the same desktop breakpoint, then
+// go 4 across (one row).
 @media (min-width: 960px) {
   .occasions {
     grid-template-columns: repeat(3, 1fr);
   }
 
   .addons {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  .addon:last-child:nth-child(odd) {
-    grid-column: auto;
+    grid-template-columns: repeat(4, 1fr);
   }
 }

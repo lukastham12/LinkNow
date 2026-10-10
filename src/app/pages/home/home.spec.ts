@@ -58,7 +58,7 @@ describe('Home', () => {
     expect(hero.getAttribute('src')).toBe('/backdrops/hero-minecraft.jpg');
   });
 
-  it('"Events we style" renders all 9 occasion tiles (8 + "Something else?"), each a WhatsApp link (R2)', () => {
+  it('"Events we style" renders all grouped occasion tiles, each a WhatsApp link', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -68,7 +68,7 @@ describe('Home', () => {
 
     const tiles = Array.from(section.querySelectorAll('.occasion')) as HTMLAnchorElement[];
     expect(tiles.length).toBe(OCCASIONS.length);
-    expect(tiles.length).toBe(9);
+    expect(tiles.length).toBe(6);
 
     for (const [i, tile] of tiles.entries()) {
       expect(tile.getAttribute('target')).toBe('_blank');
@@ -92,6 +92,19 @@ describe('Home', () => {
     }
 
     expect(section.textContent ?? '').toContain('anniversaries, proposals, graduations');
+
+    // Occasions grouped per owner request: birthdays/naming/gender-reveal/baby
+    // showers combined, weddings/ROM/bachelor combined; festive, openings and
+    // corporate stay on their own.
+    const titles = tiles.map((t) => t.querySelector('h3')?.textContent?.trim());
+    expect(titles).toEqual([
+      'Birthdays & Baby Celebrations',
+      'Weddings, ROM & Bachelor Parties',
+      'Festive Celebrations',
+      'Grand Openings & Open Houses',
+      'Corporate Events',
+      'Something else?',
+    ]);
   });
 
   it('"Our services" shows exactly the 4 R3 cards, in order, with the right links — no ROM & Wedding Services', () => {
@@ -123,15 +136,18 @@ describe('Home', () => {
     ]);
   });
 
-  it('"Add to your event" shows all 5 add-ons with icons and working WhatsApp links, plus the button (R4)', () => {
+  it('"Other Services We Provide" shows all 4 items (food station combined) with icons and working WhatsApp links, plus the button', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent ?? '').toContain('Add to your event');
+    expect(el.textContent ?? '').toContain('Other Services We Provide');
 
     const items = Array.from(el.querySelectorAll('a.addon')) as HTMLAnchorElement[];
     expect(items.length).toBe(ADDONS.length);
-    expect(items.length).toBe(5);
+    expect(items.length).toBe(4);
+
+    const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
+    expect(titles).toEqual(['Food Station', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
 
     for (const [i, item] of items.entries()) {
       expect(item.getAttribute('target')).toBe('_blank');
@@ -140,33 +156,36 @@ describe('Home', () => {
       expect(item.querySelector('h3')?.textContent?.trim()).toBe(ADDONS[i].title);
     }
 
+    // Food Station's WhatsApp message covers popcorn, ice cream and candy floss together.
+    const foodStationHref = decodeURIComponent(items[0].getAttribute('href') ?? '');
+    expect(foodStationHref).toContain('popcorn, ice cream or candy floss');
+
     const addonsButton = Array.from(el.querySelectorAll('a.btn--ghost')).find(
       (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
     ) as HTMLAnchorElement | undefined;
     expect(addonsButton).toBeTruthy();
     expect(addonsButton?.getAttribute('href')).toContain('wa.me/6588090600');
-    expect(decodeURIComponent(addonsButton?.getAttribute('href') ?? '')).toContain('popcorn, candy floss, bouncy castle, balloon sculpting, party hosting');
   });
 
-  it('shows the "One booking, one team" band after the add-ons, with its own WhatsApp button (R5)', () => {
+  it('does not show the old "One booking, one team" pink bundle band anymore', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const bundle = el.querySelector('#bundle-heading')?.closest('section');
-    expect(bundle).toBeTruthy();
-    expect(bundle?.textContent ?? '').toContain('One booking, one team.');
-    const btn = bundle?.querySelector('a.btn--solid') as HTMLAnchorElement;
-    expect(btn.textContent?.trim()).toBe('Plan my event on WhatsApp');
-    expect(btn.getAttribute('href')).toContain('wa.me/6588090600');
+    expect(el.querySelector('#bundle-heading')).toBeNull();
+    expect(el.textContent ?? '').not.toContain('One booking, one team');
+  });
 
-    // Comes after the add-ons section and before "Our Clients" in document order.
+  it('places "Other Services We Provide" right after "Events we style" and before "Our services"', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
     const sections = Array.from(el.querySelectorAll('section'));
+    const occasionsIndex = sections.findIndex((s) => s.id === 'occasions');
     const addonsIndex = sections.findIndex((s) => s.querySelector('#addons-heading'));
-    const bundleIndex = sections.indexOf(bundle as HTMLElement);
-    const clientsIndex = sections.findIndex((s) => s.querySelector('#clients-heading'));
-    expect(addonsIndex).toBeGreaterThanOrEqual(0);
-    expect(bundleIndex).toBeGreaterThan(addonsIndex);
-    expect(clientsIndex).toBeGreaterThan(bundleIndex);
+    const servicesIndex = sections.findIndex((s) => s.querySelector('#services-heading'));
+    expect(occasionsIndex).toBeGreaterThanOrEqual(0);
+    expect(addonsIndex).toBeGreaterThan(occasionsIndex);
+    expect(servicesIndex).toBeGreaterThan(addonsIndex);
   });
 
   it('fires a whatsapp_click GA event (section + item) when a new WhatsApp link is clicked, without blocking navigation', () => {
@@ -180,13 +199,6 @@ describe('Home', () => {
     const heroWa = el.querySelector('.hero a.btn--solid') as HTMLAnchorElement;
     heroWa.click();
     expect(spy).toHaveBeenCalledWith('hero', 'generic');
-
-    const bundleWa = el
-      .querySelector('#bundle-heading')
-      ?.closest('section')
-      ?.querySelector('a.btn--solid') as HTMLAnchorElement;
-    bundleWa.click();
-    expect(spy).toHaveBeenCalledWith('bundle', 'generic');
 
     const occasionTile = el.querySelector('.occasion') as HTMLAnchorElement;
     occasionTile.click();
