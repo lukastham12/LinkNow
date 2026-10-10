@@ -4,8 +4,8 @@
   color: var(--color-text-muted);
 }
 
-// Shared by every clickable card (just .service--link on this page): plain
-// link styling, lift on hover/focus, visible focus ring.
+// Shared by every clickable card (.service--link, .addon): plain link
+// styling, lift on hover/focus, visible focus ring.
 .card-lift {
   display: block;
   text-decoration: none;
@@ -197,6 +197,31 @@
   font-size: 0.92rem;
 }
 
+// Other Services We Provide (add-ons) ---------------------------------------
+
+.addons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.addon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.addon__icon {
+  display: block;
+  margin-bottom: 0.85rem;
+  color: var(--color-rose);
+}
+
 .portfolio-groups {
   display: grid;
   gap: 2.5rem;
@@ -271,6 +296,12 @@
   .portfolio-groups {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .addons {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

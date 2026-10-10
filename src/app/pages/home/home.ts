@@ -4,6 +4,7 @@ import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
+import { ADDONS, ADDONS_WA_LINK } from '../../shared/addons';
 import { AnalyticsService } from '../../shared/analytics';
 import { CaseCard } from '../../components/case-card/case-card';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
@@ -50,11 +51,11 @@ export class Home {
   protected readonly clients = CLIENTS;
 
   // "Events we style" — one combined section (owner request, 10 Oct 2026:
-  // the previous separate "Events we style" / "Our services" / "Other
-  // Services We Provide" sections were redundant). Occasions are grouped
-  // under whichever existing page actually shows that kind of work, so
-  // every card is a genuine destination, not a dead end — and the intro
-  // line makes clear this list isn't exhaustive.
+  // the previous separate "Events we style" / "Our services" sections were
+  // redundant). Occasions are grouped under whichever existing page
+  // actually shows that kind of work, so every card is a genuine
+  // destination, not a dead end — and the intro line makes clear this
+  // list isn't exhaustive.
   protected readonly services: Service[] = [
     {
       name: 'Birthdays & Celebrations',
@@ -73,13 +74,6 @@ export class Home {
       link: '/flowers',
     },
     {
-      name: 'Other Services',
-      blurb: 'Food stations, bouncy castles, balloon sculpting and more to add to your event.',
-      image: '/corporate/awwa-01.jpg',
-      imageAlt: "A themed bouncy castle set up for AWWA's Children's Day engagement",
-      link: '/extras',
-    },
-    {
       name: 'Corporate Events',
       blurb:
         'Any custom corporate event — product launches, grand openings, company days. You ' +
@@ -89,6 +83,12 @@ export class Home {
       link: '/corporate',
     },
   ];
+
+  // "Other Services We Provide" — the things that don't have their own photo
+  // gallery (food station, bouncy castle, balloon sculpting, party
+  // hosting), shown directly below "Events we style" (owner request).
+  protected readonly addons = ADDONS;
+  protected readonly addonsWaLink = ADDONS_WA_LINK;
 
   // Recent work, split by audience — a retail teaser (plain gallery tiles,
   // linking to the full /backdrops gallery) and a corporate teaser (the same

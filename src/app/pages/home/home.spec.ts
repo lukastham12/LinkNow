@@ -56,7 +56,7 @@ describe('Home', () => {
     expect(hero.getAttribute('src')).toBe('/backdrops/hero-minecraft.jpg');
   });
 
-  it('"Events we style" shows exactly 4 cards — one consolidated section, no duplicate "Our services"', () => {
+  it('"Events we style" shows exactly 3 cards — no duplicate "Our services", no "Other Services" card', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -69,18 +69,14 @@ describe('Home', () => {
     expect(section.textContent ?? '').toContain('open to styling any celebration or custom request');
 
     const cards = Array.from(section.querySelectorAll('a.service--link')) as HTMLAnchorElement[];
-    expect(cards.length).toBe(4);
+    expect(cards.length).toBe(3);
 
     const names = cards.map((c) => c.querySelector('h3')?.textContent?.trim());
-    expect(names).toEqual([
-      'Birthdays & Celebrations',
-      'Weddings & ROM',
-      'Other Services',
-      'Corporate Events',
-    ]);
+    expect(names).toEqual(['Birthdays & Celebrations', 'Weddings & ROM', 'Corporate Events']);
+    expect(names).not.toContain('Other Services');
 
     const links = cards.map((c) => c.getAttribute('href'));
-    expect(links).toEqual(['/backdrops', '/flowers', '/extras', '/corporate']);
+    expect(links).toEqual(['/backdrops', '/flowers', '/corporate']);
 
     for (const card of cards) {
       const img = card.querySelector('img');
@@ -89,15 +85,47 @@ describe('Home', () => {
       expect(img?.getAttribute('loading')).toBe('lazy');
     }
 
-    // There is only one such section on the page now — no separate
-    // "Our services" / "Other Services We Provide" / bundle band.
+    // No separate "Our services" section or old pink bundle band.
     expect(el.querySelectorAll('#services-heading').length).toBe(0);
-    expect(el.querySelectorAll('#addons-heading').length).toBe(0);
     expect(el.querySelector('#bundle-heading')).toBeNull();
     expect(el.textContent ?? '').not.toContain('One booking, one team');
   });
 
-  it('fires a whatsapp_click GA event for the hero CTA, without blocking navigation', () => {
+  it('"Other Services We Provide" sits directly below "Events we style", with all 4 items and working WhatsApp links', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+
+    const sections = Array.from(el.querySelectorAll('section'));
+    const occasionsIndex = sections.findIndex((s) => s.id === 'occasions');
+    const addonsIndex = sections.findIndex((s) => s.querySelector('#addons-heading'));
+    expect(occasionsIndex).toBeGreaterThanOrEqual(0);
+    expect(addonsIndex).toBe(occasionsIndex + 1);
+
+    const addonsSection = sections[addonsIndex];
+    expect(addonsSection.querySelector('h2')?.textContent?.trim()).toBe(
+      'Other Services We Provide',
+    );
+
+    const items = Array.from(addonsSection.querySelectorAll('a.addon')) as HTMLAnchorElement[];
+    expect(items.length).toBe(4);
+    const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
+    expect(titles).toEqual(['Food Station', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
+
+    for (const item of items) {
+      expect(item.getAttribute('target')).toBe('_blank');
+      expect(item.getAttribute('href')).toContain('wa.me/6588090600');
+      expect(item.querySelector('svg')).toBeTruthy();
+    }
+
+    const addonsButton = Array.from(addonsSection.querySelectorAll('a.btn--ghost')).find(
+      (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
+    ) as HTMLAnchorElement | undefined;
+    expect(addonsButton).toBeTruthy();
+    expect(addonsButton?.getAttribute('href')).toContain('wa.me/6588090600');
+  });
+
+  it('fires a whatsapp_click GA event for the hero CTA and the add-on items, without blocking navigation', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const instance = fixture.componentInstance as unknown as {
@@ -108,6 +136,10 @@ describe('Home', () => {
     const heroWa = el.querySelector('.hero a.btn--solid') as HTMLAnchorElement;
     heroWa.click();
     expect(spy).toHaveBeenCalledWith('hero', 'generic');
+
+    const addonItem = el.querySelector('a.addon') as HTMLAnchorElement;
+    addonItem.click();
+    expect(spy).toHaveBeenCalledWith('addons', 'food-station');
   });
 
   it('renders real decor images in the service cards and the retail portfolio teaser', () => {
