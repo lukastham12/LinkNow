@@ -5,6 +5,7 @@ import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
 import { CaseCard } from '../../components/case-card/case-card';
+import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 
 interface Service {
   name: string;
@@ -34,7 +35,7 @@ interface PortfolioGroup {
  *  contact/quote links. */
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CaseCard],
+  imports: [RouterLink, CaseCard, ReviewsCarousel],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

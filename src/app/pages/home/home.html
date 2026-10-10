@@ -116,17 +116,7 @@
   <p class="eyebrow eyebrow--center">Testimonials</p>
   <h2 id="testimonials-heading" class="section__title">Client Testimonials</h2>
   @if (testimonials.length > 0) {
-    <div class="testimonials">
-      @for (t of testimonials; track t.quote) {
-        <figure class="testimonial">
-          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">
-            <span aria-hidden="true">★★★★★</span>
-          </div>
-          <blockquote class="testimonial__quote">“{{ t.quote }}”</blockquote>
-          <figcaption class="testimonial__author">Verified Google review</figcaption>
-        </figure>
-      }
-    </div>
+    <app-reviews-carousel [reviews]="testimonials" />
   } @else {
     <p class="placeholder-note">
       Our 5-star Google reviews are coming soon. In the meantime, message us on WhatsApp to hear
