@@ -1,27 +1,53 @@
-.carousel {
-  display: flex;
-  align-items: stretch;
-  gap: 0.75rem;
-  max-width: 640px;
-  margin: 0 auto;
+.marquee {
+  overflow: hidden;
+  width: 100%;
+  // Matches the page's .section max-width (1120px) minus its own side
+  // padding (1.25rem each) — the actual width available to this component.
+  // Flex children can't size off a max-content parent via %, so this is
+  // threaded through to each .testimonial width below instead.
+  --content-width: min(1080px, calc(100vw - 2.5rem));
 }
 
-.carousel__viewport {
-  flex: 1;
-  min-width: 0;
+.marquee__track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation-name: marquee-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  &:hover,
+  &:focus-within {
+    animation-play-state: paused;
+  }
+}
+
+.marquee__track--static {
+  animation: none;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    // The track holds two back-to-back copies of the reviews, so sliding
+    // exactly one copy's width loops seamlessly back to the start.
+    transform: translateX(-50%);
+  }
 }
 
 .testimonial {
+  flex: 0 0 auto;
+  // Mobile: one card fills most of the width, with the next card peeking in
+  // to hint that it scrolls.
+  width: calc(var(--content-width) * 0.85);
   margin: 0;
-  padding: 1.75rem 1.5rem;
+  padding: 1.5rem;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  text-align: center;
-  min-height: 11rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  text-align: left;
 }
 
 .testimonial__stars {
@@ -33,8 +59,13 @@
 
 .testimonial__quote {
   margin: 0 0 0.75rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
 }
 
 .testimonial__author {
@@ -44,51 +75,22 @@
   letter-spacing: 0.04em;
 }
 
-.carousel__arrow {
-  flex: none;
-  align-self: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-size: 1.25rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.carousel__arrow:hover,
-.carousel__arrow:focus-visible {
-  border-color: var(--color-rose);
-  color: var(--color-rose);
-}
-
-.carousel__dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1.1rem;
-}
-
-.carousel__dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-border);
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.carousel__dot--active {
-  background: var(--color-rose);
-}
-
 @media (min-width: 640px) {
-  .carousel {
-    gap: 1.5rem;
+  // Two cards visible at once.
+  .testimonial {
+    width: calc((var(--content-width) - 1.25rem) / 2);
+  }
+}
+
+@media (min-width: 900px) {
+  // Four cards visible at once — the target desktop layout.
+  .testimonial {
+    width: calc((var(--content-width) - 3 * 1.25rem) / 4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
   }
 }

@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Testimonial } from '../../shared/testimonials';
 import { ReviewsCarousel } from './reviews-carousel';
 
@@ -17,85 +17,56 @@ describe('ReviewsCarousel', () => {
     return fixture;
   }
 
-  it('shows the first review initially', () => {
+  it('renders every review (no interaction needed to see them all)', () => {
     const fixture = create();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent ?? '').toContain('First review');
-    expect(el.textContent ?? '').not.toContain('Second review');
-  });
-
-  it('advances to the next review on the next button, wrapping around', () => {
-    const fixture = create();
-    const el = fixture.nativeElement as HTMLElement;
-    const next = el.querySelector<HTMLButtonElement>('.carousel__arrow--next')!;
-
-    next.click();
-    fixture.detectChanges();
     expect(el.textContent ?? '').toContain('Second review');
-
-    next.click();
-    fixture.detectChanges();
-    expect(el.textContent ?? '').toContain('Third review');
-
-    next.click();
-    fixture.detectChanges();
-    expect(el.textContent ?? '').toContain('First review');
-  });
-
-  it('goes to the previous review, wrapping around to the last one', () => {
-    const fixture = create();
-    const el = fixture.nativeElement as HTMLElement;
-    const prev = el.querySelector<HTMLButtonElement>('.carousel__arrow--prev')!;
-
-    prev.click();
-    fixture.detectChanges();
     expect(el.textContent ?? '').toContain('Third review');
   });
 
-  it('jumps to a review when its dot is clicked', () => {
+  it('duplicates the track so the scroll loops seamlessly', () => {
     const fixture = create();
     const el = fixture.nativeElement as HTMLElement;
-    const dots = el.querySelectorAll<HTMLButtonElement>('.carousel__dot');
-    expect(dots.length).toBe(3);
-
-    dots[2].click();
-    fixture.detectChanges();
-    expect(el.textContent ?? '').toContain('Third review');
+    expect(el.querySelectorAll('.testimonial').length).toBe(REVIEWS.length * 2);
   });
 
-  it('auto-advances to the next review after the autoplay interval', fakeAsync(() => {
+  it('marks the duplicated second half as aria-hidden, not the originals', () => {
     const fixture = create();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent ?? '').toContain('First review');
+    const cards = Array.from(el.querySelectorAll('.testimonial'));
+    const hidden = cards.filter((c) => c.getAttribute('aria-hidden') === 'true');
+    const visible = cards.filter((c) => c.getAttribute('aria-hidden') !== 'true');
+    expect(hidden.length).toBe(REVIEWS.length);
+    expect(visible.length).toBe(REVIEWS.length);
+  });
 
-    tick(6000);
-    fixture.detectChanges();
-    expect(el.textContent ?? '').toContain('Second review');
-
-    fixture.destroy();
-  }));
-
-  it('pauses autoplay on hover and resumes on mouse leave', fakeAsync(() => {
+  it('runs the scroll automatically — no buttons required', () => {
     const fixture = create();
     const el = fixture.nativeElement as HTMLElement;
-    const root = el.querySelector('.carousel')!;
+    expect(el.querySelector('button')).toBeNull();
+    const track = el.querySelector<HTMLElement>('.marquee__track');
+    expect(track?.classList.contains('marquee__track--static')).toBeFalse();
+  });
 
-    root.dispatchEvent(new Event('mouseenter'));
-    tick(6000);
-    fixture.detectChanges();
-    expect(el.textContent ?? '').toContain('First review');
+  it('scales the animation duration with the number of reviews (slow, not fast)', () => {
+    const shortFixture = create(REVIEWS.slice(0, 1));
+    const longFixture = create([...REVIEWS, ...REVIEWS]);
+    const shortTrack = (shortFixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
+      '.marquee__track',
+    );
+    const longTrack = (longFixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
+      '.marquee__track',
+    );
+    const shortDuration = parseFloat(shortTrack?.style.animationDuration ?? '0');
+    const longDuration = parseFloat(longTrack?.style.animationDuration ?? '0');
+    expect(longDuration).toBeGreaterThan(shortDuration);
+  });
 
-    root.dispatchEvent(new Event('mouseleave'));
-    tick(6000);
-    fixture.detectChanges();
-    expect(el.textContent ?? '').toContain('Second review');
-
-    fixture.destroy();
-  }));
-
-  it('does not render dots for a single review', () => {
-    const fixture = create([{ quote: 'Only review', rating: 5 }]);
+  it('disables the scrolling animation entirely for a single review', () => {
+    const fixture = create([{ quote: 'Only one', rating: 5 }]);
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelectorAll('.carousel__dot').length).toBe(0);
+    const track = el.querySelector<HTMLElement>('.marquee__track');
+    expect(track?.classList.contains('marquee__track--static')).toBeTrue();
   });
 });
