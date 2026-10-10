@@ -69,7 +69,7 @@ describe('EventsWeStyle', () => {
     }
 
     const addonsButton = Array.from(addonsSection.querySelectorAll('a.btn--ghost')).find(
-      (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
+      (a) => a.textContent?.trim() === 'Ask about these services on WhatsApp',
     ) as HTMLAnchorElement | undefined;
     expect(addonsButton).toBeTruthy();
     expect(addonsButton?.getAttribute('href')).toContain('wa.me/6588090600');
@@ -85,7 +85,7 @@ describe('EventsWeStyle', () => {
     const spy = spyOn(instance, 'trackWhatsappClick');
     const el = fixture.nativeElement as HTMLElement;
     const addonsButton = Array.from(el.querySelectorAll('a.btn--ghost')).find(
-      (a) => a.textContent?.trim() === 'Ask about add-ons on WhatsApp',
+      (a) => a.textContent?.trim() === 'Ask about these services on WhatsApp',
     ) as HTMLAnchorElement;
     addonsButton.click();
     expect(spy).toHaveBeenCalledWith('addons', 'generic');
