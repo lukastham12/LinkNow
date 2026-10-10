@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { WHATSAPP_HREF } from '../../shared/contact';
 
+type WeddingCapabilityIcon = 'flower' | 'arch' | 'balloon' | 'table';
+
 interface WeddingCapability {
   title: string;
   blurb: string;
+  icon: WeddingCapabilityIcon;
 }
 
 /**
@@ -14,8 +17,10 @@ interface WeddingCapability {
  * leads the page, but the focus is the full wedding/ROM decor job — backdrops,
  * balloon accents and table styling alongside the florals — so one team
  * covers the whole day (owner request, 10 Oct 2026; previously this page was
- * floral-only). No fixed packages/catalogue anywhere (BRIEF.md §4). WhatsApp
- * is the only enquiry path.
+ * floral-only). Capabilities are shown as plain, unclickable cards (same
+ * pattern as the homepage's "Other Services We Provide") with a single
+ * WhatsApp enquiry button below the grid, not per-card links. No fixed
+ * packages/catalogue anywhere (BRIEF.md §4). WhatsApp is the only enquiry path.
  */
 @Component({
   selector: 'app-flowers',
@@ -32,24 +37,23 @@ export class Flowers {
       blurb:
         'Bouquets, ceremony arrangements and reception florals in any flower, any palette — ' +
         'fresh or soap flower, tailored to your colour story.',
+      icon: 'flower',
     },
     {
       title: 'Backdrops & ceremony styling',
       blurb: 'Arches, aisles, ROM backdrops and stage styling designed around your theme.',
+      icon: 'arch',
     },
     {
       title: 'Balloon accents & installations',
       blurb:
         'Balloon garlands and columns that complement your florals for a fuller, more festive look.',
+      icon: 'balloon',
     },
     {
       title: 'Table & venue styling',
       blurb: 'Centrepieces, signage corners and tablescapes styled for your reception.',
-    },
-    {
-      title: 'Fully bespoke, start to finish',
-      blurb:
-        "No fixed packages — share your vision on WhatsApp and we'll design the full day together.",
+      icon: 'table',
     },
   ];
 }

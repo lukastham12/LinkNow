@@ -35,14 +35,22 @@ describe('Flowers (Wedding & ROM Styling page)', () => {
     expect(el.querySelector('app-floral-showcase')).toBeNull();
   });
 
-  it('leads with florals as the specialty, but covers the full wedding/ROM styling job', () => {
+  it('leads with florals as the specialty, but covers the full wedding/ROM styling job, as plain unclickable cards', () => {
     const fixture = TestBed.createComponent(Flowers);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const cards = el.querySelectorAll('.capability');
-    expect(cards.length).toBeGreaterThanOrEqual(4);
+    const cards = Array.from(el.querySelectorAll('.capability'));
+    expect(cards.length).toBe(4);
 
-    const titles = Array.from(cards).map((c) => c.querySelector('.capability__title')?.textContent);
+    // Cards are plain <article>s, not links — same pattern as the homepage's
+    // "Other Services We Provide".
+    expect(el.querySelectorAll('a.capability').length).toBe(0);
+    for (const card of cards) {
+      expect(card.tagName.toLowerCase()).toBe('article');
+      expect(card.querySelector('svg')).toBeTruthy();
+    }
+
+    const titles = cards.map((c) => c.querySelector('.capability__title')?.textContent);
     expect(titles[0]).toContain('Floral styling');
     expect(titles[0]).toContain('specialty');
 
@@ -51,6 +59,13 @@ describe('Flowers (Wedding & ROM Styling page)', () => {
     expect(text).toContain('backdrop');
     expect(text).toContain('balloon');
     expect(text).toContain('table');
+
+    // One WhatsApp enquiry button below the grid, not per-card links.
+    const waButtons = Array.from(el.querySelectorAll('a.btn--solid')) as HTMLAnchorElement[];
+    expect(waButtons.length).toBeGreaterThan(0);
+    for (const btn of waButtons) {
+      expect(btn.getAttribute('href')).toContain('wa.me/6588090600');
+    }
   });
 
   it('uses the canonical generic WhatsApp link only (no email/quote/contact)', () => {
