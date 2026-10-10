@@ -17,10 +17,10 @@ export const routes: Routes = [
     component: Home,
     data: {
       seo: {
-        title: 'Event & Corporate Decor in Singapore | LinkNow Pte Ltd',
+        title: 'Event Decorations & Balloon Decor Singapore | LinkNow Events Co.',
         description:
-          'Custom event decor in Singapore for birthdays, festive celebrations and corporate ' +
-          'events — balloon garlands, backdrops and florals. Enquire on WhatsApp.',
+          'Balloon decorations, backdrops and party add-ons for birthdays, baby showers, ' +
+          'weddings, festive and corporate events across Singapore. Enquire on WhatsApp.',
         path: '/',
       } satisfies PageSeo,
     },

@@ -2,16 +2,22 @@
 <section class="hero">
   <div class="hero__content">
     <p class="eyebrow">Event &amp; Corporate Decor · Singapore</p>
-    <h1 class="hero__title">Custom decor for every celebration, from birthdays to corporate events</h1>
+    <h1 class="hero__title">Event decorations for every celebration in Singapore</h1>
     <p class="hero__sub">
-      Birthday parties, festive celebrations and corporate events — designed, built and styled
-      across Singapore by LinkNow Pte Ltd.
+      Birthdays, baby showers, weddings, festive open houses and corporate events — balloons,
+      backdrops and party add-ons, all designed, set up and taken down by one team.
     </p>
     <div class="hero__actions">
-      <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      <a
+        class="btn btn--solid"
+        [href]="eventWhatsappHref"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="trackWhatsappClick('hero', 'generic')"
+      >
         Enquire on WhatsApp
       </a>
-      <a class="btn btn--ghost" routerLink="/services">View our services</a>
+      <a class="btn btn--ghost" href="#occasions">See what we do</a>
     </div>
   </div>
   <div class="hero__media">
@@ -25,46 +31,156 @@
   </div>
 </section>
 
+<!-- EVENTS WE STYLE (OCCASIONS) -->
+<section class="section" id="occasions" aria-labelledby="occasions-heading">
+  <p class="eyebrow eyebrow--center">Occasions</p>
+  <h2 id="occasions-heading" class="section__title">Events we style</h2>
+  <p class="section__intro">
+    Whatever you're celebrating, we'll style it. Here are some of the occasions we do most.
+  </p>
+  <div class="occasions">
+    @for (occasion of occasions; track occasion.id) {
+      <a
+        class="occasion card-lift"
+        [class.occasion--wide]="occasion.id === 'other'"
+        [href]="occasion.waLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="'Enquire about ' + occasion.title + ' on WhatsApp'"
+        (click)="trackWhatsappClick('occasions', occasion.id)"
+      >
+        @if (occasion.image) {
+          <img class="service__img" [src]="occasion.image" [alt]="occasion.imageAlt" loading="lazy" />
+        } @else {
+          <div
+            class="service__img"
+            style="display: flex; align-items: center; justify-content: center; background: var(--color-blush); color: var(--color-rose); border-color: transparent"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </div>
+        }
+        <h3 class="service__name">{{ occasion.title }}</h3>
+        <p class="service__blurb">{{ occasion.description }}</p>
+      </a>
+    }
+  </div>
+  <p class="section__intro">
+    We also style anniversaries, proposals, graduations, housewarmings, Children's Day and
+    Teachers' Day events, and more.
+  </p>
+</section>
+
 <!-- SERVICES -->
 <section class="section" aria-labelledby="services-heading">
   <p class="eyebrow eyebrow--center">What we do</p>
   <h2 id="services-heading" class="section__title">Our services</h2>
   <div class="services">
     @for (service of services; track service.name) {
-      @if (service.link) {
-        <a class="service service--link" [routerLink]="service.link">
-          <img
-            class="service__img"
-            [class.service__img--contain]="service.isCutout"
-            [src]="service.image"
-            [alt]="service.imageAlt"
-            loading="lazy"
-          />
-          <h3 class="service__name">{{ service.name }}</h3>
-          <p class="service__blurb">{{ service.blurb }}</p>
-        </a>
-      } @else {
-        <article class="service">
-          <img
-            class="service__img"
-            [class.service__img--contain]="service.isCutout"
-            [src]="service.image"
-            [alt]="service.imageAlt"
-            loading="lazy"
-          />
-          <h3 class="service__name">{{ service.name }}</h3>
-          <p class="service__blurb">{{ service.blurb }}</p>
-        </article>
-      }
+      <a class="service service--link card-lift" [routerLink]="service.link">
+        <img class="service__img" [src]="service.image" [alt]="service.imageAlt" loading="lazy" />
+        <h3 class="service__name">{{ service.name }}</h3>
+        <p class="service__blurb">{{ service.blurb }}</p>
+      </a>
     }
   </div>
+</section>
+
+<!-- ADD TO YOUR EVENT (ADD-ONS) -->
+<section class="section section--tint" aria-labelledby="addons-heading">
+  <p class="eyebrow eyebrow--center">Extras</p>
+  <h2 id="addons-heading" class="section__title">Add to your event</h2>
+  <p class="section__intro">Make it a full party — add any of these to your decor booking.</p>
+  <div class="addons">
+    @for (addon of addons; track addon.id) {
+      <a
+        class="addon card-lift"
+        [href]="addon.waLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="'Enquire about ' + addon.title + ' on WhatsApp'"
+        (click)="trackWhatsappClick('addons', addon.id)"
+      >
+        <span class="addon__icon" aria-hidden="true">
+          @switch (addon.icon) {
+            @case ('popcorn') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 10l-1.2 9.5a1 1 0 0 0 1 1.1h10.4a1 1 0 0 0 1-1.1L17 10" />
+                <path d="M6.5 10h11l.6-3a2 2 0 0 0-2-2.4c-.4 0-.8.1-1.1.4A2.6 2.6 0 0 0 12 3.5a2.6 2.6 0 0 0-3 1.5c-.3-.3-.7-.4-1.1-.4a2 2 0 0 0-2 2.4z" />
+                <path d="M10 10v10.5M14 10v10.5" />
+              </svg>
+            }
+            @case ('candy-floss') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 12v9M9.5 21h5" />
+                <circle cx="9" cy="7" r="4" />
+                <circle cx="15" cy="7" r="4" />
+                <circle cx="12" cy="5" r="4" />
+              </svg>
+            }
+            @case ('castle') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 21V9l2-2V5h2v2l1.5-1.5L11 7V5h2v2l1.5-1.5L16 7V5h2v2l2 2v12z" />
+                <path d="M4 21h16M9 21v-5a3 3 0 0 1 6 0v5" />
+              </svg>
+            }
+            @case ('balloon') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a6 6 0 0 1 2 11.6c-.3.9-.5 2-.5 2.9a1.5 1.5 0 0 1-3 0c0-.9-.2-2-.5-2.9A6 6 0 0 1 12 2z" />
+                <path d="M11 16.5s-1.5.7-1.5 2 1.5 1 1.5 2" />
+              </svg>
+            }
+            @case ('microphone') {
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="2" width="6" height="11" rx="3" />
+                <path d="M5 11a7 7 0 0 0 14 0M12 18v4M9 22h6" />
+              </svg>
+            }
+          }
+        </span>
+        <h3 class="service__name">{{ addon.title }}</h3>
+        <p class="service__blurb">{{ addon.line }}</p>
+      </a>
+    }
+  </div>
+  <div class="section__cta">
+    <a
+      class="btn btn--ghost"
+      [href]="addonsWaLink"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="trackWhatsappClick('addons', 'generic')"
+    >
+      Ask about add-ons on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ONE BOOKING, ONE TEAM (BUNDLE) -->
+<section class="section section--tint bundle" aria-labelledby="bundle-heading">
+  <h2 id="bundle-heading" class="bundle__title">One booking, one team.</h2>
+  <p class="bundle__text">
+    Combine decor, a live station and a bouncy castle in one package — no juggling multiple
+    vendors.
+  </p>
+  <a
+    class="btn btn--solid"
+    [href]="eventWhatsappHref"
+    target="_blank"
+    rel="noopener noreferrer"
+    (click)="trackWhatsappClick('bundle', 'generic')"
+  >
+    Plan my event on WhatsApp
+  </a>
 </section>
 
 <!-- OUR CLIENTS -->
 <section class="section" aria-labelledby="clients-heading">
   <p class="eyebrow eyebrow--center">Our Clients</p>
   <h2 id="clients-heading" class="section__title">Trusted by organisations</h2>
-  <p class="clients__sub">A selection of the organisations we've worked with.</p>
+  <p style="margin: 0 0 2rem; text-align: center; color: var(--color-text-muted)">A selection of the organisations we've worked with.</p>
   <ul class="clients">
     @for (client of clients; track client.name) {
       <li>
@@ -94,7 +210,7 @@
       <h3 class="eyebrow eyebrow--center">Corporate &amp; organisations</h3>
       <ul class="cases">
         @for (study of corporateCases; track study.slug) {
-          <li class="cases__item">
+          <li style="margin: 0">
             <app-case-card
               [photo]="study.headline"
               [label]="study.client"
@@ -118,7 +234,7 @@
   @if (testimonials.length > 0) {
     <app-reviews-carousel [reviews]="testimonials" />
   } @else {
-    <p class="placeholder-note">
+    <p style="margin: 1.5rem 0 0; text-align: center; font-size: 0.72rem; font-style: italic; color: var(--color-text-muted)">
       Our 5-star Google reviews are coming soon. In the meantime, message us on WhatsApp to hear
       about recent events.
     </p>
@@ -129,7 +245,7 @@
 <section class="enquiry" aria-labelledby="enquiry-heading">
   <h2 id="enquiry-heading" class="enquiry__title">Planning something?</h2>
   <p class="enquiry__sub">Tell us about your event and we'll help bring it to life.</p>
-  <div class="hero__actions hero__actions--center">
+  <div class="hero__actions" style="justify-content: center">
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
       Enquire on WhatsApp
     </a>
