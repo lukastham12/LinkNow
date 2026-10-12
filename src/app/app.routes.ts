@@ -6,6 +6,7 @@ import { Backdrops } from './pages/backdrops/backdrops';
 import { Corporate } from './pages/corporate/corporate';
 import { CorporateCaseStudyPage } from './pages/corporate-case-study/corporate-case-study';
 import { About } from './pages/about/about';
+import { Contact } from './pages/contact/contact';
 import { PageSeo } from './shared/seo';
 
 // Per-page SEO (BRIEF.md §10) is carried on `data.seo` and applied during
@@ -154,6 +155,21 @@ export const routes: Routes = [
           'garlands, custom backdrops, floral styling and corporate event decor for parties and ' +
           'celebrations.',
         path: '/about/',
+      } satisfies PageSeo,
+    },
+  },
+  // Contact — email + WhatsApp, UEN and the mini enquiry form. Registered
+  // before the wildcard.
+  {
+    path: 'contact',
+    component: Contact,
+    data: {
+      seo: {
+        title: 'Contact LinkNow Pte Ltd — Event Decor Singapore',
+        description:
+          'Get in touch with LinkNow Pte Ltd (UEN 202608341G) — WhatsApp or email us about your ' +
+          'event, or fill in a few quick details and we will open WhatsApp for you.',
+        path: '/contact/',
       } satisfies PageSeo,
     },
   },

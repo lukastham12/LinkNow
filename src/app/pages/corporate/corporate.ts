@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WHATSAPP_HREF } from '../../shared/contact';
+import { pageWhatsappLink } from '../../shared/contact';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
 import { CaseCard } from '../../components/case-card/case-card';
 
@@ -27,7 +27,7 @@ interface EventType {
   styleUrl: './corporate.scss',
 })
 export class Corporate {
-  protected readonly whatsappHref = WHATSAPP_HREF;
+  protected readonly whatsappHref = pageWhatsappLink('Corporate Events');
   protected readonly caseStudies = CORPORATE_CASE_STUDIES;
 
   protected readonly eventTypes: EventType[] = [

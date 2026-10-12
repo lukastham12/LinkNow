@@ -80,7 +80,7 @@ describe('Corporate (Corporate Events page)', () => {
     expect(text.toLowerCase()).toContain('any custom corporate or formal');
   });
 
-  it('uses the canonical generic WhatsApp link only (no email/quote/contact/form)', () => {
+  it('uses a page-specific WhatsApp link naming "Corporate Events" (no email/quote/contact/form on this page)', () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -89,7 +89,7 @@ describe('Corporate (Corporate Events page)', () => {
     ) as HTMLAnchorElement[];
     expect(waLinks.length).toBeGreaterThan(0);
     for (const a of waLinks) {
-      expect(a.href).toContain('enquire%20about%20your%20services');
+      expect(decodeURIComponent(a.href)).toContain('Corporate Events');
     }
     expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(el.querySelector('a[href="/contact"]')).toBeNull();

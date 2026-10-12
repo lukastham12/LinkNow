@@ -48,13 +48,20 @@ describe('Home', () => {
     expect(seeMore.textContent?.trim()).toBe('See what we do');
   });
 
-  it('uses the Minecraft backdrop photo as the hero banner image, unchanged (R1.5)', () => {
+  it('hero image is one of the kids/corporate/wedding photos (rotated, owner request 12 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const hero = el.querySelector('.hero__img') as HTMLImageElement;
     expect(hero).toBeTruthy();
-    expect(hero.getAttribute('src')).toBe('/backdrops/hero-minecraft.jpg');
+    expect([
+      '/backdrops/hero-minecraft.jpg',
+      '/corporate/peoples-association-01.jpg',
+      '/flowers/custom-arrangement-hero.jpg',
+    ]).toContain(hero.getAttribute('src') ?? '');
+    expect((hero.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
+    expect(hero.getAttribute('width')).toBeTruthy();
+    expect(hero.getAttribute('height')).toBeTruthy();
   });
 
   it('renders the shared "Events we style" section (via app-events-we-style), no old pink bundle band', () => {

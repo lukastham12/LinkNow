@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Marketing / showcase website for **LinkNow Events Co.** (LinkNow Pte Ltd), a Singapore events-décor company (custom backdrops, floral services, setup-only labour). It is a **content marketing site, not a web app**: no logins, accounts, payments, database, or admin dashboard. Conversion happens via **WhatsApp** — the only enquiry channel (no form, no email, no contact page).
+Marketing / showcase website for **LinkNow Events Co.** (LinkNow Pte Ltd), a Singapore events-décor company (custom backdrops, floral services, setup-only labour). It is a **content marketing site, not a web app**: no logins, accounts, payments, database, or admin dashboard. Conversion happens via **WhatsApp or email** (owner decision, 12 Oct 2026 — added a second, more formal channel for corporate/admin/HR buyers who can't buy through a personal WhatsApp chat). There is still no backend/form submission: email is a `mailto:` redirect, the same pattern as WhatsApp's `wa.me` links.
 
 The authoritative product spec is **`BRIEF.md`** — read it before building or changing pages. If code and `BRIEF.md` disagree, `BRIEF.md` wins (or flag the conflict).
 
@@ -61,12 +61,17 @@ Practical upshot for any agent: keep the code lint-clean, don't introduce vulner
 
 ## Canonical values (do not hard-code duplicates — reuse these)
 
-- **WhatsApp CTA:** `https://wa.me/6588090600` with a **generic** enquiry message (`"Hi LinkNow, I'd like to enquire about your services"`). There are **no per-package messages** — packages/pricing were removed from scope. **WhatsApp is the ONLY enquiry channel** (ticket 004): there is no enquiry form, no destination email, and no Contact page. Do not add a form, `mailto:`, or "Contact us"/"Request a quote" button anywhere.
+- **WhatsApp CTA:** `https://wa.me/6588090600`. Most pages use `pageWhatsappLink(pageLabel)` (`shared/contact.ts`) so the pre-filled message names the page the visitor came from (owner request, 12 Oct 2026 — cuts back-and-forth, shows the enquiry source in the chat); a few shared/generic spots (footer, floating WhatsApp button, homepage hero) keep the flatter `WHATSAPP_HREF`/`WHATSAPP_EVENT_HREF`. There are still **no per-package messages** — packages/pricing stay out of scope. The `/contact` page's mini enquiry form (occasion/date/venue/budget) builds its own WhatsApp message client-side — there is no backend, it only pre-fills the wa.me link.
+- **Email CTA:** `novestelatham@linknow-singapore.com`, via `EMAIL_HREF`/`mailtoLink()` (`shared/contact.ts`) — a `mailto:` link, not a form submission (static prerendered site, no backend). Shown on the homepage hero ("Contact Us" → `/contact`), the `/contact` page, and the site footer.
+- **Contact page:** `/contact` (top-level nav item) offers both WhatsApp and email, the mini enquiry form, and the business details (UEN, "Studio by appointment"). Do not add a real street address or opening hours — the owner has said not to publish either; keep "Studio by appointment, Singapore" as-is unless told otherwise.
+- **UEN:** `202608341G` (`shared/contact.ts` → `UEN`), shown in the site footer, on `/contact`, and in the JSON-LD `Organization.taxID` (`shared/seo.ts`). Do not hard-code it elsewhere.
 - **Floral lives under Services** (ticket 004): there is no Flowers *tab* in the top nav. The floral gallery is the reusable `app-floral-showcase` component (`src/app/components/floral-showcase/`, catalogue in `catalogue.ts`, currently **35 items**), shown on the standalone prerendered **`/flowers`** Floral Showcase page — reachable via the Services dropdown and the Floral Services card, not a top-level nav tab.
 - **Testimonials:** data-driven from `src/app/shared/testimonials.ts` (`TESTIMONIALS: {quote, rating:5}[]` — reviewer names removed for privacy) — **real 5-star Google reviews only**, currently populated with owner-supplied reviews shown as "Verified Google review" (never with a name). If the list is empty the page shows a placeholder state. Never fabricate reviews.
 - **Instagram:** https://www.instagram.com/linknowsg/ · **TikTok:** https://www.tiktok.com/@linknowsg
 - **Region:** Singapore only (reflect in copy + local SEO).
 - **Production domain:** not yet owned — keep the canonical/base URL configurable (in `src/index.html` meta and any SEO/sitemap setup). Do not hard-code a production domain.
+- **Homepage hero image:** rotates between 3 photos (kids' birthday, corporate, wedding — `HERO_IMAGES` in `pages/home/home.ts`), picked client-side via `afterNextRender` after hydration so SSR/prerender always ships the kids' photo for a stable first paint (owner request, 12 Oct 2026 — a kids'-only hero read as "kids' party vendor" to corporate/wedding buyers). Add to `HERO_IMAGES` rather than hard-coding a second hero image elsewhere.
+- **Backdrops gallery filters:** `/backdrops` photos carry a `category` and `caption` (`pages/backdrops/backdrops.data.ts`) drawn only from what's legible in the photo's own signage — never invent a client name, venue or date for a caption. Categories are `Birthday`, `100 Days & Naming`, `Baby Shower & Gender Reveal`, `Other`.
 
 ## Brand & tone rules (from BRIEF.md §7)
 

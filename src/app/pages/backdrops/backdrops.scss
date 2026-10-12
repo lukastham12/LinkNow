@@ -72,6 +72,48 @@
   padding: 1.5rem 1.25rem 0.5rem;
 }
 
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.filter {
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.filter:hover {
+  border-color: var(--color-rose);
+  color: var(--color-rose);
+}
+
+.filter--active {
+  background: var(--color-rose);
+  border-color: var(--color-rose);
+  color: #fff;
+}
+
+.grid__caption {
+  margin: 0.5rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
 .grid {
   list-style: none;
   margin: 0;

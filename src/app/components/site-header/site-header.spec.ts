@@ -14,14 +14,14 @@ describe('SiteHeader', () => {
     expect(TestBed.createComponent(SiteHeader).componentInstance).toBeTruthy();
   });
 
-  it('renders the top-level nav (Home, Services, About) with no Flowers tab', () => {
+  it('renders the top-level nav (Home, Services, About, Contact) with no Flowers tab', () => {
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const topLevel = Array.from(el.querySelectorAll('.header__nav > .header__link, .header__item')).map(
       (n) => (n.querySelector('.header__link') ?? n).textContent?.trim(),
     );
-    expect(topLevel).toEqual(['Home', 'Services', 'About']);
+    expect(topLevel).toEqual(['Home', 'Services', 'About', 'Contact']);
     // Floral is only reachable under the Services dropdown, never a top tab.
     const flowersTopTab = Array.from(el.querySelectorAll('.header__nav > .header__link')).find((a) =>
       /flowers|floral/i.test(a.textContent ?? ''),

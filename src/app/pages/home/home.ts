@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, afterNextRender, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
@@ -20,6 +20,39 @@ interface PortfolioGroup {
   items: PortfolioTile[];
 }
 
+interface HeroImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+// Rotated hero photos (owner request, 12 Oct 2026): a kids' Minecraft party
+// alone reads as "kids' party vendor" to corporate/wedding buyers, so the
+// hero now shows one of three occasions — picked client-side after
+// hydration so the prerendered HTML (SEO/first paint) stays stable on the
+// kids' photo and only swaps once a real browser is rendering.
+const HERO_IMAGES: readonly HeroImage[] = [
+  {
+    src: '/backdrops/hero-minecraft.jpg',
+    alt: "A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow Events Co. for Enzo's 8th birthday",
+    width: 1200,
+    height: 1240,
+  },
+  {
+    src: '/corporate/peoples-association-01.jpg',
+    alt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
+    width: 1050,
+    height: 1400,
+  },
+  {
+    src: '/flowers/custom-arrangement-hero.jpg',
+    alt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
+    width: 1050,
+    height: 1400,
+  },
+];
+
 /** Homepage (route ''). Sections: hero, events we style, clients, portfolio
  *  teaser, testimonials, enquiry strip. WhatsApp is the only enquiry
  *  channel — no contact/quote links. */
@@ -35,6 +68,18 @@ export class Home {
   protected readonly whatsappHref = WHATSAPP_HREF;
   // Hero's primary CTA uses this slightly different generic message — see contact.ts.
   protected readonly eventWhatsappHref = WHATSAPP_EVENT_HREF;
+
+  // Defaults to the kids'-party photo for the prerendered/SSR first paint,
+  // then a random one of the 3 occasions is picked once a real browser has
+  // hydrated — see HERO_IMAGES above.
+  protected readonly heroImage = signal<HeroImage>(HERO_IMAGES[0]);
+
+  constructor() {
+    afterNextRender(() => {
+      const index = Math.floor(Math.random() * HERO_IMAGES.length);
+      this.heroImage.set(HERO_IMAGES[index]);
+    });
+  }
 
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;

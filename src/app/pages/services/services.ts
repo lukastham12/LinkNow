@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WHATSAPP_HREF } from '../../shared/contact';
+import { pageWhatsappLink } from '../../shared/contact';
 import { EventsWeStyle } from '../../components/events-we-style/events-we-style';
 
 /**
@@ -18,5 +18,5 @@ import { EventsWeStyle } from '../../components/events-we-style/events-we-style'
   styleUrl: './services.scss',
 })
 export class Services {
-  protected readonly whatsappHref = WHATSAPP_HREF;
+  protected readonly whatsappHref = pageWhatsappLink('Services');
 }

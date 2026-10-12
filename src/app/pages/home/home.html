@@ -19,15 +19,16 @@
         Enquire on WhatsApp
       </a>
       <a class="btn btn--ghost" href="#occasions">See what we do</a>
+      <a class="btn btn--ghost" routerLink="/contact">Contact Us</a>
     </div>
   </div>
   <div class="hero__media">
     <img
       class="hero__img"
-      src="/backdrops/hero-minecraft.jpg"
-      alt="A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow Events Co. for Enzo's 8th birthday"
-      width="1200"
-      height="1240"
+      [src]="heroImage().src"
+      [alt]="heroImage().alt"
+      [width]="heroImage().width"
+      [height]="heroImage().height"
     />
   </div>
 </section>

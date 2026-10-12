@@ -42,7 +42,48 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(srcs).not.toContain('/backdrops/backdrop-09.jpg');
   });
 
-  it('uses the canonical generic WhatsApp link only (no email/quote/contact/form)', () => {
+  it('every photo has a non-empty caption and a valid category', () => {
+    const validCategories = ['Birthday', '100 Days & Naming', 'Baby Shower & Gender Reveal', 'Other'];
+    for (const photo of BACKDROPS) {
+      expect(photo.caption.length).toBeGreaterThan(0);
+      expect(validCategories).toContain(photo.category);
+    }
+  });
+
+  it('renders a visible caption under each photo', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const captions = Array.from(el.querySelectorAll('.grid__caption'));
+    expect(captions.length).toBe(23);
+    for (const caption of captions) {
+      expect((caption.textContent ?? '').trim().length).toBeGreaterThan(0);
+    }
+  });
+
+  it('filters the gallery by category', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+
+    const birthdayCount = BACKDROPS.filter((b) => b.category === 'Birthday').length;
+    const filterButtons = Array.from(el.querySelectorAll('.filter')) as HTMLButtonElement[];
+    const birthdayButton = filterButtons.find((b) => b.textContent?.trim() === 'Birthday');
+    expect(birthdayButton).toBeTruthy();
+    birthdayButton?.click();
+    fixture.detectChanges();
+
+    const imgs = el.querySelectorAll('.grid__img');
+    expect(imgs.length).toBe(birthdayCount);
+    expect(imgs.length).toBeLessThan(23);
+
+    const allButton = filterButtons.find((b) => b.textContent?.trim() === 'All');
+    allButton?.click();
+    fixture.detectChanges();
+    expect(el.querySelectorAll('.grid__img').length).toBe(23);
+  });
+
+  it('uses a page-specific WhatsApp link naming "Custom Backdrops" (no email/quote/contact/form on this page)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -51,7 +92,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     ) as HTMLAnchorElement[];
     expect(waLinks.length).toBeGreaterThan(0);
     for (const a of waLinks) {
-      expect(a.href).toContain('enquire%20about%20your%20services');
+      expect(decodeURIComponent(a.href)).toContain('Custom Backdrops');
     }
     expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(el.querySelector('a[href="/contact"]')).toBeNull();

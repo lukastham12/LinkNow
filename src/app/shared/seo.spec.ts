@@ -73,6 +73,8 @@ describe('SeoService', () => {
     expect(org.contactPoint.telephone).toBe('+6588090600');
     expect(org.sameAs).toContain('https://www.instagram.com/linknowsg/');
     expect(org.url).toBe(SITE_URL);
+    expect(org.taxID).toBe('202608341G');
+    expect(org.email).toBe('novestelatham@linknow-singapore.com');
 
     // No fabricated business data / pricing / ratings (BRIEF.md §4 + ticket 008).
     expect(json).not.toContain('address');
