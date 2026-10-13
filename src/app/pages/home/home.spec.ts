@@ -14,12 +14,11 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
-  it('hero eyebrow describes the business — company name/UEN live in the footer and /contact, not the hero (owner correction 13 Oct 2026)', () => {
+  it('hero has no eyebrow kicker — straight into the H1 (owner request 13 Oct 2026); company name/UEN live in the footer and /contact only', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const eyebrow = el.querySelector('.hero .eyebrow');
-    expect(eyebrow?.textContent?.trim()).toBe('Event & Corporate Decor · Singapore');
+    expect(el.querySelector('.hero .eyebrow')).toBeNull();
     expect(el.querySelector('.hero')?.textContent ?? '').not.toContain('UEN');
   });
 
