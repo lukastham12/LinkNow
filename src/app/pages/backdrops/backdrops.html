@@ -15,7 +15,6 @@
 
 @for (group of groups; track group.category) {
   <section class="gallery" [attr.aria-labelledby]="group.category + '-heading'">
-    <p class="eyebrow">{{ group.photos.length }} {{ group.photos.length === 1 ? 'photo' : 'photos' }}</p>
     <h2 [id]="group.category + '-heading'" class="gallery__title">{{ group.category }}</h2>
     <ul class="carousel">
       @for (photo of group.photos; track photo.src) {

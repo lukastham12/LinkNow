@@ -70,17 +70,11 @@
   max-width: 1120px;
   margin: 0 auto;
   padding: 1.5rem 0 0.5rem;
-
-  // Eyebrow/title keep their usual side padding; the carousel itself runs
-  // edge-to-edge so photos can scroll past the content column on mobile.
-  > .eyebrow,
-  > .gallery__title {
-    padding-inline: 1.25rem;
-  }
 }
 
 .gallery__title {
   margin: 0 0 1rem;
+  padding-inline: 1.25rem;
   font-size: clamp(1.25rem, 3.5vw, 1.6rem);
   font-weight: 600;
 }
