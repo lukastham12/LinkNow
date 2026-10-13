@@ -45,10 +45,17 @@ export class Contact {
   protected eventType: EventType | '' = '';
   protected eventDate = '';
   protected message = '';
+  // Honeypot: stays unchecked for real visitors (it's hidden via CSS and
+  // skipped in tab order). A bot that blindly fills every form field trips
+  // it, so we quietly drop the submission instead of sending it on.
+  protected botcheck = false;
 
   protected readonly status = signal<SubmitStatus>('idle');
 
   protected submit(): void {
+    if (this.botcheck) {
+      return;
+    }
     if (!this.name || !this.phone || !this.eventType) {
       return;
     }
@@ -63,6 +70,7 @@ export class Contact {
       event_type: this.eventType,
       event_date: this.eventDate || 'Not provided',
       message: this.message || 'Not provided',
+      botcheck: false,
     };
 
     this.http.post<{ success: boolean }>(WEB3FORMS_ENDPOINT, payload).subscribe({

@@ -12,6 +12,17 @@
   <h2 id="form-heading" class="section__title">Tell us about your event</h2>
 
   <form class="form" (submit)="$event.preventDefault(); submit()">
+    <!-- Honeypot (Web3Forms spam guard): invisible to real visitors; a
+         filled value means an automated script filled every field, so we
+         silently drop the submission in submit() below. -->
+    <input
+      type="checkbox"
+      name="botcheck"
+      class="field__honeypot"
+      tabindex="-1"
+      autocomplete="off"
+      [(ngModel)]="botcheck"
+    />
     <div class="form__row">
       <label class="field">
         <span class="field__label">Name *</span>

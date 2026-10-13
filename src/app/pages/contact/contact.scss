@@ -161,6 +161,20 @@
   color: #b3261e;
 }
 
+// Honeypot spam guard — kept in the DOM/tab-free so it still catches
+// scripted bots, but invisible and unreachable for real visitors.
+.field__honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 // Urgency / WhatsApp CTA ---------------------------------------------------------
 
 .urgency__action {

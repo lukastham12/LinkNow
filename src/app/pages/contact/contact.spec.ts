@@ -29,6 +29,28 @@ describe('Contact', () => {
     expect(el.querySelectorAll('h1').length).toBe(1);
   });
 
+  it('silently drops the submission if the honeypot field is filled (bot guard)', () => {
+    const fixture = TestBed.createComponent(Contact);
+    fixture.detectChanges();
+    const instance = fixture.componentInstance as unknown as {
+      name: string;
+      phone: string;
+      eventType: string;
+      botcheck: boolean;
+    };
+    instance.name = 'Jane Tan';
+    instance.phone = '+65 9123 4567';
+    instance.eventType = 'Birthday';
+    instance.botcheck = true;
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    (el.querySelector('form.form') as HTMLFormElement).dispatchEvent(new Event('submit'));
+    fixture.detectChanges();
+
+    httpMock.expectNone('https://api.web3forms.com/submit');
+  });
+
   it('has a Name, Phone, Event Type, Event Date and Message form that submits to Web3Forms', () => {
     const fixture = TestBed.createComponent(Contact);
     fixture.detectChanges();
