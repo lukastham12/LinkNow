@@ -1,4 +1,4 @@
-# Product Brief — LinkNow Events Co. Website
+# Product Brief — LinkNow Pte Ltd Website
 
 _Last updated: 2026-07-18 · Owner: Product (lukastham12@gmail.com) · Status: Approved for build_
 
@@ -6,14 +6,14 @@ _Last updated: 2026-07-18 · Owner: Product (lukastham12@gmail.com) · Status: A
 
 ## 1. Summary (the one-paragraph version)
 
-A **mobile-first marketing & showcase website** for **LinkNow Pte Ltd** (brand: **LinkNow Events Co.**), a Singapore-based events décor company. The site's job is to make visitors feel the quality of our work through imagery, explain our services, build trust with portfolio + testimonials, and drive them to **enquire via WhatsApp** (the only enquiry channel — no form, no email, no contact page). There is **no online catalogue, no pricing, no logins, and no payments** — pricing is handled per enquiry. This is a marketing site, not a web app.
+A **mobile-first marketing & showcase website** for **LinkNow Pte Ltd**, a Singapore-based events décor company. The site's job is to make visitors feel the quality of our work through imagery, explain our services, build trust with portfolio + testimonials, and drive them to **enquire via WhatsApp** (the only enquiry channel — no form, no email, no contact page). There is **no online catalogue, no pricing, no logins, and no payments** — pricing is handled per enquiry. This is a marketing site, not a web app.
 
 ---
 
 ## 2. Company
 
 - **Legal name:** LinkNow Pte Ltd
-- **Brand name:** LinkNow Events Co.
+- **Brand name:** LinkNow (no separate trading name — "LinkNow Events Co." is not a real company and must never appear anywhere on the site, owner directive 13 Oct 2026)
 - **Location / market:** Singapore only (reflect in copy and local SEO)
 - **What we do:** Three headline service lines — **custom backdrops** for celebrations and formal occasions (birthdays, weddings, corporate events), **floral services**, and **corporate events** (styling and décor for company celebrations, launches and formal occasions, e.g. the Avocaderia in-store event). _(Setup-only labour — supplying just the manpower when the client already has their materials — is still offered on request but is no longer a headline service line; it was replaced by Corporate Events, ticket 006.)_
 

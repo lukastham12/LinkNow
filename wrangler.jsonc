@@ -1,8 +1,8 @@
 {
   // Cloudflare Workers (static assets) deployment config for the LinkNow
-  // Events Co. site. Every route is prerendered to static HTML at build
-  // time (see src/app/app.routes.server.ts), so this serves the build
-  // output directly — no Worker script/runtime logic needed.
+  // site. Every route is prerendered to static HTML at build time (see
+  // src/app/app.routes.server.ts), so this serves the build output
+  // directly — no Worker script/runtime logic needed.
   "name": "linknow",
   "compatibility_date": "2024-09-23",
   "assets": {

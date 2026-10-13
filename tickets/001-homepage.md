@@ -6,7 +6,7 @@
 
 ## User story
 As a mobile visitor arriving from TikTok (retail or corporate), I want to instantly
-understand what Linknow Events Co. does and see the quality of their work, so that I
+understand what LinkNow does and see the quality of their work, so that I
 can reach them on WhatsApp to enquire — in one tap.
 
 ## Context

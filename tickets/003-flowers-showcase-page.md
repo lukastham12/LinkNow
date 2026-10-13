@@ -30,7 +30,7 @@ is the standard generic WhatsApp CTA plus a link to /contact.
     each item rendered as **photo + name ONLY**, in a responsive grid.
 - A generic WhatsApp CTA ("enquire for a quote") using the canonical link, plus a link to
   `/contact`.
-- Add route `{ path: 'flowers', component: Flowers, title: 'Floral Showcase — Linknow Events Co.' }`
+- Add route `{ path: 'flowers', component: Flowers, title: 'Floral Showcase — LinkNow' }`
   to `src/app/app.routes.ts`, **before** the `**` wildcard; keep SSR/prerender working.
 - Add a nav entry `{ label: 'Flowers', path: '/flowers' }` to `NAV_LINKS` in
   `src/app/shared/contact.ts`, positioned **immediately after "Services"** (header + footer
