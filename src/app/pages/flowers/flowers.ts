@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WHATSAPP_HREF } from '../../shared/contact';
+import { pageWhatsappLink } from '../../shared/contact';
 
 type WeddingCapabilityIcon = 'flower' | 'arch' | 'balloon' | 'table';
 
@@ -29,7 +29,7 @@ interface WeddingCapability {
   styleUrl: './flowers.scss',
 })
 export class Flowers {
-  protected readonly whatsappHref = WHATSAPP_HREF;
+  protected readonly whatsappHref = pageWhatsappLink('Weddings & ROM');
 
   protected readonly capabilities: WeddingCapability[] = [
     {

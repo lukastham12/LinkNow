@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { WHATSAPP_HREF } from '../../shared/contact';
+import { pageWhatsappLink } from '../../shared/contact';
 
 interface Expertise {
   name: string;
@@ -22,7 +22,7 @@ interface Expertise {
   styleUrl: './about.scss',
 })
 export class About {
-  protected readonly whatsappHref = WHATSAPP_HREF;
+  protected readonly whatsappHref = pageWhatsappLink('About');
 
   protected readonly expertise: Expertise[] = [
     {

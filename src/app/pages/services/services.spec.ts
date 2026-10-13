@@ -48,10 +48,10 @@ describe('Services', () => {
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const items = Array.from(el.querySelectorAll('.addon'));
-    expect(items.length).toBe(4);
+    expect(items.length).toBe(5);
     expect(el.querySelectorAll('a.addon').length).toBe(0);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
-    expect(titles).toEqual(['Food Station', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
+    expect(titles).toEqual(['Food Station', 'Buffet Catering', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
   });
 
   it('does not embed the floral gallery (it now lives on /flowers)', () => {

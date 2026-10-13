@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  LinkNow Events Co. sitemap — the existing prerendered routes.
+  LinkNow sitemap — the existing prerendered routes.
   STATIC file: the domain must match SITE_URL in src/app/shared/site.ts —
   keep both in sync if it ever changes.
 -->
@@ -56,5 +56,10 @@
     <loc>https://linknowsg.com/about/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/contact/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

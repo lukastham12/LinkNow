@@ -18,7 +18,7 @@ Real backdrop photos are now in `public/backdrops/backdrop-01.jpg … backdrop-1
 - Create a **Backdrops Portfolio page** at route `/backdrops` (title "Custom Backdrops"),
   `src/app/pages/backdrops/`. Show a short intro + a responsive **gallery grid of all 14 photos**
   (consistent tiles, e.g. `aspect-ratio: 4/5; object-fit: cover`, lazy-loaded, descriptive alt like
-  "Custom event backdrop by Linknow Events Co."). End with a WhatsApp CTA: **"Want a backdrop like
+  "Custom event backdrop by LinkNow"). End with a WhatsApp CTA: **"Want a backdrop like
   these? Enquire on WhatsApp"** (generic `WHATSAPP_HREF`). No prices, no per-item messages.
   Put the image list in a small data file (e.g. `backdrops.ts`) the component maps over.
 - Wire it up: the **Custom Backdrops** service card (on `/services`) links to `/backdrops` (like the

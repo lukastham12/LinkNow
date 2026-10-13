@@ -9,8 +9,10 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 import {
+  EMAIL_ADDRESS,
   INSTAGRAM_URL,
   TIKTOK_URL,
+  UEN,
   WHATSAPP_NUMBER,
 } from './contact';
 import {
@@ -131,9 +133,11 @@ export class SeoService {
           '@id': `${SITE_URL}/#organization`,
           name: SITE_NAME,
           legalName: LEGAL_NAME,
+          taxID: UEN,
           url: SITE_URL,
           logo: absoluteUrl('/brand/logo.jpg'),
           image: absoluteUrl('/brand/logo.jpg'),
+          email: EMAIL_ADDRESS,
           description:
             'Singapore event decor studio creating custom backdrops, floral ' +
             'services and corporate event styling for celebrations and formal occasions.',
@@ -142,6 +146,7 @@ export class SeoService {
             '@type': 'ContactPoint',
             contactType: 'customer service',
             telephone: `+${WHATSAPP_NUMBER}`,
+            email: EMAIL_ADDRESS,
           },
           sameAs: [INSTAGRAM_URL, TIKTOK_URL],
         },

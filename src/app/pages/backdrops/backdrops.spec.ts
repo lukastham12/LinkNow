@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Backdrops } from './backdrops';
-import { BACKDROPS } from './backdrops.data';
+import { BACKDROP_GROUPS, BACKDROPS } from './backdrops.data';
 
 describe('Backdrops (Custom Backdrops portfolio page)', () => {
   beforeEach(async () => {
@@ -27,7 +27,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const imgs = Array.from(el.querySelectorAll('.grid__img')) as HTMLImageElement[];
+    const imgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
     expect(imgs.length).toBe(23);
     for (const img of imgs) {
       expect(img.getAttribute('src')).toMatch(/\/backdrops\/backdrop-\d{2}\.jpg$/);
@@ -42,7 +42,52 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(srcs).not.toContain('/backdrops/backdrop-09.jpg');
   });
 
-  it('uses the canonical generic WhatsApp link only (no email/quote/contact/form)', () => {
+  it('every photo has a non-empty caption and a valid category', () => {
+    const validCategories = ['Birthday', '100 Days & Naming', 'Baby Shower & Gender Reveal', 'Other'];
+    for (const photo of BACKDROPS) {
+      expect(photo.caption.length).toBeGreaterThan(0);
+      expect(validCategories).toContain(photo.category);
+    }
+  });
+
+  it('renders a visible caption under each photo', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const captions = Array.from(el.querySelectorAll('.carousel__caption'));
+    expect(captions.length).toBe(23);
+    for (const caption of captions) {
+      expect((caption.textContent ?? '').trim().length).toBeGreaterThan(0);
+    }
+  });
+
+  it('groups photos into one carousel section per category, each with its own heading', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+
+    const sections = Array.from(el.querySelectorAll('.gallery'));
+    expect(sections.length).toBe(BACKDROP_GROUPS.length);
+
+    const headings = sections.map((s) => s.querySelector('.gallery__title')?.textContent?.trim());
+    expect(headings).toEqual(BACKDROP_GROUPS.map((g) => g.category));
+
+    BACKDROP_GROUPS.forEach((group, i) => {
+      const imgs = sections[i].querySelectorAll('.carousel__img');
+      expect(imgs.length).toBe(group.photos.length);
+      expect(imgs.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('each carousel scrolls horizontally rather than wrapping into a grid', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelectorAll('.carousel').length).toBe(BACKDROP_GROUPS.length);
+    expect(el.querySelector('.filter')).toBeNull();
+  });
+
+  it('uses a page-specific WhatsApp link naming "Custom Backdrops" (no email/quote/contact/form on this page)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -51,7 +96,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     ) as HTMLAnchorElement[];
     expect(waLinks.length).toBeGreaterThan(0);
     for (const a of waLinks) {
-      expect(a.href).toContain('enquire%20about%20your%20services');
+      expect(decodeURIComponent(a.href)).toContain('Custom Backdrops');
     }
     expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(el.querySelector('a[href="/contact"]')).toBeNull();

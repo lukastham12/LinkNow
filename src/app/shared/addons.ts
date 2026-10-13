@@ -7,7 +7,7 @@
 
 import { whatsappLink } from './contact';
 
-export type AddOnIcon = 'popcorn' | 'castle' | 'balloon' | 'microphone';
+export type AddOnIcon = 'popcorn' | 'buffet' | 'castle' | 'balloon' | 'microphone';
 
 export interface AddOn {
   id: string;
@@ -28,6 +28,13 @@ export const ADDONS: readonly AddOn[] = [
     line: 'Popcorn, ice cream or candy floss — freshly made on the spot.',
     icon: 'popcorn',
     waLink: addOnWaLink('food station (popcorn, ice cream or candy floss)'),
+  },
+  {
+    id: 'buffet-catering',
+    title: 'Buffet Catering',
+    line: 'A full buffet spread catered for your event, any headcount.',
+    icon: 'buffet',
+    waLink: addOnWaLink('buffet catering'),
   },
   {
     id: 'bouncy-castle',
@@ -53,6 +60,6 @@ export const ADDONS: readonly AddOn[] = [
 ];
 
 export const ADDONS_WA_LINK = whatsappLink(
-  "Hi LinkNow, I'd like to ask about your other services (food station, bouncy castle, balloon " +
-    'sculpting, party hosting).',
+  "Hi LinkNow, I'd like to ask about your other services (food station, buffet catering, bouncy " +
+    'castle, balloon sculpting, party hosting).',
 );

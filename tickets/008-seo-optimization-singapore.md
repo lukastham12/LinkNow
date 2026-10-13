@@ -66,7 +66,7 @@ should ship as small slices (base URL + service → per-page tags → JSON-LD �
 - [ ] Site-wide defaults added: `theme-color` matching the brand (e.g. off-white `#faf6f3` or rose
       `#a63f57`), a default OG image, `lang="en"` (already present) and `viewport` (already present) retained.
 - [ ] **JSON-LD** for an **Organization/LocalBusiness** is present in the prerendered HTML, containing ONLY:
-      `name` ("Linknow Events Co." / legal "LinkNow Pte Ltd"), `logo`/brand, `description`, `url`
+      `name` ("LinkNow" / legal "LinkNow Pte Ltd"), `logo`/brand, `description`, `url`
       (configurable base), `areaServed` = **Singapore**, `telephone`/contactPoint = the canonical WhatsApp
       number **+65 8809 0600**, and `sameAs` = the Instagram + TikTok URLs. It contains **NO** address,
       opening hours, geo, price/Offer, or aggregateRating. Optional `WebSite` and/or `BreadcrumbList`

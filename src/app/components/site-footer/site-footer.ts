@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { INSTAGRAM_URL, NAV_LINKS, TIKTOK_URL, WHATSAPP_HREF } from '../../shared/contact';
+import { INSTAGRAM_URL, NAV_LINKS, TIKTOK_URL, UEN, WHATSAPP_HREF } from '../../shared/contact';
 
-/** Shared site footer: logo, contact, socials, region. */
+/** Shared site footer: logo, contact, socials, region, UEN. */
 @Component({
   selector: 'app-site-footer',
   imports: [RouterLink],
@@ -14,5 +14,6 @@ export class SiteFooter {
   protected readonly whatsappHref = WHATSAPP_HREF;
   protected readonly instagramUrl = INSTAGRAM_URL;
   protected readonly tiktokUrl = TIKTOK_URL;
+  protected readonly uen = UEN;
   protected readonly year = new Date().getFullYear();
 }

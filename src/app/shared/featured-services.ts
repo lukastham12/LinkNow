@@ -18,14 +18,14 @@ export const FEATURED_SERVICES: readonly FeaturedService[] = [
       "Birthdays, naming ceremonies, 100 days and more — you name the celebration, we'll style it.",
     image: '/backdrops/backdrop-25.jpg',
     imageAlt:
-      'A Winnie the Pooh-themed gender reveal balloon arch, "Our Little Hunny is on the way!", styled by LinkNow Events Co.',
+      'A Winnie the Pooh-themed gender reveal balloon arch, "Our Little Hunny is on the way!", styled by LinkNow',
     link: '/backdrops',
   },
   {
     name: 'Weddings & ROM',
     blurb: 'Floral and backdrop styling for your big day.',
     image: '/flowers/custom-arrangement-hero.jpg',
-    imageAlt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
+    imageAlt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow',
     link: '/flowers',
   },
   {
@@ -33,7 +33,7 @@ export const FEATURED_SERVICES: readonly FeaturedService[] = [
     blurb:
       'Any custom corporate event — product launches, grand openings, company days. You name it, we style it.',
     image: '/corporate/peoples-association-01.jpg',
-    imageAlt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
+    imageAlt: "Balloon pillar entrance styled by LinkNow for a People's Association Open House",
     link: '/corporate',
   },
 ];

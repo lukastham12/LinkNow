@@ -1,7 +1,6 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero__content">
-    <p class="eyebrow">Event &amp; Corporate Decor · Singapore</p>
     <h1 class="hero__title">Event decorations for anything you're planning in Singapore</h1>
     <p class="hero__sub">
       Balloon decor, custom backdrops, florals and corporate styling — and if your event isn't
@@ -24,10 +23,10 @@
   <div class="hero__media">
     <img
       class="hero__img"
-      src="/backdrops/hero-minecraft.jpg"
-      alt="A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow Events Co. for Enzo's 8th birthday"
-      width="1200"
-      height="1240"
+      [src]="heroImage().src"
+      [alt]="heroImage().alt"
+      [width]="heroImage().width"
+      [height]="heroImage().height"
     />
   </div>
 </section>

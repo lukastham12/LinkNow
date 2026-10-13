@@ -9,7 +9,7 @@
 export const SITE_URL = 'https://linknowsg.com';
 
 // Brand identity (canonical — see BRIEF.md §2/§7).
-export const SITE_NAME = 'LinkNow Events Co.';
+export const SITE_NAME = 'LinkNow';
 export const LEGAL_NAME = 'LinkNow Pte Ltd';
 
 // Default social-share image. This brand is image-led, so the share card uses
@@ -21,7 +21,7 @@ export const LEGAL_NAME = 'LinkNow Pte Ltd';
 export const DEFAULT_OG_IMAGE = '/backdrops/backdrop-02.jpg';
 
 // Alt text / locale for the default share image and social cards.
-export const DEFAULT_OG_IMAGE_ALT = 'A balloon-garland celebration setup styled by LinkNow Events Co. in Singapore';
+export const DEFAULT_OG_IMAGE_ALT = 'A balloon-garland celebration setup styled by LinkNow in Singapore';
 export const OG_LOCALE = 'en_SG';
 
 // Brand theme colour for browser UI — the rose accent from src/styles.scss

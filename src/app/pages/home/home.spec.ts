@@ -14,6 +14,14 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
+  it('hero has no eyebrow kicker — straight into the H1 (owner request 13 Oct 2026); company name/UEN live in the footer and /contact only', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.hero .eyebrow')).toBeNull();
+    expect(el.querySelector('.hero')?.textContent ?? '').not.toContain('UEN');
+  });
+
   it('has exactly one H1, matching the Homepage redesign copy exactly (R1.1)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
@@ -48,13 +56,33 @@ describe('Home', () => {
     expect(seeMore.textContent?.trim()).toBe('See what we do');
   });
 
-  it('uses the Minecraft backdrop photo as the hero banner image, unchanged (R1.5)', () => {
+  it('hero has exactly 2 action buttons — no "Contact Us" button (owner request 13 Oct 2026)', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const actions = el.querySelector('.hero__actions') as HTMLElement;
+    const buttons = Array.from(actions.querySelectorAll('a'));
+    expect(buttons.length).toBe(2);
+    expect(buttons.map((b) => b.textContent?.trim())).toEqual([
+      'Enquire on WhatsApp',
+      'See what we do',
+    ]);
+  });
+
+  it('hero image is one of the kids/corporate/wedding photos (rotated, owner request 12 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const hero = el.querySelector('.hero__img') as HTMLImageElement;
     expect(hero).toBeTruthy();
-    expect(hero.getAttribute('src')).toBe('/backdrops/hero-minecraft.jpg');
+    expect([
+      '/backdrops/hero-minecraft.jpg',
+      '/corporate/peoples-association-01.jpg',
+      '/flowers/custom-arrangement-hero.jpg',
+    ]).toContain(hero.getAttribute('src') ?? '');
+    expect((hero.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
+    expect(hero.getAttribute('width')).toBeTruthy();
+    expect(hero.getAttribute('height')).toBeTruthy();
   });
 
   it('renders the shared "Events we style" section (via app-events-we-style), no old pink bundle band', () => {

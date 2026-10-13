@@ -1,0 +1,117 @@
+<section class="intro">
+  <p class="eyebrow">Contact Us</p>
+  <h1 class="intro__title">Let's talk about your event</h1>
+  <p class="intro__lede">
+    Send us your details below and we'll get back to you — or WhatsApp us if you need a faster
+    reply.
+  </p>
+</section>
+
+<section class="section" aria-labelledby="form-heading">
+  <p class="eyebrow eyebrow--center">Send Us a Message</p>
+  <h2 id="form-heading" class="section__title">Tell us about your event</h2>
+
+  <form class="form" (submit)="$event.preventDefault(); submit()">
+    <!-- Honeypot (Web3Forms spam guard): invisible to real visitors; a
+         filled value means an automated script filled every field, so we
+         silently drop the submission in submit() below. -->
+    <input
+      type="checkbox"
+      name="botcheck"
+      class="field__honeypot"
+      tabindex="-1"
+      autocomplete="off"
+      [(ngModel)]="botcheck"
+    />
+    <div class="form__row">
+      <label class="field">
+        <span class="field__label">Name *</span>
+        <input
+          class="field__input"
+          type="text"
+          placeholder="Your full name"
+          [(ngModel)]="name"
+          name="name"
+          required
+        />
+      </label>
+      <label class="field">
+        <span class="field__label">Phone / WhatsApp *</span>
+        <input
+          class="field__input"
+          type="tel"
+          placeholder="+65 9123 4567"
+          [(ngModel)]="phone"
+          name="phone"
+          required
+        />
+      </label>
+    </div>
+    <div class="form__row">
+      <label class="field">
+        <span class="field__label">Event Type *</span>
+        <select class="field__input" [(ngModel)]="eventType" name="eventType" required>
+          <option value="">Select type</option>
+          @for (item of eventTypes; track item) {
+            <option [value]="item">{{ item }}</option>
+          }
+        </select>
+      </label>
+      <label class="field">
+        <span class="field__label">Event Date</span>
+        <input class="field__input" type="date" [(ngModel)]="eventDate" name="eventDate" />
+      </label>
+    </div>
+    <label class="field">
+      <span class="field__label">Message</span>
+      <textarea
+        class="field__input field__input--area"
+        placeholder="Tell us about your event — number of guests, venue, services you need…"
+        rows="4"
+        [(ngModel)]="message"
+        name="message"
+      ></textarea>
+    </label>
+
+    <button type="submit" class="btn btn--solid form__submit" [disabled]="status() === 'sending'">
+      {{ status() === 'sending' ? 'Sending…' : 'Send Message' }}
+    </button>
+
+    @if (status() === 'success') {
+      <p class="form__status form__status--success" role="status">
+        Thanks! Your message has been sent — we'll be in touch shortly.
+      </p>
+    }
+    @if (status() === 'error') {
+      <p class="form__status form__status--error" role="alert">
+        Something went wrong sending your message. Please try again, or WhatsApp us instead.
+      </p>
+    }
+  </form>
+</section>
+
+<section class="section section--tint urgency" aria-labelledby="urgency-heading">
+  <p class="eyebrow eyebrow--center">Need a faster reply?</p>
+  <h2 id="urgency-heading" class="section__title">For urgent enquiries, WhatsApp us directly</h2>
+  <p class="section__intro">
+    Event coming up soon? Skip the form and message us on WhatsApp — it's the fastest way to reach
+    us.
+  </p>
+  <div class="urgency__action">
+    <a
+      class="btn btn--solid"
+      [href]="whatsappHref"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="trackWhatsappClick('contact_urgent', 'generic')"
+    >
+      WhatsApp Us Now
+    </a>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="business-heading">
+  <p class="eyebrow eyebrow--center">Business details</p>
+  <h2 id="business-heading" class="section__title">LinkNow Pte Ltd</h2>
+  <p class="business">UEN {{ uen }} · Singapore</p>
+</section>
