@@ -59,10 +59,10 @@ describe('EventsWeStyle', () => {
     );
 
     const items = Array.from(addonsSection.querySelectorAll('.addon'));
-    expect(items.length).toBe(4);
+    expect(items.length).toBe(5);
     expect(addonsSection.querySelectorAll('a.addon').length).toBe(0);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
-    expect(titles).toEqual(['Food Station', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
+    expect(titles).toEqual(['Food Station', 'Buffet Catering', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
 
     for (const item of items) {
       expect(item.querySelector('svg')).toBeTruthy();
