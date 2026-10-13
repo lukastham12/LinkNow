@@ -16,25 +16,20 @@
   text-align: center;
 }
 
-// Hero brand identity line (owner request, 13 Oct 2026): "LinkNow Pte Ltd"
-// reads as a clear, bold brand statement; the UEN sits underneath, small
-// and unbolded, so it doesn't compete with it.
+// Hero brand identity line (owner request, 13 Oct 2026): matches the small
+// eyebrow kicker used site-wide (same size/caps/letter-spacing as "Our
+// Work", "Occasions", etc. on every other page) so it sits above the H1 the
+// way it's meant to, instead of competing with it as a second headline.
+// Full text colour + semibold (rather than the usual muted eyebrow grey)
+// gives the company name/UEN a touch more presence without breaking the
+// established pattern.
 .hero__brand {
-  margin: 0 0 1rem;
-}
-
-.hero__brand-name {
-  margin: 0;
-  font-weight: 700;
-  font-size: 1.4rem;
-  letter-spacing: 0.01em;
   color: var(--color-text);
+  font-weight: 600;
 }
 
 .hero__brand-uen {
-  margin: 0.25rem 0 0;
   font-weight: 400;
-  font-size: 0.92rem;
   color: var(--color-text-muted);
 }
 
