@@ -16,23 +16,6 @@
   text-align: center;
 }
 
-// Hero brand identity line (owner request, 13 Oct 2026): matches the small
-// eyebrow kicker used site-wide (same size/caps/letter-spacing as "Our
-// Work", "Occasions", etc. on every other page) so it sits above the H1 the
-// way it's meant to, instead of competing with it as a second headline.
-// Full text colour + semibold (rather than the usual muted eyebrow grey)
-// gives the company name/UEN a touch more presence without breaking the
-// established pattern.
-.hero__brand {
-  color: var(--color-text);
-  font-weight: 600;
-}
-
-.hero__brand-uen {
-  font-weight: 400;
-  color: var(--color-text-muted);
-}
-
 .btn {
   display: inline-block;
   font-size: 0.75rem;

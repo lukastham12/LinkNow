@@ -14,13 +14,13 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
-  it('hero shows "LinkNow Pte Ltd · UEN ..." as a single kicker line matching the site-wide eyebrow style (owner request 13 Oct 2026)', () => {
+  it('hero eyebrow describes the business — company name/UEN live in the footer and /contact, not the hero (owner correction 13 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const brand = el.querySelector('.hero .hero__brand');
-    expect(brand?.classList).toContain('eyebrow');
-    expect(brand?.textContent?.replace(/\s+/g, ' ').trim()).toBe('LinkNow Pte Ltd · UEN 202608341G');
+    const eyebrow = el.querySelector('.hero .eyebrow');
+    expect(eyebrow?.textContent?.trim()).toBe('Event & Corporate Decor · Singapore');
+    expect(el.querySelector('.hero')?.textContent ?? '').not.toContain('UEN');
   });
 
   it('has exactly one H1, matching the Homepage redesign copy exactly (R1.1)', () => {

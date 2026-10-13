@@ -1,6 +1,6 @@
 import { Component, afterNextRender, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { UEN, WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
+import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
@@ -66,7 +66,6 @@ export class Home {
   private readonly analytics = inject(AnalyticsService);
 
   protected readonly whatsappHref = WHATSAPP_HREF;
-  protected readonly uen = UEN;
   // Hero's primary CTA uses this slightly different generic message — see contact.ts.
   protected readonly eventWhatsappHref = WHATSAPP_EVENT_HREF;
 
