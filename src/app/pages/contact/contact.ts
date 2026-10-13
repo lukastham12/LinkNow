@@ -1,21 +1,23 @@
-import { Component, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AnalyticsService } from '../../shared/analytics';
-import { EMAIL_ADDRESS, EMAIL_HREF, UEN, WHATSAPP_HREF, whatsappLink } from '../../shared/contact';
+import { UEN, WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT, WHATSAPP_HREF } from '../../shared/contact';
 
-type Occasion = 'Birthday' | 'Wedding & ROM' | 'Baby shower / gender reveal' | 'Corporate event' | 'Other';
-type Budget = 'Under $500' | '$500 – $1,000' | '$1,000 – $2,500' | '$2,500+' | 'Not sure yet';
+type EventType = 'Birthday' | 'Wedding & ROM' | 'Baby shower / gender reveal' | 'Corporate event' | 'Other';
+
+type SubmitStatus = 'idle' | 'sending' | 'success' | 'error';
 
 /**
  * Contact page (route '/contact').
  *
- * Owner request, 12 Oct 2026: corporate/admin/HR buyers often can't buy
- * through a personal WhatsApp chat, so this page gives them a second, more
- * formal channel — email — alongside WhatsApp, plus the UEN so the business
- * can be verified. There is still no backend/form submission (static
- * prerendered site): the email option is a `mailto:` link, and the mini
- * enquiry form below builds a pre-filled WhatsApp message rather than
- * posting anywhere.
+ * Owner request, 12–13 Oct 2026: corporate/admin/HR buyers often can't buy
+ * through a personal WhatsApp chat, so this page gives them a second,
+ * formal channel. The form below submits directly to Web3Forms (no mail
+ * app opens, no backend of our own) and delivers to
+ * novestelatham@linknow-singapore.com. A separate urgency section still
+ * points time-sensitive enquiries to WhatsApp. UEN is shown for
+ * verification; no street address or opening hours are published.
  */
 @Component({
   selector: 'app-contact',
@@ -25,47 +27,62 @@ type Budget = 'Under $500' | '$500 – $1,000' | '$1,000 – $2,500' | '$2,500+'
 })
 export class Contact {
   private readonly analytics = inject(AnalyticsService);
+  private readonly http = inject(HttpClient);
 
   protected readonly whatsappHref = WHATSAPP_HREF;
-  protected readonly emailHref = EMAIL_HREF;
-  protected readonly emailAddress = EMAIL_ADDRESS;
   protected readonly uen = UEN;
 
-  protected readonly occasions: Occasion[] = [
+  protected readonly eventTypes: EventType[] = [
     'Birthday',
     'Wedding & ROM',
     'Baby shower / gender reveal',
     'Corporate event',
     'Other',
   ];
-  protected readonly budgets: Budget[] = [
-    'Under $500',
-    '$500 – $1,000',
-    '$1,000 – $2,500',
-    '$2,500+',
-    'Not sure yet',
-  ];
 
-  protected occasion: Occasion | '' = '';
-  protected date = '';
-  protected venue = '';
-  protected budget: Budget | '' = '';
+  protected name = '';
+  protected phone = '';
+  protected eventType: EventType | '' = '';
+  protected eventDate = '';
+  protected message = '';
 
-  /** Builds a pre-filled wa.me link from whatever the visitor has entered. */
-  protected get formWhatsappLink(): string {
-    const lines = ["Hi LinkNow, I'd like to enquire about an event."];
-    if (this.occasion) lines.push(`Occasion: ${this.occasion}`);
-    if (this.date) lines.push(`Date: ${this.date}`);
-    if (this.venue) lines.push(`Venue: ${this.venue}`);
-    if (this.budget) lines.push(`Budget: ${this.budget}`);
-    return whatsappLink(lines.join('\n'));
+  protected readonly status = signal<SubmitStatus>('idle');
+
+  protected submit(): void {
+    if (!this.name || !this.phone || !this.eventType) {
+      return;
+    }
+
+    this.status.set('sending');
+
+    const payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: `New enquiry from the LinkNow website — ${this.eventType}`,
+      name: this.name,
+      phone: this.phone,
+      event_type: this.eventType,
+      event_date: this.eventDate || 'Not provided',
+      message: this.message || 'Not provided',
+    };
+
+    this.http.post<{ success: boolean }>(WEB3FORMS_ENDPOINT, payload).subscribe({
+      next: () => {
+        this.status.set('success');
+        this.analytics.trackEvent('email_submit', { section: 'contact', item: 'success' });
+        this.name = '';
+        this.phone = '';
+        this.eventType = '';
+        this.eventDate = '';
+        this.message = '';
+      },
+      error: () => {
+        this.status.set('error');
+        this.analytics.trackEvent('email_submit', { section: 'contact', item: 'error' });
+      },
+    });
   }
 
   protected trackWhatsappClick(section: string, item: string): void {
     this.analytics.trackEvent('whatsapp_click', { section, item });
-  }
-
-  protected trackEmailClick(): void {
-    this.analytics.trackEvent('email_click', { section: 'contact', item: 'generic' });
   }
 }

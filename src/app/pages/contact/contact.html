@@ -2,101 +2,105 @@
   <p class="eyebrow">Contact Us</p>
   <h1 class="intro__title">Let's talk about your event</h1>
   <p class="intro__lede">
-    Reach us however suits you best — a quick WhatsApp message, or email if you're enquiring on
-    behalf of a company.
+    Send us your details below and we'll get back to you — or WhatsApp us if you need a faster
+    reply.
   </p>
-  <div class="channels">
+</section>
+
+<section class="section" aria-labelledby="form-heading">
+  <p class="eyebrow eyebrow--center">Send Us a Message</p>
+  <h2 id="form-heading" class="section__title">Tell us about your event</h2>
+
+  <form class="form" (submit)="$event.preventDefault(); submit()">
+    <div class="form__row">
+      <label class="field">
+        <span class="field__label">Name *</span>
+        <input
+          class="field__input"
+          type="text"
+          placeholder="Your full name"
+          [(ngModel)]="name"
+          name="name"
+          required
+        />
+      </label>
+      <label class="field">
+        <span class="field__label">Phone / WhatsApp *</span>
+        <input
+          class="field__input"
+          type="tel"
+          placeholder="+65 9123 4567"
+          [(ngModel)]="phone"
+          name="phone"
+          required
+        />
+      </label>
+    </div>
+    <div class="form__row">
+      <label class="field">
+        <span class="field__label">Event Type *</span>
+        <select class="field__input" [(ngModel)]="eventType" name="eventType" required>
+          <option value="">Select type</option>
+          @for (item of eventTypes; track item) {
+            <option [value]="item">{{ item }}</option>
+          }
+        </select>
+      </label>
+      <label class="field">
+        <span class="field__label">Event Date</span>
+        <input class="field__input" type="date" [(ngModel)]="eventDate" name="eventDate" />
+      </label>
+    </div>
+    <label class="field">
+      <span class="field__label">Message</span>
+      <textarea
+        class="field__input field__input--area"
+        placeholder="Tell us about your event — number of guests, venue, services you need…"
+        rows="4"
+        [(ngModel)]="message"
+        name="message"
+      ></textarea>
+    </label>
+
+    <button type="submit" class="btn btn--solid form__submit" [disabled]="status() === 'sending'">
+      {{ status() === 'sending' ? 'Sending…' : 'Send Message' }}
+    </button>
+
+    @if (status() === 'success') {
+      <p class="form__status form__status--success" role="status">
+        Thanks! Your message has been sent — we'll be in touch shortly.
+      </p>
+    }
+    @if (status() === 'error') {
+      <p class="form__status form__status--error" role="alert">
+        Something went wrong sending your message. Please try again, or WhatsApp us instead.
+      </p>
+    }
+  </form>
+</section>
+
+<section class="section section--tint urgency" aria-labelledby="urgency-heading">
+  <p class="eyebrow eyebrow--center">Need a faster reply?</p>
+  <h2 id="urgency-heading" class="section__title">For urgent enquiries, WhatsApp us directly</h2>
+  <p class="section__intro">
+    Event coming up soon? Skip the form and message us on WhatsApp — it's the fastest way to reach
+    us.
+  </p>
+  <div class="urgency__action">
     <a
-      class="channel"
+      class="btn btn--solid"
       [href]="whatsappHref"
       target="_blank"
       rel="noopener noreferrer"
-      (click)="trackWhatsappClick('contact', 'generic')"
+      (click)="trackWhatsappClick('contact_urgent', 'generic')"
     >
-      <span class="channel__icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-          <path
-            fill="currentColor"
-            d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.1 1.6 5.9L4 29l8.3-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7.7.7-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.4-7.3c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"
-          />
-        </svg>
-      </span>
-      <span class="channel__body">
-        <span class="channel__title">WhatsApp</span>
-        <span class="channel__blurb">Fastest way to reach us — most enquiries.</span>
-      </span>
-    </a>
-
-    <a class="channel" [href]="emailHref" (click)="trackEmailClick()">
-      <span class="channel__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="5" width="18" height="14" rx="2" />
-          <path d="m3.5 6 8.5 7 8.5-7" />
-        </svg>
-      </span>
-      <span class="channel__body">
-        <span class="channel__title">Email</span>
-        <span class="channel__blurb">{{ emailAddress }} — best for companies and admin teams.</span>
-      </span>
+      WhatsApp Us Now
     </a>
   </div>
 </section>
 
-<section class="section" aria-labelledby="form-heading">
-  <p class="eyebrow eyebrow--center">Tell us about your event</p>
-  <h2 id="form-heading" class="section__title">A few details speed things up</h2>
-  <p class="section__intro">
-    Fill in what you know — we'll open WhatsApp with your details already in the message.
-  </p>
-  <form class="form" (submit)="$event.preventDefault()">
-    <label class="field">
-      <span class="field__label">Occasion</span>
-      <select class="field__input" [(ngModel)]="occasion" name="occasion">
-        <option value="">Select an occasion</option>
-        @for (item of occasions; track item) {
-          <option [value]="item">{{ item }}</option>
-        }
-      </select>
-    </label>
-    <label class="field">
-      <span class="field__label">Date</span>
-      <input class="field__input" type="date" [(ngModel)]="date" name="date" />
-    </label>
-    <label class="field">
-      <span class="field__label">Venue</span>
-      <input
-        class="field__input"
-        type="text"
-        placeholder="e.g. your home, a hotel, an office"
-        [(ngModel)]="venue"
-        name="venue"
-      />
-    </label>
-    <label class="field">
-      <span class="field__label">Budget</span>
-      <select class="field__input" [(ngModel)]="budget" name="budget">
-        <option value="">Select a range</option>
-        @for (item of budgets; track item) {
-          <option [value]="item">{{ item }}</option>
-        }
-      </select>
-    </label>
-    <a
-      class="btn btn--solid form__submit"
-      [href]="formWhatsappLink"
-      target="_blank"
-      rel="noopener noreferrer"
-      (click)="trackWhatsappClick('contact_form', 'generic')"
-    >
-      Continue on WhatsApp
-    </a>
-  </form>
-</section>
-
-<section class="section section--tint" aria-labelledby="business-heading">
+<section class="section" aria-labelledby="business-heading">
   <p class="eyebrow eyebrow--center">Business details</p>
   <h2 id="business-heading" class="section__title">LinkNow Pte Ltd</h2>
-  <p class="business">
-    UEN {{ uen }} · Studio by appointment, Singapore
-  </p>
+  <p class="business">UEN {{ uen }} · Studio by appointment, Singapore</p>
 </section>

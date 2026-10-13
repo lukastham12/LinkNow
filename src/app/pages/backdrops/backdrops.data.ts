@@ -64,7 +64,7 @@ export const BACKDROPS: readonly BackdropPhoto[] = ORDER.map((num) => {
   const { caption, category } = PHOTOS[num];
   return {
     src: `/backdrops/backdrop-${n}.jpg`,
-    alt: `${caption} — custom event backdrop by LinkNow Events Co.`,
+    alt: `${caption} — custom event backdrop by LinkNow`,
     caption,
     category,
   };

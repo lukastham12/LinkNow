@@ -1,14 +1,14 @@
-// Canonical contact values for LinkNow Events Co. (see BRIEF.md §8).
+// Canonical contact values for LinkNow (see BRIEF.md §8).
 // Single source of truth — every component imports from here so the WhatsApp
 // number, email and social links are never re-typed with typos.
 //
-// WhatsApp and email are the two enquiry channels (owner request, 12 Oct
+// WhatsApp and email are the two enquiry channels (owner request, 12–13 Oct
 // 2026 — corporate/admin/HR buyers often can't buy through a personal WA
 // chat, so a dedicated /contact page with an email option was added
-// alongside WhatsApp). There is still no enquiry form/backend — the email
-// option is a `mailto:` link, same "redirect" pattern as WhatsApp's wa.me
-// links, since this is a static prerendered site with no server to receive
-// form submissions.
+// alongside WhatsApp). The /contact form submits straight to Web3Forms
+// (WEB3FORMS_ENDPOINT/ACCESS_KEY below) rather than opening the visitor's
+// mail app — there is still no backend of our own, Web3Forms delivers the
+// message to novestelatham@linknow-singapore.com.
 
 export const WHATSAPP_NUMBER = '6588090600';
 export const WHATSAPP_MESSAGE = "Hi LinkNow, I'd like to enquire about your services";
@@ -41,14 +41,14 @@ export function pageWhatsappLink(pageLabel: string): string {
 
 export const EMAIL_ADDRESS = 'novestelatham@linknow-singapore.com';
 
-/** Build a mailto: link with a pre-filled subject (and optional body). */
-export function mailtoLink(subject: string, body?: string): string {
-  const params = new URLSearchParams({ subject });
-  if (body) params.set('body', body);
-  return `mailto:${EMAIL_ADDRESS}?${params.toString()}`;
-}
-
-export const EMAIL_HREF = mailtoLink("Enquiry from LinkNow's website");
+// Web3Forms submission endpoint (owner request, 13 Oct 2026 — the /contact
+// form must deliver the message directly, not just open the visitor's mail
+// app). ACCESS_KEY is a Web3Forms *public* access key: by design it only
+// allows submitting a form to the email verified with Web3Forms
+// (novestelatham@linknow-singapore.com) and carries no other privilege, so
+// it's safe to ship in client-side code — it is not a secret.
+export const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+export const WEB3FORMS_ACCESS_KEY = '3e1dbb4e-f13e-45c5-9ab6-ec9219c374b0';
 
 // LinkNow Pte Ltd's UEN (Unique Entity Number) — shown on /contact and in
 // the site footer so corporate/admin/HR buyers can verify the business.

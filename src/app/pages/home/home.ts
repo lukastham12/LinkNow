@@ -1,6 +1,6 @@
 import { Component, afterNextRender, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
+import { UEN, WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
@@ -35,19 +35,19 @@ interface HeroImage {
 const HERO_IMAGES: readonly HeroImage[] = [
   {
     src: '/backdrops/hero-minecraft.jpg',
-    alt: "A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow Events Co. for Enzo's 8th birthday",
+    alt: "A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow for Enzo's 8th birthday",
     width: 1200,
     height: 1240,
   },
   {
     src: '/corporate/peoples-association-01.jpg',
-    alt: "Balloon pillar entrance styled by LinkNow Events Co. for a People's Association Open House",
+    alt: "Balloon pillar entrance styled by LinkNow for a People's Association Open House",
     width: 1050,
     height: 1400,
   },
   {
     src: '/flowers/custom-arrangement-hero.jpg',
-    alt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow Events Co.',
+    alt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow',
     width: 1050,
     height: 1400,
   },
@@ -66,6 +66,7 @@ export class Home {
   private readonly analytics = inject(AnalyticsService);
 
   protected readonly whatsappHref = WHATSAPP_HREF;
+  protected readonly uen = UEN;
   // Hero's primary CTA uses this slightly different generic message — see contact.ts.
   protected readonly eventWhatsappHref = WHATSAPP_EVENT_HREF;
 
@@ -97,11 +98,11 @@ export class Home {
     items: [
       {
         image: '/backdrops/backdrop-20.jpg',
-        alt: "A Minecraft-themed birthday backdrop built by LinkNow Events Co. for Enzo's 8th birthday",
+        alt: "A Minecraft-themed birthday backdrop built by LinkNow for Enzo's 8th birthday",
       },
       {
         image: '/backdrops/backdrop-02.jpg',
-        alt: "A balloon-garland celebration setup styled by LinkNow Events Co. for Daxton's 100 Days",
+        alt: "A balloon-garland celebration setup styled by LinkNow for Daxton's 100 Days",
       },
     ],
   };

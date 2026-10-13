@@ -95,7 +95,7 @@ export const routes: Routes = [
         title: "People's Association Open House Decor | LinkNow Pte Ltd",
         description:
           "A case study on styling People's Association's Open House — balloon pillars, " +
-          'ribbon-cutting and on-site balloon art, by LinkNow Events Co.',
+          'ribbon-cutting and on-site balloon art, by LinkNow',
         path: '/corporate/peoples-association/',
       } satisfies PageSeo,
     },
@@ -109,7 +109,7 @@ export const routes: Routes = [
         title: "AWWA Children's Day Bouncy Castle | LinkNow Pte Ltd",
         description:
           "A case study on AWWA's Children's Day engagement — a themed bouncy castle delivered " +
-          'end-to-end by LinkNow Events Co.',
+          'end-to-end by LinkNow',
         path: '/corporate/awwa/',
       } satisfies PageSeo,
     },
@@ -123,7 +123,7 @@ export const routes: Routes = [
         title: "Bucket House Preschool Children's Day Styling | LinkNow Pte Ltd",
         description:
           "A case study on Bucket House Preschool's Children's Day celebration — balloon " +
-          'twisting and floral styling by LinkNow Events Co.',
+          'twisting and floral styling by LinkNow',
         path: '/corporate/bucket-house/',
       } satisfies PageSeo,
     },
@@ -137,7 +137,7 @@ export const routes: Routes = [
         title: 'Avocadoria Easter Storefront Styling | LinkNow Pte Ltd',
         description:
           "A case study on Avocadoria's in-store Easter event — a pastel balloon installation " +
-          'styled by LinkNow Events Co.',
+          'styled by LinkNow',
         path: '/corporate/avocadoria/',
       } satisfies PageSeo,
     },
@@ -151,7 +151,7 @@ export const routes: Routes = [
       seo: {
         title: 'About LinkNow Pte Ltd — Event & Party Decor in Singapore',
         description:
-          'Meet LinkNow Events Co., a Singapore event decor studio specialising in balloon ' +
+          'Meet LinkNow, a Singapore event decor studio specialising in balloon ' +
           'garlands, custom backdrops, floral styling and corporate event decor for parties and ' +
           'celebrations.',
         path: '/about/',

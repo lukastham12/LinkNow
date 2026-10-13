@@ -14,6 +14,14 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
+  it('hero eyebrow shows "LinkNow Pte Ltd" and the UEN, not a generic tagline', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const eyebrow = el.querySelector('.hero .eyebrow');
+    expect(eyebrow?.textContent?.trim()).toBe('LinkNow Pte Ltd · UEN 202608341G');
+  });
+
   it('has exactly one H1, matching the Homepage redesign copy exactly (R1.1)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
