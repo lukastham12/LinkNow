@@ -122,12 +122,12 @@ describe('Contact', () => {
     expect(waLink.length).toBeGreaterThan(0);
   });
 
-  it('shows the UEN and "studio by appointment", no fabricated address or hours', () => {
+  it('shows the UEN, no fabricated address, hours or "studio by appointment" line', () => {
     const fixture = TestBed.createComponent(Contact);
     fixture.detectChanges();
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
     expect(text).toContain('202608341G');
-    expect(text).toContain('by appointment');
+    expect(text).not.toContain('by appointment');
   });
 
   it('has no mailto link (submits directly, does not open the mail app)', () => {

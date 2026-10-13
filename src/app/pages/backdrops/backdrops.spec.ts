@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Backdrops } from './backdrops';
-import { BACKDROPS } from './backdrops.data';
+import { BACKDROP_GROUPS, BACKDROPS } from './backdrops.data';
 
 describe('Backdrops (Custom Backdrops portfolio page)', () => {
   beforeEach(async () => {
@@ -27,7 +27,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const imgs = Array.from(el.querySelectorAll('.grid__img')) as HTMLImageElement[];
+    const imgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
     expect(imgs.length).toBe(23);
     for (const img of imgs) {
       expect(img.getAttribute('src')).toMatch(/\/backdrops\/backdrop-\d{2}\.jpg$/);
@@ -54,33 +54,37 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const captions = Array.from(el.querySelectorAll('.grid__caption'));
+    const captions = Array.from(el.querySelectorAll('.carousel__caption'));
     expect(captions.length).toBe(23);
     for (const caption of captions) {
       expect((caption.textContent ?? '').trim().length).toBeGreaterThan(0);
     }
   });
 
-  it('filters the gallery by category', () => {
+  it('groups photos into one carousel section per category, each with its own heading', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
 
-    const birthdayCount = BACKDROPS.filter((b) => b.category === 'Birthday').length;
-    const filterButtons = Array.from(el.querySelectorAll('.filter')) as HTMLButtonElement[];
-    const birthdayButton = filterButtons.find((b) => b.textContent?.trim() === 'Birthday');
-    expect(birthdayButton).toBeTruthy();
-    birthdayButton?.click();
-    fixture.detectChanges();
+    const sections = Array.from(el.querySelectorAll('.gallery'));
+    expect(sections.length).toBe(BACKDROP_GROUPS.length);
 
-    const imgs = el.querySelectorAll('.grid__img');
-    expect(imgs.length).toBe(birthdayCount);
-    expect(imgs.length).toBeLessThan(23);
+    const headings = sections.map((s) => s.querySelector('.gallery__title')?.textContent?.trim());
+    expect(headings).toEqual(BACKDROP_GROUPS.map((g) => g.category));
 
-    const allButton = filterButtons.find((b) => b.textContent?.trim() === 'All');
-    allButton?.click();
+    BACKDROP_GROUPS.forEach((group, i) => {
+      const imgs = sections[i].querySelectorAll('.carousel__img');
+      expect(imgs.length).toBe(group.photos.length);
+      expect(imgs.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('each carousel scrolls horizontally rather than wrapping into a grid', () => {
+    const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
-    expect(el.querySelectorAll('.grid__img').length).toBe(23);
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelectorAll('.carousel').length).toBe(BACKDROP_GROUPS.length);
+    expect(el.querySelector('.filter')).toBeNull();
   });
 
   it('uses a page-specific WhatsApp link naming "Custom Backdrops" (no email/quote/contact/form on this page)', () => {

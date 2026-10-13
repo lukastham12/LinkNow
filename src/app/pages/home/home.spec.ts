@@ -14,12 +14,14 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
-  it('hero eyebrow shows "LinkNow Pte Ltd" and the UEN, not a generic tagline', () => {
+  it('hero shows "LinkNow Pte Ltd" bold, with the UEN smaller underneath (owner request 13 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const eyebrow = el.querySelector('.hero .eyebrow');
-    expect(eyebrow?.textContent?.trim()).toBe('LinkNow Pte Ltd · UEN 202608341G');
+    const name = el.querySelector('.hero__brand-name');
+    const uen = el.querySelector('.hero__brand-uen');
+    expect(name?.textContent?.trim()).toBe('LinkNow Pte Ltd');
+    expect(uen?.textContent?.trim()).toBe('UEN 202608341G');
   });
 
   it('has exactly one H1, matching the Homepage redesign copy exactly (R1.1)', () => {
@@ -54,6 +56,19 @@ describe('Home', () => {
     const seeMore = hero.querySelector('a.btn--ghost') as HTMLAnchorElement;
     expect(seeMore.getAttribute('href')).toBe('#occasions');
     expect(seeMore.textContent?.trim()).toBe('See what we do');
+  });
+
+  it('hero has exactly 2 action buttons — no "Contact Us" button (owner request 13 Oct 2026)', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const actions = el.querySelector('.hero__actions') as HTMLElement;
+    const buttons = Array.from(actions.querySelectorAll('a'));
+    expect(buttons.length).toBe(2);
+    expect(buttons.map((b) => b.textContent?.trim())).toEqual([
+      'Enquire on WhatsApp',
+      'See what we do',
+    ]);
   });
 
   it('hero image is one of the kids/corporate/wedding photos (rotated, owner request 12 Oct 2026)', () => {

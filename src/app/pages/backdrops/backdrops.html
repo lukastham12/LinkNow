@@ -13,37 +13,20 @@
   </div>
 </section>
 
-<section class="gallery" aria-label="Custom backdrops gallery">
-  <div class="filters" role="group" aria-label="Filter by occasion">
-    <button
-      type="button"
-      class="filter"
-      [class.filter--active]="activeFilter() === 'All'"
-      (click)="setFilter('All')"
-    >
-      All
-    </button>
-    @for (category of categories; track category) {
-      <button
-        type="button"
-        class="filter"
-        [class.filter--active]="activeFilter() === category"
-        (click)="setFilter(category)"
-      >
-        {{ category }}
-      </button>
-    }
-  </div>
-
-  <ul class="grid">
-    @for (photo of filtered(); track photo.src) {
-      <li class="grid__item">
-        <img class="grid__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
-        <p class="grid__caption">{{ photo.caption }}</p>
-      </li>
-    }
-  </ul>
-</section>
+@for (group of groups; track group.category) {
+  <section class="gallery" [attr.aria-labelledby]="group.category + '-heading'">
+    <p class="eyebrow">{{ group.photos.length }} {{ group.photos.length === 1 ? 'photo' : 'photos' }}</p>
+    <h2 [id]="group.category + '-heading'" class="gallery__title">{{ group.category }}</h2>
+    <ul class="carousel">
+      @for (photo of group.photos; track photo.src) {
+        <li class="carousel__item">
+          <img class="carousel__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+          <p class="carousel__caption">{{ photo.caption }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+}
 
 <section class="outro">
   <p class="outro__text">Want a backdrop like these? Enquire on WhatsApp.</p>

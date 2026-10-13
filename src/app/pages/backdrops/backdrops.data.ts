@@ -76,3 +76,19 @@ export const BACKDROP_CATEGORIES: readonly BackdropCategory[] = [
   'Baby Shower & Gender Reveal',
   'Other',
 ];
+
+export interface BackdropGroup {
+  category: BackdropCategory;
+  photos: readonly BackdropPhoto[];
+}
+
+// Grouped by category, in BACKDROP_CATEGORIES order — each group renders as
+// its own horizontally-scrolling carousel (owner request, 13 Oct 2026:
+// filter-pill buttons over one grid didn't read well on mobile or desktop;
+// category-grouped carousels are the more common pattern on modern
+// portfolio/case-study sites, and surface every category at a glance
+// instead of hiding them behind a click).
+export const BACKDROP_GROUPS: readonly BackdropGroup[] = BACKDROP_CATEGORIES.map((category) => ({
+  category,
+  photos: BACKDROPS.filter((b) => b.category === category),
+}));

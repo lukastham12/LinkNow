@@ -1,17 +1,19 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { pageWhatsappLink } from '../../shared/contact';
-import { BACKDROP_CATEGORIES, BACKDROPS, BackdropCategory } from './backdrops.data';
+import { BACKDROP_GROUPS } from './backdrops.data';
 
 /**
  * Custom Backdrops portfolio page (route '/backdrops').
  *
- * A gallery of real backdrop builds — photo tiles only, no prices or
- * quantities (BRIEF.md §4). Each photo carries a short caption (occasion/
- * theme, from the photo's own signage — no invented venues) and a category,
- * filterable by the buttons above the grid (owner request, 12 Oct 2026).
- * Reachable from the Custom Backdrops service card and the Services nav
- * dropdown. The WhatsApp CTA names this page in the pre-filled message so
- * the enquiry source is visible in the chat.
+ * A gallery of real backdrop builds, grouped into one horizontally
+ * scrolling carousel per category (Birthday, 100 Days & Naming, Baby
+ * Shower & Gender Reveal, Other) — owner request, 13 Oct 2026, replacing
+ * filter-pill buttons over a single grid which didn't read well on mobile
+ * or desktop. Each photo carries a short caption (occasion/theme, from the
+ * photo's own signage — no invented venues). No prices or quantities
+ * (BRIEF.md §4). Reachable from the Custom Backdrops service card and the
+ * Services nav dropdown. The WhatsApp CTA names this page in the
+ * pre-filled message so the enquiry source is visible in the chat.
  */
 @Component({
   selector: 'app-backdrops',
@@ -21,17 +23,5 @@ import { BACKDROP_CATEGORIES, BACKDROPS, BackdropCategory } from './backdrops.da
 })
 export class Backdrops {
   protected readonly whatsappHref = pageWhatsappLink('Custom Backdrops');
-  protected readonly backdrops = BACKDROPS;
-  protected readonly categories = BACKDROP_CATEGORIES;
-
-  protected readonly activeFilter = signal<BackdropCategory | 'All'>('All');
-
-  protected readonly filtered = computed(() => {
-    const filter = this.activeFilter();
-    return filter === 'All' ? this.backdrops : this.backdrops.filter((b) => b.category === filter);
-  });
-
-  protected setFilter(filter: BackdropCategory | 'All'): void {
-    this.activeFilter.set(filter);
-  }
+  protected readonly groups = BACKDROP_GROUPS;
 }

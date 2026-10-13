@@ -16,6 +16,30 @@
   text-align: center;
 }
 
+// Hero brand identity line (owner request, 13 Oct 2026): "LinkNow Pte Ltd"
+// reads as a clear, bold brand statement; the UEN sits underneath, small
+// and unbolded, so it doesn't compete with it.
+.hero__brand {
+  margin: 0 0 1rem;
+}
+
+.hero__brand-name {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  color: var(--color-text);
+}
+
+.hero__brand-uen {
+  margin: 0.2rem 0 0;
+  font-weight: 400;
+  font-size: 0.68rem;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
 .btn {
   display: inline-block;
   font-size: 0.75rem;
