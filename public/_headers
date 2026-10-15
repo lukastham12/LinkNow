@@ -1,0 +1,39 @@
+# Cloudflare Workers static-assets response headers — parsed at request
+# time, not served as a file itself. See
+# https://developers.cloudflare.com/workers/static-assets/headers/
+#
+# Security headers are conservative on purpose: no Content-Security-Policy
+# here yet. A CSP tight enough to matter has to allow GA4's script
+# (googletagmanager.com) and the /contact form's fetch() to Web3Forms
+# (api.web3forms.com) — getting that wrong silently breaks one of them, so
+# it should be added deliberately with its own testing pass, not bundled in
+# here.
+
+/*
+	X-Content-Type-Options: nosniff
+	X-Frame-Options: DENY
+	Referrer-Policy: strict-origin-when-cross-origin
+	Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=()
+
+# Angular's build output is content-hashed (main-<hash>.js, styles-<hash>.css,
+# etc.) — a new build always gets a new filename, so these are safe to cache
+# for a long time.
+/*.js
+	Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+	Cache-Control: public, max-age=31536000, immutable
+
+# Photo filenames are NOT hashed (e.g. backdrop-20.jpg can be swapped for a
+# different photo in place), so keep these to a day rather than a year.
+/backdrops/*
+	Cache-Control: public, max-age=86400
+
+/brand/*
+	Cache-Control: public, max-age=86400
+
+/corporate/*
+	Cache-Control: public, max-age=86400
+
+/flowers/*
+	Cache-Control: public, max-age=86400
