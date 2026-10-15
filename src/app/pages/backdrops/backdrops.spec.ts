@@ -36,7 +36,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     }
   });
 
-  it('excludes the Avocaderia corporate photos (backdrop-08, backdrop-09) — now on /corporate', () => {
+  it('excludes the Avocadoria corporate photos (backdrop-08, backdrop-09) — now on /corporate', () => {
     const srcs = BACKDROPS.map((b) => b.src);
     expect(srcs).not.toContain('/backdrops/backdrop-08.jpg');
     expect(srcs).not.toContain('/backdrops/backdrop-09.jpg');

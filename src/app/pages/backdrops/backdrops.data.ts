@@ -9,7 +9,7 @@
 // and isn't legible in the photos themselves, so it's left out rather than
 // guessed.
 //
-// backdrop-08 and backdrop-09 are the Avocaderia in-store event photos; they
+// backdrop-08 and backdrop-09 are the Avocadoria in-store event photos; they
 // now live on the Corporate Events page (/corporate) and are intentionally
 // excluded here (ticket 007), leaving backdrop-01…25 minus the two corporate
 // shots as gallery items.

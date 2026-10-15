@@ -18,19 +18,19 @@
 - To avoid the hero and the Custom Backdrops card being the same photo, set the homepage **Custom
   Backdrops** service-card image to `/backdrops/backdrop-02.jpg` (Daxton's).
 
-## C. Corporate Events — its own page (+ move the Avocaderia photos here)
+## C. Corporate Events — its own page (+ move the Avocadoria photos here)
 - Create a **Corporate Events page** at `/corporate` (`src/app/pages/corporate/`, title "Corporate Events").
   Content:
   - Intro: décor for companies and formal occasions.
   - Copy mentioning the range: **weddings** (we don't have photos yet — describe, don't fake),
     **corporate backdrops**, product launches, grand openings, dinner & dance (D&D), roadshows, and
     festive/seasonal décor. Keep it warm and concise.
-  - Show the **two Avocaderia photos**: `/backdrops/backdrop-08.jpg` and `/backdrops/backdrop-09.jpg`
-    (with alt like "In-store corporate event styled for Avocaderia").
+  - Show the **two Avocadoria photos**: `/backdrops/backdrop-08.jpg` and `/backdrops/backdrop-09.jpg`
+    (with alt like "In-store corporate event styled for Avocadoria").
   - End with a WhatsApp CTA: **"Planning a corporate event? Enquire on WhatsApp."** (generic WHATSAPP_HREF).
 - Wire it: the **Corporate Events** service card (homepage + `/services`) links to `/corporate`; the
   **Services dropdown** "Corporate Events" child → `/corporate` (was `/services#corporate`). Register `/corporate`.
-- **Remove the two Avocaderia photos (backdrop-08, backdrop-09) from the `/backdrops` gallery**
+- **Remove the two Avocadoria photos (backdrop-08, backdrop-09) from the `/backdrops` gallery**
   (`backdrops.data.ts` → 12 items now). Update the backdrops spec's count.
 
 ## D. Trim the nav
@@ -47,7 +47,7 @@
 ## Acceptance criteria
 - [ ] Hero shows `/backdrops/backdrop-07.jpg` as a proper cover image (rounded, fills the column); no hydrangea PNG.
 - [ ] Floral card (home + services) uses `/flowers/floral-feature.jpg`, shown whole (not cropped).
-- [ ] `/corporate` page exists (single h1) with the two Avocaderia photos, the weddings/backdrops/other-events
+- [ ] `/corporate` page exists (single h1) with the two Avocadoria photos, the weddings/backdrops/other-events
       copy, and a WhatsApp CTA; no prices.
 - [ ] Corporate Events card + Services dropdown child both link to `/corporate`.
 - [ ] `/backdrops` gallery no longer includes backdrop-08 or backdrop-09 (12 items).

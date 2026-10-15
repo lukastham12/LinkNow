@@ -30,18 +30,18 @@ On the homepage (`src/app/pages/home/`):
 - The three service cards currently use placeholder panels. Give them real images:
   - **Custom Backdrops** → `/backdrops/backdrop-07.jpg` (the best).
   - **Floral Services** → a flower photo, e.g. `/flowers/hydrangea-china.jpg` (or another tasteful bloom).
-  - **Corporate Events** (see §D) → `/backdrops/backdrop-09.jpg` (Avocaderia).
+  - **Corporate Events** (see §D) → `/backdrops/backdrop-09.jpg` (Avocadoria).
 - The "Recent events" portfolio teaser: replace the 6 placeholder tiles with 6 real backdrop photos
   (pick a varied set, e.g. backdrop-02, 07, 10, 04, 12, 03) and point "View full portfolio" →
   `/backdrops`. Keep it a teaser (links to the full gallery).
 
 ## D. Rename "Setup-Only Labour" → "Corporate Events"
 The PM's view: the company does weddings, formal occasions and corporate/company events (e.g. the
-Avocaderia in-store event). Replace the third service line everywhere:
+Avocadoria in-store event). Replace the third service line everywhere:
 - Name: **"Corporate Events"** (was "Setup-Only Labour").
 - Blurb: something like "Styling and décor for company celebrations, launches and formal
   occasions — polished setups your guests will remember."
-- Image: `/backdrops/backdrop-09.jpg` (Avocaderia).
+- Image: `/backdrops/backdrop-09.jpg` (Avocadoria).
 - Update: homepage services list (`home.ts`), the Services page card (`services.ts`), the Services
   dropdown child label in `contact.ts` (and its link — point to `/services#corporate`, and give
   that card `id="corporate"`), and **BRIEF.md §2/§5** (replace the setup-only labour service line
@@ -57,7 +57,7 @@ Avocaderia in-store event). Replace the third service line everywhere:
 - [ ] Custom Backdrops card (/services) and the Services dropdown "Custom Backdrops" both go to `/backdrops`.
 - [ ] Homepage service cards show real images (backdrop-07 / a flower / backdrop-09); portfolio teaser
       shows real backdrops and links to `/backdrops`.
-- [ ] Third service is "Corporate Events" (not "Setup-Only Labour") everywhere, with the Avocaderia image;
+- [ ] Third service is "Corporate Events" (not "Setup-Only Labour") everywhere, with the Avocadoria image;
       BRIEF.md updated.
 - [ ] Minimalist/light rose theme, CSS variables; `npm run lint`, `npm run build`, `npm test` all pass;
       specs updated (backdrops page, corporate rename, testimonials attribution).
