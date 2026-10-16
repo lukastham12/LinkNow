@@ -1,6 +1,6 @@
 import { Component, afterNextRender, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { GOOGLE_REVIEWS_URL, WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
+import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
@@ -106,7 +106,6 @@ export class Home {
 
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
-  protected readonly googleReviewsUrl = GOOGLE_REVIEWS_URL;
 
   // Organisations we've worked with — logo row only.
   protected readonly clients = CLIENTS;

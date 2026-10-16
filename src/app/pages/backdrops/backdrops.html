@@ -52,11 +52,6 @@
   <h2 id="reviews-heading" class="reviews__title">What our clients say</h2>
   @if (testimonials.length > 0) {
     <app-reviews-carousel [reviews]="testimonials" />
-    <div class="reviews__cta">
-      <a class="btn btn--ghost" [href]="googleReviewsUrl" target="_blank" rel="noopener">
-        Read all reviews on Google
-      </a>
-    </div>
   }
 </section>
 

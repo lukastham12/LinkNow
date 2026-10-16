@@ -1,5 +1,5 @@
 import { afterNextRender, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { pageWhatsappLink, GOOGLE_REVIEWS_URL } from '../../shared/contact';
+import { pageWhatsappLink } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 import { BACKDROP_GROUPS } from './backdrops.data';
@@ -84,7 +84,6 @@ export class Backdrops {
   protected readonly groups = BACKDROP_GROUPS;
   protected readonly testimonials = TESTIMONIALS;
   protected readonly faqs = FAQS;
-  protected readonly googleReviewsUrl = GOOGLE_REVIEWS_URL;
 
   // Carousel arrows (UX review, 16 Oct 2026 — the carousels had no controls,
   // so mouse users couldn't tell they scroll). One scroll state per category
