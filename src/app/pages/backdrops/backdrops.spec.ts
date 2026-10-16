@@ -122,4 +122,26 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(el.textContent ?? '').toContain('What our clients say');
     expect(el.querySelector('app-reviews-carousel')).toBeTruthy();
   });
+
+  it('shows a short FAQ covering lead time, venues, inclusions, deposit/cancellation and rain backup (UX review, 16 Oct 2026)', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const items = Array.from(el.querySelectorAll('.faq__item')) as HTMLDetailsElement[];
+    expect(items.length).toBeGreaterThanOrEqual(4);
+
+    const text = el.textContent ?? '';
+    expect(text).toMatch(/book/i);
+    expect(text).toMatch(/condo|void deck|HDB/i);
+    expect(text).toMatch(/setup and teardown/i);
+    expect(text).toMatch(/deposit/i);
+    expect(text).toMatch(/cancellation/i);
+    expect(text).toMatch(/rain/i);
+
+    // Guardrail: FAQ answers stay general — no unconfirmed numbers invented.
+    const faqText = Array.from(el.querySelectorAll('.faq__answer'))
+      .map((p) => p.textContent ?? '')
+      .join(' ');
+    expect(faqText).not.toMatch(/\d+\s*(%|percent|days?|weeks?)/i);
+  });
 });

@@ -35,6 +35,19 @@
   }
 </section>
 
+<section class="faq" aria-labelledby="faq-heading">
+  <p class="eyebrow eyebrow--center">Good to Know</p>
+  <h2 id="faq-heading" class="faq__title">Frequently Asked Questions</h2>
+  <div class="faq__list">
+    @for (item of faqs; track item.question) {
+      <details class="faq__item">
+        <summary class="faq__question">{{ item.question }}</summary>
+        <p class="faq__answer">{{ item.answer }}</p>
+      </details>
+    }
+  </div>
+</section>
+
 <section class="outro">
   <p class="outro__text">Want a backdrop like these? Enquire on WhatsApp.</p>
   <div class="intro__actions intro__actions--center">

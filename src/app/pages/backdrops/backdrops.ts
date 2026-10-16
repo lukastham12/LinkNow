@@ -4,6 +4,46 @@ import { TESTIMONIALS } from '../../shared/testimonials';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 import { BACKDROP_GROUPS } from './backdrops.data';
 
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+// FAQ (UX review, 16 Oct 2026): a shortlisting visitor had no answers on
+// lead time, venues, what's included, deposit/cancellation or rain backup
+// before messaging. Answers stay deliberately general rather than naming a
+// specific minimum lead time, a deposit percentage or a cancellation
+// window — none of those are confirmed business policy, so none are
+// claimed; each answer routes the specifics to a WhatsApp conversation
+// instead of inventing a number.
+const FAQS: readonly Faq[] = [
+  {
+    question: 'How far ahead do we need to book?',
+    answer:
+      "There's no fixed cut-off — message us with your date on WhatsApp and we'll tell you straight away whether it's doable. The earlier you reach out, the more design options we'll have time to plan.",
+  },
+  {
+    question: 'Do you set up in condo function rooms, void decks or HDB spaces?',
+    answer:
+      "Yes — we regularly build in condo function rooms, void decks, HDB flats, hotels and offices across Singapore. If your venue needs its own booking or permit (a void deck or function room, for example), that's arranged on your end; just tell us the space and we'll plan the setup around it.",
+  },
+  {
+    question: 'What does a backdrop include — is setup and teardown part of it?',
+    answer:
+      "Every backdrop is quoted as a full job, not a bare backdrop: delivery, setup and teardown are part of what you're quoted for, and the design is sized to fit your space. Share your venue and theme on WhatsApp and we'll confirm exactly what's included for your event.",
+  },
+  {
+    question: "What's your deposit and cancellation policy?",
+    answer:
+      "Deposit and cancellation terms are confirmed with your quote, since they depend on the scale of the job — ask us on WhatsApp before you commit to anything and we'll walk you through it.",
+  },
+  {
+    question: 'What if the event is outdoors and it rains?',
+    answer:
+      "For outdoor setups we'll talk through a rain backup — a sheltered spot, timing buffer or indoor alternative — before the day, so there's a plan in place either way.",
+  },
+];
+
 /**
  * Custom Backdrops portfolio page (route '/backdrops').
  *
@@ -20,6 +60,9 @@ import { BACKDROP_GROUPS } from './backdrops.data';
  * Reviews (UX review, 16 Oct 2026): testimonials previously only lived on
  * the homepage, not here where a visitor is actually deciding — same real
  * TESTIMONIALS data, same carousel component, shown below the gallery.
+ *
+ * FAQ (UX review, 16 Oct 2026): see FAQS above for why the answers stay
+ * general rather than naming unconfirmed numbers.
  */
 @Component({
   selector: 'app-backdrops',
@@ -31,4 +74,5 @@ export class Backdrops {
   protected readonly whatsappHref = pageWhatsappLink('Custom Backdrops');
   protected readonly groups = BACKDROP_GROUPS;
   protected readonly testimonials = TESTIMONIALS;
+  protected readonly faqs = FAQS;
 }
