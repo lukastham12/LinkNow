@@ -67,7 +67,7 @@ describe('Contact', () => {
     instance.name = 'Jane Tan';
     instance.phone = '+65 9123 4567';
     instance.email = 'jane@example.com';
-    instance.eventType = 'Corporate event';
+    instance.eventType = 'Business / corporate';
     instance.eventDate = '2026-12-01';
     instance.venue = 'Marina Bay Sands';
     instance.budget = '$1,000 – $2,500';
@@ -85,7 +85,7 @@ describe('Contact', () => {
     expect(req.request.body.name).toBe('Jane Tan');
     expect(req.request.body.phone).toBe('+65 9123 4567');
     expect(req.request.body.email).toBe('jane@example.com');
-    expect(req.request.body.event_type).toBe('Corporate event');
+    expect(req.request.body.event_type).toBe('Business / corporate');
     expect(req.request.body.event_date).toBe('2026-12-01');
     expect(req.request.body.venue).toBe('Marina Bay Sands');
     expect(req.request.body.budget).toBe('$1,000 – $2,500');
@@ -115,7 +115,7 @@ describe('Contact', () => {
     req.flush({ success: true });
   });
 
-  it('shows a corporate-specific hint under Event Type only when "Corporate event" is selected', () => {
+  it('shows a corporate-specific hint under Event Type only when "Business / corporate" is selected', () => {
     const fixture = TestBed.createComponent(Contact);
     fixture.detectChanges();
     const instance = fixture.componentInstance as unknown as { eventType: string };
@@ -123,7 +123,7 @@ describe('Contact', () => {
 
     expect(el.textContent ?? '').not.toContain('business profile, portfolio and rate card');
 
-    instance.eventType = 'Corporate event';
+    instance.eventType = 'Business / corporate';
     fixture.detectChanges();
     expect(el.textContent ?? '').toContain('business profile, portfolio and rate card');
 

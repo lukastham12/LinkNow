@@ -26,7 +26,7 @@ describe('EventsWeStyle', () => {
     expect(cards.length).toBe(3);
 
     const names = cards.map((c) => c.querySelector('h3')?.textContent?.trim());
-    expect(names).toEqual(['Birthdays & Celebrations', 'Weddings & ROM', 'Corporate Events']);
+    expect(names).toEqual(['Birthdays & Celebrations', 'Weddings & ROM', 'For Businesses']);
 
     const links = cards.map((c) => c.getAttribute('href'));
     expect(links).toEqual(['/backdrops', '/flowers', '/corporate']);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EMAIL_ADDRESS, pageWhatsappLink } from '../../shared/contact';
+import { businessWhatsappLink, EMAIL_ADDRESS } from '../../shared/contact';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
 import { CaseCard } from '../../components/case-card/case-card';
 
@@ -9,20 +9,23 @@ interface EventType {
 }
 
 /**
- * Corporate Events page (route '/corporate').
+ * For Businesses page (route '/corporate' — URL kept unchanged, owner
+ * request, 23 Oct 2026, when the page was reworded from "Corporate Events"
+ * to speak to businesses/stores/brands rather than "events").
  *
- * Informational page describing the decor we create for companies, formal
- * occasions, and any other custom event — corporate backdrops, product
- * launches, grand openings, dinner & dance, roadshows, festive/seasonal
- * decor, mall activations, and anything bespoke beyond that list ("Weddings"
- * was removed from this list 23 Oct 2026 — wedding styling belongs on
- * /flowers, not here, and the "new photography coming soon" note was stale).
- * Leads with a 4-client use-case grid (People's Association, AWWA, Bucket
- * House Preschool, Avocadoria), each card linking through to its own
- * case-study page (/corporate/:slug). WhatsApp is the primary enquiry path;
- * a secondary "Email us" mailto link sits below the main CTA for
- * corporate/admin buyers who'd rather email (owner request, 23 Oct 2026) —
- * still no form or /contact link on this page.
+ * Informational page describing the decor we create for businesses, stores
+ * and brands — corporate backdrops, product launches, grand openings,
+ * dinner & dance, roadshows, festive/seasonal decor, mall activations, and
+ * anything bespoke beyond that list ("Weddings" was removed from this list
+ * 23 Oct 2026 — wedding styling belongs on /flowers, not here, and the "new
+ * photography coming soon" note was stale). Leads with a 4-client use-case
+ * grid (People's Association, AWWA, Bucket House Preschool, Avocadoria),
+ * each card linking through to its own case-study page (/corporate/:slug).
+ * WhatsApp is the primary enquiry path (via businessWhatsappLink(), a
+ * different template from the rest of the site — Company/Location/Dates/
+ * What we need rather than Event/Venue/Theme/Budget); a secondary "Email
+ * us" mailto link sits below the main CTA for corporate/admin buyers who'd
+ * rather email — still no form or /contact link on this page.
  */
 @Component({
   selector: 'app-corporate',
@@ -31,7 +34,7 @@ interface EventType {
   styleUrl: './corporate.scss',
 })
 export class Corporate {
-  protected readonly whatsappHref = pageWhatsappLink('Corporate Events');
+  protected readonly whatsappHref = businessWhatsappLink('For Businesses');
   protected readonly emailAddress = EMAIL_ADDRESS;
   protected readonly caseStudies = CORPORATE_CASE_STUDIES;
 

@@ -42,13 +42,28 @@ export const WHATSAPP_EVENT_HREF = whatsappLink(WHATSAPP_EVENT_MESSAGE);
  * page the visitor came from in the pre-filled message cuts the
  * back-and-forth and shows the enquiry source right in the chat. Use this
  * instead of the flat WHATSAPP_HREF wherever a page has its own clear
- * identity (backdrops, corporate, about, services) — keep WHATSAPP_HREF only
- * for generic/shared chrome like the footer and the floating WhatsApp button.
+ * identity (backdrops, about, services) — keep WHATSAPP_HREF only for
+ * generic/shared chrome like the footer and the floating WhatsApp button.
+ * The For Businesses page uses businessWhatsappLink() below instead, since
+ * its template asks for different details.
  */
 export function pageWhatsappLink(pageLabel: string): string {
   return whatsappLink(
     `Hi LinkNow, I saw your ${pageLabel} page and I'd like to enquire about an event.\n` +
       ENQUIRY_TEMPLATE,
+  );
+}
+
+// For Businesses enquiry template (owner request, 23 Oct 2026 — reworded the
+// corporate section to speak to businesses rather than "events"): a
+// business/store enquiry needs a company name, outlet/location and dates,
+// not the retail Event/Venue/Theme/Budget template above.
+const BUSINESS_ENQUIRY_TEMPLATE = 'Company: \nLocation/outlet: \nDates: \nWhat we need: ';
+
+/** Page-specific wa.me link for the For Businesses page and its case studies. */
+export function businessWhatsappLink(pageLabel: string): string {
+  return whatsappLink(
+    `Hi LinkNow, I saw your ${pageLabel} page and I'd like a quote.\n` + BUSINESS_ENQUIRY_TEMPLATE,
   );
 }
 
@@ -98,7 +113,7 @@ export const NAV_LINKS: readonly NavLink[] = [
     children: [
       { label: 'Custom Backdrops', path: '/backdrops' },
       { label: 'Weddings & ROM', path: '/flowers' },
-      { label: 'Corporate Events', path: '/corporate' },
+      { label: 'For Businesses', path: '/corporate' },
     ],
   },
   { label: 'About', path: '/about' },

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Corporate } from './corporate';
 
-describe('Corporate (Corporate Events page)', () => {
+describe('Corporate (For Businesses page)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Corporate],
@@ -14,7 +14,7 @@ describe('Corporate (Corporate Events page)', () => {
     expect(TestBed.createComponent(Corporate).componentInstance).toBeTruthy();
   });
 
-  it('has a single "Corporate Events" h1', () => {
+  it('has a single h1', () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -82,7 +82,7 @@ describe('Corporate (Corporate Events page)', () => {
     expect(text.toLowerCase()).toContain('any custom corporate or formal');
   });
 
-  it('uses a page-specific WhatsApp link naming "Corporate Events", plus a secondary mailto "Email us" (owner request, 23 Oct 2026) — still no form/quote/contact-page link', () => {
+  it('uses a page-specific WhatsApp link naming "For Businesses", plus a secondary mailto "Email us" (owner request, 23 Oct 2026) — still no form/quote/contact-page link', () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -91,7 +91,14 @@ describe('Corporate (Corporate Events page)', () => {
     ) as HTMLAnchorElement[];
     expect(waLinks.length).toBeGreaterThan(0);
     for (const a of waLinks) {
-      expect(decodeURIComponent(a.href)).toContain('Corporate Events');
+      const decoded = decodeURIComponent(a.href);
+      expect(decoded).toContain('For Businesses');
+      // Business enquiry template (owner request, 23 Oct 2026) — Company/
+      // Location/Dates/What we need, not the retail Event/Venue/Theme/Budget
+      // template used elsewhere on the site.
+      expect(decoded).toContain("I'd like a quote");
+      expect(decoded).toContain('Company:');
+      expect(decoded).toContain('Location/outlet:');
     }
 
     const mailtoLinks = Array.from(el.querySelectorAll('a[href^="mailto:"]')) as HTMLAnchorElement[];

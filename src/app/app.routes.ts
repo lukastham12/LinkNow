@@ -69,8 +69,9 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
-  // Corporate Events — informational page reachable via the Services dropdown
-  // and the Corporate Events service card. Registered before the wildcard.
+  // For Businesses (renamed from "Corporate Events" 23 Oct 2026, URL kept
+  // unchanged) — informational page reachable via the Services dropdown and
+  // the For Businesses service card. Registered before the wildcard.
   {
     path: 'corporate',
     component: Corporate,

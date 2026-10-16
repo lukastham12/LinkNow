@@ -29,7 +29,7 @@ export const FEATURED_SERVICES: readonly FeaturedService[] = [
     link: '/flowers',
   },
   {
-    name: 'Corporate Events',
+    name: 'For Businesses',
     blurb:
       'Any custom corporate event — product launches, grand openings, company days. You name it, we style it.',
     image: '/corporate/peoples-association-01.jpg',

@@ -94,7 +94,7 @@ describe('CorporateCaseStudyPage', () => {
     expect(srcs).toContain('/backdrops/backdrop-09.jpg');
   });
 
-  it('uses the canonical generic WhatsApp link only (no email/quote/contact/form)', async () => {
+  it('uses the For Businesses WhatsApp link (owner request, 23 Oct 2026) — no email/contact/form', async () => {
     await configure('avocadoria');
     const fixture = TestBed.createComponent(CorporateCaseStudyPage);
     fixture.detectChanges();
@@ -103,8 +103,25 @@ describe('CorporateCaseStudyPage', () => {
       el.querySelectorAll('a[href*="wa.me/6588090600"]'),
     ) as HTMLAnchorElement[];
     expect(waLinks.length).toBeGreaterThan(0);
+    for (const a of waLinks) {
+      const decoded = decodeURIComponent(a.href);
+      expect(decoded).toContain('For Businesses');
+      expect(decoded).toContain("I'd like a quote");
+      expect(decoded).toContain('Company:');
+    }
     expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(el.querySelector('form, input, button[type="submit"]')).toBeNull();
+  });
+
+  it('shows "Get a quote for your business" buttons and a back link to For Businesses', async () => {
+    await configure('peoples-association');
+    const fixture = TestBed.createComponent(CorporateCaseStudyPage);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const back = el.querySelector('a.back') as HTMLAnchorElement;
+    expect(back.textContent?.trim()).toBe('← Back to For Businesses');
+    const buttons = Array.from(el.querySelectorAll('a.btn--solid')) as HTMLAnchorElement[];
+    expect(buttons.some((b) => b.textContent?.trim() === 'Get a quote for your business')).toBeTrue();
   });
 
   it('shows NO price, currency or quantity language anywhere (guardrail)', async () => {

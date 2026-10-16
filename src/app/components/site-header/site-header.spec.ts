@@ -55,12 +55,12 @@ describe('SiteHeader', () => {
     const el = fixture.nativeElement as HTMLElement;
     const links = Array.from(el.querySelectorAll('.submenu__link')) as HTMLAnchorElement[];
     const labels = links.map((a) => a.textContent?.trim());
-    expect(labels).toEqual(['Custom Backdrops', 'Weddings & ROM', 'Corporate Events']);
+    expect(labels).toEqual(['Custom Backdrops', 'Weddings & ROM', 'For Businesses']);
     const floral = links.find((a) => a.textContent?.includes('Weddings & ROM'));
     expect(floral?.getAttribute('href')).toBe('/flowers');
     const backdrops = links.find((a) => a.textContent?.includes('Custom Backdrops'));
     expect(backdrops?.getAttribute('href')).toBe('/backdrops');
-    const corporate = links.find((a) => a.textContent?.includes('Corporate Events'));
+    const corporate = links.find((a) => a.textContent?.includes('For Businesses'));
     expect(corporate?.getAttribute('href')).toBe('/corporate');
   });
 

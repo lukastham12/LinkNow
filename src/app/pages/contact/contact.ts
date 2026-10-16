@@ -15,7 +15,7 @@ type EventType =
   | '100 Days / Naming Ceremony'
   | 'Wedding & ROM'
   | 'Baby shower / gender reveal'
-  | 'Corporate event'
+  | 'Business / corporate'
   | 'Other';
 type Budget = 'Under $500' | '$500 – $1,000' | '$1,000 – $2,500' | '$2,500+' | 'Not sure yet';
 
@@ -44,11 +44,12 @@ const SG_PHONE_PATTERN = /^(\+65)?[3689]\d{7}$/;
  * form if they'd rather write their own email.
  *
  * Email field (owner request, 23 Oct 2026): optional, after Phone — some
- * enquiries are easier to follow up over email than WhatsApp. Corporate
- * event type also shows a hint under Event Type nudging the visitor to
- * mention in their message if they'd like LinkNow's business profile,
- * portfolio and rate card sent over, since corporate buyers usually ask for
- * those anyway.
+ * enquiries are easier to follow up over email than WhatsApp. The
+ * "Business / corporate" event type (renamed from "Corporate event" 23 Oct
+ * 2026, matching the For Businesses page) also shows a hint under Event
+ * Type nudging the visitor to mention in their message if they'd like
+ * LinkNow's business profile, portfolio and rate card sent over, since
+ * business buyers usually ask for those anyway.
  */
 @Component({
   selector: 'app-contact',
@@ -69,7 +70,7 @@ export class Contact {
     '100 Days / Naming Ceremony',
     'Wedding & ROM',
     'Baby shower / gender reveal',
-    'Corporate event',
+    'Business / corporate',
     'Other',
   ];
   protected readonly budgets: Budget[] = [
