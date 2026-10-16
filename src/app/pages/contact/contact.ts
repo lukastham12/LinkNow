@@ -2,9 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AnalyticsService } from '../../shared/analytics';
-import { UEN, WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT, WHATSAPP_HREF } from '../../shared/contact';
+import {
+  EMAIL_ADDRESS,
+  UEN,
+  WEB3FORMS_ACCESS_KEY,
+  WEB3FORMS_ENDPOINT,
+  WHATSAPP_HREF,
+} from '../../shared/contact';
 
 type EventType = 'Birthday' | 'Wedding & ROM' | 'Baby shower / gender reveal' | 'Corporate event' | 'Other';
+type Budget = 'Under $500' | '$500 – $1,000' | '$1,000 – $2,500' | '$2,500+' | 'Not sure yet';
 
 type SubmitStatus = 'idle' | 'sending' | 'success' | 'error';
 
@@ -18,6 +25,12 @@ type SubmitStatus = 'idle' | 'sending' | 'success' | 'error';
  * novestelatham@linknow-singapore.com. A separate urgency section still
  * points time-sensitive enquiries to WhatsApp. UEN is shown for
  * verification; no street address or opening hours are published.
+ *
+ * Venue/Budget fields (UX review, 16 Oct 2026): the original 5-field form
+ * (Name/Phone/Event Type/Date/Message) still made Novi chase venue and
+ * budget over follow-up messages — both are now explicit fields, and the
+ * email address is shown as plain text so a visitor isn't limited to the
+ * form if they'd rather write their own email.
  */
 @Component({
   selector: 'app-contact',
@@ -31,6 +44,7 @@ export class Contact {
 
   protected readonly whatsappHref = WHATSAPP_HREF;
   protected readonly uen = UEN;
+  protected readonly emailAddress = EMAIL_ADDRESS;
 
   protected readonly eventTypes: EventType[] = [
     'Birthday',
@@ -39,11 +53,20 @@ export class Contact {
     'Corporate event',
     'Other',
   ];
+  protected readonly budgets: Budget[] = [
+    'Under $500',
+    '$500 – $1,000',
+    '$1,000 – $2,500',
+    '$2,500+',
+    'Not sure yet',
+  ];
 
   protected name = '';
   protected phone = '';
   protected eventType: EventType | '' = '';
   protected eventDate = '';
+  protected venue = '';
+  protected budget: Budget | '' = '';
   protected message = '';
   // Honeypot: stays unchecked for real visitors (it's hidden via CSS and
   // skipped in tab order). A bot that blindly fills every form field trips
@@ -69,6 +92,8 @@ export class Contact {
       phone: this.phone,
       event_type: this.eventType,
       event_date: this.eventDate || 'Not provided',
+      venue: this.venue || 'Not provided',
+      budget: this.budget || 'Not provided',
       message: this.message || 'Not provided',
       botcheck: false,
     };
@@ -81,6 +106,8 @@ export class Contact {
         this.phone = '';
         this.eventType = '';
         this.eventDate = '';
+        this.venue = '';
+        this.budget = '';
         this.message = '';
       },
       error: () => {

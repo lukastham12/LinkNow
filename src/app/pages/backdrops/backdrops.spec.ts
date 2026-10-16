@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Backdrops } from './backdrops';
 import { BACKDROP_GROUPS, BACKDROPS } from './backdrops.data';
+import { TESTIMONIALS } from '../../shared/testimonials';
 
 describe('Backdrops (Custom Backdrops portfolio page)', () => {
   beforeEach(async () => {
@@ -111,5 +112,14 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
     expect(text).not.toMatch(/\$|SGD|price|from\s*\$/i);
     expect(text).not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
+  });
+
+  it('shows real testimonials below the gallery (UX review, 16 Oct 2026 — reviews previously only lived on the homepage)', () => {
+    expect(TESTIMONIALS.length).toBeGreaterThan(0);
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent ?? '').toContain('What our clients say');
+    expect(el.querySelector('app-reviews-carousel')).toBeTruthy();
   });
 });

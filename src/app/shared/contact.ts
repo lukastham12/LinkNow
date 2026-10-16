@@ -11,7 +11,16 @@
 // message to novestelatham@linknow-singapore.com.
 
 export const WHATSAPP_NUMBER = '6588090600';
-export const WHATSAPP_MESSAGE = "Hi LinkNow, I'd like to enquire about your services";
+
+// Fill-in-the-blank template (owner request, 16 Oct 2026, from a UX review:
+// a bare "I'd like to enquire" meant Novi had to chase date/venue/theme/
+// budget over 5-6 follow-up messages, giving a shopping visitor time to book
+// elsewhere first). Every generic WhatsApp message below appends this block
+// so the whole brief arrives in the first message.
+const ENQUIRY_TEMPLATE = 'Event: \nDate: \nVenue: \nTheme: \nBudget: ';
+
+export const WHATSAPP_MESSAGE =
+  "Hi LinkNow! I'd like to enquire about an event.\n" + ENQUIRY_TEMPLATE;
 
 /** Build a wa.me link for an arbitrary pre-filled message. */
 export function whatsappLink(message: string): string {
@@ -24,7 +33,8 @@ export const WHATSAPP_HREF = whatsappLink(WHATSAPP_MESSAGE);
 // message is used only by the hero's primary CTA and the "One booking, one
 // team" bundle band. Every other WhatsApp link on the site keeps using
 // WHATSAPP_HREF/WHATSAPP_MESSAGE above, unchanged.
-export const WHATSAPP_EVENT_MESSAGE = "Hi LinkNow, I'd like to enquire about decorating my event.";
+export const WHATSAPP_EVENT_MESSAGE =
+  "Hi LinkNow! I'd like to enquire about decorating my event.\n" + ENQUIRY_TEMPLATE;
 export const WHATSAPP_EVENT_HREF = whatsappLink(WHATSAPP_EVENT_MESSAGE);
 
 /**
@@ -36,7 +46,10 @@ export const WHATSAPP_EVENT_HREF = whatsappLink(WHATSAPP_EVENT_MESSAGE);
  * for generic/shared chrome like the footer and the floating WhatsApp button.
  */
 export function pageWhatsappLink(pageLabel: string): string {
-  return whatsappLink(`Hi LinkNow, I saw your ${pageLabel} page and I'd like to enquire.`);
+  return whatsappLink(
+    `Hi LinkNow, I saw your ${pageLabel} page and I'd like to enquire about an event.\n` +
+      ENQUIRY_TEMPLATE,
+  );
 }
 
 export const EMAIL_ADDRESS = 'novestelatham@linknow-singapore.com';

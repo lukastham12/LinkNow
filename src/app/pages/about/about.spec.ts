@@ -33,6 +33,14 @@ describe('About page', () => {
     expect(text).toMatch(/Singapore/i);
   });
 
+  it('names Novi Tham as the person running LinkNow, without inventing a bio (UX review, 16 Oct 2026)', () => {
+    const fixture = TestBed.createComponent(About);
+    fixture.detectChanges();
+    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
+    expect(text).toContain('Novi Tham');
+    expect(text).not.toMatch(/founded in|since \d{4}|award/i);
+  });
+
   it('uses a page-specific WhatsApp link naming "About" (no email/quote/contact/form on this page)', () => {
     const fixture = TestBed.createComponent(About);
     fixture.detectChanges();

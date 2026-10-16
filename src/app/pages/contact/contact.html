@@ -3,7 +3,8 @@
   <h1 class="intro__title">Let's talk about your event</h1>
   <p class="intro__lede">
     Send us your details below and we'll get back to you — or WhatsApp us if you need a faster
-    reply.
+    reply. Prefer to write your own email? Reach us at
+    <a class="intro__email" href="mailto:{{ emailAddress }}">{{ emailAddress }}</a>.
   </p>
 </section>
 
@@ -60,6 +61,27 @@
       <label class="field">
         <span class="field__label">Event Date</span>
         <input class="field__input" type="date" [(ngModel)]="eventDate" name="eventDate" />
+      </label>
+    </div>
+    <div class="form__row">
+      <label class="field">
+        <span class="field__label">Venue</span>
+        <input
+          class="field__input"
+          type="text"
+          placeholder="e.g. your home, a hotel, an office"
+          [(ngModel)]="venue"
+          name="venue"
+        />
+      </label>
+      <label class="field">
+        <span class="field__label">Budget</span>
+        <select class="field__input" [(ngModel)]="budget" name="budget">
+          <option value="">Select a range</option>
+          @for (item of budgets; track item) {
+            <option [value]="item">{{ item }}</option>
+          }
+        </select>
       </label>
     </div>
     <label class="field">

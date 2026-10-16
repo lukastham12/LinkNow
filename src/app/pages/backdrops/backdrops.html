@@ -27,6 +27,14 @@
   </section>
 }
 
+<section class="reviews" aria-labelledby="reviews-heading">
+  <p class="eyebrow eyebrow--center">Testimonials</p>
+  <h2 id="reviews-heading" class="reviews__title">What our clients say</h2>
+  @if (testimonials.length > 0) {
+    <app-reviews-carousel [reviews]="testimonials" />
+  }
+</section>
+
 <section class="outro">
   <p class="outro__text">Want a backdrop like these? Enquire on WhatsApp.</p>
   <div class="intro__actions intro__actions--center">

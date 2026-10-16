@@ -57,9 +57,9 @@ Two segments:
 | Page | Purpose | Key content |
 |------|---------|-------------|
 | **Home** | First impression + funnel to enquiry | Hero (backdrop photo, tagline, WhatsApp CTA), services overview, **"Recent work"** teaser (links to `/services`), testimonials section, WhatsApp CTA |
-| **Services** | Explain the full offering | Card grid: Custom backdrops · **Floral services** · **Corporate events**. The Custom Backdrops card links to the **Backdrops Portfolio** page (`/backdrops`); the Floral card links to the **Floral Showcase** page (`/flowers`, the gallery); the Corporate Events card links to the **Corporate Events** page (`/corporate`). |
-| **Backdrops Portfolio** (`/backdrops`) | Show the range of custom backdrops | Responsive gallery of real backdrop builds (photo tiles only, no prices) + WhatsApp CTA. **Not a top-level nav tab** — reachable via the Services dropdown and the Custom Backdrops card. |
-| **Floral Showcase** (`/flowers`) | The floral gallery | 35-item flower gallery (photo + name only, no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Floral Services card. |
+| **Services** | Explain the full offering | Card grid: Custom backdrops · **Weddings & ROM** · **Corporate events**. The Custom Backdrops card links to the **Backdrops Portfolio** page (`/backdrops`); the Weddings & ROM card links to the **Wedding & ROM Styling** page (`/flowers`); the Corporate Events card links to the **Corporate Events** page (`/corporate`). |
+| **Backdrops Portfolio** (`/backdrops`) | Show the range of custom backdrops | Backdrop photos grouped into one carousel per occasion category (no prices) + WhatsApp CTA + testimonials. **Not a top-level nav tab** — reachable via the Services dropdown and the Custom Backdrops card. |
+| **Wedding & ROM Styling** (`/flowers`) | Full wedding/ROM styling, floral-led | Floral styling as the specialty, plus backdrops, balloon accents and table styling as plain capability cards (no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Weddings & ROM card. |
 | **Corporate Events** (`/corporate`) | Décor for companies & formal occasions | Intro + copy on the range (weddings — described, no photos yet — corporate backdrops, product launches, grand openings, D&D, roadshows, festive/seasonal décor), the two Avocadoria in-store photos, and a WhatsApp CTA (no prices). **Not a top-level nav tab** — reachable via the Services dropdown and the Corporate Events card. |
 | **About** | Who we are | Company story, team, what makes us different |
 

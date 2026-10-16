@@ -48,6 +48,6 @@ describe('App', () => {
     const emailLink = Array.from(el.querySelectorAll('app-site-footer a')).find(
       (a) => a.textContent?.trim() === 'Email us',
     ) as HTMLAnchorElement | undefined;
-    expect(emailLink?.getAttribute('href')).toBe('/contact');
+    expect(emailLink?.getAttribute('href')).toBe('/contact#form-heading');
   });
 });

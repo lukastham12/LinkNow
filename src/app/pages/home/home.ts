@@ -29,29 +29,53 @@ interface HeroImage {
 
 // Rotated hero photos (owner request, 12 Oct 2026): a kids' Minecraft party
 // alone reads as "kids' party vendor" to corporate/wedding buyers, so the
-// hero now shows one of three occasions — picked client-side after
-// hydration so the prerendered HTML (SEO/first paint) stays stable on the
-// kids' photo and only swaps once a real browser is rendering.
-const HERO_IMAGES: readonly HeroImage[] = [
+// hero shows one of three occasions — picked client-side after hydration so
+// the prerendered HTML (SEO/first paint) stays stable on the kids' photo and
+// only swaps once a real browser is rendering.
+//
+// `weight` biases the pick (UX review, 16 Oct 2026): birthdays are the most
+// common reason someone lands here, and a parent who opens the homepage to
+// a corporate red-carpet arch reads it as "wrong kind of vendor" — so the
+// birthday photo shows roughly half the time, with corporate/wedding
+// splitting the rest to still signal that range to other audiences.
+interface WeightedHeroImage extends HeroImage {
+  weight: number;
+}
+
+const HERO_IMAGES: readonly WeightedHeroImage[] = [
   {
     src: '/backdrops/hero-minecraft.jpg',
     alt: "A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow for Enzo's 8th birthday",
     width: 1200,
     height: 1240,
+    weight: 2,
   },
   {
     src: '/corporate/peoples-association-01.jpg',
     alt: "Balloon pillar entrance styled by LinkNow for a People's Association Open House",
     width: 1050,
     height: 1400,
+    weight: 1,
   },
   {
     src: '/flowers/custom-arrangement-hero.jpg',
     alt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow',
     width: 1050,
     height: 1400,
+    weight: 1,
   },
 ];
+
+/** Weighted random pick — see the `weight` note on HERO_IMAGES above. */
+function pickWeightedHeroImage(): WeightedHeroImage {
+  const totalWeight = HERO_IMAGES.reduce((sum, img) => sum + img.weight, 0);
+  let roll = Math.random() * totalWeight;
+  for (const image of HERO_IMAGES) {
+    roll -= image.weight;
+    if (roll < 0) return image;
+  }
+  return HERO_IMAGES[0];
+}
 
 /** Homepage (route ''). Sections: hero, events we style, clients, portfolio
  *  teaser, testimonials, enquiry strip. WhatsApp is the only enquiry
@@ -76,8 +100,7 @@ export class Home {
 
   constructor() {
     afterNextRender(() => {
-      const index = Math.floor(Math.random() * HERO_IMAGES.length);
-      this.heroImage.set(HERO_IMAGES[index]);
+      this.heroImage.set(pickWeightedHeroImage());
     });
   }
 

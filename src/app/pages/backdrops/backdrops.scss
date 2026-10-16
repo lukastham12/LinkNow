@@ -127,6 +127,25 @@
   }
 }
 
+// Reviews --------------------------------------------------------------------
+
+.eyebrow--center {
+  text-align: center;
+}
+
+.reviews {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 0.5rem;
+}
+
+.reviews__title {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+  font-weight: 600;
+}
+
 // Outro --------------------------------------------------------------------
 
 .outro {

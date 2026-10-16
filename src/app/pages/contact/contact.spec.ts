@@ -51,7 +51,7 @@ describe('Contact', () => {
     httpMock.expectNone('https://api.web3forms.com/submit');
   });
 
-  it('has a Name, Phone, Event Type, Event Date and Message form that submits to Web3Forms', () => {
+  it('has a Name, Phone, Event Type, Event Date, Venue, Budget and Message form that submits to Web3Forms', () => {
     const fixture = TestBed.createComponent(Contact);
     fixture.detectChanges();
     const instance = fixture.componentInstance as unknown as {
@@ -59,12 +59,16 @@ describe('Contact', () => {
       phone: string;
       eventType: string;
       eventDate: string;
+      venue: string;
+      budget: string;
       message: string;
     };
     instance.name = 'Jane Tan';
     instance.phone = '+65 9123 4567';
     instance.eventType = 'Corporate event';
     instance.eventDate = '2026-12-01';
+    instance.venue = 'Marina Bay Sands';
+    instance.budget = '$1,000 – $2,500';
     instance.message = '50 guests at an office';
     fixture.detectChanges();
 
@@ -80,6 +84,8 @@ describe('Contact', () => {
     expect(req.request.body.phone).toBe('+65 9123 4567');
     expect(req.request.body.event_type).toBe('Corporate event');
     expect(req.request.body.event_date).toBe('2026-12-01');
+    expect(req.request.body.venue).toBe('Marina Bay Sands');
+    expect(req.request.body.budget).toBe('$1,000 – $2,500');
     expect(req.request.body.message).toBe('50 guests at an office');
     req.flush({ success: true });
   });
@@ -152,11 +158,15 @@ describe('Contact', () => {
     expect(text).not.toContain('by appointment');
   });
 
-  it('has no mailto link (submits directly, does not open the mail app)', () => {
+  it('the form submits directly (not via mailto); a plain mailto is shown only as a fallback for writing your own email', () => {
     const fixture = TestBed.createComponent(Contact);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
+    const submitBtn = el.querySelector('.form__submit') as HTMLButtonElement;
+    expect(submitBtn.tagName.toLowerCase()).toBe('button');
+    const mailtoLinks = Array.from(el.querySelectorAll('a[href^="mailto:"]')) as HTMLAnchorElement[];
+    expect(mailtoLinks.length).toBe(1);
+    expect(mailtoLinks[0].getAttribute('href')).toBe('mailto:novestelatham@linknow-singapore.com');
   });
 
   it('shows no price, currency or quantity language anywhere (guardrail)', () => {
