@@ -132,9 +132,11 @@
     background: var(--color-surface);
   }
 
+  // Hidden rather than faded when at the start/end of a row (UX review,
+  // 23 Oct 2026 — a disabled arrow sitting faded over the photo read as
+  // broken rather than "no more photos this way").
   .carousel__arrow:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
+    display: none;
   }
 
   .carousel__arrow--prev {

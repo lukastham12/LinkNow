@@ -161,8 +161,9 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(text).toMatch(/cancellation/i);
     expect(text).toMatch(/rain/i);
 
-    // Owner-confirmed lead time (23 Oct 2026) — the one FAQ fact that names
-    // a real number; everything else still routes to WhatsApp instead.
-    expect(text).toContain('2–3 weeks ahead is ideal');
+    // Lead time (owner request, 23 Oct 2026) — book anytime, including
+    // last-minute, no preferred window pushed.
+    expect(text).toContain('You can book anytime');
+    expect(text).toMatch(/last-minute/i);
   });
 });

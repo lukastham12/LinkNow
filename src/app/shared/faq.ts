@@ -5,9 +5,9 @@
 //
 // Answers stay deliberately general — no specific deposit percentage or
 // cancellation window is named, since neither is confirmed business policy.
-// The lead-time answer is the one exception: the owner confirmed "2–3 weeks
-// ahead is ideal; last-minute requests are often possible" (23 Oct 2026), so
-// that one fact is now stated directly rather than deferred to WhatsApp.
+// Lead time (owner request, 23 Oct 2026): there's no preferred window at
+// all — book anytime, including last-minute, so the answer says that
+// plainly rather than nudging toward booking early.
 
 export interface Faq {
   question: string;
@@ -18,7 +18,7 @@ export const FAQS: readonly Faq[] = [
   {
     question: 'How far ahead do we need to book?',
     answer:
-      "There's no fixed cut-off — message us with your date on WhatsApp and we'll tell you straight away whether it's doable. The earlier you reach out, the more design options we'll have time to plan. 2–3 weeks ahead is ideal; last-minute requests are often possible, just ask.",
+      "You can book anytime — there's no hard lead time or preferred window. We facilitate last-minute requests too, so message us on WhatsApp with your date and we'll take it from there.",
   },
   {
     question: 'Do you set up in condo function rooms, void decks or HDB spaces?',

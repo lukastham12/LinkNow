@@ -69,7 +69,7 @@ describe('Home', () => {
     ]);
   });
 
-  it('hero image is one of the kids/corporate/wedding photos (rotated, owner request 12 Oct 2026)', () => {
+  it('hero image is one of the kids\'-party/birthday photos only — no corporate or fine-dining photo (rotated, owner request 23 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -77,8 +77,8 @@ describe('Home', () => {
     expect(hero).toBeTruthy();
     expect([
       '/backdrops/hero-minecraft.jpg',
-      '/corporate/peoples-association-01.jpg',
-      '/flowers/custom-arrangement-hero.jpg',
+      '/backdrops/backdrop-24.jpg',
+      '/backdrops/backdrop-11.jpg',
     ]).toContain(hero.getAttribute('src') ?? '');
     expect((hero.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
     expect(hero.getAttribute('width')).toBeTruthy();
@@ -192,7 +192,7 @@ describe('Home', () => {
     const el = fixture.nativeElement as HTMLElement;
     const items = Array.from(el.querySelectorAll('.faq__item')) as HTMLDetailsElement[];
     expect(items.length).toBeGreaterThanOrEqual(4);
-    expect(el.textContent ?? '').toContain('2–3 weeks ahead is ideal');
+    expect(el.textContent ?? '').toContain('You can book anytime');
 
     const sections = Array.from(el.querySelectorAll('section'));
     const faqIndex = sections.findIndex((s) => s.querySelector('#faq-heading'));

@@ -28,54 +28,38 @@ interface HeroImage {
   height: number;
 }
 
-// Rotated hero photos (owner request, 12 Oct 2026): a kids' Minecraft party
-// alone reads as "kids' party vendor" to corporate/wedding buyers, so the
-// hero shows one of three occasions — picked client-side after hydration so
-// the prerendered HTML (SEO/first paint) stays stable on the kids' photo and
-// only swaps once a real browser is rendering.
-//
-// `weight` biases the pick (UX review, 16 Oct 2026): birthdays are the most
-// common reason someone lands here, and a parent who opens the homepage to
-// a corporate red-carpet arch reads it as "wrong kind of vendor" — so the
-// birthday photo shows roughly half the time, with corporate/wedding
-// splitting the rest to still signal that range to other audiences.
-interface WeightedHeroImage extends HeroImage {
-  weight: number;
-}
-
-const HERO_IMAGES: readonly WeightedHeroImage[] = [
+// Rotated hero photos (owner request, 12 Oct 2026, narrowed to kids'-party/
+// birthday photos only — owner request, 23 Oct 2026, removing the corporate
+// and fine-dining photos that used to round out the rotation): picked
+// client-side after hydration so the prerendered HTML (SEO/first paint)
+// stays stable on the first photo and only swaps once a real browser is
+// rendering, on every screen size. Add to HERO_IMAGES rather than hard-coding
+// a second hero image elsewhere — keep every entry a kids'-party/birthday
+// photo.
+const HERO_IMAGES: readonly HeroImage[] = [
   {
     src: '/backdrops/hero-minecraft.jpg',
     alt: "A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow for Enzo's 8th birthday",
     width: 1200,
     height: 1240,
-    weight: 2,
   },
   {
-    src: '/corporate/peoples-association-01.jpg',
-    alt: "Balloon pillar entrance styled by LinkNow for a People's Association Open House",
+    src: '/backdrops/backdrop-24.jpg',
+    alt: "A safari-themed 1st birthday backdrop with balloon garlands styled by LinkNow for Sharan Nikitharan",
     width: 1050,
     height: 1400,
-    weight: 1,
   },
   {
-    src: '/flowers/custom-arrangement-hero.jpg',
-    alt: 'A bespoke floral centrepiece styled along a fine-dining table by LinkNow',
+    src: '/backdrops/backdrop-11.jpg',
+    alt: 'A Peppa Pig-themed birthday backdrop styled by LinkNow',
     width: 1050,
     height: 1400,
-    weight: 1,
   },
 ];
 
-/** Weighted random pick — see the `weight` note on HERO_IMAGES above. */
-function pickWeightedHeroImage(): WeightedHeroImage {
-  const totalWeight = HERO_IMAGES.reduce((sum, img) => sum + img.weight, 0);
-  let roll = Math.random() * totalWeight;
-  for (const image of HERO_IMAGES) {
-    roll -= image.weight;
-    if (roll < 0) return image;
-  }
-  return HERO_IMAGES[0];
+/** Uniform random pick across HERO_IMAGES. */
+function pickHeroImage(): HeroImage {
+  return HERO_IMAGES[Math.floor(Math.random() * HERO_IMAGES.length)];
 }
 
 /** Homepage (route ''). Sections: hero, events we style, clients, portfolio
@@ -94,14 +78,14 @@ export class Home {
   // Hero's primary CTA uses this slightly different generic message — see contact.ts.
   protected readonly eventWhatsappHref = WHATSAPP_EVENT_HREF;
 
-  // Defaults to the kids'-party photo for the prerendered/SSR first paint,
-  // then a random one of the 3 occasions is picked once a real browser has
-  // hydrated — see HERO_IMAGES above.
+  // Defaults to the first kids'-party photo for the prerendered/SSR first
+  // paint, then a random one of HERO_IMAGES is picked once a real browser
+  // has hydrated.
   protected readonly heroImage = signal<HeroImage>(HERO_IMAGES[0]);
 
   constructor() {
     afterNextRender(() => {
-      this.heroImage.set(pickWeightedHeroImage());
+      this.heroImage.set(pickHeroImage());
     });
   }
 

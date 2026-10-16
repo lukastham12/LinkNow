@@ -10,7 +10,13 @@ import {
   WHATSAPP_HREF,
 } from '../../shared/contact';
 
-type EventType = 'Birthday' | 'Wedding & ROM' | 'Baby shower / gender reveal' | 'Corporate event' | 'Other';
+type EventType =
+  | 'Birthday'
+  | '100 Days / Naming Ceremony'
+  | 'Wedding & ROM'
+  | 'Baby shower / gender reveal'
+  | 'Corporate event'
+  | 'Other';
 type Budget = 'Under $500' | '$500 – $1,000' | '$1,000 – $2,500' | '$2,500+' | 'Not sure yet';
 
 type SubmitStatus = 'idle' | 'sending' | 'success' | 'error';
@@ -60,6 +66,7 @@ export class Contact {
 
   protected readonly eventTypes: EventType[] = [
     'Birthday',
+    '100 Days / Naming Ceremony',
     'Wedding & ROM',
     'Baby shower / gender reveal',
     'Corporate event',
