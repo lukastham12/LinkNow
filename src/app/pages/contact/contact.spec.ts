@@ -51,12 +51,13 @@ describe('Contact', () => {
     httpMock.expectNone('https://api.web3forms.com/submit');
   });
 
-  it('has a Name, Phone, Event Type, Event Date, Venue, Budget and Message form that submits to Web3Forms', () => {
+  it('has a Name, Phone, Email, Event Type, Event Date, Venue, Budget and Message form that submits to Web3Forms', () => {
     const fixture = TestBed.createComponent(Contact);
     fixture.detectChanges();
     const instance = fixture.componentInstance as unknown as {
       name: string;
       phone: string;
+      email: string;
       eventType: string;
       eventDate: string;
       venue: string;
@@ -65,6 +66,7 @@ describe('Contact', () => {
     };
     instance.name = 'Jane Tan';
     instance.phone = '+65 9123 4567';
+    instance.email = 'jane@example.com';
     instance.eventType = 'Corporate event';
     instance.eventDate = '2026-12-01';
     instance.venue = 'Marina Bay Sands';
@@ -82,12 +84,52 @@ describe('Contact', () => {
     expect(req.request.body.access_key).toBe('3e1dbb4e-f13e-45c5-9ab6-ec9219c374b0');
     expect(req.request.body.name).toBe('Jane Tan');
     expect(req.request.body.phone).toBe('+65 9123 4567');
+    expect(req.request.body.email).toBe('jane@example.com');
     expect(req.request.body.event_type).toBe('Corporate event');
     expect(req.request.body.event_date).toBe('2026-12-01');
     expect(req.request.body.venue).toBe('Marina Bay Sands');
     expect(req.request.body.budget).toBe('$1,000 – $2,500');
     expect(req.request.body.message).toBe('50 guests at an office');
     req.flush({ success: true });
+  });
+
+  it('Email is optional — submits fine with it left blank', () => {
+    const fixture = TestBed.createComponent(Contact);
+    fixture.detectChanges();
+    const instance = fixture.componentInstance as unknown as {
+      name: string;
+      phone: string;
+      eventType: string;
+    };
+    instance.name = 'Jane Tan';
+    instance.phone = '+65 9123 4567';
+    instance.eventType = 'Birthday';
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    (el.querySelector('form.form') as HTMLFormElement).dispatchEvent(new Event('submit'));
+    fixture.detectChanges();
+
+    const req = httpMock.expectOne('https://api.web3forms.com/submit');
+    expect(req.request.body.email).toBe('Not provided');
+    req.flush({ success: true });
+  });
+
+  it('shows a corporate-specific hint under Event Type only when "Corporate event" is selected', () => {
+    const fixture = TestBed.createComponent(Contact);
+    fixture.detectChanges();
+    const instance = fixture.componentInstance as unknown as { eventType: string };
+    const el = fixture.nativeElement as HTMLElement;
+
+    expect(el.textContent ?? '').not.toContain('business profile, portfolio and rate card');
+
+    instance.eventType = 'Corporate event';
+    fixture.detectChanges();
+    expect(el.textContent ?? '').toContain('business profile, portfolio and rate card');
+
+    instance.eventType = 'Birthday';
+    fixture.detectChanges();
+    expect(el.textContent ?? '').not.toContain('business profile, portfolio and rate card');
   });
 
   it('shows a success message and clears the form after a successful submit', () => {

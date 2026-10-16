@@ -26,7 +26,9 @@
      fit on one line. */
   --font-size-nav: 0.875rem; /* nav/footer links — up from ~0.72rem (~11.5px) */
   --font-size-button: 0.875rem; /* button labels — up from 0.75rem (12px) */
-  --font-size-label: 0.75rem; /* eyebrow/section labels — up from 0.68rem (~10.9px) */
+  /* eyebrow/section labels — up from 0.68rem (~10.9px) to 0.75rem (12px) on
+     16 Oct 2026, then to 0.8125rem (13px) on 23 Oct 2026 (owner request). */
+  --font-size-label: 0.8125rem;
 
   /* Consistent letter-spacing scale for the "spaced caps" look — slightly
      tightened alongside the font-size bump above. */

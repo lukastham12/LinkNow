@@ -36,6 +36,13 @@ const SG_PHONE_PATTERN = /^(\+65)?[3689]\d{7}$/;
  * budget over follow-up messages — both are now explicit fields, and the
  * email address is shown as plain text so a visitor isn't limited to the
  * form if they'd rather write their own email.
+ *
+ * Email field (owner request, 23 Oct 2026): optional, after Phone — some
+ * enquiries are easier to follow up over email than WhatsApp. Corporate
+ * event type also shows a hint under Event Type nudging the visitor to
+ * mention in their message if they'd like LinkNow's business profile,
+ * portfolio and rate card sent over, since corporate buyers usually ask for
+ * those anyway.
  */
 @Component({
   selector: 'app-contact',
@@ -72,6 +79,7 @@ export class Contact {
 
   protected name = '';
   protected phone = '';
+  protected email = '';
   protected eventType: EventType | '' = '';
   protected eventDate = '';
   protected venue = '';
@@ -160,6 +168,7 @@ export class Contact {
       subject: `New enquiry from the LinkNow website — ${this.eventType}`,
       name: this.name,
       phone: this.phone,
+      email: this.email || 'Not provided',
       event_type: this.eventType,
       event_date: this.eventDate || 'Not provided',
       venue: this.venue || 'Not provided',
@@ -174,6 +183,7 @@ export class Contact {
         this.analytics.trackEvent('email_submit', { section: 'contact', item: 'success' });
         this.name = '';
         this.phone = '';
+        this.email = '';
         this.eventType = '';
         this.eventDate = '';
         this.venue = '';

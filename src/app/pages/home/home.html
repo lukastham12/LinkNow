@@ -98,6 +98,20 @@
   }
 </section>
 
+<!-- FAQ -->
+<section class="faq" aria-labelledby="faq-heading">
+  <p class="eyebrow eyebrow--center">Good to Know</p>
+  <h2 id="faq-heading" class="faq__title">Frequently Asked Questions</h2>
+  <div class="faq__list">
+    @for (item of faqs; track item.question) {
+      <details class="faq__item">
+        <summary class="faq__question">{{ item.question }}</summary>
+        <p class="faq__answer">{{ item.answer }}</p>
+      </details>
+    }
+  </div>
+</section>
+
 <!-- ENQUIRY STRIP -->
 <section class="enquiry" aria-labelledby="enquiry-heading">
   <h2 id="enquiry-heading" class="enquiry__title">Planning something?</h2>

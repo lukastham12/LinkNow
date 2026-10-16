@@ -66,6 +66,16 @@
         }
       </label>
     </div>
+    <label class="field">
+      <span class="field__label">Email</span>
+      <input
+        class="field__input"
+        type="email"
+        placeholder="you@example.com"
+        [(ngModel)]="email"
+        name="email"
+      />
+    </label>
     <div class="form__row">
       <label class="field">
         <span class="field__label">Event Type *</span>
@@ -88,6 +98,13 @@
         </select>
         @if (eventTypeError) {
           <p id="event-type-error" class="field__error" role="alert">{{ eventTypeError }}</p>
+        }
+        @if (eventType === 'Corporate event') {
+          <p class="field__hint">
+            Planning for your company? Corporate enquiries usually need a business profile,
+            portfolio and rate card — mention in your message below if you'd like us to share
+            those with you.
+          </p>
         }
       </label>
       <label class="field">

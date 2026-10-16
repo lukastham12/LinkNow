@@ -39,14 +39,14 @@ export const ADDONS: readonly AddOn[] = [
   {
     id: 'bouncy-castle',
     title: 'Bouncy Castle',
-    line: 'Hours of safe, bouncy fun for the kids.',
+    line: "Hours of safe, bouncy fun for kids' parties.",
     icon: 'castle',
     waLink: addOnWaLink('bouncy castle'),
   },
   {
     id: 'balloon-sculpting',
     title: 'Balloon Sculpting',
-    line: 'A roving balloon artist making animals and shapes for the kids.',
+    line: 'A roving balloon artist making animals and shapes for kids and grown-ups alike.',
     icon: 'balloon',
     waLink: addOnWaLink('balloon sculpting session'),
   },

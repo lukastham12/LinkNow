@@ -114,11 +114,11 @@ export const CORPORATE_CASE_STUDIES: readonly CorporateCaseStudy[] = [
       },
     ],
     brief:
-      'Avocadoria wanted their café storefront to feel festive and photo-worthy for the Easter ' +
-      'season — something that would catch the eye from outside and give customers a reason to ' +
-      'stop and share it.',
+      'Avocadoria wanted their café storefront — a shopping mall unit — to feel festive and ' +
+      'photo-worthy for the Easter season — something that would catch the eye from outside and ' +
+      'give customers a reason to stop and share it.',
     build:
-      'A pastel balloon installation and Easter-themed display built around their storefront ' +
+      'A pastel balloon installation and Easter-themed display built around their mall storefront ' +
       'entrance, scaled to the space and designed to read well both in person and in photos.',
     result:
       'A warm, seasonal storefront moment that fit naturally with the café’s own branding — ' +

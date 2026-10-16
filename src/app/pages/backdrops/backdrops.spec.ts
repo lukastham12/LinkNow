@@ -23,13 +23,13 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(h1s[0].textContent).toContain('Custom Backdrops');
   });
 
-  it('lists all 23 backdrop photos with descriptive alt text, lazy-loaded', () => {
-    expect(BACKDROPS.length).toBe(23);
+  it('lists all 22 backdrop photos with descriptive alt text, lazy-loaded', () => {
+    expect(BACKDROPS.length).toBe(22);
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const imgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
-    expect(imgs.length).toBe(23);
+    expect(imgs.length).toBe(22);
     for (const img of imgs) {
       expect(img.getAttribute('src')).toMatch(/\/backdrops\/backdrop-\d{2}\.jpg$/);
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
@@ -43,12 +43,35 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(srcs).not.toContain('/backdrops/backdrop-09.jpg');
   });
 
+  it('excludes backdrop-16 — a duplicate of the backdrop-25 gender-reveal photo (owner request, 23 Oct 2026)', () => {
+    const srcs = BACKDROPS.map((b) => b.src);
+    expect(srcs).not.toContain('/backdrops/backdrop-16.jpg');
+    const hunnyPhotos = BACKDROPS.filter((b) => b.caption.includes('Our Little Hunny'));
+    expect(hunnyPhotos.length).toBe(1);
+  });
+
   it('every photo has a non-empty caption and a valid category', () => {
-    const validCategories = ['Birthday', '100 Days & Naming', 'Baby Shower & Gender Reveal', 'Other'];
+    const validCategories = [
+      'Birthday',
+      'Grown-Up Celebrations',
+      '100 Days & Naming',
+      'Baby Shower & Gender Reveal',
+      'Other',
+    ];
     for (const photo of BACKDROPS) {
       expect(photo.caption.length).toBeGreaterThan(0);
       expect(validCategories).toContain(photo.category);
     }
+  });
+
+  it('moves 21st/28th/30th/55th birthdays into a separate "Grown-Up Celebrations" row (owner request, 23 Oct 2026)', () => {
+    const grownUp = BACKDROPS.filter((b) => b.category === 'Grown-Up Celebrations');
+    expect(grownUp.length).toBe(4);
+    const captions = grownUp.map((b) => b.caption);
+    expect(captions).toContain("Elakiya's 28th birthday, Stitch-themed");
+    expect(captions).toContain("Lady Julie's 55th birthday soirée");
+    expect(captions).toContain("Herman Keh's 30th birthday");
+    expect(captions).toContain("Vishal Arivin Enrico's 21st birthday");
   });
 
   it('renders a visible caption under each photo', () => {
@@ -56,7 +79,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const captions = Array.from(el.querySelectorAll('.carousel__caption'));
-    expect(captions.length).toBe(23);
+    expect(captions.length).toBe(22);
     for (const caption of captions) {
       expect((caption.textContent ?? '').trim().length).toBeGreaterThan(0);
     }
@@ -138,10 +161,8 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(text).toMatch(/cancellation/i);
     expect(text).toMatch(/rain/i);
 
-    // Guardrail: FAQ answers stay general — no unconfirmed numbers invented.
-    const faqText = Array.from(el.querySelectorAll('.faq__answer'))
-      .map((p) => p.textContent ?? '')
-      .join(' ');
-    expect(faqText).not.toMatch(/\d+\s*(%|percent|days?|weeks?)/i);
+    // Owner-confirmed lead time (23 Oct 2026) — the one FAQ fact that names
+    // a real number; everything else still routes to WhatsApp instead.
+    expect(text).toContain('2–3 weeks ahead is ideal');
   });
 });

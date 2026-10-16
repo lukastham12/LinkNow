@@ -22,17 +22,19 @@ describe('Corporate (Corporate Events page)', () => {
     expect(h1s.length).toBe(1);
   });
 
-  it('describes the range of corporate occasions (incl. weddings, described only)', () => {
+  it('describes the range of corporate occasions, no "Weddings" entry (removed 23 Oct 2026 — belongs on /flowers)', () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(text).toContain('Weddings');
+    expect(text).not.toContain('Weddings');
+    expect(text).not.toContain('wedding photography coming soon');
     expect(text).toContain('Corporate backdrops');
     expect(text).toContain('Product launches');
     expect(text).toContain('Grand openings');
     expect(text).toMatch(/Dinner\s*&\s*dance/i);
     expect(text).toContain('Roadshows');
     expect(text).toMatch(/festive/i);
+    expect(text).toContain('Shopping mall activations & festive displays');
   });
 
   it("shows a 4-card use-case grid (People's Association, AWWA, Bucket House, Avocadoria), each linking to its own page", () => {
@@ -80,7 +82,7 @@ describe('Corporate (Corporate Events page)', () => {
     expect(text.toLowerCase()).toContain('any custom corporate or formal');
   });
 
-  it('uses a page-specific WhatsApp link naming "Corporate Events" (no email/quote/contact/form on this page)', () => {
+  it('uses a page-specific WhatsApp link naming "Corporate Events", plus a secondary mailto "Email us" (owner request, 23 Oct 2026) — still no form/quote/contact-page link', () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -91,7 +93,12 @@ describe('Corporate (Corporate Events page)', () => {
     for (const a of waLinks) {
       expect(decodeURIComponent(a.href)).toContain('Corporate Events');
     }
-    expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
+
+    const mailtoLinks = Array.from(el.querySelectorAll('a[href^="mailto:"]')) as HTMLAnchorElement[];
+    expect(mailtoLinks.length).toBe(1);
+    expect(mailtoLinks[0].getAttribute('href')).toBe('mailto:novestelatham@linknow-singapore.com');
+    expect(mailtoLinks[0].textContent?.trim()).toBe('Email us');
+
     expect(el.querySelector('a[href="/contact"]')).toBeNull();
     expect(el.querySelector('form, input, button[type="submit"]')).toBeNull();
     const text = el.textContent ?? '';

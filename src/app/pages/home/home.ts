@@ -2,6 +2,7 @@ import { Component, afterNextRender, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { WHATSAPP_EVENT_HREF, WHATSAPP_HREF } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
+import { FAQS } from '../../shared/faq';
 import { CLIENTS } from '../../shared/clients';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
 import { AnalyticsService } from '../../shared/analytics';
@@ -106,6 +107,10 @@ export class Home {
 
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
+
+  // Same FAQ shown on /backdrops (UX review, 23 Oct 2026 — the same
+  // pre-enquiry questions apply before a visitor ever reaches the gallery).
+  protected readonly faqs = FAQS;
 
   // Organisations we've worked with — logo row only.
   protected readonly clients = CLIENTS;

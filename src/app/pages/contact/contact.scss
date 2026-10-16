@@ -141,6 +141,15 @@
   outline-offset: 1px;
 }
 
+// Corporate helper text under Event Type (owner request, 23 Oct 2026) ------
+
+.field__hint {
+  margin: 0.4rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
 // Inline field errors (UX review, 16 Oct 2026) ------------------------------
 
 .field__input--invalid {

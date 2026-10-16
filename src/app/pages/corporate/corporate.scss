@@ -36,6 +36,17 @@
   background: color-mix(in srgb, var(--color-rose) 88%, #000);
 }
 
+.btn--ghost {
+  color: var(--color-rose);
+  border: 1px solid var(--color-hairline);
+  background: none;
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-rose);
+  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
+}
+
 // Intro --------------------------------------------------------------------
 
 .intro {
@@ -179,4 +190,10 @@
   margin: 0 0 1.75rem;
   color: var(--color-text-muted);
   font-size: 1rem;
+}
+
+// Secondary "Email us" CTA (owner request, 23 Oct 2026) — for
+// corporate/admin buyers who'd rather email than WhatsApp.
+.outro__secondary {
+  margin-top: 0.75rem;
 }

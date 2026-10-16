@@ -186,6 +186,21 @@ describe('Home', () => {
     expect(el.textContent ?? '').not.toContain('Lisha Soh');
   });
 
+  it('shows the same FAQ as /backdrops, above "Planning something?" (UX review, 23 Oct 2026)', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const items = Array.from(el.querySelectorAll('.faq__item')) as HTMLDetailsElement[];
+    expect(items.length).toBeGreaterThanOrEqual(4);
+    expect(el.textContent ?? '').toContain('2–3 weeks ahead is ideal');
+
+    const sections = Array.from(el.querySelectorAll('section'));
+    const faqIndex = sections.findIndex((s) => s.querySelector('#faq-heading'));
+    const enquiryIndex = sections.findIndex((s) => s.querySelector('#enquiry-heading'));
+    expect(faqIndex).toBeGreaterThanOrEqual(0);
+    expect(enquiryIndex).toBeGreaterThan(faqIndex);
+  });
+
   it('shows the "Our Clients" logo row — all 4 logos, no names/descriptions shown', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();

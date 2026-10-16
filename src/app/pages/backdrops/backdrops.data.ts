@@ -11,10 +11,17 @@
 //
 // backdrop-08 and backdrop-09 are the Avocadoria in-store event photos; they
 // now live on the Corporate Events page (/corporate) and are intentionally
-// excluded here (ticket 007), leaving backdrop-01…25 minus the two corporate
-// shots as gallery items.
+// excluded here (ticket 007). backdrop-16 is also excluded — a duplicate
+// upload of the same "Our Little Hunny" gender-reveal photo as backdrop-25
+// (owner request, 23 Oct 2026) — leaving backdrop-01…25 minus those three as
+// gallery items.
 
-export type BackdropCategory = 'Birthday' | '100 Days & Naming' | 'Baby Shower & Gender Reveal' | 'Other';
+export type BackdropCategory =
+  | 'Birthday'
+  | 'Grown-Up Celebrations'
+  | '100 Days & Naming'
+  | 'Baby Shower & Gender Reveal'
+  | 'Other';
 
 export interface BackdropPhoto {
   /** Path under public/ (served at the site root). */
@@ -29,16 +36,19 @@ export interface BackdropPhoto {
 // Curated display order (most eye-catching/premium-looking first), not file
 // order — the strongest designs lead so first-time visitors are hooked
 // before they scroll. Re-order this list to change what leads.
+// backdrop-16 is the same "Our Little Hunny" gender-reveal photo as
+// backdrop-25 (duplicate upload) — removed from here and from ORDER below
+// (owner request, 23 Oct 2026).
 const PHOTOS: Record<number, { caption: string; category: BackdropCategory }> = {
   25: { caption: 'Gender reveal balloon arch — "Our Little Hunny is on the way!"', category: 'Baby Shower & Gender Reveal' },
   2: { caption: "Daxton's 100 Days backdrop", category: '100 Days & Naming' },
-  22: { caption: "Elakiya's 28th birthday, Stitch-themed", category: 'Birthday' },
-  21: { caption: "Lady Julie's 55th birthday soirée", category: 'Birthday' },
+  22: { caption: "Elakiya's 28th birthday, Stitch-themed", category: 'Grown-Up Celebrations' },
+  21: { caption: "Lady Julie's 55th birthday soirée", category: 'Grown-Up Celebrations' },
   23: { caption: 'Sparkle & Co. retail pop-up backdrop', category: 'Other' },
   18: { caption: 'Welcome backdrop for newborn Aarav Xayyan', category: 'Baby Shower & Gender Reveal' },
   19: { caption: 'Aqiqah naming-ceremony backdrop', category: '100 Days & Naming' },
   24: { caption: "Sharan Nikitharan's 1st birthday, safari-themed", category: 'Birthday' },
-  15: { caption: "Vishal Arivin Enrico's 21st birthday", category: 'Birthday' },
+  15: { caption: "Vishal Arivin Enrico's 21st birthday", category: 'Grown-Up Celebrations' },
   17: { caption: "Raphael's 1st birthday", category: 'Birthday' },
   12: { caption: '16th birthday, gold & black', category: 'Birthday' },
   5: { caption: "Farzanah's baby shower", category: 'Baby Shower & Gender Reveal' },
@@ -47,17 +57,14 @@ const PHOTOS: Record<number, { caption: string; category: BackdropCategory }> = 
   20: { caption: "Enzo's 8th birthday, Minecraft-themed", category: 'Birthday' },
   1: { caption: 'Naming ceremony backdrop for a little prince', category: '100 Days & Naming' },
   4: { caption: 'Easter "He is Risen" backdrop', category: 'Other' },
-  16: { caption: 'Gender reveal balloon arch — "Our Little Hunny is on the way!"', category: 'Baby Shower & Gender Reveal' },
   6: { caption: 'Ganesh prayer-function backdrop', category: 'Other' },
-  3: { caption: "Herman Keh's 30th birthday", category: 'Birthday' },
+  3: { caption: "Herman Keh's 30th birthday", category: 'Grown-Up Celebrations' },
   13: { caption: "Azkayra Nur Aasyifa's birthday, Kuromi-themed", category: 'Birthday' },
   10: { caption: "Leia's 1st birthday", category: 'Birthday' },
   11: { caption: 'Peppa Pig-themed birthday backdrop', category: 'Birthday' },
 };
 
-const ORDER = [
-  25, 2, 22, 21, 23, 18, 19, 24, 15, 17, 12, 5, 7, 14, 20, 1, 4, 16, 6, 3, 13, 10, 11,
-];
+const ORDER = [25, 2, 22, 21, 23, 18, 19, 24, 15, 17, 12, 5, 7, 14, 20, 1, 4, 6, 3, 13, 10, 11];
 
 export const BACKDROPS: readonly BackdropPhoto[] = ORDER.map((num) => {
   const n = String(num).padStart(2, '0');
@@ -72,6 +79,7 @@ export const BACKDROPS: readonly BackdropPhoto[] = ORDER.map((num) => {
 
 export const BACKDROP_CATEGORIES: readonly BackdropCategory[] = [
   'Birthday',
+  'Grown-Up Celebrations',
   '100 Days & Naming',
   'Baby Shower & Gender Reveal',
   'Other',
