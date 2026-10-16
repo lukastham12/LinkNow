@@ -113,6 +113,15 @@
   }
 }
 
+// Owner feedback, 23 Oct 2026 — at desktop widths the 2-column grid left
+// each card oversized. A 3rd column also splits the current 5 case studies
+// into a tidier 3+2 instead of 2+2+1.
+@media (min-width: 960px) {
+  .cases__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 // Range of occasions -------------------------------------------------------
 
 .range {
