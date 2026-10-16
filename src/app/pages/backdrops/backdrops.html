@@ -13,17 +13,37 @@
   </div>
 </section>
 
-@for (group of groups; track group.category) {
+@for (group of groups; track group.category; let i = $index) {
   <section class="gallery" [attr.aria-labelledby]="group.category + '-heading'">
     <h2 [id]="group.category + '-heading'" class="gallery__title">{{ group.category }}</h2>
-    <ul class="carousel">
-      @for (photo of group.photos; track photo.src) {
-        <li class="carousel__item">
-          <img class="carousel__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
-          <p class="carousel__caption">{{ photo.caption }}</p>
-        </li>
-      }
-    </ul>
+    <div class="carousel-wrap">
+      <button
+        type="button"
+        class="carousel__arrow carousel__arrow--prev"
+        [attr.aria-label]="'Scroll to previous ' + group.category + ' photos'"
+        [disabled]="carouselState[group.category]?.atStart ?? true"
+        (click)="scrollCarousel(group.category, 'prev')"
+      >
+        <span aria-hidden="true">&lsaquo;</span>
+      </button>
+      <ul #carouselRef class="carousel" (scroll)="onCarouselScroll(group.category, $event)">
+        @for (photo of group.photos; track photo.src) {
+          <li class="carousel__item">
+            <img class="carousel__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+            <p class="carousel__caption">{{ photo.caption }}</p>
+          </li>
+        }
+      </ul>
+      <button
+        type="button"
+        class="carousel__arrow carousel__arrow--next"
+        [attr.aria-label]="'Scroll to next ' + group.category + ' photos'"
+        [disabled]="carouselState[group.category]?.atEnd ?? false"
+        (click)="scrollCarousel(group.category, 'next')"
+      >
+        <span aria-hidden="true">&rsaquo;</span>
+      </button>
+    </div>
   </section>
 }
 
@@ -32,6 +52,11 @@
   <h2 id="reviews-heading" class="reviews__title">What our clients say</h2>
   @if (testimonials.length > 0) {
     <app-reviews-carousel [reviews]="testimonials" />
+    <div class="reviews__cta">
+      <a class="btn btn--ghost" [href]="googleReviewsUrl" target="_blank" rel="noopener">
+        Read all reviews on Google
+      </a>
+    </div>
   }
 </section>
 

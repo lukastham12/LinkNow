@@ -11,15 +11,27 @@
   --color-rose: #a63f57; /* rose accent — AA on off-white bg and with white text */
   --color-rose-soft: #c98a99;
   --color-text: #22201c; /* warm near-black charcoal */
-  --color-text-muted: #7c766b;
+  /* Darkened from #7c766b (UX review, 16 Oct 2026 — the lighter grey measured
+     ~4.19:1 against --color-bg, short of WCAG AA's 4.5:1 for normal text).
+     #6b655a keeps the same warm-grey hue at ~5.4:1. */
+  --color-text-muted: #6b655a;
   --color-hairline: rgba(166, 63, 87, 0.35);
   --color-border: rgba(34, 32, 28, 0.14);
 
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-  /* Consistent letter-spacing scale for the "spaced caps" look. */
-  --track-wide: 0.32em;
-  --track-mid: 0.18em;
+  /* Shared font-size tokens (UX review, 16 Oct 2026 — nav links, button
+     labels and the small uppercase section labels all read too small).
+     Letter-spacing below is tuned down to match so the larger labels still
+     fit on one line. */
+  --font-size-nav: 0.875rem; /* nav/footer links — up from ~0.72rem (~11.5px) */
+  --font-size-button: 0.875rem; /* button labels — up from 0.75rem (12px) */
+  --font-size-label: 0.75rem; /* eyebrow/section labels — up from 0.68rem (~10.9px) */
+
+  /* Consistent letter-spacing scale for the "spaced caps" look — slightly
+     tightened alongside the font-size bump above. */
+  --track-wide: 0.26em;
+  --track-mid: 0.14em;
 }
 
 * {
@@ -42,4 +54,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Clearance for the floating WhatsApp button (UX review, 16 Oct 2026 — below
+   768px it's fixed over the bottom of every page and overlapped card text,
+   headings and the /contact Budget dropdown). The button is largest in its
+   icon+label form (~48px tall) plus its 1rem offset from the viewport
+   bottom, so this adds a bit more than that beneath the page's own content
+   on every route — the floating button still sits on top, but nothing is
+   left underneath it. */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 4.75rem;
+  }
 }

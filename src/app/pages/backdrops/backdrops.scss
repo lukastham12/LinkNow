@@ -3,14 +3,14 @@
 .eyebrow {
   margin: 0 0 0.75rem;
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--font-size-label);
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
 }
 
 .btn {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: var(--font-size-button);
   letter-spacing: var(--track-mid);
   text-transform: uppercase;
   text-decoration: none;
@@ -30,6 +30,17 @@
 
 .btn--solid:hover {
   background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
+.btn--ghost {
+  color: var(--color-rose);
+  border: 1px solid var(--color-hairline);
+  background: none;
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-rose);
+  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
 }
 
 // Intro --------------------------------------------------------------------
@@ -66,28 +77,84 @@
 
 // Gallery — one section + horizontally-scrolling carousel per category -----
 
+// Horizontal padding lives on .gallery itself (not on the title or the
+// carousel separately) so the carousel's left edge always lines up with the
+// heading above it (UX review, 16 Oct 2026 — they'd drifted out of sync at
+// some widths when each had its own padding).
 .gallery {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 1.5rem 0 0.5rem;
+  padding: 1.5rem 1.25rem 0.5rem;
 }
 
 .gallery__title {
   margin: 0 0 1rem;
-  padding-inline: 1.25rem;
   font-size: clamp(1.25rem, 3.5vw, 1.6rem);
   font-weight: 600;
+}
+
+.carousel-wrap {
+  position: relative;
 }
 
 .carousel {
   list-style: none;
   margin: 0;
-  padding: 0 1.25rem 0.75rem;
+  padding: 0 0 0.75rem;
   display: flex;
   gap: 0.9rem;
   overflow-x: auto;
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
+}
+
+// Prev/next arrows (UX review, 16 Oct 2026 — mouse users had no sign the
+// carousels scroll). Hidden on mobile, where touch swipe already works and
+// the arrows would just eat into limited screen width.
+.carousel__arrow {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .carousel__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+    color: var(--color-text);
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .carousel__arrow:hover:not(:disabled) {
+    background: var(--color-surface);
+  }
+
+  .carousel__arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .carousel__arrow--prev {
+    left: 0.25rem;
+  }
+
+  .carousel__arrow--next {
+    right: 0.25rem;
+  }
 }
 
 .carousel__item {
@@ -144,6 +211,11 @@
   text-align: center;
   font-size: clamp(1.25rem, 3.5vw, 1.6rem);
   font-weight: 600;
+}
+
+.reviews__cta {
+  margin-top: 1.5rem;
+  text-align: center;
 }
 
 // FAQ ------------------------------------------------------------------------

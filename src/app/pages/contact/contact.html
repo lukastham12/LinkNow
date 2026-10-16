@@ -28,35 +28,67 @@
       <label class="field">
         <span class="field__label">Name *</span>
         <input
+          #nameInput
           class="field__input"
+          [class.field__input--invalid]="nameError"
           type="text"
           placeholder="Your full name"
           [(ngModel)]="name"
+          (ngModelChange)="touched.name && (nameError = validateName())"
+          (blur)="onNameTouched()"
           name="name"
           required
+          [attr.aria-invalid]="nameError ? 'true' : null"
+          [attr.aria-describedby]="nameError ? 'name-error' : null"
         />
+        @if (nameError) {
+          <p id="name-error" class="field__error" role="alert">{{ nameError }}</p>
+        }
       </label>
       <label class="field">
         <span class="field__label">Phone / WhatsApp *</span>
         <input
+          #phoneInput
           class="field__input"
+          [class.field__input--invalid]="phoneError"
           type="tel"
           placeholder="+65 9123 4567"
           [(ngModel)]="phone"
+          (ngModelChange)="touched.phone && (phoneError = validatePhone())"
+          (blur)="onPhoneTouched()"
           name="phone"
           required
+          [attr.aria-invalid]="phoneError ? 'true' : null"
+          [attr.aria-describedby]="phoneError ? 'phone-error' : null"
         />
+        @if (phoneError) {
+          <p id="phone-error" class="field__error" role="alert">{{ phoneError }}</p>
+        }
       </label>
     </div>
     <div class="form__row">
       <label class="field">
         <span class="field__label">Event Type *</span>
-        <select class="field__input" [(ngModel)]="eventType" name="eventType" required>
+        <select
+          #eventTypeInput
+          class="field__input"
+          [class.field__input--invalid]="eventTypeError"
+          [(ngModel)]="eventType"
+          (ngModelChange)="touched.eventType && (eventTypeError = validateEventType())"
+          (blur)="onEventTypeTouched()"
+          name="eventType"
+          required
+          [attr.aria-invalid]="eventTypeError ? 'true' : null"
+          [attr.aria-describedby]="eventTypeError ? 'event-type-error' : null"
+        >
           <option value="">Select type</option>
           @for (item of eventTypes; track item) {
             <option [value]="item">{{ item }}</option>
           }
         </select>
+        @if (eventTypeError) {
+          <p id="event-type-error" class="field__error" role="alert">{{ eventTypeError }}</p>
+        }
       </label>
       <label class="field">
         <span class="field__label">Event Date</span>

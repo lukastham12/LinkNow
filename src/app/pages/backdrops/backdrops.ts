@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
-import { pageWhatsappLink } from '../../shared/contact';
+import { afterNextRender, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { pageWhatsappLink, GOOGLE_REVIEWS_URL } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 import { BACKDROP_GROUPS } from './backdrops.data';
+
+interface CarouselScrollState {
+  atStart: boolean;
+  atEnd: boolean;
+}
 
 interface Faq {
   question: string;
@@ -63,6 +68,10 @@ const FAQS: readonly Faq[] = [
  *
  * FAQ (UX review, 16 Oct 2026): see FAQS above for why the answers stay
  * general rather than naming unconfirmed numbers.
+ *
+ * Carousel arrows (UX review, 16 Oct 2026): previous/next buttons on
+ * tablet/desktop (hidden on mobile, where touch swipe already works) —
+ * see the carouselState/scrollCarousel members above.
  */
 @Component({
   selector: 'app-backdrops',
@@ -75,4 +84,49 @@ export class Backdrops {
   protected readonly groups = BACKDROP_GROUPS;
   protected readonly testimonials = TESTIMONIALS;
   protected readonly faqs = FAQS;
+  protected readonly googleReviewsUrl = GOOGLE_REVIEWS_URL;
+
+  // Carousel arrows (UX review, 16 Oct 2026 — the carousels had no controls,
+  // so mouse users couldn't tell they scroll). One scroll state per category
+  // (atStart/atEnd), used to disable the matching arrow at each end. Read
+  // after the first render (afterNextRender), same pattern as the hero image
+  // pick in home.ts — mutating carouselState any earlier (e.g. in
+  // ngAfterViewInit) trips Angular's "changed after checked" dev-mode guard.
+  @ViewChildren('carouselRef') private carouselRefs!: QueryList<ElementRef<HTMLUListElement>>;
+  private readonly carouselElements = new Map<string, HTMLUListElement>();
+  protected readonly carouselState: Record<string, CarouselScrollState> = {};
+
+  constructor() {
+    afterNextRender(() => {
+      const refs = this.carouselRefs.toArray();
+      this.groups.forEach((group, i) => {
+        const el = refs[i]?.nativeElement;
+        if (!el) {
+          return;
+        }
+        this.carouselElements.set(group.category, el);
+        this.carouselState[group.category] = this.readScrollState(el);
+      });
+    });
+  }
+
+  private readScrollState(el: HTMLUListElement): CarouselScrollState {
+    return {
+      atStart: el.scrollLeft <= 1,
+      atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 1,
+    };
+  }
+
+  protected onCarouselScroll(category: string, event: Event): void {
+    this.carouselState[category] = this.readScrollState(event.target as HTMLUListElement);
+  }
+
+  protected scrollCarousel(category: string, direction: 'prev' | 'next'): void {
+    const el = this.carouselElements.get(category);
+    if (!el) {
+      return;
+    }
+    const amount = el.clientWidth * 0.9 * (direction === 'next' ? 1 : -1);
+    el.scrollBy({ left: amount, behavior: 'smooth' });
+  }
 }

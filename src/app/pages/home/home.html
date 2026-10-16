@@ -90,6 +90,11 @@
   <h2 id="testimonials-heading" class="section__title">Client Testimonials</h2>
   @if (testimonials.length > 0) {
     <app-reviews-carousel [reviews]="testimonials" />
+    <div class="section__cta">
+      <a class="btn btn--ghost" [href]="googleReviewsUrl" target="_blank" rel="noopener">
+        Read all reviews on Google
+      </a>
+    </div>
   } @else {
     <p style="margin: 1.5rem 0 0; text-align: center; font-size: 0.72rem; font-style: italic; color: var(--color-text-muted)">
       Our 5-star Google reviews are coming soon. In the meantime, message us on WhatsApp to hear

@@ -3,14 +3,14 @@
 .eyebrow {
   margin: 0 0 0.75rem;
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--font-size-label);
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
 }
 
 .btn {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: var(--font-size-button);
   letter-spacing: var(--track-mid);
   text-transform: uppercase;
   text-decoration: none;

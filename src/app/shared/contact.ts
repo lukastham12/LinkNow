@@ -70,6 +70,12 @@ export const UEN = '202608341G';
 export const INSTAGRAM_URL = 'https://www.instagram.com/linknowsg/';
 export const TIKTOK_URL = 'https://www.tiktok.com/@linknowsg';
 
+// Google Business Profile reviews link (UX review, 16 Oct 2026 — testimonials
+// had no way to verify they're real/see more). PLACEHOLDER: replace with the
+// real "share review link" from the LinkNow Google Business Profile once
+// available (Google Business Profile → "Ask for reviews" → copy link).
+export const GOOGLE_REVIEWS_URL = 'https://g.page/r/REPLACE_WITH_REAL_GOOGLE_REVIEWS_LINK/review';
+
 // Primary navigation used by the header (and footer).
 //
 // Weddings & ROM is NOT a top-level tab: the Wedding & ROM styling page

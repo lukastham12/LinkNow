@@ -3,7 +3,7 @@
 .eyebrow {
   margin: 0 0 0.75rem;
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: var(--font-size-label);
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
 }
@@ -14,7 +14,7 @@
 
 .btn {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: var(--font-size-button);
   letter-spacing: var(--track-mid);
   text-transform: uppercase;
   text-decoration: none;
@@ -139,6 +139,22 @@
 .field__input:focus-visible {
   outline: 2px solid var(--color-rose);
   outline-offset: 1px;
+}
+
+// Inline field errors (UX review, 16 Oct 2026) ------------------------------
+
+.field__input--invalid {
+  border-color: #b3261e;
+}
+
+.field__input--invalid:focus-visible {
+  outline-color: #b3261e;
+}
+
+.field__error {
+  margin: 0;
+  color: #b3261e;
+  font-size: 0.78rem;
 }
 
 .form__submit {

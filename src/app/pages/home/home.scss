@@ -7,7 +7,7 @@
 .eyebrow {
   @extend %muted;
   margin: 0 0 0.75rem;
-  font-size: 0.68rem;
+  font-size: var(--font-size-label);
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
 }
@@ -18,7 +18,7 @@
 
 .btn {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: var(--font-size-button);
   letter-spacing: var(--track-mid);
   text-transform: uppercase;
   text-decoration: none;
@@ -88,6 +88,17 @@
   display: grid;
   gap: 1.25rem;
   align-items: center;
+}
+
+// Mobile hero reorder (UX review, 16 Oct 2026 — the photo sat below the
+// headline/copy/buttons, so the first screen on a phone was all text). The
+// grid order is flipped below 768px so the photo leads; markup/copy stay
+// unchanged. The existing 200px image height already leaves the H1 visible
+// without scrolling on a 390×844 screen once it's first.
+@media (max-width: 767px) {
+  .hero__media {
+    order: -1;
+  }
 }
 
 .hero__title {

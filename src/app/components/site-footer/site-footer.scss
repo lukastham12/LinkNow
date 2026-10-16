@@ -44,7 +44,7 @@
 .footer__link {
   color: var(--color-text);
   text-decoration: none;
-  font-size: 0.72rem;
+  font-size: var(--font-size-nav);
   letter-spacing: var(--track-mid);
   text-transform: uppercase;
 }
@@ -70,7 +70,7 @@
   display: inline-block;
   color: var(--color-rose);
   text-decoration: none;
-  font-size: 0.72rem;
+  font-size: var(--font-size-button);
   letter-spacing: var(--track-mid);
   text-transform: uppercase;
   padding: 0.7rem 1.5rem;
