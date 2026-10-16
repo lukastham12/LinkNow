@@ -77,7 +77,7 @@ export const routes: Routes = [
     component: Corporate,
     data: {
       seo: {
-        title: 'Corporate Event Decor in Singapore | LinkNow Pte Ltd',
+        title: 'Decor for Businesses in Singapore | LinkNow Pte Ltd',
         description:
           'Corporate event decor in Singapore — backdrops, product launches, grand openings, ' +
           'D&D and festive styling for companies and formal occasions.',
@@ -87,6 +87,7 @@ export const routes: Routes = [
   },
   // Corporate case-study pages — one static route per client use-case shown
   // on the /corporate grid. Registered before the wildcard.
+  // (Sparkle & Co. added 23 Oct 2026.)
   {
     path: 'corporate/peoples-association',
     component: CorporateCaseStudyPage,
@@ -140,6 +141,20 @@ export const routes: Routes = [
           "A case study on Avocadoria's in-store Easter event — a pastel balloon installation " +
           'styled by LinkNow',
         path: '/corporate/avocadoria/',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'corporate/sparkle-and-co',
+    component: CorporateCaseStudyPage,
+    data: {
+      slug: 'sparkle-and-co',
+      seo: {
+        title: 'Sparkle & Co. Flea & Feast Booth Styling | LinkNow Pte Ltd',
+        description:
+          "A case study on Sparkle & Co.'s booth at The Twilight: Flea & Feast, Suntec Singapore " +
+          '— full booth styling by LinkNow',
+        path: '/corporate/sparkle-and-co/',
       } satisfies PageSeo,
     },
   },

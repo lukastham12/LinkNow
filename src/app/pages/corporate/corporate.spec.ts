@@ -32,17 +32,17 @@ describe('Corporate (For Businesses page)', () => {
     expect(text).toContain('Product launches');
     expect(text).toContain('Grand openings');
     expect(text).toMatch(/Dinner\s*&\s*dance/i);
-    expect(text).toContain('Roadshows');
+    expect(text).toContain('Booths, pop-ups & roadshows');
     expect(text).toMatch(/festive/i);
     expect(text).toContain('Shopping mall activations & festive displays');
   });
 
-  it("shows a 4-card use-case grid (People's Association, AWWA, Bucket House, Avocadoria), each linking to its own page", () => {
+  it("shows a 5-card use-case grid (People's Association, AWWA, Bucket House, Avocadoria, Sparkle & Co.), each linking to its own page", () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const cards = Array.from(el.querySelectorAll('.case-card')) as HTMLAnchorElement[];
-    expect(cards.length).toBe(4);
+    expect(cards.length).toBe(5);
     const labels = Array.from(el.querySelectorAll('.case-card__label')).map((n) =>
       (n.textContent ?? '').trim(),
     );
@@ -50,12 +50,14 @@ describe('Corporate (For Businesses page)', () => {
     expect(labels.some((l) => l.includes('AWWA'))).toBeTrue();
     expect(labels.some((l) => l.includes('Bucket House'))).toBeTrue();
     expect(labels.some((l) => l.includes('Avocadoria'))).toBeTrue();
+    expect(labels.some((l) => l.includes('Sparkle & Co.'))).toBeTrue();
 
     const hrefs = cards.map((c) => c.getAttribute('href'));
     expect(hrefs).toContain('/corporate/peoples-association');
     expect(hrefs).toContain('/corporate/awwa');
     expect(hrefs).toContain('/corporate/bucket-house');
     expect(hrefs).toContain('/corporate/avocadoria');
+    expect(hrefs).toContain('/corporate/sparkle-and-co');
 
     for (const card of cards) {
       const img = card.querySelector('.case-card__img') as HTMLImageElement;
@@ -75,11 +77,25 @@ describe('Corporate (For Businesses page)', () => {
     expect(text).not.toContain('What we built');
   });
 
-  it('states scope covers any custom corporate or formal event, not just the listed types', () => {
+  it('states scope covers any business occasion, not just the listed types (reworded 23 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Corporate);
     fixture.detectChanges();
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(text.toLowerCase()).toContain('any custom corporate or formal');
+    expect(text).toContain("Don't see what you need? Tell us — we design for any business occasion.");
+  });
+
+  it('shows a "For Businesses" FAQ accordion with all 4 questions (owner request, 23 Oct 2026)', () => {
+    const fixture = TestBed.createComponent(Corporate);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const items = Array.from(el.querySelectorAll('.faq__item')) as HTMLDetailsElement[];
+    expect(items.length).toBe(4);
+    const text = el.textContent ?? '';
+    expect(text).toContain('Can you install outside opening hours?');
+    expect(text).toContain('Can you include our branding?');
+    expect(text).toContain('Who handles mall or venue approvals?');
+    expect(text).toContain('Do you issue invoices?');
+    expect(text).toContain('every business job comes with a formal invoice');
   });
 
   it('uses a page-specific WhatsApp link naming "For Businesses", plus a secondary mailto "Email us" (owner request, 23 Oct 2026) — still no form/quote/contact-page link', () => {

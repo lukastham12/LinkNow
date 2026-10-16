@@ -94,6 +94,29 @@ describe('CorporateCaseStudyPage', () => {
     expect(srcs).toContain('/backdrops/backdrop-09.jpg');
   });
 
+  it('renders the Sparkle & Co. case study (added 23 Oct 2026) with its booth photo and brief/build copy', async () => {
+    await configure('sparkle-and-co');
+    const fixture = TestBed.createComponent(CorporateCaseStudyPage);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+
+    const h1s = el.querySelectorAll('h1');
+    expect(h1s.length).toBe(1);
+    expect(h1s[0].textContent).toContain('Sparkle & Co.');
+
+    const text = el.textContent ?? '';
+    expect(text).toMatch(/twilight: flea & feast/i);
+    expect(text).toMatch(/suntec singapore/i);
+    expect(text).toMatch(/4m\s*×\s*4m/i);
+    expect(text).toContain('[RESULT — to fill in]');
+
+    const imgs = Array.from(el.querySelectorAll('.showcase__img')) as HTMLImageElement[];
+    expect(imgs.length).toBe(1);
+    expect(imgs[0].getAttribute('src')).toBe('/backdrops/backdrop-23.jpg');
+    expect((imgs[0].getAttribute('alt') ?? '').length).toBeGreaterThan(0);
+    expect(imgs[0].getAttribute('loading')).toBe('lazy');
+  });
+
   it('uses the For Businesses WhatsApp link (owner request, 23 Oct 2026) — no email/contact/form', async () => {
     await configure('avocadoria');
     const fixture = TestBed.createComponent(CorporateCaseStudyPage);

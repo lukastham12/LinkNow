@@ -124,4 +124,25 @@ export const CORPORATE_CASE_STUDIES: readonly CorporateCaseStudy[] = [
       'A warm, seasonal storefront moment that fit naturally with the café’s own branding — ' +
       'the same disciplined, no-clutter styling we bring to every event, corporate or retail.',
   },
+  {
+    slug: 'sparkle-and-co',
+    client: 'Sparkle & Co.',
+    headline: {
+      src: '/backdrops/backdrop-23.jpg',
+      alt: 'Sparkle & Co. retail pop-up backdrop styled by LinkNow at The Twilight: Flea & Feast',
+    },
+    photos: [
+      {
+        src: '/backdrops/backdrop-23.jpg',
+        alt: 'Sparkle & Co. retail pop-up backdrop styled by LinkNow at The Twilight: Flea & Feast',
+      },
+    ],
+    brief:
+      'Sparkle & Co. needed their booth at The Twilight: Flea & Feast (Suntec Singapore, Halls ' +
+      '401–403) to stand out across a busy 3-day fair.',
+    build:
+      'Full styling for their 4m × 4m booth — backdrop and decor designed to draw shoppers in ' +
+      'from the aisle.',
+    result: '[RESULT — to fill in]',
+  },
 ];

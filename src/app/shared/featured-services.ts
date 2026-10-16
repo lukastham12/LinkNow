@@ -31,7 +31,7 @@ export const FEATURED_SERVICES: readonly FeaturedService[] = [
   {
     name: 'For Businesses',
     blurb:
-      'Any custom corporate event — product launches, grand openings, company days. You name it, we style it.',
+      'Store displays, launches, booths and staff celebrations — tell us what your business needs.',
     image: '/corporate/peoples-association-01.jpg',
     imageAlt: "Balloon pillar entrance styled by LinkNow for a People's Association Open House",
     link: '/corporate',

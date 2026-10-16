@@ -40,9 +40,21 @@
     }
   </ul>
   <p class="range__note">
-    Don't see your event type? We design and style for any custom corporate or formal
-    occasion — tell us what you have in mind on WhatsApp.
+    Don't see what you need? Tell us — we design for any business occasion.
   </p>
+</section>
+
+<section class="faq" aria-labelledby="faq-heading">
+  <p class="eyebrow eyebrow--center">For Businesses FAQ</p>
+  <h2 id="faq-heading" class="faq__title">Frequently asked questions</h2>
+  <div class="faq__list">
+    @for (item of faqs; track item.question) {
+      <details class="faq__item">
+        <summary class="faq__question">{{ item.question }}</summary>
+        <p class="faq__answer">{{ item.answer }}</p>
+      </details>
+    }
+  </div>
 </section>
 
 <section class="outro">
