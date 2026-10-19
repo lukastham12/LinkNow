@@ -38,6 +38,7 @@
           (blur)="onNameTouched()"
           name="name"
           required
+          [attr.maxlength]="maxLengths.name"
           [attr.aria-invalid]="nameError ? 'true' : null"
           [attr.aria-describedby]="nameError ? 'name-error' : null"
         />
@@ -58,6 +59,7 @@
           (blur)="onPhoneTouched()"
           name="phone"
           required
+          [attr.maxlength]="maxLengths.phone"
           [attr.aria-invalid]="phoneError ? 'true' : null"
           [attr.aria-describedby]="phoneError ? 'phone-error' : null"
         />
@@ -69,12 +71,22 @@
     <label class="field">
       <span class="field__label">Email</span>
       <input
+        #emailInput
         class="field__input"
+        [class.field__input--invalid]="emailError"
         type="email"
         placeholder="you@example.com"
         [(ngModel)]="email"
+        (ngModelChange)="touched.email && (emailError = validateEmail())"
+        (blur)="onEmailTouched()"
         name="email"
+        [attr.maxlength]="maxLengths.email"
+        [attr.aria-invalid]="emailError ? 'true' : null"
+        [attr.aria-describedby]="emailError ? 'email-error' : null"
       />
+      @if (emailError) {
+        <p id="email-error" class="field__error" role="alert">{{ emailError }}</p>
+      }
     </label>
     <div class="form__row">
       <label class="field">
@@ -121,6 +133,7 @@
           placeholder="e.g. your home, a hotel, an office"
           [(ngModel)]="venue"
           name="venue"
+          [attr.maxlength]="maxLengths.venue"
         />
       </label>
       <label class="field">
@@ -141,6 +154,7 @@
         rows="4"
         [(ngModel)]="message"
         name="message"
+        [attr.maxlength]="maxLengths.message"
       ></textarea>
     </label>
 

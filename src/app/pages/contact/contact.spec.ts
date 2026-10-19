@@ -93,6 +93,70 @@ describe('Contact', () => {
     req.flush({ success: true });
   });
 
+  it('validates email format when provided (optional, but must be plausible if filled in)', () => {
+    const fixture = TestBed.createComponent(Contact);
+    fixture.detectChanges();
+    const instance = fixture.componentInstance as unknown as {
+      name: string;
+      phone: string;
+      email: string;
+      eventType: string;
+    };
+    instance.name = 'Jane Tan';
+    instance.phone = '+65 9123 4567';
+    instance.eventType = 'Birthday';
+    instance.email = 'not-an-email';
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    (el.querySelector('form.form') as HTMLFormElement).dispatchEvent(new Event('submit'));
+    fixture.detectChanges();
+
+    httpMock.expectNone('https://api.web3forms.com/submit');
+    expect(el.textContent ?? '').toContain('Please enter a valid email address.');
+  });
+
+  it('sanitizes free-text fields before sending — HTML-escaped and stripped of control characters (XSS/header-injection hardening)', () => {
+    const fixture = TestBed.createComponent(Contact);
+    fixture.detectChanges();
+    const instance = fixture.componentInstance as unknown as {
+      name: string;
+      phone: string;
+      email: string;
+      eventType: string;
+      venue: string;
+      message: string;
+    };
+    instance.name = '<script>alert(1)</script>';
+    instance.phone = '+65 9123 4567';
+    instance.email = 'jane@example.com';
+    instance.eventType = 'Birthday';
+    instance.venue = 'My Place\r\nBcc: attacker@evil.test';
+    instance.message = 'Hi <b>there</b>\nSee you soon';
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    (el.querySelector('form.form') as HTMLFormElement).dispatchEvent(new Event('submit'));
+    fixture.detectChanges();
+
+    const req = httpMock.expectOne('https://api.web3forms.com/submit');
+    expect(req.request.body.name).toBe('&lt;script&gt;alert(1)&lt;/script&gt;');
+    expect(req.request.body.venue).not.toContain('\r');
+    expect(req.request.body.venue).not.toContain('\n');
+    expect(req.request.body.message).toBe('Hi &lt;b&gt;there&lt;/b&gt;\nSee you soon');
+    req.flush({ success: true });
+  });
+
+  it('caps every free-text field to a maximum length (maxlength attribute + payload truncation)', () => {
+    const fixture = TestBed.createComponent(Contact);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const nameInput = el.querySelector('input[name="name"]') as HTMLInputElement;
+    const messageInput = el.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
+    expect(nameInput.maxLength).toBe(100);
+    expect(messageInput.maxLength).toBe(3000);
+  });
+
   it('Email is optional — submits fine with it left blank', () => {
     const fixture = TestBed.createComponent(Contact);
     fixture.detectChanges();

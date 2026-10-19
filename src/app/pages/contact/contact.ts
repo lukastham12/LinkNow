@@ -9,6 +9,7 @@ import {
   WEB3FORMS_ENDPOINT,
   WHATSAPP_HREF,
 } from '../../shared/contact';
+import { FIELD_MAX_LENGTHS, sanitizeLine, sanitizeMultiline } from '../../shared/sanitize';
 
 type EventType =
   | 'Birthday'
@@ -25,6 +26,10 @@ type SubmitStatus = 'idle' | 'sending' | 'success' | 'error';
 // 3, 6, 8 or 9. Spaces are stripped before testing so "+65 9123 4567" and
 // "91234567" both validate the same way.
 const SG_PHONE_PATTERN = /^(\+65)?[3689]\d{7}$/;
+
+// Deliberately permissive (not RFC 5322) — just enough to catch an obviously
+// malformed address without rejecting real ones.
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
  * Contact page (route '/contact').
@@ -50,6 +55,16 @@ const SG_PHONE_PATTERN = /^(\+65)?[3689]\d{7}$/;
  * Type nudging the visitor to mention in their message if they'd like
  * LinkNow's business profile, portfolio and rate card sent over, since
  * business buyers usually ask for those anyway.
+ *
+ * Input hardening (owner request, 19 Oct 2026): Email now gets the same
+ * touched/inline-error treatment as Name/Phone (format-checked, optional).
+ * Every free-text field is length-capped (`maxLengths`, template
+ * `maxlength` attrs) and run through sanitizeLine()/sanitizeMultiline()
+ * (shared/sanitize.ts) right before the payload is built — HTML-escaped
+ * and stripped of control characters, so neither a malformed submission
+ * nor HTML/script content can ride along to Web3Forms. There's no SQL
+ * database on this site to inject into (Web3Forms is a JSON API, not a
+ * query we build) — see shared/sanitize.ts for the full reasoning.
  */
 @Component({
   selector: 'app-contact',
@@ -83,7 +98,13 @@ export class Contact {
 
   @ViewChild('nameInput') private nameInput?: ElementRef<HTMLInputElement>;
   @ViewChild('phoneInput') private phoneInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('emailInput') private emailInput?: ElementRef<HTMLInputElement>;
   @ViewChild('eventTypeInput') private eventTypeInput?: ElementRef<HTMLSelectElement>;
+
+  // Input hardening (owner request, 19 Oct 2026) — see shared/sanitize.ts
+  // for why (no SQL backend to inject into, but XSS/header-injection into
+  // downstream email and oversized payloads are real risks regardless).
+  protected readonly maxLengths = FIELD_MAX_LENGTHS;
 
   protected name = '';
   protected phone = '';
@@ -104,9 +125,10 @@ export class Contact {
   // starts validating-as-you-type once it's been through one submit attempt
   // or been blurred, so errors don't appear before the visitor has had a
   // chance to fill anything in.
-  protected touched = { name: false, phone: false, eventType: false };
+  protected touched = { name: false, phone: false, email: false, eventType: false };
   protected nameError: string | null = null;
   protected phoneError: string | null = null;
+  protected emailError: string | null = null;
   protected eventTypeError: string | null = null;
 
   protected readonly status = signal<SubmitStatus>('idle');
@@ -129,6 +151,16 @@ export class Contact {
     return this.eventType ? null : 'Please select an event type.';
   }
 
+  // Email is optional — only validated (as a plausible email shape) once
+  // something has actually been typed.
+  protected validateEmail(): string | null {
+    const value = this.email.trim();
+    if (!value) {
+      return null;
+    }
+    return EMAIL_PATTERN.test(value) ? null : 'Please enter a valid email address.';
+  }
+
   protected onNameTouched(): void {
     this.touched.name = true;
     this.nameError = this.validateName();
@@ -137,6 +169,11 @@ export class Contact {
   protected onPhoneTouched(): void {
     this.touched.phone = true;
     this.phoneError = this.validatePhone();
+  }
+
+  protected onEmailTouched(): void {
+    this.touched.email = true;
+    this.emailError = this.validateEmail();
   }
 
   protected onEventTypeTouched(): void {
@@ -149,7 +186,9 @@ export class Contact {
       ? this.nameInput
       : this.phoneError
         ? this.phoneInput
-        : this.eventTypeInput;
+        : this.emailError
+          ? this.emailInput
+          : this.eventTypeInput;
     target?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     target?.nativeElement.focus();
   }
@@ -159,29 +198,36 @@ export class Contact {
       return;
     }
 
-    this.touched = { name: true, phone: true, eventType: true };
+    this.touched = { name: true, phone: true, email: true, eventType: true };
     this.nameError = this.validateName();
     this.phoneError = this.validatePhone();
+    this.emailError = this.validateEmail();
     this.eventTypeError = this.validateEventType();
 
-    if (this.nameError || this.phoneError || this.eventTypeError) {
+    if (this.nameError || this.phoneError || this.emailError || this.eventTypeError) {
       this.focusFirstInvalid();
       return;
     }
 
     this.status.set('sending');
 
+    // Sanitize every free-text field right before it leaves the browser —
+    // see shared/sanitize.ts. eventType/budget come from fixed option
+    // lists and eventDate from a native date input, so they're already
+    // constrained to known-safe values.
     const payload = {
       access_key: WEB3FORMS_ACCESS_KEY,
       subject: `New enquiry from the LinkNow website — ${this.eventType}`,
-      name: this.name,
-      phone: this.phone,
-      email: this.email || 'Not provided',
+      name: sanitizeLine(this.name, this.maxLengths.name),
+      phone: sanitizeLine(this.phone, this.maxLengths.phone),
+      email: this.email ? sanitizeLine(this.email, this.maxLengths.email) : 'Not provided',
       event_type: this.eventType,
       event_date: this.eventDate || 'Not provided',
-      venue: this.venue || 'Not provided',
+      venue: this.venue ? sanitizeLine(this.venue, this.maxLengths.venue) : 'Not provided',
       budget: this.budget || 'Not provided',
-      message: this.message || 'Not provided',
+      message: this.message
+        ? sanitizeMultiline(this.message, this.maxLengths.message)
+        : 'Not provided',
       botcheck: false,
     };
 
@@ -197,9 +243,10 @@ export class Contact {
         this.venue = '';
         this.budget = '';
         this.message = '';
-        this.touched = { name: false, phone: false, eventType: false };
+        this.touched = { name: false, phone: false, email: false, eventType: false };
         this.nameError = null;
         this.phoneError = null;
+        this.emailError = null;
         this.eventTypeError = null;
       },
       error: () => {
