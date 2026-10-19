@@ -1,0 +1,222 @@
+// Shared building blocks (duplicated per-component to stay within the
+// per-component style budget — mirrors corporate-case-study.scss).
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-label);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.btn {
+  display: inline-block;
+  font-size: var(--font-size-button);
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.8rem;
+  border-radius: 2px;
+  transition:
+    border-color 0.25s,
+    background-color 0.25s,
+    color 0.25s;
+}
+
+.btn--solid {
+  background: var(--color-rose);
+  color: #fff;
+  border: 1px solid var(--color-rose);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
+.btn--ghost {
+  color: var(--color-rose);
+  border: 1px solid var(--color-hairline);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-rose);
+  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
+}
+
+// Intro ----------------------------------------------------------------
+
+.intro {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.back {
+  display: block;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.back:hover,
+.back:focus-visible {
+  color: var(--color-rose);
+}
+
+.intro__icon {
+  display: inline-flex;
+  color: var(--color-rose);
+  margin-bottom: 0.5rem;
+}
+
+.intro__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.intro__lede {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+// Pricing card -----------------------------------------------------------
+
+.pricing {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+}
+
+.pricing__card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.pricing__title {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.pricing__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pricing__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.95rem;
+}
+
+.pricing__row--extra {
+  border-bottom: none;
+  padding-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.pricing__value {
+  font-weight: 600;
+  color: var(--color-rose);
+}
+
+.pricing__note {
+  margin: 1rem 0 1.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.pricing__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+// Details ------------------------------------------------------------------
+
+.details {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 0.5rem;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.details__label {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.details__text {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.details__text:last-child {
+  margin-bottom: 0;
+}
+
+.details__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.details__list-item {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.details__list-item::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-rose);
+  font-weight: 600;
+}
+
+// Outro --------------------------------------------------------------------
+
+.outro {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.outro__text {
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.outro__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.outro__secondary {
+  margin-top: 0.75rem;
+}

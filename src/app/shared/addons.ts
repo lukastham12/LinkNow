@@ -1,33 +1,36 @@
 // "Other Services We Provide" homepage section data (Homepage — Services &
 // Occasions Redesign v1.0, 10 Oct 2026, §R4). One array so adding, removing
 // or reordering an item is a one-line change (R4.7). Icon names map to the
-// inline SVGs rendered in events-we-style.html.
+// inline SVGs rendered by the shared `app-addon-icon` component.
 //
 // Starting prices (owner request, 19 Oct 2026 — explicit, deliberate
 // override of BRIEF.md §4's "no package catalogue, no 'from $X' pricing"
 // rule). Originally sourced from LinkNow_RateCard.pdf (Corporate Rate Card
 // 2026 §5 "Guest engagement add-ons", rates effective 17 Oct 2026), which
-// priced only "Popcorn station: From $260/day" for food & drink add-ons.
-// Superseded same day by owner-supplied prices from a different reference
-// (a vendor catalogue screenshot), which price Popcorn Station, Candy Floss
-// and Soft Serve Ice Cream individually — Food Station was split into these
-// three separate cards to match (was one combined "Ice Cream & Candy Floss"
-// card). The $260 popcorn figure from the rate card PDF is intentionally
-// NOT used below; $220 (the newer, owner-confirmed figure) is. Neither
-// source gives a per-unit label (day/guest/hour) for these three, so none
-// is shown — don't invent one. Chocolate Fondue and Mini Churros appeared
-// in that same reference image but were NOT added here (owner declined,
-// 19 Oct 2026) — don't add them without the owner asking again. Buffet
-// Catering has no price from either source ("quoted per event" per the
-// rate card's own terms) and stays price-free. Bouncy Castle, Balloon
-// Sculpting and Party Hosting still carry their rate-card figures
-// ($110/day, $140/day, $90/hour respectively) — unaffected by the newer
-// reference, which didn't cover them.
+// only priced "Popcorn station: From $260/day" for food & drink and gave
+// flat per-day/per-hour figures for Bouncy Castle ($110/day), Balloon
+// Sculpting ($140/day) and Party Hosting ($90/hour).
 //
-// These are *corporate* rate-card figures (plus the newer food & drink
-// figures) shown on a section that also serves retail/birthday visitors —
-// see the section__intro note in events-we-style.html about the
-// coordination fee for standalone bookings.
+// Superseded same day by owner-supplied prices from LinkNow's actual
+// third-party vendor for these add-ons (a vendor catalogue with its own
+// per-item detail pages — see shared/addon-details.ts), engaged 19 Oct 2026.
+// That vendor prices Popcorn Station, Candy Floss and Soft Serve Ice Cream
+// individually — Food Station was split into these three separate cards to
+// match (was one combined "Ice Cream & Candy Floss" card). It also gives
+// Bouncy Castle and Balloon Sculpting tiered hourly pricing instead of a
+// flat day rate; the `price` fields below were updated to the vendor's
+// lowest tier ("From $X") to match each item's detail page. Party Hosting
+// and Buffet Catering are NOT covered by this vendor and keep their
+// original rate-card figures / no-price status unchanged.
+//
+// `detailSlug` links an add-on to its own page (route '/services/:slug',
+// pages/addon-detail) with the vendor's full tiered pricing and a
+// WhatsApp/email CTA — only the 5 items this vendor actually supplies carry
+// one. Chocolate Fondue and Mini Churros also appeared in the vendor's
+// catalogue but were NOT added here (owner declined, 19 Oct 2026) — don't
+// add them without being asked again. Buffet Catering has no price from any
+// source ("quoted per event" per the original rate card's own terms) and
+// stays price-free, with no detail page.
 
 import { whatsappLink } from './contact';
 
@@ -48,6 +51,8 @@ export interface AddOn {
   waLink: string;
   /** Starting price, e.g. "From $110 / day". Omit when no confirmed figure exists — never invent one. */
   price?: string;
+  /** Slug of this add-on's own detail page (route '/services/:slug'), when it has one. */
+  detailSlug?: string;
 }
 
 function addOnWaLink(addOn: string): string {
@@ -62,6 +67,7 @@ export const ADDONS: readonly AddOn[] = [
     icon: 'popcorn',
     waLink: addOnWaLink('popcorn station'),
     price: 'From $220',
+    detailSlug: 'popcorn-station',
   },
   {
     id: 'candy-floss',
@@ -70,6 +76,7 @@ export const ADDONS: readonly AddOn[] = [
     icon: 'candyfloss',
     waLink: addOnWaLink('candy floss station'),
     price: 'From $220',
+    detailSlug: 'candy-floss',
   },
   {
     id: 'soft-serve-ice-cream',
@@ -78,6 +85,7 @@ export const ADDONS: readonly AddOn[] = [
     icon: 'icecream',
     waLink: addOnWaLink('soft serve ice cream station'),
     price: 'From $420',
+    detailSlug: 'soft-serve-ice-cream',
   },
   {
     id: 'buffet-catering',
@@ -92,7 +100,8 @@ export const ADDONS: readonly AddOn[] = [
     line: "Hours of safe, bouncy fun for kids' parties.",
     icon: 'castle',
     waLink: addOnWaLink('bouncy castle'),
-    price: 'From $110 / day',
+    price: 'From $95',
+    detailSlug: 'bouncy-castle',
   },
   {
     id: 'balloon-sculpting',
@@ -100,7 +109,8 @@ export const ADDONS: readonly AddOn[] = [
     line: 'A roving balloon artist making animals and shapes for kids and grown-ups alike.',
     icon: 'balloon',
     waLink: addOnWaLink('balloon sculpting session'),
-    price: 'From $140 / day',
+    price: 'From $120',
+    detailSlug: 'balloon-sculpting',
   },
   {
     id: 'party-hosting',

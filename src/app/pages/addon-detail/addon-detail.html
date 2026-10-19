@@ -1,0 +1,65 @@
+<section class="intro">
+  <a class="back" routerLink="/services" fragment="addons-heading">← Back to Services</a>
+  <p class="eyebrow">Add-On Service</p>
+  <span class="intro__icon" aria-hidden="true">
+    <app-addon-icon [icon]="icon" [size]="40" />
+  </span>
+  <h1 class="intro__title">{{ addon.title }}</h1>
+  <p class="intro__lede">{{ addon.tagline }}</p>
+</section>
+
+<section class="pricing" aria-labelledby="pricing-heading">
+  <div class="pricing__card">
+    <h2 id="pricing-heading" class="pricing__title">Pricing</h2>
+    <ul class="pricing__list">
+      @for (tier of addon.pricing; track tier.label) {
+        <li class="pricing__row">
+          <span class="pricing__label">{{ tier.label }}</span>
+          <span class="pricing__value">{{ tier.price }}</span>
+        </li>
+      }
+      @if (addon.extraHour) {
+        <li class="pricing__row pricing__row--extra">
+          <span class="pricing__label">Extra hour</span>
+          <span class="pricing__value">{{ addon.extraHour }}</span>
+        </li>
+      }
+    </ul>
+    <p class="pricing__note">{{ addon.priceNote }}</p>
+    <div class="pricing__actions">
+      <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+        Enquire on WhatsApp
+      </a>
+      <a class="btn btn--ghost" href="mailto:{{ emailAddress }}">Email us</a>
+    </div>
+  </div>
+</section>
+
+<section class="details" aria-label="Service details">
+  <div class="details__item">
+    <h2 class="details__label">About this service</h2>
+    @for (paragraph of addon.description; track paragraph) {
+      <p class="details__text">{{ paragraph }}</p>
+    }
+  </div>
+  <div class="details__item">
+    <h2 class="details__label">What's included</h2>
+    <ul class="details__list">
+      @for (item of addon.whatsIncluded; track item) {
+        <li class="details__list-item">{{ item }}</li>
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="outro">
+  <p class="outro__text">Tell us about your event — we'll confirm availability and the full quote.</p>
+  <div class="outro__actions">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+  <div class="outro__secondary">
+    <a class="btn btn--ghost" href="mailto:{{ emailAddress }}">Email us</a>
+  </div>
+</section>

@@ -144,6 +144,13 @@
   border-radius: 4px;
 }
 
+// Add-ons that have their own detail page (pricing table, full description)
+// render as a link instead of a plain card (19 Oct 2026).
+.addon--link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .addon__icon {
   display: block;
   margin-bottom: 0.85rem;
@@ -154,6 +161,12 @@
   margin: 0.5rem 0 0;
   font-size: 0.85rem;
   font-weight: 600;
+  color: var(--color-rose);
+}
+
+.addon__more {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
   color: var(--color-rose);
 }
 

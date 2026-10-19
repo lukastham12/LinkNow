@@ -1,0 +1,49 @@
+@switch (icon()) {
+  @case ('popcorn') {
+    <svg [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 10l-1.2 9.5a1 1 0 0 0 1 1.1h10.4a1 1 0 0 0 1-1.1L17 10" />
+      <path d="M6.5 10h11l.6-3a2 2 0 0 0-2-2.4c-.4 0-.8.1-1.1.4A2.6 2.6 0 0 0 12 3.5a2.6 2.6 0 0 0-3 1.5c-.3-.3-.7-.4-1.1-.4a2 2 0 0 0-2 2.4z" />
+      <path d="M10 10v10.5M14 10v10.5" />
+    </svg>
+  }
+  @case ('candyfloss') {
+    <svg [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9.5" cy="7.5" r="4" />
+      <circle cx="14.5" cy="8.5" r="3.6" />
+      <circle cx="12" cy="5.5" r="3" />
+      <path d="M12 12.5v9M9.5 21.5h5" />
+    </svg>
+  }
+  @case ('icecream') {
+    <svg [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 11a4 4 0 0 1 8 0" />
+      <path d="M6.5 11h11L13 21.5a1.2 1.2 0 0 1-2 0L6.5 11z" />
+      <path d="M12 3v2.2M9 4.3l.8 1.9M15 4.3l-.8 1.9" />
+    </svg>
+  }
+  @case ('buffet') {
+    <svg [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 13a9 9 0 0 1 18 0" />
+      <circle cx="12" cy="7" r="0.75" fill="currentColor" stroke="none" />
+      <path d="M2.5 13h19M2.5 16.5h19" />
+    </svg>
+  }
+  @case ('castle') {
+    <svg [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 21V9l2-2V5h2v2l1.5-1.5L11 7V5h2v2l1.5-1.5L16 7V5h2v2l2 2v12z" />
+      <path d="M4 21h16M9 21v-5a3 3 0 0 1 6 0v5" />
+    </svg>
+  }
+  @case ('balloon') {
+    <svg [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2a6 6 0 0 1 2 11.6c-.3.9-.5 2-.5 2.9a1.5 1.5 0 0 1-3 0c0-.9-.2-2-.5-2.9A6 6 0 0 1 12 2z" />
+      <path d="M11 16.5s-1.5.7-1.5 2 1.5 1 1.5 2" />
+    </svg>
+  }
+  @case ('microphone') {
+    <svg [attr.width]="size()" [attr.height]="size()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="2" width="6" height="11" rx="3" />
+      <path d="M5 11a7 7 0 0 0 14 0M12 18v4M9 22h6" />
+    </svg>
+  }
+}

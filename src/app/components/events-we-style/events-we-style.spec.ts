@@ -42,7 +42,7 @@ describe('EventsWeStyle', () => {
     }
   });
 
-  it('"Other Services We Provide" sits directly below, with all items as plain cards (not individual WhatsApp links)', () => {
+  it('"Other Services We Provide" sits directly below, linking priced add-ons to their own detail pages', () => {
     const fixture = TestBed.createComponent(EventsWeStyle);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -60,7 +60,11 @@ describe('EventsWeStyle', () => {
 
     const items = Array.from(addonsSection.querySelectorAll('.addon'));
     expect(items.length).toBe(7);
-    expect(addonsSection.querySelectorAll('a.addon').length).toBe(0);
+    // 5 items have their own detail page (vendor-supplied: Popcorn Station,
+    // Candy Floss, Soft Serve Ice Cream, Bouncy Castle, Balloon Sculpting);
+    // Buffet Catering and Party Hosting stay plain cards (no detail page).
+    const links = Array.from(addonsSection.querySelectorAll('a.addon')) as HTMLAnchorElement[];
+    expect(links.length).toBe(5);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
     expect(titles).toEqual([
       'Popcorn Station',
@@ -70,6 +74,15 @@ describe('EventsWeStyle', () => {
       'Bouncy Castle',
       'Balloon Sculpting',
       'Party Hosting',
+    ]);
+
+    const linkHrefs = links.map((a) => a.getAttribute('href'));
+    expect(linkHrefs).toEqual([
+      '/services/popcorn-station',
+      '/services/candy-floss',
+      '/services/soft-serve-ice-cream',
+      '/services/bouncy-castle',
+      '/services/balloon-sculpting',
     ]);
 
     for (const item of items) {
@@ -82,8 +95,8 @@ describe('EventsWeStyle', () => {
       'From $220',
       'From $420',
       undefined,
-      'From $110 / day',
-      'From $140 / day',
+      'From $95',
+      'From $120',
       'From $90 / hour',
     ]);
 

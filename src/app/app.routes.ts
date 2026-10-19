@@ -5,6 +5,7 @@ import { Flowers } from './pages/flowers/flowers';
 import { Backdrops } from './pages/backdrops/backdrops';
 import { Corporate } from './pages/corporate/corporate';
 import { CorporateCaseStudyPage } from './pages/corporate-case-study/corporate-case-study';
+import { AddonDetailPage } from './pages/addon-detail/addon-detail';
 import { About } from './pages/about/about';
 import { Contact } from './pages/contact/contact';
 import { PageSeo } from './shared/seo';
@@ -156,6 +157,80 @@ export const routes: Routes = [
           "A case study on Sparkle & Co.'s booth at The Twilight: Flea & Feast, Suntec Singapore " +
           '— full booth styling by LinkNow',
         path: '/corporate/sparkle-and-co/',
+      } satisfies PageSeo,
+    },
+  },
+  // Add-on detail pages — one static route per add-on LinkNow's third-party
+  // vendor supplies, shown as "Other Services We Provide" on the homepage
+  // and /services (owner request, 19 Oct 2026; see shared/addon-details.ts
+  // for sourcing). Registered before the wildcard.
+  {
+    path: 'services/popcorn-station',
+    component: AddonDetailPage,
+    data: {
+      slug: 'popcorn-station',
+      seo: {
+        title: 'Popcorn Station Add-On for Events | LinkNow Pte Ltd',
+        description:
+          'Add a fresh-popped popcorn station to your event in Singapore — flavour options, ' +
+          'pricing and booking via LinkNow.',
+        path: '/services/popcorn-station/',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'services/candy-floss',
+    component: AddonDetailPage,
+    data: {
+      slug: 'candy-floss',
+      seo: {
+        title: 'Candy Floss Add-On for Events | LinkNow Pte Ltd',
+        description:
+          'Add a fresh-spun candy floss station to your event in Singapore — custom colours, ' +
+          'pricing and booking via LinkNow.',
+        path: '/services/candy-floss/',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'services/soft-serve-ice-cream',
+    component: AddonDetailPage,
+    data: {
+      slug: 'soft-serve-ice-cream',
+      seo: {
+        title: 'Soft Serve Ice Cream Add-On for Events | LinkNow Pte Ltd',
+        description:
+          'Add a soft serve ice cream station to your event in Singapore — flavours, toppings ' +
+          'bar, pricing and booking via LinkNow.',
+        path: '/services/soft-serve-ice-cream/',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'services/bouncy-castle',
+    component: AddonDetailPage,
+    data: {
+      slug: 'bouncy-castle',
+      seo: {
+        title: 'Bouncy Castle Add-On for Events | LinkNow Pte Ltd',
+        description:
+          'Add a bouncy castle to your event in Singapore — delivery, setup, pricing and ' +
+          'booking via LinkNow.',
+        path: '/services/bouncy-castle/',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'services/balloon-sculpting',
+    component: AddonDetailPage,
+    data: {
+      slug: 'balloon-sculpting',
+      seo: {
+        title: 'Balloon Sculpting Add-On for Events | LinkNow Pte Ltd',
+        description:
+          'Add a roving balloon sculpting artist to your event in Singapore — pricing and ' +
+          'booking via LinkNow.',
+        path: '/services/balloon-sculpting/',
       } satisfies PageSeo,
     },
   },

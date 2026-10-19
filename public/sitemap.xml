@@ -53,6 +53,38 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <!-- Was missing from this static sitemap; added alongside the addon
+         pages below since both are adjacent pages hand-added here. -->
+    <loc>https://linknowsg.com/corporate/sparkle-and-co/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/services/popcorn-station/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/services/candy-floss/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/services/soft-serve-ice-cream/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/services/bouncy-castle/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/services/balloon-sculpting/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://linknowsg.com/about/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>

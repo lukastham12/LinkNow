@@ -1,5 +1,7 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AddonIcon } from '../addon-icon/addon-icon';
 import { ADDONS, ADDONS_WA_LINK } from '../../shared/addons';
 import { AnalyticsService } from '../../shared/analytics';
 import { FEATURED_SERVICES } from '../../shared/featured-services';
@@ -11,7 +13,7 @@ import { FEATURED_SERVICES } from '../../shared/featured-services';
  */
 @Component({
   selector: 'app-events-we-style',
-  imports: [RouterLink],
+  imports: [RouterLink, NgTemplateOutlet, AddonIcon],
   templateUrl: './events-we-style.html',
   styleUrl: './events-we-style.scss',
 })
