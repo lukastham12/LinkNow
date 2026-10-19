@@ -5,21 +5,40 @@
 //
 // Starting prices (owner request, 19 Oct 2026 — explicit, deliberate
 // override of BRIEF.md §4's "no package catalogue, no 'from $X' pricing"
-// rule, sourced from LinkNow_RateCard.pdf, Corporate Rate Card 2026 §5
-// "Guest engagement add-ons", rates effective 17 Oct 2026): Food Station
-// was split into Popcorn Station (priced — the rate card only prices
-// popcorn, "From $260" per day) and Ice Cream & Candy Floss (no rate-card
-// price, so no price shown — don't invent one). Buffet Catering has no
-// rate-card price either ("quoted per event" per the terms) and stays
-// price-free. Bouncy Castle, Balloon Sculpting and Party Hosting carry
-// their rate-card figures ($110/day, $140/day, $90/hour respectively).
-// These are *corporate* rate-card figures shown on a section that also
-// serves retail/birthday visitors — see the section__intro note in
-// events-we-style.html about the coordination fee for standalone bookings.
+// rule). Originally sourced from LinkNow_RateCard.pdf (Corporate Rate Card
+// 2026 §5 "Guest engagement add-ons", rates effective 17 Oct 2026), which
+// priced only "Popcorn station: From $260/day" for food & drink add-ons.
+// Superseded same day by owner-supplied prices from a different reference
+// (a vendor catalogue screenshot), which price Popcorn Station, Candy Floss
+// and Soft Serve Ice Cream individually — Food Station was split into these
+// three separate cards to match (was one combined "Ice Cream & Candy Floss"
+// card). The $260 popcorn figure from the rate card PDF is intentionally
+// NOT used below; $220 (the newer, owner-confirmed figure) is. Neither
+// source gives a per-unit label (day/guest/hour) for these three, so none
+// is shown — don't invent one. Chocolate Fondue and Mini Churros appeared
+// in that same reference image but were NOT added here (owner declined,
+// 19 Oct 2026) — don't add them without the owner asking again. Buffet
+// Catering has no price from either source ("quoted per event" per the
+// rate card's own terms) and stays price-free. Bouncy Castle, Balloon
+// Sculpting and Party Hosting still carry their rate-card figures
+// ($110/day, $140/day, $90/hour respectively) — unaffected by the newer
+// reference, which didn't cover them.
+//
+// These are *corporate* rate-card figures (plus the newer food & drink
+// figures) shown on a section that also serves retail/birthday visitors —
+// see the section__intro note in events-we-style.html about the
+// coordination fee for standalone bookings.
 
 import { whatsappLink } from './contact';
 
-export type AddOnIcon = 'popcorn' | 'icecream' | 'buffet' | 'castle' | 'balloon' | 'microphone';
+export type AddOnIcon =
+  | 'popcorn'
+  | 'candyfloss'
+  | 'icecream'
+  | 'buffet'
+  | 'castle'
+  | 'balloon'
+  | 'microphone';
 
 export interface AddOn {
   id: string;
@@ -27,7 +46,7 @@ export interface AddOn {
   line: string;
   icon: AddOnIcon;
   waLink: string;
-  /** Starting price, e.g. "From $110 / day". Omit when no rate-card figure exists — never invent one. */
+  /** Starting price, e.g. "From $110 / day". Omit when no confirmed figure exists — never invent one. */
   price?: string;
 }
 
@@ -39,17 +58,26 @@ export const ADDONS: readonly AddOn[] = [
   {
     id: 'popcorn-station',
     title: 'Popcorn Station',
-    line: 'Freshly popped popcorn, made on the spot.',
+    line: 'Fresh-popped, flavour-packed party snacks.',
     icon: 'popcorn',
     waLink: addOnWaLink('popcorn station'),
-    price: 'From $260 / day',
+    price: 'From $220',
   },
   {
-    id: 'ice-cream-candy-floss',
-    title: 'Ice Cream & Candy Floss',
-    line: 'Soft-serve ice cream or spun candy floss, made fresh for your guests.',
+    id: 'candy-floss',
+    title: 'Candy Floss',
+    line: 'Spun fresh, in any colour you want.',
+    icon: 'candyfloss',
+    waLink: addOnWaLink('candy floss station'),
+    price: 'From $220',
+  },
+  {
+    id: 'soft-serve-ice-cream',
+    title: 'Soft Serve Ice Cream',
+    line: 'Creamy soft serve — a crowd favourite.',
     icon: 'icecream',
-    waLink: addOnWaLink('ice cream or candy floss station'),
+    waLink: addOnWaLink('soft serve ice cream station'),
+    price: 'From $420',
   },
   {
     id: 'buffet-catering',
@@ -85,6 +113,6 @@ export const ADDONS: readonly AddOn[] = [
 ];
 
 export const ADDONS_WA_LINK = whatsappLink(
-  "Hi LinkNow, I'd like to ask about your other services (popcorn station, ice cream or candy " +
-    'floss, buffet catering, bouncy castle, balloon sculpting, party hosting).',
+  "Hi LinkNow, I'd like to ask about your other services (popcorn station, candy floss, soft " +
+    'serve ice cream, buffet catering, bouncy castle, balloon sculpting, party hosting).',
 );

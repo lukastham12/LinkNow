@@ -59,12 +59,13 @@ describe('EventsWeStyle', () => {
     );
 
     const items = Array.from(addonsSection.querySelectorAll('.addon'));
-    expect(items.length).toBe(6);
+    expect(items.length).toBe(7);
     expect(addonsSection.querySelectorAll('a.addon').length).toBe(0);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
     expect(titles).toEqual([
       'Popcorn Station',
-      'Ice Cream & Candy Floss',
+      'Candy Floss',
+      'Soft Serve Ice Cream',
       'Buffet Catering',
       'Bouncy Castle',
       'Balloon Sculpting',
@@ -77,8 +78,9 @@ describe('EventsWeStyle', () => {
 
     const prices = items.map((item) => item.querySelector('.addon__price')?.textContent?.trim());
     expect(prices).toEqual([
-      'From $260 / day',
-      undefined,
+      'From $220',
+      'From $220',
+      'From $420',
       undefined,
       'From $110 / day',
       'From $140 / day',

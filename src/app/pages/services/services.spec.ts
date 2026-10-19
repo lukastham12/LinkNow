@@ -52,12 +52,13 @@ describe('Services', () => {
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const items = Array.from(el.querySelectorAll('.addon'));
-    expect(items.length).toBe(6);
+    expect(items.length).toBe(7);
     expect(el.querySelectorAll('a.addon').length).toBe(0);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
     expect(titles).toEqual([
       'Popcorn Station',
-      'Ice Cream & Candy Floss',
+      'Candy Floss',
+      'Soft Serve Ice Cream',
       'Buffet Catering',
       'Bouncy Castle',
       'Balloon Sculpting',
@@ -108,7 +109,9 @@ describe('Services', () => {
       p.textContent?.trim(),
     );
     expect(addonPrices).toEqual([
-      'From $260 / day',
+      'From $220',
+      'From $220',
+      'From $420',
       'From $110 / day',
       'From $140 / day',
       'From $90 / hour',
