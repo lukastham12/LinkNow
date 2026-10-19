@@ -21,12 +21,16 @@ describe('Services', () => {
     expect(el.querySelectorAll('h1').length).toBe(1);
   });
 
-  it('invites a no-obligation WhatsApp quote without quoting any price (no $/SGD figure)', () => {
+  it('invites a no-obligation WhatsApp quote for core decor without quoting any price (no $/SGD figure)', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
-    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(text.toLowerCase()).toContain('message us for a quick, no-obligation quote');
-    expect(text).not.toMatch(/\$|SGD/);
+    const el = fixture.nativeElement as HTMLElement;
+    const introText = el.querySelector('.intro')?.textContent ?? '';
+    expect(introText.toLowerCase()).toContain('message us for a quick, no-obligation quote');
+    // Core decor (backdrops/floral/corporate) stays quote-only — no $/SGD figure in
+    // the page intro. The "Other Services We Provide" add-ons below DO carry
+    // starting prices (owner request, 19 Oct 2026 — see shared/addons.ts).
+    expect(introText).not.toMatch(/\$|SGD/);
   });
 
   it('shows the same "Events we style" section as the homepage, linking to /backdrops, /flowers and /corporate', () => {
@@ -48,10 +52,17 @@ describe('Services', () => {
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const items = Array.from(el.querySelectorAll('.addon'));
-    expect(items.length).toBe(5);
+    expect(items.length).toBe(6);
     expect(el.querySelectorAll('a.addon').length).toBe(0);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
-    expect(titles).toEqual(['Food Station', 'Buffet Catering', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
+    expect(titles).toEqual([
+      'Popcorn Station',
+      'Ice Cream & Candy Floss',
+      'Buffet Catering',
+      'Bouncy Castle',
+      'Balloon Sculpting',
+      'Party Hosting',
+    ]);
   });
 
   it('does not embed the floral gallery (it now lives on /flowers)', () => {
@@ -77,11 +88,30 @@ describe('Services', () => {
     expect(text).not.toMatch(/request a quote|contact us/i);
   });
 
-  it('shows NO price, currency or quantity language anywhere (guardrail)', () => {
+  it('shows no quantity language, and no price outside the approved add-on starting prices (guardrail)', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
-    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(text).not.toMatch(/\$|SGD|price|from\s*\$/i);
+    const el = fixture.nativeElement as HTMLElement;
+    const text = el.textContent ?? '';
     expect(text).not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
+
+    // Core decor (intro + "Events we style") stays quote-only.
+    const introText = el.querySelector('.intro')?.textContent ?? '';
+    const occasionsText = el.querySelector('#occasions')?.textContent ?? '';
+    expect(introText).not.toMatch(/\$|SGD|price|from\s*\$/i);
+    expect(occasionsText).not.toMatch(/\$|SGD|price|from\s*\$/i);
+
+    // "Other Services We Provide" add-ons (shared/addons.ts) DO carry starting
+    // prices (owner request, 19 Oct 2026) — every price shown there must be
+    // one of the approved rate-card figures, nothing invented.
+    const addonPrices = Array.from(el.querySelectorAll('.addon__price')).map((p) =>
+      p.textContent?.trim(),
+    );
+    expect(addonPrices).toEqual([
+      'From $260 / day',
+      'From $110 / day',
+      'From $140 / day',
+      'From $90 / hour',
+    ]);
   });
 });

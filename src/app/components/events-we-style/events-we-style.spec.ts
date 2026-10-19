@@ -42,7 +42,7 @@ describe('EventsWeStyle', () => {
     }
   });
 
-  it('"Other Services We Provide" sits directly below, with all 4 items as plain cards (not individual WhatsApp links)', () => {
+  it('"Other Services We Provide" sits directly below, with all items as plain cards (not individual WhatsApp links)', () => {
     const fixture = TestBed.createComponent(EventsWeStyle);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -59,14 +59,31 @@ describe('EventsWeStyle', () => {
     );
 
     const items = Array.from(addonsSection.querySelectorAll('.addon'));
-    expect(items.length).toBe(5);
+    expect(items.length).toBe(6);
     expect(addonsSection.querySelectorAll('a.addon').length).toBe(0);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
-    expect(titles).toEqual(['Food Station', 'Buffet Catering', 'Bouncy Castle', 'Balloon Sculpting', 'Party Hosting']);
+    expect(titles).toEqual([
+      'Popcorn Station',
+      'Ice Cream & Candy Floss',
+      'Buffet Catering',
+      'Bouncy Castle',
+      'Balloon Sculpting',
+      'Party Hosting',
+    ]);
 
     for (const item of items) {
       expect(item.querySelector('svg')).toBeTruthy();
     }
+
+    const prices = items.map((item) => item.querySelector('.addon__price')?.textContent?.trim());
+    expect(prices).toEqual([
+      'From $260 / day',
+      undefined,
+      undefined,
+      'From $110 / day',
+      'From $140 / day',
+      'From $90 / hour',
+    ]);
 
     const addonsButton = Array.from(addonsSection.querySelectorAll('a.btn--ghost')).find(
       (a) => a.textContent?.trim() === 'Ask about these services on WhatsApp',
