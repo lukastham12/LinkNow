@@ -11,7 +11,13 @@ interface CarouselScrollState {
 }
 
 /**
- * Custom Backdrops portfolio page (route '/backdrops').
+ * Birthdays & Celebrations portfolio page (route '/backdrops').
+ *
+ * Renamed from "Custom Backdrops" to "Birthdays & Celebrations" site-wide
+ * on 23 Oct 2026 (owner request) — "Custom Backdrops" is the product, but a
+ * customer searching for a birthday/celebration decorator doesn't think in
+ * that term; the nav label and H1 now speak to the occasion, while the body
+ * copy still describes backdrops as the product.
  *
  * A gallery of real backdrop builds, grouped into one horizontally
  * scrolling carousel per category (Birthday, 100 Days & Naming, Baby
@@ -19,8 +25,8 @@ interface CarouselScrollState {
  * filter-pill buttons over a single grid which didn't read well on mobile
  * or desktop. Each photo carries a short caption (occasion/theme, from the
  * photo's own signage — no invented venues). No prices or quantities
- * (BRIEF.md §4). Reachable from the Custom Backdrops service card and the
- * Services nav dropdown. The WhatsApp CTA names this page in the
+ * (BRIEF.md §4). Reachable from the Birthdays & Celebrations service card
+ * and the Services nav dropdown. The WhatsApp CTA names this page in the
  * pre-filled message so the enquiry source is visible in the chat.
  *
  * Reviews (UX review, 16 Oct 2026): testimonials previously only lived on
@@ -42,7 +48,7 @@ interface CarouselScrollState {
   styleUrl: './backdrops.scss',
 })
 export class Backdrops {
-  protected readonly whatsappHref = pageWhatsappLink('Custom Backdrops');
+  protected readonly whatsappHref = pageWhatsappLink('Birthdays & Celebrations');
   protected readonly groups = BACKDROP_GROUPS;
   protected readonly testimonials = TESTIMONIALS;
   protected readonly faqs = FAQS;

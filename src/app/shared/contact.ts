@@ -111,7 +111,7 @@ export const NAV_LINKS: readonly NavLink[] = [
     label: 'Services',
     path: '/services',
     children: [
-      { label: 'Custom Backdrops', path: '/backdrops' },
+      { label: 'Birthdays & Celebrations', path: '/backdrops' },
       { label: 'Weddings & ROM', path: '/flowers' },
       { label: 'For Businesses', path: '/corporate' },
     ],

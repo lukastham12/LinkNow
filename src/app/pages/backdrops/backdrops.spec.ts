@@ -3,7 +3,7 @@ import { Backdrops } from './backdrops';
 import { BACKDROP_GROUPS, BACKDROPS } from './backdrops.data';
 import { TESTIMONIALS } from '../../shared/testimonials';
 
-describe('Backdrops (Custom Backdrops portfolio page)', () => {
+describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Backdrops],
@@ -14,13 +14,13 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(TestBed.createComponent(Backdrops).componentInstance).toBeTruthy();
   });
 
-  it('has a single "Custom Backdrops" h1', () => {
+  it('has a single "Birthdays & Celebrations" h1 (renamed from "Custom Backdrops" 23 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = el.querySelectorAll('h1');
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent).toContain('Custom Backdrops');
+    expect(h1s[0].textContent).toContain('Birthdays & Celebrations');
   });
 
   it('lists all 22 backdrop photos with descriptive alt text, lazy-loaded', () => {
@@ -111,7 +111,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     expect(el.querySelector('.filter')).toBeNull();
   });
 
-  it('uses a page-specific WhatsApp link naming "Custom Backdrops" (no email/quote/contact/form on this page)', () => {
+  it('uses a page-specific WhatsApp link naming "Birthdays & Celebrations" (no email/quote/contact/form on this page)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -120,7 +120,7 @@ describe('Backdrops (Custom Backdrops portfolio page)', () => {
     ) as HTMLAnchorElement[];
     expect(waLinks.length).toBeGreaterThan(0);
     for (const a of waLinks) {
-      expect(decodeURIComponent(a.href)).toContain('Custom Backdrops');
+      expect(decodeURIComponent(a.href)).toContain('Birthdays & Celebrations');
     }
     expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(el.querySelector('a[href="/contact"]')).toBeNull();

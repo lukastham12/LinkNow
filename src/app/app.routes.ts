@@ -54,14 +54,15 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
-  // Custom Backdrops portfolio — reachable via the Services dropdown and the
-  // Custom Backdrops service card.
+  // Birthdays & Celebrations portfolio (renamed from "Custom Backdrops"
+  // 23 Oct 2026, URL kept unchanged) — reachable via the Services dropdown
+  // and the Birthdays & Celebrations service card.
   {
     path: 'backdrops',
     component: Backdrops,
     data: {
       seo: {
-        title: 'Custom Event Backdrops in Singapore | LinkNow Pte Ltd',
+        title: 'Birthdays & Celebrations Decor in Singapore | LinkNow Pte Ltd',
         description:
           'A portfolio of custom event backdrops built in Singapore for birthdays, weddings, ' +
           'corporate events and formal occasions. See our work and enquire on WhatsApp.',
