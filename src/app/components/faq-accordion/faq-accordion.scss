@@ -1,0 +1,135 @@
+// Shared building block (duplicated per-component to stay within the
+// per-component style budget — mirrors the small set of primitives used
+// elsewhere, e.g. events-we-style.scss).
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-label);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.eyebrow--center {
+  text-align: center;
+}
+
+// Modernised 20 Oct 2026 (owner request): rounded cards with a soft tint on
+// hover/open, and an animated "+" -> "×" icon instead of the browser's
+// default <details> marker triangle.
+
+.faq {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 0.5rem;
+}
+
+.faq__title {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+  font-weight: 600;
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.faq__item {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.faq__item:hover {
+  border-color: var(--color-hairline);
+}
+
+.faq__item[open] {
+  border-color: var(--color-rose);
+  background: color-mix(in srgb, var(--color-rose) 4%, var(--color-surface));
+}
+
+.faq__question {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq__question::marker {
+  content: '';
+}
+
+.faq__question-text {
+  flex: 1;
+}
+
+// "+" icon: two bars forming a plus, rotating 45° into a "×" when open.
+.faq__icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--color-hairline);
+  transition:
+    transform 0.25s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--color-rose);
+  transition: transform 0.25s ease;
+}
+
+.faq__icon::before {
+  width: 10px;
+  height: 1.5px;
+  transform: translate(-50%, -50%);
+}
+
+.faq__icon::after {
+  width: 1.5px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+}
+
+.faq__item[open] .faq__icon {
+  background: var(--color-rose);
+  border-color: var(--color-rose);
+  transform: rotate(45deg);
+}
+
+.faq__item[open] .faq__icon::before,
+.faq__item[open] .faq__icon::after {
+  background: #fff;
+}
+
+.faq__answer {
+  margin: 0;
+  padding: 0 1.25rem 1.1rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}

@@ -8,6 +8,7 @@ import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
 import { AnalyticsService } from '../../shared/analytics';
 import { CaseCard } from '../../components/case-card/case-card';
 import { EventsWeStyle } from '../../components/events-we-style/events-we-style';
+import { FaqAccordion } from '../../components/faq-accordion/faq-accordion';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 
 interface PortfolioTile {
@@ -36,24 +37,43 @@ interface HeroImage {
 // rendering, on every screen size. Add to HERO_IMAGES rather than hard-coding
 // a second hero image elsewhere — keep every entry a kids'-party/birthday
 // photo.
+//
+// Curated for visual impact (owner request, 20 Oct 2026 — "most exquisite
+// images... Peppa Pig is boring"): swapped out backdrop-11 (a basic printed
+// Peppa Pig tablecloth + plain balloon garland) for two more elaborate,
+// editorial-looking builds already in the portfolio — backdrop-12 (gold/
+// black 16th birthday, neon signage, foil numbers) and backdrop-17 (teddy-
+// bear-themed 1st birthday, styled dessert table, blue/peach palette).
+// Both were re-derived from their pre-optimisation originals (git history,
+// commit 0b59aab~1) and re-saved at hero scale (1150px long edge) rather
+// than upscaled from their smaller 700px gallery-thumbnail versions, which
+// would have looked soft at hero size — see the image-optimisation
+// CLAUDE.md note. Width/height below are each image's real current
+// dimensions (keep them in sync if an image here is ever re-processed).
 const HERO_IMAGES: readonly HeroImage[] = [
   {
     src: '/backdrops/hero-minecraft.jpg',
     alt: "A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow for Enzo's 8th birthday",
-    width: 1200,
-    height: 1240,
+    width: 1113,
+    height: 1150,
   },
   {
     src: '/backdrops/backdrop-24.jpg',
     alt: "A safari-themed 1st birthday backdrop with balloon garlands styled by LinkNow for Sharan Nikitharan",
-    width: 1050,
-    height: 1400,
+    width: 862,
+    height: 1150,
   },
   {
-    src: '/backdrops/backdrop-11.jpg',
-    alt: 'A Peppa Pig-themed birthday backdrop styled by LinkNow',
-    width: 1050,
-    height: 1400,
+    src: '/backdrops/backdrop-12.jpg',
+    alt: 'A gold and black 16th birthday backdrop with neon signage and foil number balloons, styled by LinkNow',
+    width: 959,
+    height: 1150,
+  },
+  {
+    src: '/backdrops/backdrop-17.jpg',
+    alt: "A teddy-bear-themed 1st birthday backdrop with a styled dessert table, styled by LinkNow for Raphael's first birthday",
+    width: 862,
+    height: 1150,
   },
 ];
 
@@ -67,7 +87,7 @@ function pickHeroImage(): HeroImage {
  *  channel — no contact/quote links. */
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CaseCard, EventsWeStyle, ReviewsCarousel],
+  imports: [RouterLink, CaseCard, EventsWeStyle, ReviewsCarousel, FaqAccordion],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

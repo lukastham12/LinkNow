@@ -2,6 +2,7 @@ import { afterNextRender, Component, ElementRef, QueryList, ViewChildren } from 
 import { pageWhatsappLink } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { FAQS } from '../../shared/faq';
+import { FaqAccordion } from '../../components/faq-accordion/faq-accordion';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 import { BACKDROP_GROUPS } from './backdrops.data';
 
@@ -43,7 +44,7 @@ interface CarouselScrollState {
  */
 @Component({
   selector: 'app-backdrops',
-  imports: [ReviewsCarousel],
+  imports: [ReviewsCarousel, FaqAccordion],
   templateUrl: './backdrops.html',
   styleUrl: './backdrops.scss',
 })

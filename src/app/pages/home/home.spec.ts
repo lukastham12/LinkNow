@@ -78,7 +78,8 @@ describe('Home', () => {
     expect([
       '/backdrops/hero-minecraft.jpg',
       '/backdrops/backdrop-24.jpg',
-      '/backdrops/backdrop-11.jpg',
+      '/backdrops/backdrop-12.jpg',
+      '/backdrops/backdrop-17.jpg',
     ]).toContain(hero.getAttribute('src') ?? '');
     expect((hero.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
     expect(hero.getAttribute('width')).toBeTruthy();

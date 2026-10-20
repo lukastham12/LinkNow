@@ -204,50 +204,8 @@
   font-weight: 600;
 }
 
-// FAQ ------------------------------------------------------------------------
-
-.faq {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2.5rem 1.25rem 0.5rem;
-}
-
-.faq__title {
-  margin: 0 0 1.5rem;
-  text-align: center;
-  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
-  font-weight: 600;
-}
-
-.faq__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.faq__item {
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  padding: 0.9rem 1.1rem;
-}
-
-.faq__question {
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.95rem;
-  list-style: none;
-}
-
-.faq__question::-webkit-details-marker {
-  display: none;
-}
-
-.faq__answer {
-  margin: 0.75rem 0 0;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-}
+// FAQ now lives in the shared app-faq-accordion component (extracted 20 Oct
+// 2026) — see components/faq-accordion/.
 
 // Outro --------------------------------------------------------------------
 

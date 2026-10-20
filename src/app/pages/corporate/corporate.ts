@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { businessWhatsappLink, EMAIL_ADDRESS } from '../../shared/contact';
 import { CORPORATE_CASE_STUDIES } from '../../shared/corporate-case-studies';
 import { CaseCard } from '../../components/case-card/case-card';
+import { FaqAccordion } from '../../components/faq-accordion/faq-accordion';
 
 interface EventType {
   name: string;
@@ -63,7 +64,7 @@ const FAQS: readonly Faq[] = [
  */
 @Component({
   selector: 'app-corporate',
-  imports: [CaseCard],
+  imports: [CaseCard, FaqAccordion],
   templateUrl: './corporate.html',
   styleUrl: './corporate.scss',
 })

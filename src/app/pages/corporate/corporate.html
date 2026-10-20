@@ -44,18 +44,7 @@
   </p>
 </section>
 
-<section class="faq" aria-labelledby="faq-heading">
-  <p class="eyebrow eyebrow--center">For Businesses FAQ</p>
-  <h2 id="faq-heading" class="faq__title">Frequently asked questions</h2>
-  <div class="faq__list">
-    @for (item of faqs; track item.question) {
-      <details class="faq__item">
-        <summary class="faq__question">{{ item.question }}</summary>
-        <p class="faq__answer">{{ item.answer }}</p>
-      </details>
-    }
-  </div>
-</section>
+<app-faq-accordion eyebrow="For Businesses FAQ" title="Frequently asked questions" [faqs]="faqs" />
 
 <section class="outro">
   <p class="outro__text">Tell us what you need — we'll send a proposal and mockup.</p>
