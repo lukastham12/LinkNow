@@ -57,22 +57,19 @@
 }
 
 .hero__img {
-  // object-fit: contain (not cover) — fixed (20 Oct 2026, owner report:
-  // "hero image is getting cut off"). The rotated photos (HERO_IMAGES) are
-  // all tall portrait backdrops with the important content (names, signage,
-  // balloon numerals) at different depths — cover-cropping into a short,
-  // wide box chopped off whichever element didn't land in the centre
-  // (e.g. the Raphael backdrop's name was sliced off at the top on every
-  // load). contain always shows the full photo, letterboxed on the sides
-  // instead of cropped top/bottom, so nothing is ever lost regardless of
-  // which photo rotates in.
+  // No fixed height (20 Oct 2026, 2nd fix). The first attempt used
+  // object-fit: contain at a fixed height, which stopped the cropping but
+  // left ugly white letterbox bars whenever a photo's ratio didn't match
+  // the box (owner report, with a screenshot of the Minecraft photo boxed
+  // in white). Instead, height is now `auto` so the box always matches each
+  // photo's own aspect ratio (from its width/height attributes in
+  // home.html, already correct per photo) — full photo, no crop, no
+  // letterbox, every time, whatever its shape.
   display: block;
   width: 100%;
-  height: 320px;
-  object-fit: contain;
+  height: auto;
   border-radius: 8px;
   border: 1px solid var(--color-border);
-  background: var(--color-surface);
 }
 
 .portfolio__img {
@@ -240,7 +237,10 @@
   }
 
   .hero__img {
-    height: 480px;
+    // Cap width (not height) so tall portrait photos don't tower over the
+    // text column — height still follows the image's own aspect ratio, so
+    // this never crops or letterboxes.
+    max-width: 420px;
   }
 
   .section {
