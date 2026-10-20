@@ -1,0 +1,22 @@
+<ng-template #addonBody>
+  <span class="addon__icon" aria-hidden="true">
+    <app-addon-icon [icon]="addon().icon" />
+  </span>
+  <h3 class="addon__name">{{ addon().title }}</h3>
+  <p class="addon__blurb">{{ addon().line }}</p>
+  @if (addon().price) {
+    <p class="addon__price">{{ addon().price }}</p>
+  }
+  @if (addon().detailSlug) {
+    <span class="addon__more">See pricing &amp; details →</span>
+  }
+</ng-template>
+@if (addon().detailSlug) {
+  <a class="addon addon--link card-lift" [routerLink]="['/services', addon().detailSlug]">
+    <ng-container [ngTemplateOutlet]="addonBody" />
+  </a>
+} @else {
+  <article class="addon">
+    <ng-container [ngTemplateOutlet]="addonBody" />
+  </article>
+}

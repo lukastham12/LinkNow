@@ -55,6 +55,16 @@
   background: color-mix(in srgb, var(--color-rose) 7%, transparent);
 }
 
+.btn--solid {
+  background: var(--color-rose);
+  color: #fff;
+  border: 1px solid var(--color-rose);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
 .service__img {
   display: block;
   width: 100%;
@@ -104,6 +114,25 @@
   text-align: center;
 }
 
+.section__cta--stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.addons__group-title {
+  margin: 2rem 0 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.addons__group-title:first-of-type {
+  margin-top: 0.5rem;
+}
+
 .services {
   display: grid;
   grid-template-columns: 1fr;
@@ -124,50 +153,17 @@
 }
 
 .addons {
-  // auto-fit instead of a fixed column count: the item count has changed
-  // twice already (5 -> 6 -> 7) as add-ons were split/priced, and this
-  // keeps every row evenly filled at any width without a breakpoint per
-  // count.
+  // auto-fit instead of a fixed column count: the item count per group
+  // changes as add-ons are split/priced/regrouped, and this keeps every row
+  // evenly filled at any width without a breakpoint per count. Card markup
+  // lives in the shared app-addon-card component (components/addon-card).
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1.25rem;
 }
 
-.addon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-}
-
-// Add-ons that have their own detail page (pricing table, full description)
-// render as a link instead of a plain card (19 Oct 2026).
-.addon--link {
-  text-decoration: none;
-  color: inherit;
-}
-
-.addon__icon {
-  display: block;
-  margin-bottom: 0.85rem;
-  color: var(--color-rose);
-}
-
-.addon__price {
-  margin: 0.5rem 0 0;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-rose);
-}
-
-.addon__more {
-  margin-top: 0.6rem;
-  font-size: 0.78rem;
-  color: var(--color-rose);
+.addons + .addons__group-title {
+  margin-top: 2.5rem;
 }
 
 // Responsive ------------------------------------------------------------------

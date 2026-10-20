@@ -1,0 +1,39 @@
+<section class="intro">
+  <p class="eyebrow">Party Add-Ons</p>
+  <h1 class="intro__title">Party Add-Ons &amp; Catering</h1>
+  <p class="intro__lede">
+    Book any of these on their own, or pair them with your decor — whatever your event needs.
+  </p>
+</section>
+
+<section class="group" aria-labelledby="food-heading">
+  <h2 id="food-heading" class="group__title">Food &amp; Drink Stations</h2>
+  <div class="addons">
+    @for (addon of foodAddons; track addon.id) {
+      <app-addon-card [addon]="addon" />
+    }
+  </div>
+</section>
+
+<section class="group" aria-labelledby="entertainment-heading">
+  <h2 id="entertainment-heading" class="group__title">Entertainment</h2>
+  <div class="addons">
+    @for (addon of entertainmentAddons; track addon.id) {
+      <app-addon-card [addon]="addon" />
+    }
+  </div>
+</section>
+
+<section class="outro">
+  <p class="outro__text">Not seeing what you need? We're open to sourcing it — just ask.</p>
+  <div class="outro__actions">
+    <a
+      class="btn btn--solid"
+      [href]="addonsWaLink"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Ask about these services on WhatsApp
+    </a>
+  </div>
+</section>

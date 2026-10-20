@@ -1,0 +1,95 @@
+// Shared building blocks (duplicated per-component to stay within the
+// per-component style budget — mirrors other pages, e.g. corporate.scss).
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-label);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.btn {
+  display: inline-block;
+  font-size: var(--font-size-button);
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.8rem;
+  border-radius: 2px;
+  transition: background-color 0.25s ease;
+}
+
+.btn--solid {
+  background: var(--color-rose);
+  color: #fff;
+  border: 1px solid var(--color-rose);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
+// Intro ----------------------------------------------------------------
+
+.intro {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.intro__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.intro__lede {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+// Groups ---------------------------------------------------------------
+
+.group {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+}
+
+.group__title {
+  margin: 0 0 1.25rem;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.addons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.25rem;
+}
+
+// Outro ------------------------------------------------------------------
+
+.outro {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.outro__text {
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.outro__actions {
+  display: flex;
+  justify-content: center;
+}

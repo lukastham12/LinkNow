@@ -42,7 +42,7 @@ describe('EventsWeStyle', () => {
     }
   });
 
-  it('"Other Services We Provide" sits directly below, linking priced add-ons to their own detail pages', () => {
+  it('"Other Services We Provide" sits directly below, grouped into Food & Drink Stations / Entertainment', () => {
     const fixture = TestBed.createComponent(EventsWeStyle);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -58,13 +58,18 @@ describe('EventsWeStyle', () => {
       'Other Services We Provide',
     );
 
+    const groupTitles = Array.from(addonsSection.querySelectorAll('.addons__group-title')).map(
+      (h) => h.textContent?.trim(),
+    );
+    expect(groupTitles).toEqual(['Food & Drink Stations', 'Entertainment']);
+
     const items = Array.from(addonsSection.querySelectorAll('.addon'));
     expect(items.length).toBe(7);
-    // 5 items have their own detail page (vendor-supplied: Popcorn Station,
-    // Candy Floss, Soft Serve Ice Cream, Bouncy Castle, Balloon Sculpting);
-    // Buffet Catering and Party Hosting stay plain cards (no detail page).
+    // 6 items have their own detail page (Popcorn Station, Candy Floss, Soft
+    // Serve Ice Cream, Buffet Catering, Bouncy Castle, Balloon Sculpting);
+    // Party Hosting stays a plain card (no detail page).
     const links = Array.from(addonsSection.querySelectorAll('a.addon')) as HTMLAnchorElement[];
-    expect(links.length).toBe(5);
+    expect(links.length).toBe(6);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
     expect(titles).toEqual([
       'Popcorn Station',
@@ -81,6 +86,7 @@ describe('EventsWeStyle', () => {
       '/services/popcorn-station',
       '/services/candy-floss',
       '/services/soft-serve-ice-cream',
+      '/services/buffet-catering',
       '/services/bouncy-castle',
       '/services/balloon-sculpting',
     ]);
@@ -94,11 +100,15 @@ describe('EventsWeStyle', () => {
       'From $220',
       'From $220',
       'From $420',
-      undefined,
+      'From $18.90 / pax',
       'From $95',
       'From $120',
       'From $90 / hour',
     ]);
+
+    const seeAllLink = addonsSection.querySelector('a.btn--solid') as HTMLAnchorElement;
+    expect(seeAllLink.textContent?.trim()).toBe('See all add-ons & full pricing');
+    expect(seeAllLink.getAttribute('href')).toBe('/services/add-ons');
 
     const addonsButton = Array.from(addonsSection.querySelectorAll('a.btn--ghost')).find(
       (a) => a.textContent?.trim() === 'Ask about these services on WhatsApp',

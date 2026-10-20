@@ -26,33 +26,23 @@
     Prices shown are starting rates — tap through for full pricing, or enquire for an exact
     quote.
   </p>
+
+  <h3 class="addons__group-title">Food &amp; Drink Stations</h3>
   <div class="addons">
-    @for (addon of addons; track addon.id) {
-      <ng-template #addonBody>
-        <span class="addon__icon" aria-hidden="true">
-          <app-addon-icon [icon]="addon.icon" />
-        </span>
-        <h3 class="service__name">{{ addon.title }}</h3>
-        <p class="service__blurb">{{ addon.line }}</p>
-        @if (addon.price) {
-          <p class="addon__price">{{ addon.price }}</p>
-        }
-        @if (addon.detailSlug) {
-          <span class="addon__more">See pricing &amp; details →</span>
-        }
-      </ng-template>
-      @if (addon.detailSlug) {
-        <a class="addon addon--link card-lift" [routerLink]="['/services', addon.detailSlug]">
-          <ng-container [ngTemplateOutlet]="addonBody" />
-        </a>
-      } @else {
-        <article class="addon">
-          <ng-container [ngTemplateOutlet]="addonBody" />
-        </article>
-      }
+    @for (addon of foodAddons; track addon.id) {
+      <app-addon-card [addon]="addon" />
     }
   </div>
-  <div class="section__cta">
+
+  <h3 class="addons__group-title">Entertainment</h3>
+  <div class="addons">
+    @for (addon of entertainmentAddons; track addon.id) {
+      <app-addon-card [addon]="addon" />
+    }
+  </div>
+
+  <div class="section__cta section__cta--stacked">
+    <a class="btn btn--solid" routerLink="/services/add-ons">See all add-ons &amp; full pricing</a>
     <a
       class="btn btn--ghost"
       [href]="addonsWaLink"

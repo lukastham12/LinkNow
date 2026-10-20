@@ -1,0 +1,70 @@
+:host {
+  display: contents;
+}
+
+.addon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+// Add-ons that have their own detail page (pricing table, full description)
+// render as a link instead of a plain card (19 Oct 2026).
+.addon--link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.addon__icon {
+  display: block;
+  margin-bottom: 0.85rem;
+  color: var(--color-rose);
+}
+
+.addon__name {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--color-rose);
+}
+
+.addon__blurb {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.addon__price {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-rose);
+}
+
+.addon__more {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--color-rose);
+}
+
+.card-lift {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.card-lift:hover,
+.card-lift:focus-visible {
+  transform: translateY(-3px);
+}
+
+.card-lift:focus-visible {
+  outline: 2px solid var(--color-rose);
+  outline-offset: 3px;
+}

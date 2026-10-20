@@ -6,6 +6,7 @@ import { Backdrops } from './pages/backdrops/backdrops';
 import { Corporate } from './pages/corporate/corporate';
 import { CorporateCaseStudyPage } from './pages/corporate-case-study/corporate-case-study';
 import { AddonDetailPage } from './pages/addon-detail/addon-detail';
+import { AddonsOverviewPage } from './pages/addons-overview/addons-overview';
 import { About } from './pages/about/about';
 import { Contact } from './pages/contact/contact';
 import { PageSeo } from './shared/seo';
@@ -231,6 +232,46 @@ export const routes: Routes = [
           'Add a roving balloon sculpting artist to your event in Singapore — pricing and ' +
           'booking via LinkNow.',
         path: '/services/balloon-sculpting/',
+      } satisfies PageSeo,
+    },
+  },
+  // Buffet Catering — bespoke page (not the generic AddonDetailPage), since
+  // this vendor's catalogue has several buffet lines/tiers rather than one
+  // flat set of hourly pricing. See shared/buffet-menu.ts. Registered
+  // before the wildcard.
+  {
+    path: 'services/buffet-catering',
+    // Lazy-loaded (unlike every other route here): the buffet catalogue
+    // data (shared/buffet-menu.ts) is large enough on its own to push the
+    // site's initial bundle over budget if bundled eagerly with every other
+    // page. Still prerendered at build time like the rest of the site —
+    // RenderMode.Prerender in app.routes.server.ts applies regardless of
+    // whether a route is eager or lazy.
+    loadComponent: () =>
+      import('./pages/buffet-catering/buffet-catering').then((m) => m.BuffetCateringPage),
+    data: {
+      seo: {
+        title: 'Buffet Catering Add-On for Events | LinkNow Pte Ltd',
+        description:
+          'Add buffet catering to your event in Singapore — menus, pricing and booking via ' +
+          'LinkNow.',
+        path: '/services/buffet-catering/',
+      } satisfies PageSeo,
+    },
+  },
+  // Party Add-Ons & Catering hub — lists every add-on grouped into Food &
+  // Drink Stations / Entertainment (owner request, 19 Oct 2026). Registered
+  // before the wildcard.
+  {
+    path: 'services/add-ons',
+    component: AddonsOverviewPage,
+    data: {
+      seo: {
+        title: 'Party Add-Ons & Catering in Singapore | LinkNow Pte Ltd',
+        description:
+          'Food stations, buffet catering and entertainment add-ons for your event in Singapore ' +
+          '— pricing and booking via LinkNow.',
+        path: '/services/add-ons/',
       } satisfies PageSeo,
     },
   },

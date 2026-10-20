@@ -85,6 +85,16 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://linknowsg.com/services/buffet-catering/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://linknowsg.com/services/add-ons/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://linknowsg.com/about/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>

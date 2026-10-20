@@ -24,13 +24,26 @@
 // original rate-card figures / no-price status unchanged.
 //
 // `detailSlug` links an add-on to its own page (route '/services/:slug',
-// pages/addon-detail) with the vendor's full tiered pricing and a
-// WhatsApp/email CTA — only the 5 items this vendor actually supplies carry
-// one. Chocolate Fondue and Mini Churros also appeared in the vendor's
-// catalogue but were NOT added here (owner declined, 19 Oct 2026) — don't
-// add them without being asked again. Buffet Catering has no price from any
-// source ("quoted per event" per the original rate card's own terms) and
-// stays price-free, with no detail page.
+// pages/addon-detail for the 4 simple items, or a bespoke page for Buffet
+// Catering — see below) with full pricing and a WhatsApp/email CTA. Only
+// items with a real detail page carry one. Chocolate Fondue and Mini
+// Churros also appeared in the food-station vendor's catalogue but were NOT
+// added here (owner declined, 19 Oct 2026) — don't add them without being
+// asked again.
+//
+// Buffet Catering (owner-supplied catalogues, 19 Oct 2026 — two PDFs from a
+// second, separate third-party vendor, "Yea! Mama — Experiential Catering",
+// engaged for buffet catering specifically): now has its own bespoke detail
+// page (pages/buffet-catering/, route '/services/buffet-catering') — see
+// shared/buffet-menu.ts for the full sourcing note. "From $18.90" is that
+// vendor's lowest per-pax tier across every buffet line in both catalogues
+// (Classic Buffet Standard and the Premium tier of the build-your-own
+// buffet are tied at this price).
+//
+// `category` groups add-ons into the two sections shown on the dedicated
+// /services/add-ons page and in the "Other Services We Provide" teaser
+// (owner request, 19 Oct 2026 — "food station then candy floss, buffet
+// etc, then entertainment like bouncy castle hosting etc").
 
 import { whatsappLink } from './contact';
 
@@ -43,12 +56,15 @@ export type AddOnIcon =
   | 'balloon'
   | 'microphone';
 
+export type AddOnCategory = 'food' | 'entertainment';
+
 export interface AddOn {
   id: string;
   title: string;
   line: string;
   icon: AddOnIcon;
   waLink: string;
+  category: AddOnCategory;
   /** Starting price, e.g. "From $110 / day". Omit when no confirmed figure exists — never invent one. */
   price?: string;
   /** Slug of this add-on's own detail page (route '/services/:slug'), when it has one. */
@@ -66,6 +82,7 @@ export const ADDONS: readonly AddOn[] = [
     line: 'Fresh-popped, flavour-packed party snacks.',
     icon: 'popcorn',
     waLink: addOnWaLink('popcorn station'),
+    category: 'food',
     price: 'From $220',
     detailSlug: 'popcorn-station',
   },
@@ -75,6 +92,7 @@ export const ADDONS: readonly AddOn[] = [
     line: 'Spun fresh, in any colour you want.',
     icon: 'candyfloss',
     waLink: addOnWaLink('candy floss station'),
+    category: 'food',
     price: 'From $220',
     detailSlug: 'candy-floss',
   },
@@ -84,6 +102,7 @@ export const ADDONS: readonly AddOn[] = [
     line: 'Creamy soft serve — a crowd favourite.',
     icon: 'icecream',
     waLink: addOnWaLink('soft serve ice cream station'),
+    category: 'food',
     price: 'From $420',
     detailSlug: 'soft-serve-ice-cream',
   },
@@ -93,6 +112,9 @@ export const ADDONS: readonly AddOn[] = [
     line: 'A full buffet spread catered for your event, any headcount.',
     icon: 'buffet',
     waLink: addOnWaLink('buffet catering'),
+    category: 'food',
+    price: 'From $18.90 / pax',
+    detailSlug: 'buffet-catering',
   },
   {
     id: 'bouncy-castle',
@@ -100,6 +122,7 @@ export const ADDONS: readonly AddOn[] = [
     line: "Hours of safe, bouncy fun for kids' parties.",
     icon: 'castle',
     waLink: addOnWaLink('bouncy castle'),
+    category: 'entertainment',
     price: 'From $95',
     detailSlug: 'bouncy-castle',
   },
@@ -109,6 +132,7 @@ export const ADDONS: readonly AddOn[] = [
     line: 'A roving balloon artist making animals and shapes for kids and grown-ups alike.',
     icon: 'balloon',
     waLink: addOnWaLink('balloon sculpting session'),
+    category: 'entertainment',
     price: 'From $120',
     detailSlug: 'balloon-sculpting',
   },
@@ -118,6 +142,7 @@ export const ADDONS: readonly AddOn[] = [
     line: 'Games and emcee to keep the energy up.',
     icon: 'microphone',
     waLink: addOnWaLink('party hosting service'),
+    category: 'entertainment',
     price: 'From $90 / hour',
   },
 ];

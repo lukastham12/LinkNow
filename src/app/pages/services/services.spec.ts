@@ -47,13 +47,13 @@ describe('Services', () => {
     expect(hrefs).toEqual(['/backdrops', '/flowers', '/corporate']);
   });
 
-  it('shows the same "Other Services We Provide" section as the homepage, with the 5 vendor add-ons linking to their own pages', () => {
+  it('shows the same "Other Services We Provide" section as the homepage, with 6 add-ons linking to their own pages', () => {
     const fixture = TestBed.createComponent(Services);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const items = Array.from(el.querySelectorAll('.addon'));
     expect(items.length).toBe(7);
-    expect(el.querySelectorAll('a.addon').length).toBe(5);
+    expect(el.querySelectorAll('a.addon').length).toBe(6);
     const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
     expect(titles).toEqual([
       'Popcorn Station',
@@ -112,6 +112,7 @@ describe('Services', () => {
       'From $220',
       'From $220',
       'From $420',
+      'From $18.90 / pax',
       'From $95',
       'From $120',
       'From $90 / hour',

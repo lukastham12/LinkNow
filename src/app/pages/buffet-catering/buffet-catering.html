@@ -1,0 +1,81 @@
+<section class="intro">
+  <a class="back" routerLink="/services" fragment="addons-heading">← Back to Services</a>
+  <p class="eyebrow">Add-On Service</p>
+  <span class="intro__icon" aria-hidden="true">
+    <app-addon-icon icon="buffet" [size]="40" />
+  </span>
+  <h1 class="intro__title">Buffet Catering</h1>
+  <p class="intro__lede">A full buffet spread catered for your event, any headcount.</p>
+  <div class="intro__actions">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+    <a class="btn btn--ghost" href="mailto:{{ emailAddress }}">Email us</a>
+  </div>
+</section>
+
+<section class="lines" aria-label="Buffet menus and pricing">
+  @for (line of lines; track line.id) {
+    <div class="line">
+      <h2 class="line__title">{{ line.title }}</h2>
+      <p class="line__blurb">{{ line.blurb }}</p>
+      <div class="tiers">
+        @for (tier of line.tiers; track tier.id) {
+          <details class="tier">
+            <summary class="tier__summary">
+              <span class="tier__name">{{ tier.name }}</span>
+              <span class="tier__meta">
+                {{ tier.price }} ({{ tier.priceInclGst }}) · {{ tier.minPax }} · {{ tier.itemCount }}
+              </span>
+            </summary>
+            <div class="tier__columns">
+              @for (column of tier.columns; track $index) {
+                <div class="tier__column">
+                  @if (column.label) {
+                    <h3 class="tier__column-label">{{ column.label }}</h3>
+                  }
+                  @for (group of column.groups; track group.heading) {
+                    <h4 class="tier__group-heading">{{ group.heading }}</h4>
+                    <ul class="tier__group-list">
+                      @for (item of group.items; track item) {
+                        <li>{{ item }}</li>
+                      }
+                    </ul>
+                  }
+                </div>
+              }
+            </div>
+          </details>
+        }
+      </div>
+    </div>
+  }
+</section>
+
+<section class="extras" aria-labelledby="extras-heading">
+  <h2 id="extras-heading" class="extras__title">Added costs to plan around</h2>
+  <ul class="extras__list">
+    @for (charge of extraCharges; track charge.label) {
+      <li class="extras__row">
+        <span class="extras__label">{{ charge.label }}</span>
+        <span class="extras__value">{{ charge.price }}</span>
+      </li>
+    }
+  </ul>
+  <p class="extras__note">
+    Prices shown are per pax before any add-ons noted above; minimum pax applies per tier — we'll
+    confirm your exact quote, including any transport, staff or setup charges, when you enquire.
+  </p>
+</section>
+
+<section class="outro">
+  <p class="outro__text">Tell us your headcount and preferred buffet line — we'll confirm availability and the full quote.</p>
+  <div class="outro__actions">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+  <div class="outro__secondary">
+    <a class="btn btn--ghost" href="mailto:{{ emailAddress }}">Email us</a>
+  </div>
+</section>
