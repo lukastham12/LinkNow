@@ -23,13 +23,38 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(h1s[0].textContent).toContain('Birthdays & Celebrations');
   });
 
-  it('lists all 22 backdrop photos with descriptive alt text, lazy-loaded', () => {
-    expect(BACKDROPS.length).toBe(22);
+  it('puts "Birthday" first, ahead of the baby/newborn-stage categories (owner request, 22 Oct 2026)', () => {
+    expect(BACKDROP_GROUPS[0].category).toBe('Birthday');
+    const order = BACKDROP_GROUPS.map((g) => g.category);
+    expect(order.indexOf('Birthday')).toBeLessThan(order.indexOf('100 Days & Naming'));
+    expect(order.indexOf('Birthday')).toBeLessThan(order.indexOf('Baby Shower & Gender Reveal'));
+  });
+
+  it('shows a 4-step "How It Works" section between the intro and the gallery', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+
+    const sections = Array.from(el.querySelectorAll('section'));
+    const introIndex = sections.findIndex((s) => s.querySelector('h1'));
+    const stepsIndex = sections.findIndex((s) => s.querySelector('#steps-heading'));
+    const galleryIndex = sections.findIndex((s) => s.classList.contains('gallery'));
+    expect(stepsIndex).toBe(introIndex + 1);
+    expect(stepsIndex).toBeLessThan(galleryIndex);
+
+    const items = Array.from(el.querySelectorAll('.steps__item'));
+    expect(items.length).toBe(4);
+    const titles = items.map((i) => i.querySelector('.steps__item-title')?.textContent?.trim());
+    expect(titles).toEqual(['Send us your theme', 'We send a mock-up', 'You confirm', 'We set up and clear']);
+  });
+
+  it('lists all 19 backdrop photos with descriptive alt text, lazy-loaded', () => {
+    expect(BACKDROPS.length).toBe(19);
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const imgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
-    expect(imgs.length).toBe(22);
+    expect(imgs.length).toBe(19);
     for (const img of imgs) {
       expect(img.getAttribute('src')).toMatch(/\/backdrops\/backdrop-\d{2}\.jpg$/);
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
@@ -56,7 +81,6 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
       'Grown-Up Celebrations',
       '100 Days & Naming',
       'Baby Shower & Gender Reveal',
-      'Other',
     ];
     for (const photo of BACKDROPS) {
       expect(photo.caption.length).toBeGreaterThan(0);
@@ -64,14 +88,48 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     }
   });
 
+  it('drops the "Other" category entirely (Easter/Ganesh/Sparkle & Co. — owner request, 22 Oct 2026)', () => {
+    const categories: string[] = BACKDROP_GROUPS.map((g) => g.category);
+    expect(categories).not.toContain('Other');
+    const srcs = BACKDROPS.map((b) => b.src);
+    expect(srcs).not.toContain('/backdrops/backdrop-04.jpg');
+    expect(srcs).not.toContain('/backdrops/backdrop-06.jpg');
+    expect(srcs).not.toContain('/backdrops/backdrop-23.jpg');
+  });
+
+  it('no caption or alt text names a child (owner request, 22 Oct 2026 — theme-only captions)', () => {
+    const names = [
+      'Sharan',
+      'Nikitharan',
+      'Raphael',
+      'Enzo',
+      'Elakiya',
+      'Lady Julie',
+      'Herman Keh',
+      'Vishal',
+      'Azkayra',
+      'Daxton',
+      'Farzanah',
+      'Iymran',
+      'Leia',
+      'Aarav',
+    ];
+    for (const photo of BACKDROPS) {
+      for (const name of names) {
+        expect(photo.caption).not.toContain(name);
+        expect(photo.alt).not.toContain(name);
+      }
+    }
+  });
+
   it('moves 21st/28th/30th/55th birthdays into a separate "Grown-Up Celebrations" row (owner request, 23 Oct 2026)', () => {
     const grownUp = BACKDROPS.filter((b) => b.category === 'Grown-Up Celebrations');
     expect(grownUp.length).toBe(4);
     const captions = grownUp.map((b) => b.caption);
-    expect(captions).toContain("Elakiya's 28th birthday, Stitch-themed");
-    expect(captions).toContain("Lady Julie's 55th birthday soirée");
-    expect(captions).toContain("Herman Keh's 30th birthday");
-    expect(captions).toContain("Vishal Arivin Enrico's 21st birthday");
+    expect(captions).toContain('28th birthday, Stitch-themed');
+    expect(captions).toContain('55th birthday soirée');
+    expect(captions).toContain('30th birthday');
+    expect(captions).toContain('21st birthday');
   });
 
   it('renders a visible caption under each photo', () => {
@@ -79,7 +137,7 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const captions = Array.from(el.querySelectorAll('.carousel__caption'));
-    expect(captions.length).toBe(22);
+    expect(captions.length).toBe(19);
     for (const caption of captions) {
       expect((caption.textContent ?? '').trim().length).toBeGreaterThan(0);
     }

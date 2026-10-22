@@ -2,6 +2,11 @@
 // homepage and /services (owner request, 10 Oct 2026: both pages must show
 // the same section rather than /services maintaining its own stale grid).
 // Single source of truth so the two pages can never drift again.
+//
+// The Birthdays & Celebrations card's image was a gender-reveal photo
+// (backdrop-25.jpg) — swapped 22 Oct 2026 (owner request) for an actual
+// kid's birthday shot (backdrop-24.jpg, safari-themed 1st birthday) so the
+// card's photo matches what it's promoting.
 
 export interface FeaturedService {
   name: string;
@@ -16,9 +21,8 @@ export const FEATURED_SERVICES: readonly FeaturedService[] = [
     name: 'Birthdays & Celebrations',
     blurb:
       "Birthdays, naming ceremonies, 100 days and more — you name the celebration, we'll style it.",
-    image: '/backdrops/backdrop-25.jpg',
-    imageAlt:
-      'A Winnie the Pooh-themed gender reveal balloon arch, "Our Little Hunny is on the way!", styled by LinkNow',
+    image: '/backdrops/backdrop-24.jpg',
+    imageAlt: 'A safari-themed 1st birthday balloon backdrop styled by LinkNow',
     link: '/backdrops',
   },
   {

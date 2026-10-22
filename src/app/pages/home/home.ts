@@ -36,7 +36,9 @@ interface HeroImage {
 // stays stable on the first photo and only swaps once a real browser is
 // rendering, on every screen size. Add to HERO_IMAGES rather than hard-coding
 // a second hero image elsewhere — keep every entry a kids'-party/birthday
-// photo.
+// photo. Alt text is theme-only, no child's name (owner request, 22 Oct
+// 2026 — same reasoning as backdrops.data.ts: a parent browsing could
+// wonder if their own child's name ends up here too).
 //
 // Curated for visual impact (owner request, 20 Oct 2026 — "most exquisite
 // images... Peppa Pig is boring"): swapped out backdrop-11 (a basic printed
@@ -53,13 +55,13 @@ interface HeroImage {
 const HERO_IMAGES: readonly HeroImage[] = [
   {
     src: '/backdrops/hero-minecraft.jpg',
-    alt: "A Minecraft-themed birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow for Enzo's 8th birthday",
+    alt: 'A Minecraft-themed 8th birthday backdrop with balloon garlands, TNT and character cut-outs — styled by LinkNow',
     width: 1113,
     height: 1150,
   },
   {
     src: '/backdrops/backdrop-24.jpg',
-    alt: "A safari-themed 1st birthday backdrop with balloon garlands styled by LinkNow for Sharan Nikitharan",
+    alt: 'A safari-themed 1st birthday backdrop with balloon garlands, styled by LinkNow',
     width: 862,
     height: 1150,
   },
@@ -71,7 +73,7 @@ const HERO_IMAGES: readonly HeroImage[] = [
   },
   {
     src: '/backdrops/backdrop-17.jpg',
-    alt: "A teddy-bear-themed 1st birthday backdrop with a styled dessert table, styled by LinkNow for Raphael's first birthday",
+    alt: 'A teddy-bear-themed 1st birthday backdrop with a styled dessert table, styled by LinkNow',
     width: 862,
     height: 1150,
   },

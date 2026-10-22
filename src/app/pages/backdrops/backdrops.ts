@@ -11,6 +11,33 @@ interface CarouselScrollState {
   atEnd: boolean;
 }
 
+interface HowItWorksStep {
+  title: string;
+  text: string;
+}
+
+// "How It Works" section (owner request, 22 Oct 2026) — a short, concrete
+// process so a first-time visitor knows what happens after they message us,
+// without us naming a price or timeline we haven't confirmed.
+const HOW_IT_WORKS: readonly HowItWorksStep[] = [
+  {
+    title: 'Send us your theme',
+    text: "Message us on WhatsApp with your date, venue and the theme or vibe you're going for.",
+  },
+  {
+    title: 'We send a mock-up',
+    text: "You'll see a visual of the design before anything is built, so there are no surprises.",
+  },
+  {
+    title: 'You confirm',
+    text: 'Approve the mock-up and we lock in your date.',
+  },
+  {
+    title: 'We set up and clear',
+    text: 'Delivery, setup before your event and teardown after — all handled for you.',
+  },
+];
+
 /**
  * Birthdays & Celebrations portfolio page (route '/backdrops').
  *
@@ -21,14 +48,19 @@ interface CarouselScrollState {
  * copy still describes backdrops as the product.
  *
  * A gallery of real backdrop builds, grouped into one horizontally
- * scrolling carousel per category (Birthday, 100 Days & Naming, Baby
- * Shower & Gender Reveal, Other) — owner request, 13 Oct 2026, replacing
- * filter-pill buttons over a single grid which didn't read well on mobile
- * or desktop. Each photo carries a short caption (occasion/theme, from the
- * photo's own signage — no invented venues). No prices or quantities
- * (BRIEF.md §4). Reachable from the Birthdays & Celebrations service card
- * and the Services nav dropdown. The WhatsApp CTA names this page in the
- * pre-filled message so the enquiry source is visible in the chat.
+ * scrolling carousel per category (Birthday, Grown-Up Celebrations,
+ * 100 Days & Naming, Baby Shower & Gender Reveal — in that order, kids'
+ * birthdays first per owner request, 22 Oct 2026) — owner request, 13 Oct
+ * 2026, replacing filter-pill buttons over a single grid which didn't read
+ * well on mobile or desktop. The "Other" category (Easter, Ganesh prayer
+ * function, Sparkle & Co.) was dropped entirely 22 Oct 2026 — see
+ * backdrops.data.ts for where those 3 photos went. Each photo carries a
+ * short caption (occasion/theme, from the photo's own signage — no
+ * invented venues, no child's name — see backdrops.data.ts). No prices or
+ * quantities (BRIEF.md §4). Reachable from the Birthdays & Celebrations
+ * service card and the Services nav dropdown. The WhatsApp CTA names this
+ * page in the pre-filled message so the enquiry source is visible in the
+ * chat.
  *
  * Reviews (UX review, 16 Oct 2026): testimonials previously only lived on
  * the homepage, not here where a visitor is actually deciding — same real
@@ -51,6 +83,7 @@ interface CarouselScrollState {
 export class Backdrops {
   protected readonly whatsappHref = pageWhatsappLink('Birthdays & Celebrations');
   protected readonly groups = BACKDROP_GROUPS;
+  protected readonly howItWorks = HOW_IT_WORKS;
   protected readonly testimonials = TESTIMONIALS;
   protected readonly faqs = FAQS;
 

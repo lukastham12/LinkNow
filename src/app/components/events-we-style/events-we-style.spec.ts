@@ -32,7 +32,7 @@ describe('EventsWeStyle', () => {
     expect(links).toEqual(['/backdrops', '/flowers', '/corporate']);
 
     const birthdayImg = cards[0].querySelector('img');
-    expect(birthdayImg?.getAttribute('src')).toBe('/backdrops/backdrop-25.jpg');
+    expect(birthdayImg?.getAttribute('src')).toBe('/backdrops/backdrop-24.jpg');
 
     for (const card of cards) {
       const img = card.querySelector('img');
