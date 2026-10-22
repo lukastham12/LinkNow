@@ -22,6 +22,7 @@
         class="chip"
         [class.chip--active]="chip.category === activeCategory()"
         [attr.aria-selected]="chip.category === activeCategory()"
+        [attr.tabindex]="chip.category === activeCategory() ? 0 : -1"
         [id]="'chip-' + i"
         aria-controls="gallery-panel"
         (click)="selectCategory(chip.category)"
@@ -67,11 +68,14 @@
   </div>
 
   <!-- Every category's photos stay in the DOM (not just the selected one) so
-       the full gallery is crawlable — only the inactive groups are visually
-       hidden, and their images are lazy-loaded like the visible group's. -->
+       the full gallery is crawlable — genuinely display:none (not the
+       position:absolute visually-hidden utility) so these ~15 inactive-
+       category images don't sit near the fold and get fetched eagerly on
+       mobile; aria-hidden since this list exists for crawlability, not
+       screen-reader users (who already get the visible carousel). -->
   @for (group of groups; track group.category) {
     @if (group.category !== activeCategory()) {
-      <ul class="visually-hidden" aria-hidden="true">
+      <ul class="gallery-hidden" aria-hidden="true">
         @for (photo of group.photos; track photo.src) {
           <li><img [src]="photo.src" [alt]="photo.alt" loading="lazy" /></li>
         }
