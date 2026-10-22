@@ -14,6 +14,17 @@ describe('EventsWeStyle', () => {
     expect(TestBed.createComponent(EventsWeStyle).componentInstance).toBeTruthy();
   });
 
+  it('.btn gets a 220px min-width and centered text so short-label buttons match longer ones (button-width consistency fix)', () => {
+    const fixture = TestBed.createComponent(EventsWeStyle);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const btn = el.querySelector('.btn') as HTMLElement;
+    expect(btn).toBeTruthy();
+    const style = getComputedStyle(btn);
+    expect(style.minWidth).toBe('220px');
+    expect(style.textAlign).toBe('center');
+  });
+
   it('"Events we style" shows exactly 3 cards linking to the right pages', () => {
     const fixture = TestBed.createComponent(EventsWeStyle);
     fixture.detectChanges();

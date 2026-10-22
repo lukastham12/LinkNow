@@ -15,6 +15,17 @@ describe('BuffetCateringPage', () => {
     expect(TestBed.createComponent(BuffetCateringPage).componentInstance).toBeTruthy();
   });
 
+  it('.btn gets a 220px min-width and centered text so short-label buttons match longer ones (button-width consistency fix)', () => {
+    const fixture = TestBed.createComponent(BuffetCateringPage);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const btn = el.querySelector('.btn') as HTMLElement;
+    expect(btn).toBeTruthy();
+    const style = getComputedStyle(btn);
+    expect(style.minWidth).toBe('220px');
+    expect(style.textAlign).toBe('center');
+  });
+
   it('has a single h1 and a back link to /services', () => {
     const fixture = TestBed.createComponent(BuffetCateringPage);
     fixture.detectChanges();

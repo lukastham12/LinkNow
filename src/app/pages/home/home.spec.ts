@@ -14,6 +14,17 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
+  it('.btn gets a 220px min-width and centered text so short-label buttons match longer ones (button-width consistency fix)', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const btn = el.querySelector('.btn') as HTMLElement;
+    expect(btn).toBeTruthy();
+    const style = getComputedStyle(btn);
+    expect(style.minWidth).toBe('220px');
+    expect(style.textAlign).toBe('center');
+  });
+
   it('hero has no eyebrow kicker — straight into the H1 (owner request 13 Oct 2026); company name/UEN live in the footer and /contact only', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
