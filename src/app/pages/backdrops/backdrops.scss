@@ -131,22 +131,28 @@
   padding: 0.25rem 0 0.5rem;
 }
 
+// Underline tabs (owner request, 22 Oct 2026 — the earlier pill/filled-chip
+// style read as dated). Text-forward, no fill/border on the chips
+// themselves, just a thin shared baseline with a coloured underline under
+// the active one — a more current pattern, still inside the brand's
+// no-shadow, no-busy-decoration rules.
 .chips {
   display: flex;
-  gap: 0.5rem;
+  gap: 1.5rem;
   overflow-x: auto;
-  padding: 0 1.25rem 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
   scrollbar-width: none;
 }
 
 .chip {
   flex: 0 0 auto;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-hairline);
-  background: var(--color-surface);
-  color: var(--color-text);
+  padding: 0.6rem 0 0.75rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-muted);
   font-size: 0.78rem;
   letter-spacing: var(--track-mid);
   text-transform: uppercase;
@@ -154,9 +160,9 @@
 }
 
 .chip--active {
-  background: var(--color-rose);
-  border-color: var(--color-rose);
-  color: #fff;
+  color: var(--color-rose);
+  border-bottom-color: var(--color-rose);
+  font-weight: 600;
 }
 
 .carousel-wrap {
