@@ -15,6 +15,8 @@ import { RouterLink } from '@angular/router';
 import { whatsappLink } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { FAQS } from '../../shared/faq';
+import { ADDONS } from '../../shared/addons';
+import { AddonCard } from '../../components/addon-card/addon-card';
 import { FaqAccordion } from '../../components/faq-accordion/faq-accordion';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 import { BACKDROP_CATEGORIES, BACKDROP_GROUPS, BackdropCategory } from './backdrops.data';
@@ -81,19 +83,35 @@ const BACKDROPS_WHATSAPP_MESSAGE =
 // (e.g. the homepage).
 const EXCLUDED_QUOTE_SNIPPETS = ['the big and beautiful bouquet', 'soap flower bouquets'];
 
+// "Make It a Full Party" strip (restored 22 Oct 2026 — owner request, in
+// place of the single "See party add-ons" redirect line the mobile-first
+// restructure replaced it with) — a fixed, deliberately short pick of 4
+// add-ons (not all 7) that a parent planning a kid's birthday is most
+// likely to want: one food station, one sweet station, entertainment and
+// hosting. Buffet Catering, Soft Serve Ice Cream and Balloon Sculpting are
+// left for the full /services/add-ons page.
+const FULL_PARTY_ADDON_IDS = ['bouncy-castle', 'candy-floss', 'popcorn-station', 'party-hosting'];
+
 /**
  * Birthdays & Celebrations portfolio page (route '/backdrops').
  *
  * Mobile-first restructure (owner request, 22 Oct 2026, 2nd round): everything
  * needed to decide and enquire now sits in the first ~1.5 mobile viewports —
- * compact hero (no button; the sticky bar below carries the CTA), then one
- * chip-filtered gallery (replacing four separate always-visible carousel
- * rows and the "Make It a Full Party" add-on card section, which duplicated
- * /services/add-ons and pushed the gallery below the fold). "How It Works"
- * compresses to a single strip on mobile; testimonials/FAQ/final CTA are
- * unchanged in substance, just reordered after the gallery. See
- * backdrops.html/.scss for the section-by-section layout and the sticky
- * WhatsApp bar.
+ * compact hero (no button, no photo; the sticky bar below carries the CTA),
+ * then one chip-filtered gallery (replacing four separate always-visible
+ * carousel rows). "How It Works" compresses to a single strip on mobile;
+ * testimonials/FAQ/final CTA are unchanged in substance, just reordered
+ * after the gallery. See backdrops.html/.scss for the section-by-section
+ * layout and the sticky WhatsApp bar.
+ *
+ * 3rd round (owner request, 22 Oct 2026, same day): the hero photo and the
+ * trust line were both dropped — the photo read as too large/heavy for a
+ * compact mobile-first hero, and the trust line ("Real 5-star reviews from
+ * Singapore parents") wasn't earning its place without a page section right
+ * below it to back it up. The "See party add-ons" redirect line was also
+ * swapped back for the full "Make It a Full Party" add-on card section
+ * (FULL_PARTY_ADDON_IDS below) — the owner wanted the cards shown inline on
+ * this page rather than just a link elsewhere.
  *
  * The floating site-wide WhatsApp bubble (components/whatsapp-button/) is
  * hidden on this page on mobile, via a body class toggled below, so there
@@ -101,7 +119,7 @@ const EXCLUDED_QUOTE_SNIPPETS = ['the big and beautiful bouquet', 'soap flower b
  */
 @Component({
   selector: 'app-backdrops',
-  imports: [ReviewsCarousel, FaqAccordion, RouterLink],
+  imports: [ReviewsCarousel, FaqAccordion, AddonCard, RouterLink],
   templateUrl: './backdrops.html',
   styleUrl: './backdrops.scss',
 })
@@ -110,12 +128,10 @@ export class Backdrops implements OnDestroy {
   private readonly document = inject(DOCUMENT);
 
   protected readonly whatsappHref = whatsappLink(BACKDROPS_WHATSAPP_MESSAGE);
-  protected readonly heroImage = {
-    src: '/backdrops/backdrop-24.jpg',
-    alt: 'A safari-themed 1st birthday backdrop built by LinkNow',
-    width: 862,
-    height: 1150,
-  };
+
+  protected readonly fullPartyAddons = FULL_PARTY_ADDON_IDS.map(
+    (id) => ADDONS.find((a) => a.id === id)!,
+  );
 
   protected readonly categories = BACKDROP_CATEGORIES;
   protected readonly chips = BACKDROP_CATEGORIES.map((category) => ({

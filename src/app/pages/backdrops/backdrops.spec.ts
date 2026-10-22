@@ -37,7 +37,7 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(document.body.classList.contains('backdrops-page')).toBeFalse();
   });
 
-  it('shows no hero CTA button for mobile-only markup (sticky bar carries it) but a desktop-only one exists, plus the hero photo (owner spec, 22 Oct 2026)', () => {
+  it('shows no hero CTA button for mobile-only markup (sticky bar carries it) but a desktop-only one exists, and no hero photo or trust line (owner spec, 22 Oct 2026 — both dropped the same day)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -46,20 +46,9 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(desktopActions).toBeTruthy();
     expect(desktopActions?.querySelector('a.btn--solid')).toBeTruthy();
 
-    const heroImg = el.querySelector('.intro__photo') as HTMLImageElement;
-    expect(heroImg).toBeTruthy();
-    expect(heroImg.getAttribute('src')).toBe('/backdrops/backdrop-24.jpg');
-    expect((heroImg.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
-  });
-
-  it('shows a trust line with no fabricated rating number or price (owner spec, 22 Oct 2026 — neither a real Google rating nor an approved backdrop price exists)', () => {
-    const fixture = TestBed.createComponent(Backdrops);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const trust = el.querySelector('.intro__trust');
-    expect(trust).toBeTruthy();
-    expect(trust?.textContent ?? '').not.toMatch(/\d(\.\d)?\s*(star|\/\s*5|on google)/i);
-    expect(trust?.textContent ?? '').not.toMatch(/\$|from\s*s?\$/i);
+    expect(el.querySelector('.intro__photo')).toBeNull();
+    expect(el.querySelector('.intro__trust')).toBeNull();
+    expect(el.textContent ?? '').not.toContain('Real 5-star reviews');
   });
 
   it('shows a chip-filtered gallery defaulting to "Kids\' Birthdays", with chips as an accessible tablist', () => {
@@ -116,15 +105,25 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     }
   });
 
-  it('shows a single "See party add-ons" line linking to /services/add-ons, with no add-on cards (owner spec, 22 Oct 2026 — replaces the old "Make It a Full Party" card strip, which duplicated /services/add-ons)', () => {
+  it('shows the "Make It a Full Party" add-on card strip after the gallery, linking to /services/add-ons (owner spec, 22 Oct 2026, restored same day in place of the single-line redirect)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('app-addon-card')).toBeNull();
-    expect((el.textContent ?? '')).toMatch(/bouncy castle, candy floss, popcorn or party host/i);
-    const link = el.querySelector('.addons-link a') as HTMLAnchorElement;
-    expect(link).toBeTruthy();
-    expect(link.getAttribute('href')).toBe('/services/add-ons');
+
+    const sections = Array.from(el.querySelectorAll('section'));
+    const galleryIndex = sections.findIndex((s) => s.classList.contains('gallery'));
+    const fullPartyIndex = sections.findIndex((s) => s.querySelector('#full-party-heading'));
+    expect(fullPartyIndex).toBe(galleryIndex + 1);
+
+    const fullPartySection = sections[fullPartyIndex];
+    const addonTitles = Array.from(fullPartySection.querySelectorAll('h3')).map((h) =>
+      h.textContent?.trim(),
+    );
+    expect(addonTitles).toEqual(['Bouncy Castle', 'Candy Floss', 'Popcorn Station', 'Party Hosting']);
+
+    const seeAllLink = fullPartySection.querySelector('a.btn--ghost') as HTMLAnchorElement;
+    expect(seeAllLink).toBeTruthy();
+    expect(seeAllLink.getAttribute('href')).toBe('/services/add-ons');
   });
 
   it('shows a 4-step "How It Works" section between the gallery and testimonials', () => {
@@ -250,12 +249,15 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(bar.getAttribute('href')).toContain('wa.me/6588090600');
   });
 
-  it('shows no quantity language, and no price anywhere (guardrail — decor stays quote-only)', () => {
+  it('shows no quantity language, and no price outside the "Make It a Full Party" add-ons (guardrail — decor stays quote-only)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent ?? '').not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
-    expect(el.textContent ?? '').not.toMatch(/\$|SGD|from\s*s?\$/i);
+
+    const clone = el.cloneNode(true) as HTMLElement;
+    clone.querySelector('.full-party')?.remove();
+    expect(clone.textContent).not.toMatch(/\$|SGD|from\s*s?\$/i);
   });
 
   it('shows real testimonials minus the two bouquet reviews (owner spec, 22 Oct 2026 — this page only, shared/testimonials.ts is unchanged)', () => {

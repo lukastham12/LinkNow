@@ -32,6 +32,15 @@
   background: color-mix(in srgb, var(--color-rose) 88%, #000);
 }
 
+.btn--ghost {
+  color: var(--color-rose);
+  border: 1px solid var(--color-hairline);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-rose);
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -42,16 +51,15 @@
 }
 
 // Hero — compact (mobile-first restructure, 22 Oct 2026): no button on
-// mobile (the sticky CTA bar carries it) and no photo, so the gallery below
-// starts as close to the fold as possible. Desktop restores the button and
-// adds the hero photo in a second column. -----------------------------------
+// mobile (the sticky CTA bar carries it), so the gallery below starts as
+// close to the fold as possible. Desktop restores the button. No hero photo
+// (owner request, 22 Oct 2026, same day — it read as too large/heavy for a
+// compact mobile-first hero). ------------------------------------------------
 
 .intro {
   max-width: 1120px;
   margin: 0 auto;
   padding: 1.25rem 1.25rem 0.75rem;
-  display: grid;
-  gap: 0.75rem;
 }
 
 .intro__title {
@@ -62,17 +70,10 @@
 }
 
 .intro__lede {
-  margin: 0;
+  margin: 0 0 0.75rem;
   color: var(--color-text-muted);
   max-width: 48ch;
   font-size: 0.96rem;
-}
-
-.intro__trust {
-  margin: 0;
-  color: var(--color-rose);
-  font-size: 0.85rem;
-  font-weight: 600;
 }
 
 .intro__actions {
@@ -89,27 +90,13 @@
   display: none;
 }
 
-.intro__photo {
-  display: none;
-}
-
 @media (min-width: 900px) {
   .intro {
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
     padding: 2.75rem 1.25rem 1.75rem;
   }
 
   .intro__actions--desktop-only {
     display: flex;
-    margin-top: 0.5rem;
-  }
-
-  .intro__photo {
-    display: block;
-    width: 100%;
-    aspect-ratio: 862 / 1150;
-    object-fit: cover;
   }
 }
 
@@ -217,17 +204,13 @@
   scroll-snap-align: start;
 }
 
-.carousel__img,
-.intro__photo {
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-}
-
 .carousel__img {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
 }
 
 .carousel__caption {
@@ -237,21 +220,29 @@
   line-height: 1.4;
 }
 
-// Add-ons link — single centred line, replaces the old add-on card strip
-// (owner request, 22 Oct 2026 — it duplicated /services/add-ons). ----------
+// Make It a Full Party (restored 22 Oct 2026 — owner request, in place of
+// the single-line add-ons redirect) — a short strip of add-on cards right
+// after the gallery, before "How It Works". --------------------------------
 
-.addons-link {
-  max-width: 560px;
-  margin: 0 auto 1.5rem;
-  padding: 0 1.25rem;
+.full-party {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 2rem;
   text-align: center;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
 }
 
-.addons-link a {
-  color: var(--color-rose);
-  font-weight: 600;
+.full-party__lede {
+  margin: 0 auto 1.5rem;
+  color: var(--color-text-muted);
+  max-width: 48ch;
+  font-size: 0.92rem;
+}
+
+.full-party__addons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
 }
 
 // How It Works — a compact single-line strip on mobile (no numbered
