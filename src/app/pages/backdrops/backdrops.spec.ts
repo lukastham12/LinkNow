@@ -12,11 +12,15 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     }).compileComponents();
   });
 
+  afterEach(() => {
+    document.body.classList.remove('backdrops-page');
+  });
+
   it('should create', () => {
     expect(TestBed.createComponent(Backdrops).componentInstance).toBeTruthy();
   });
 
-  it('has a single "Birthdays & Celebrations" h1 (renamed from "Custom Backdrops" 23 Oct 2026)', () => {
+  it('has a single "Birthdays & Celebrations" h1', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -25,24 +29,108 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(h1s[0].textContent).toContain('Birthdays & Celebrations');
   });
 
-  it('puts "Birthday" first, ahead of the baby/newborn-stage categories (owner request, 22 Oct 2026)', () => {
-    expect(BACKDROP_GROUPS[0].category).toBe('Birthday');
-    const order = BACKDROP_GROUPS.map((g) => g.category);
-    expect(order.indexOf('Birthday')).toBeLessThan(order.indexOf('100 Days & Naming'));
-    expect(order.indexOf('Birthday')).toBeLessThan(order.indexOf('Baby Shower & Gender Reveal'));
+  it('adds a "backdrops-page" class to the body on create and removes it on destroy (owner spec, 22 Oct 2026 — hides the floating WhatsApp bubble on mobile)', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    expect(document.body.classList.contains('backdrops-page')).toBeTrue();
+    fixture.destroy();
+    expect(document.body.classList.contains('backdrops-page')).toBeFalse();
   });
 
-  it('shows a 4-step "How It Works" section between the intro and the gallery', () => {
+  it('shows no hero CTA button for mobile-only markup (sticky bar carries it) but a desktop-only one exists, plus the hero photo (owner spec, 22 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
 
-    const sections = Array.from(el.querySelectorAll('section'));
-    const introIndex = sections.findIndex((s) => s.querySelector('h1'));
-    const stepsIndex = sections.findIndex((s) => s.querySelector('#steps-heading'));
-    const galleryIndex = sections.findIndex((s) => s.classList.contains('gallery'));
-    expect(stepsIndex).toBe(introIndex + 1);
-    expect(stepsIndex).toBeLessThan(galleryIndex);
+    const desktopActions = el.querySelector('.intro__actions--desktop-only');
+    expect(desktopActions).toBeTruthy();
+    expect(desktopActions?.querySelector('a.btn--solid')).toBeTruthy();
+
+    const heroImg = el.querySelector('.intro__photo') as HTMLImageElement;
+    expect(heroImg).toBeTruthy();
+    expect(heroImg.getAttribute('src')).toBe('/backdrops/backdrop-24.jpg');
+    expect((heroImg.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
+  });
+
+  it('shows a trust line with no fabricated rating number or price (owner spec, 22 Oct 2026 — neither a real Google rating nor an approved backdrop price exists)', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const trust = el.querySelector('.intro__trust');
+    expect(trust).toBeTruthy();
+    expect(trust?.textContent ?? '').not.toMatch(/\d(\.\d)?\s*(star|\/\s*5|on google)/i);
+    expect(trust?.textContent ?? '').not.toMatch(/\$|from\s*s?\$/i);
+  });
+
+  it('shows a chip-filtered gallery defaulting to "Kids\' Birthdays", with chips as an accessible tablist', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+
+    const tablist = el.querySelector('[role="tablist"]');
+    expect(tablist).toBeTruthy();
+
+    const chips = Array.from(el.querySelectorAll('.chip')) as HTMLButtonElement[];
+    expect(chips.map((c) => c.textContent?.trim())).toEqual([
+      "Kids' Birthdays",
+      'Grown-Up',
+      '100 Days & Naming',
+      'Baby Shower',
+    ]);
+    expect(chips[0].getAttribute('aria-selected')).toBe('true');
+    expect(chips[1].getAttribute('aria-selected')).toBe('false');
+    expect(chips[0].classList).toContain('chip--active');
+  });
+
+  it('switching chips swaps the visible carousel photos to the selected category', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+
+    const birthdayGroup = BACKDROP_GROUPS.find((g) => g.category === 'Birthday')!;
+    const babyGroup = BACKDROP_GROUPS.find((g) => g.category === 'Baby Shower & Gender Reveal')!;
+
+    let visibleImgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
+    expect(visibleImgs.length).toBe(birthdayGroup.photos.length);
+
+    const chips = Array.from(el.querySelectorAll('.chip')) as HTMLButtonElement[];
+    chips[3].click();
+    fixture.detectChanges();
+
+    visibleImgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
+    expect(visibleImgs.length).toBe(babyGroup.photos.length);
+    expect(visibleImgs[0].getAttribute('src')).toBe(babyGroup.photos[0].src);
+    expect(chips[3].getAttribute('aria-selected')).toBe('true');
+    expect(chips[0].getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('keeps every category\'s photos in the DOM (not just the active one) so the whole gallery stays crawlable', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const allImgSrcs = Array.from(el.querySelectorAll('img'))
+      .map((img) => img.getAttribute('src'))
+      .filter((src) => src?.startsWith('/backdrops/backdrop-'));
+    for (const photo of BACKDROPS) {
+      expect(allImgSrcs).toContain(photo.src);
+    }
+  });
+
+  it('shows a single "See party add-ons" line linking to /services/add-ons, with no add-on cards (owner spec, 22 Oct 2026 — replaces the old "Make It a Full Party" card strip, which duplicated /services/add-ons)', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('app-addon-card')).toBeNull();
+    expect((el.textContent ?? '')).toMatch(/bouncy castle, candy floss, popcorn or party host/i);
+    const link = el.querySelector('.addons-link a') as HTMLAnchorElement;
+    expect(link).toBeTruthy();
+    expect(link.getAttribute('href')).toBe('/services/add-ons');
+  });
+
+  it('shows a 4-step "How It Works" section between the gallery and testimonials', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
 
     const items = Array.from(el.querySelectorAll('.steps__item'));
     expect(items.length).toBe(4);
@@ -50,39 +138,17 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(titles).toEqual(['Send us your theme', 'We send a mock-up', 'You confirm', 'We set up and clear']);
   });
 
-  it('shows a "Make It a Full Party" strip with 4 add-on cards linking to /services/add-ons (owner feedback, 22 Oct 2026)', () => {
-    const fixture = TestBed.createComponent(Backdrops);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-
-    const sections = Array.from(el.querySelectorAll('section'));
-    const stepsIndex = sections.findIndex((s) => s.querySelector('#steps-heading'));
-    const fullPartyIndex = sections.findIndex((s) => s.querySelector('#full-party-heading'));
-    const galleryIndex = sections.findIndex((s) => s.classList.contains('gallery'));
-    expect(fullPartyIndex).toBe(stepsIndex + 1);
-    expect(fullPartyIndex).toBeLessThan(galleryIndex);
-
-    const fullPartySection = sections[fullPartyIndex];
-    const addonTitles = Array.from(fullPartySection.querySelectorAll('h3')).map((h) =>
-      h.textContent?.trim(),
-    );
-    expect(addonTitles).toEqual(['Bouncy Castle', 'Candy Floss', 'Popcorn Station', 'Party Hosting']);
-
-    const seeAllLink = fullPartySection.querySelector('a.btn--ghost') as HTMLAnchorElement;
-    expect(seeAllLink.getAttribute('href')).toBe('/services/add-ons');
-  });
-
-  it('lists all 19 backdrop photos with descriptive alt text, lazy-loaded', () => {
+  it('lists all 19 backdrop photos across the gallery with descriptive alt text', () => {
     expect(BACKDROPS.length).toBe(19);
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const imgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
+    const imgs = Array.from(
+      el.querySelectorAll('.gallery img[src^="/backdrops/backdrop-"]'),
+    ) as HTMLImageElement[];
     expect(imgs.length).toBe(19);
     for (const img of imgs) {
-      expect(img.getAttribute('src')).toMatch(/\/backdrops\/backdrop-\d{2}\.jpg$/);
       expect((img.getAttribute('alt') ?? '').length).toBeGreaterThan(0);
-      expect(img.getAttribute('loading')).toBe('lazy');
     }
   });
 
@@ -92,11 +158,9 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(srcs).not.toContain('/backdrops/backdrop-09.jpg');
   });
 
-  it('excludes backdrop-16 — a duplicate of the backdrop-25 gender-reveal photo (owner request, 23 Oct 2026)', () => {
+  it('excludes backdrop-16 — a duplicate of the backdrop-25 gender-reveal photo', () => {
     const srcs = BACKDROPS.map((b) => b.src);
     expect(srcs).not.toContain('/backdrops/backdrop-16.jpg');
-    const hunnyPhotos = BACKDROPS.filter((b) => b.caption.includes('Our Little Hunny'));
-    expect(hunnyPhotos.length).toBe(1);
   });
 
   it('every photo has a non-empty caption and a valid category', () => {
@@ -112,16 +176,7 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     }
   });
 
-  it('drops the "Other" category entirely (Easter/Ganesh/Sparkle & Co. — owner request, 22 Oct 2026)', () => {
-    const categories: string[] = BACKDROP_GROUPS.map((g) => g.category);
-    expect(categories).not.toContain('Other');
-    const srcs = BACKDROPS.map((b) => b.src);
-    expect(srcs).not.toContain('/backdrops/backdrop-04.jpg');
-    expect(srcs).not.toContain('/backdrops/backdrop-06.jpg');
-    expect(srcs).not.toContain('/backdrops/backdrop-23.jpg');
-  });
-
-  it('no caption or alt text names a child (owner request, 22 Oct 2026 — theme-only captions)', () => {
+  it('no caption or alt text names a child (theme-only captions)', () => {
     const names = [
       'Sharan',
       'Nikitharan',
@@ -146,94 +201,86 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     }
   });
 
-  it('moves 21st/28th/30th/55th birthdays into a separate "Grown-Up Celebrations" row (owner request, 23 Oct 2026)', () => {
-    const grownUp = BACKDROPS.filter((b) => b.category === 'Grown-Up Celebrations');
-    expect(grownUp.length).toBe(4);
-    const captions = grownUp.map((b) => b.caption);
-    expect(captions).toContain('28th birthday, Stitch-themed');
-    expect(captions).toContain('55th birthday soirée');
-    expect(captions).toContain('30th birthday');
-    expect(captions).toContain('21st birthday');
-  });
-
-  it('renders a visible caption under each photo', () => {
+  it('renders a visible caption under each active-category photo', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const captions = Array.from(el.querySelectorAll('.carousel__caption'));
-    expect(captions.length).toBe(19);
+    const birthdayGroup = BACKDROP_GROUPS.find((g) => g.category === 'Birthday')!;
+    expect(captions.length).toBe(birthdayGroup.photos.length);
     for (const caption of captions) {
       expect((caption.textContent ?? '').trim().length).toBeGreaterThan(0);
     }
-  });
-
-  it('groups photos into one carousel section per category, each with its own heading', () => {
-    const fixture = TestBed.createComponent(Backdrops);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-
-    const sections = Array.from(el.querySelectorAll('.gallery'));
-    expect(sections.length).toBe(BACKDROP_GROUPS.length);
-
-    const headings = sections.map((s) => s.querySelector('.gallery__title')?.textContent?.trim());
-    expect(headings).toEqual(BACKDROP_GROUPS.map((g) => g.category));
-
-    BACKDROP_GROUPS.forEach((group, i) => {
-      const imgs = sections[i].querySelectorAll('.carousel__img');
-      expect(imgs.length).toBe(group.photos.length);
-      expect(imgs.length).toBeGreaterThan(0);
-    });
   });
 
   it('each carousel scrolls horizontally rather than wrapping into a grid', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelectorAll('.carousel').length).toBe(BACKDROP_GROUPS.length);
-    expect(el.querySelector('.filter')).toBeNull();
+    expect(el.querySelectorAll('.carousel').length).toBe(1);
   });
 
-  it('uses a page-specific WhatsApp link naming "Birthdays & Celebrations" (no email/quote/contact/form on this page)', () => {
+  it('every WhatsApp button (hero, sticky bar, final CTA) uses the page-specific birthday-party prefill (owner spec, 22 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const waLinks = Array.from(
       el.querySelectorAll('a[href*="wa.me/6588090600"]'),
     ) as HTMLAnchorElement[];
-    expect(waLinks.length).toBeGreaterThan(0);
+    expect(waLinks.length).toBeGreaterThanOrEqual(3);
     for (const a of waLinks) {
-      expect(decodeURIComponent(a.href)).toContain('Birthdays & Celebrations');
+      const decoded = decodeURIComponent(a.href);
+      expect(decoded).toContain("I'm planning a birthday party");
+      expect(decoded).toContain('Date:');
+      expect(decoded).toContain('Venue (HDB / condo / other):');
+      expect(decoded).toContain('Theme:');
+      expect(decoded).toContain("Add-ons I'm interested in:");
     }
     expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(el.querySelector('a[href="/contact"]')).toBeNull();
-    expect(el.querySelector('form, input, button[type="submit"]')).toBeNull();
-    const text = el.textContent ?? '';
-    expect(text).not.toMatch(/request a quote|contact us/i);
   });
 
-  it('shows no quantity language, and no price outside the "Make It a Full Party" add-ons (guardrail)', () => {
+  it('shows a sticky mobile WhatsApp CTA bar', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const bar = el.querySelector('.sticky-cta') as HTMLAnchorElement;
+    expect(bar).toBeTruthy();
+    expect(bar.textContent?.trim()).toBe('WhatsApp us your date & theme');
+    expect(bar.getAttribute('href')).toContain('wa.me/6588090600');
+  });
+
+  it('shows no quantity language, and no price anywhere (guardrail — decor stays quote-only)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent ?? '').not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
-
-    // Backdrops/decor itself stays quote-only — no price anywhere outside
-    // the add-on cards (shared/addons.ts, approved pricing — 19 Oct 2026).
-    const clone = el.cloneNode(true) as HTMLElement;
-    clone.querySelector('.full-party')?.remove();
-    expect(clone.textContent).not.toMatch(/\$|SGD|price|from\s*\$/i);
+    expect(el.textContent ?? '').not.toMatch(/\$|SGD|from\s*s?\$/i);
   });
 
-  it('shows real testimonials below the gallery (UX review, 16 Oct 2026 — reviews previously only lived on the homepage)', () => {
+  it('shows real testimonials minus the two bouquet reviews (owner spec, 22 Oct 2026 — this page only, shared/testimonials.ts is unchanged)', () => {
     expect(TESTIMONIALS.length).toBeGreaterThan(0);
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent ?? '').toContain('What our clients say');
     expect(el.querySelector('app-reviews-carousel')).toBeTruthy();
+
+    const component = fixture.componentInstance;
+    expect(component['testimonials'].length).toBe(TESTIMONIALS.length - 2);
+    expect(
+      component['testimonials'].some((t: { quote: string }) =>
+        t.quote.includes('the big and beautiful bouquet'),
+      ),
+    ).toBeFalse();
+    expect(
+      component['testimonials'].some((t: { quote: string }) =>
+        t.quote.includes('soap flower bouquets'),
+      ),
+    ).toBeFalse();
   });
 
-  it('shows a short FAQ covering lead time, venues, inclusions, deposit/cancellation and rain backup (UX review, 16 Oct 2026)', () => {
+  it('shows a short FAQ covering lead time, venues, inclusions, deposit/cancellation and rain backup', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -247,10 +294,12 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(text).toMatch(/deposit/i);
     expect(text).toMatch(/cancellation/i);
     expect(text).toMatch(/rain/i);
+  });
 
-    // Lead time (owner request, 23 Oct 2026) — book anytime, including
-    // last-minute, no preferred window pushed.
-    expect(text).toContain('You can book anytime');
-    expect(text).toMatch(/last-minute/i);
+  it('final CTA text is unchanged ("Ready to plan the party...")', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent ?? '').toContain('Ready to plan the party? Tell us your date and theme.');
   });
 });

@@ -1,11 +1,15 @@
 // Shared building blocks (mirrors the other pages for a consistent look) -----
 
 .eyebrow {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
   color: var(--color-text-muted);
   font-size: var(--font-size-label);
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
+}
+
+.eyebrow--center {
+  text-align: center;
 }
 
 .btn {
@@ -16,10 +20,6 @@
   text-decoration: none;
   padding: 0.85rem 1.8rem;
   border-radius: 2px;
-  transition:
-    border-color 0.25s ease,
-    background-color 0.25s ease,
-    color 0.25s ease;
 }
 
 .btn--solid {
@@ -32,36 +32,47 @@
   background: color-mix(in srgb, var(--color-rose) 88%, #000);
 }
 
-.btn--ghost {
-  color: var(--color-rose);
-  border: 1px solid var(--color-hairline);
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.btn--ghost:hover {
-  border-color: var(--color-rose);
-  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
-}
-
-// Intro --------------------------------------------------------------------
+// Hero — compact (mobile-first restructure, 22 Oct 2026): no button on
+// mobile (the sticky CTA bar carries it) and no photo, so the gallery below
+// starts as close to the fold as possible. Desktop restores the button and
+// adds the hero photo in a second column. -----------------------------------
 
 .intro {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 3rem 1.25rem 1rem;
+  padding: 1.25rem 1.25rem 0.75rem;
+  display: grid;
+  gap: 0.75rem;
 }
 
 .intro__title {
-  margin: 0 0 1rem;
-  font-size: clamp(1.9rem, 6vw, 3rem);
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.7rem, 7vw, 2.6rem);
   line-height: 1.15;
   font-weight: 600;
 }
 
 .intro__lede {
-  margin: 0 0 1.75rem;
+  margin: 0;
   color: var(--color-text-muted);
-  max-width: 56ch;
-  font-size: 1rem;
+  max-width: 48ch;
+  font-size: 0.96rem;
+}
+
+.intro__trust {
+  margin: 0;
+  color: var(--color-rose);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .intro__actions {
@@ -74,112 +85,79 @@
   justify-content: center;
 }
 
-// How It Works (owner request, 22 Oct 2026) ---------------------------------
-
-.steps,
-.full-party {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 1rem 1.25rem 2rem;
+.intro__actions--desktop-only {
+  display: none;
 }
 
-.steps__title {
-  margin: 0 0 1.5rem;
-  text-align: center;
-  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
-  font-weight: 600;
+.intro__photo {
+  display: none;
 }
 
-.steps__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: 1fr;
-}
+@media (min-width: 900px) {
+  .intro {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    padding: 2.75rem 1.25rem 1.75rem;
+  }
 
-.steps__item {
-  text-align: center;
-}
+  .intro__actions--desktop-only {
+    display: flex;
+    margin-top: 0.5rem;
+  }
 
-.steps__number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-bottom: 0.6rem;
-  border-radius: 50%;
-  border: 1px solid var(--color-hairline);
-  color: var(--color-rose);
-  font-weight: 600;
-}
-
-.steps__item-title {
-  margin: 0 0 0.4rem;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.steps__item-text {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: 0.88rem;
-  line-height: 1.5;
-  max-width: 32ch;
-  margin-inline: auto;
-}
-
-@media (min-width: 720px) {
-  .steps__list {
-    grid-template-columns: repeat(4, 1fr);
+  .intro__photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 862 / 1150;
+    object-fit: cover;
   }
 }
 
-// Make It a Full Party (owner feedback, 22 Oct 2026 — the intro promises
-// food stations and entertainment, but the page only showed backdrops with
-// no link or proof) — a short strip of add-on cards right after the steps,
-// before the photo gallery. Reuses the same app-addon-card component as the
-// homepage teaser and /services/add-ons.
-.full-party {
-  text-align: center;
-}
+// Celebration gallery — chip-filtered single carousel ------------------------
 
-.full-party__lede {
-  margin: 0 auto 1.5rem;
-  color: var(--color-text-muted);
-  max-width: 48ch;
-  font-size: 0.92rem;
-}
-
-.full-party__addons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 1.75rem;
-}
-
-// Gallery — one section + horizontally-scrolling carousel per category -----
-
-// Horizontal padding lives on .gallery itself (not on the title or the
-// carousel separately) so the carousel's left edge always lines up with the
-// heading above it (UX review, 16 Oct 2026 — they'd drifted out of sync at
-// some widths when each had its own padding).
-.gallery {
+.gallery,
+.steps,
+.reviews,
+.outro {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 0.5rem;
 }
 
-.gallery__title {
-  margin: 0 0 1rem;
-  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
-  font-weight: 600;
+.gallery {
+  padding: 0.25rem 0 0.5rem;
+}
+
+.chips {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0 1.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.78rem;
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.chip--active {
+  background: var(--color-rose);
+  border-color: var(--color-rose);
+  color: #fff;
 }
 
 .carousel-wrap {
   position: relative;
+  padding: 0 1.25rem;
 }
 
 .carousel {
@@ -190,12 +168,10 @@
   gap: 0.9rem;
   overflow-x: auto;
   scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
 }
 
-// Prev/next arrows (UX review, 16 Oct 2026 — mouse users had no sign the
-// carousels scroll). Hidden on mobile, where touch swipe already works and
-// the arrows would just eat into limited screen width.
+// Prev/next arrows (UX review, 16 Oct 2026). Hidden on mobile, where touch
+// swipe already works.
 .carousel__arrow {
   display: none;
 }
@@ -214,52 +190,44 @@
     padding: 0;
     border-radius: 999px;
     border: 1px solid var(--color-border);
-    background: color-mix(in srgb, var(--color-surface) 90%, transparent);
-    color: var(--color-text);
-    font-size: 1.2rem;
-    line-height: 1;
-    cursor: pointer;
-    transition:
-      background-color 0.2s ease,
-      opacity 0.2s ease;
-  }
-
-  .carousel__arrow:hover:not(:disabled) {
     background: var(--color-surface);
+    font-size: 1.2rem;
   }
 
-  // Hidden rather than faded when at the start/end of a row (UX review,
-  // 23 Oct 2026 — a disabled arrow sitting faded over the photo read as
-  // broken rather than "no more photos this way").
   .carousel__arrow:disabled {
     display: none;
   }
 
   .carousel__arrow--prev {
-    left: 0.25rem;
+    left: 1.5rem;
   }
 
   .carousel__arrow--next {
-    right: 0.25rem;
+    right: 1.5rem;
   }
 }
 
+// A fixed card width gives a peek of the next photo on mobile (~1.6 cards
+// visible on a 390px screen) and ~4 cards visible on desktop — no extra
+// breakpoints needed.
 .carousel__item {
   flex: 0 0 auto;
-  width: 180px;
+  width: 230px;
   margin: 0;
   scroll-snap-align: start;
+}
+
+.carousel__img,
+.intro__photo {
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
 }
 
 .carousel__img {
   display: block;
   width: 100%;
-  // Consistent tiles for varied source photos; real scenes shown as-is.
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
 }
 
 .carousel__caption {
@@ -269,45 +237,134 @@
   line-height: 1.4;
 }
 
-@media (min-width: 640px) {
-  .carousel__item {
-    width: 220px;
-  }
+// Add-ons link — single centred line, replaces the old add-on card strip
+// (owner request, 22 Oct 2026 — it duplicated /services/add-ons). ----------
+
+.addons-link {
+  max-width: 560px;
+  margin: 0 auto 1.5rem;
+  padding: 0 1.25rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
 }
 
-@media (min-width: 900px) {
-  .carousel__item {
-    width: 250px;
+.addons-link a {
+  color: var(--color-rose);
+  font-weight: 600;
+}
+
+// How It Works — a compact single-line strip on mobile (no numbered
+// circles), the original 4-column layout from 720px up. ---------------------
+
+.steps {
+  padding: 1rem 1.25rem 2rem;
+}
+
+.steps__title,
+.reviews__title {
+  text-align: center;
+  font-size: clamp(1.15rem, 3.5vw, 1.6rem);
+  font-weight: 600;
+}
+
+.steps__title {
+  margin: 0 0 1rem;
+}
+
+.steps__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem 0;
+}
+
+.steps__item {
+  display: flex;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.steps__item:not(:last-child)::after {
+  content: '→';
+  margin: 0 0.5rem;
+  color: var(--color-text-muted);
+}
+
+.steps__number,
+.steps__item-text {
+  display: none;
+}
+
+.steps__item-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+@media (min-width: 720px) {
+  .steps__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .steps__item {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .steps__item::after {
+    content: none;
+  }
+
+  .steps__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-bottom: 0.6rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-hairline);
+    color: var(--color-rose);
+    font-weight: 600;
+  }
+
+  .steps__item-title {
+    margin: 0 0 0.4rem;
+  }
+
+  .steps__item-text {
+    display: block;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    max-width: 32ch;
+    margin-inline: auto;
   }
 }
 
 // Reviews --------------------------------------------------------------------
 
-.eyebrow--center {
-  text-align: center;
-}
-
 .reviews {
-  max-width: 1120px;
-  margin: 0 auto;
   padding: 2.5rem 1.25rem 0.5rem;
 }
 
 .reviews__title {
   margin: 0 0 1.5rem;
-  text-align: center;
-  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
-  font-weight: 600;
 }
 
-// FAQ now lives in the shared app-faq-accordion component (extracted 20 Oct
-// 2026) — see components/faq-accordion/.
+// FAQ now lives in the shared app-faq-accordion component — see
+// components/faq-accordion/.
 
 // Outro --------------------------------------------------------------------
 
 .outro {
-  max-width: 1120px;
-  margin: 0 auto;
   padding: 3.5rem 1.25rem 1rem;
   text-align: center;
 }
@@ -316,4 +373,26 @@
   margin: 0 0 1.75rem;
   color: var(--color-text-muted);
   font-size: 1rem;
+}
+
+// Sticky mobile CTA bar (owner spec, 22 Oct 2026) — replaces the floating
+// WhatsApp bubble on this page below 768px (hidden globally via the
+// body.backdrops-page class — see styles.scss). ----------------------------
+
+.sticky-cta {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .sticky-cta {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 70;
+    width: 100%;
+    text-align: center;
+    padding-bottom: calc(0.85rem + env(safe-area-inset-bottom));
+  }
 }

@@ -108,7 +108,7 @@ describe('CorporateCaseStudyPage', () => {
     expect(text).toMatch(/twilight: flea & feast/i);
     expect(text).toMatch(/suntec singapore/i);
     expect(text).toMatch(/4m\s*×\s*4m/i);
-    expect(text).toContain('[RESULT — to fill in]');
+    expect(text).toMatch(/32%/);
 
     const imgs = Array.from(el.querySelectorAll('.showcase__img')) as HTMLImageElement[];
     expect(imgs.length).toBe(1);
