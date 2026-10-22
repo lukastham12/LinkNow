@@ -83,6 +83,16 @@
   font-size: 0.96rem;
 }
 
+// Price anchor (owner override, 22 Oct 2026) — bolded and in the rose
+// accent so "decor only, add-ons cost extra" reads as a clarification,
+// not a second promise.
+.intro__price {
+  margin: 0 0 0.75rem;
+  max-width: 48ch;
+  font-size: 0.96rem;
+  color: var(--color-rose);
+}
+
 .intro__actions {
   display: flex;
   flex-wrap: wrap;
