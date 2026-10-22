@@ -57,10 +57,11 @@
 }
 
 // Hero — compact (mobile-first restructure, 22 Oct 2026): no button on
-// mobile (the sticky CTA bar carries it), so the gallery below starts as
-// close to the fold as possible. Desktop restores the button. No hero photo
-// (owner request, 22 Oct 2026, same day — it read as too large/heavy for a
-// compact mobile-first hero). ------------------------------------------------
+// mobile, so the gallery below starts as close to the fold as possible —
+// the floating site-wide WhatsApp bubble and the outro CTA cover mobile
+// enquiries. Desktop restores the button. No hero photo (owner request,
+// 22 Oct 2026, same day — it read as too large/heavy for a compact
+// mobile-first hero). --------------------------------------------------
 
 .intro {
   max-width: 1120px;
@@ -75,11 +76,22 @@
   font-weight: 600;
 }
 
-.intro__lede {
+.intro__lede,
+.intro__theme {
   margin: 0 0 0.75rem;
   color: var(--color-text-muted);
   max-width: 48ch;
   font-size: 0.96rem;
+}
+
+// Price anchor (owner override, 22 Oct 2026) — bolded and in the rose
+// accent so it reads as a clear, separate fact, not folded into the
+// lede/theme copy above it.
+.intro__price {
+  margin: 0 0 0.75rem;
+  max-width: 48ch;
+  font-size: 0.96rem;
+  color: var(--color-rose);
 }
 
 .intro__actions {
@@ -120,22 +132,28 @@
   padding: 0.25rem 0 0.5rem;
 }
 
+// Underline tabs (owner request, 22 Oct 2026 — the earlier pill/filled-chip
+// style read as dated). Text-forward, no fill/border on the chips
+// themselves, just a thin shared baseline with a coloured underline under
+// the active one — a more current pattern, still inside the brand's
+// no-shadow, no-busy-decoration rules.
 .chips {
   display: flex;
-  gap: 0.5rem;
+  gap: 1.5rem;
   overflow-x: auto;
-  padding: 0 1.25rem 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
   scrollbar-width: none;
 }
 
 .chip {
   flex: 0 0 auto;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-hairline);
-  background: var(--color-surface);
-  color: var(--color-text);
+  padding: 0.6rem 0 0.75rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-muted);
   font-size: 0.78rem;
   letter-spacing: var(--track-mid);
   text-transform: uppercase;
@@ -143,9 +161,9 @@
 }
 
 .chip--active {
-  background: var(--color-rose);
-  border-color: var(--color-rose);
-  color: #fff;
+  color: var(--color-rose);
+  border-bottom-color: var(--color-rose);
+  font-weight: 600;
 }
 
 .carousel-wrap {
@@ -378,24 +396,3 @@
   font-size: 1rem;
 }
 
-// Sticky mobile CTA bar (owner spec, 22 Oct 2026) — replaces the floating
-// WhatsApp bubble on this page below 768px (hidden globally via the
-// body.backdrops-page class — see styles.scss). ----------------------------
-
-.sticky-cta {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .sticky-cta {
-    display: block;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 70;
-    width: 100%;
-    text-align: center;
-    padding-bottom: calc(0.85rem + env(safe-area-inset-bottom));
-  }
-}

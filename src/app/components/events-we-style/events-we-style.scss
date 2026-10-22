@@ -116,10 +116,15 @@
   text-align: center;
 }
 
+// Equal-width stacked pair (owner request, 22 Oct 2026 — mismatched
+// widths between stacked buttons looked jarring). No explicit width on
+// either .btn: the default flex align-items: stretch makes both match the
+// wider one's natural content width.
 .section__cta--stacked {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: fit-content;
+  margin-inline: auto;
   gap: 0.75rem;
 }
 
