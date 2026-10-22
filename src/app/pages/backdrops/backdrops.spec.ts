@@ -250,17 +250,15 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(el.querySelector('a[href="/contact"]')).toBeNull();
   });
 
-  it('shows a bold "Backdrops from S$349" price anchor in the intro, clearly scoped to decor only (owner override, 22 Oct 2026 — explicit, acknowledged exception to decor staying quote-only on this page only) and no price anywhere else outside it and the "Make It a Full Party" add-ons', () => {
+  it('shows a bold "Backdrop starts at S$349" price anchor in the intro (owner override, 22 Oct 2026 — explicit, acknowledged exception to decor staying quote-only on this page only) and no price anywhere else outside it and the "Make It a Full Party" add-ons', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent ?? '').not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
 
     const priceEl = el.querySelector('.intro__price');
-    expect(priceEl?.textContent).toContain('S$349');
+    expect(priceEl?.textContent?.trim()).toBe('Backdrop starts at S$349');
     expect(priceEl?.querySelector('strong')?.textContent).toContain('S$349');
-    expect(priceEl?.textContent).toMatch(/decor only/i);
-    expect(priceEl?.textContent).toMatch(/add-ons cost extra/i);
 
     const clone = el.cloneNode(true) as HTMLElement;
     clone.querySelector('.full-party')?.remove();
