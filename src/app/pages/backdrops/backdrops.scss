@@ -75,7 +75,8 @@
   font-weight: 600;
 }
 
-.intro__lede {
+.intro__lede,
+.intro__theme {
   margin: 0 0 0.75rem;
   color: var(--color-text-muted);
   max-width: 48ch;
@@ -378,24 +379,3 @@
   font-size: 1rem;
 }
 
-// Sticky mobile CTA bar (owner spec, 22 Oct 2026) — replaces the floating
-// WhatsApp bubble on this page below 768px (hidden globally via the
-// body.backdrops-page class — see styles.scss). ----------------------------
-
-.sticky-cta {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .sticky-cta {
-    display: block;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 70;
-    width: 100%;
-    text-align: center;
-    padding-bottom: calc(0.85rem + env(safe-area-inset-bottom));
-  }
-}

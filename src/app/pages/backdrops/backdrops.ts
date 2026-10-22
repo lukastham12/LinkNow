@@ -4,13 +4,11 @@ import {
   ElementRef,
   inject,
   Injector,
-  OnDestroy,
   QueryList,
   signal,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { whatsappLink } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
@@ -65,10 +63,10 @@ const CHIP_LABELS: Record<BackdropCategory, string> = {
   'Baby Shower & Gender Reveal': 'Baby Shower',
 };
 
-// This page's WhatsApp buttons (hero, sticky bar, final CTA) use a bespoke
-// prefill rather than the shared pageWhatsappLink() template — owner spec,
-// 22 Oct 2026 mobile-first restructure — asking for date/venue/theme/
-// add-ons up front, tuned for a parent planning a kid's birthday.
+// This page's WhatsApp buttons (hero, final CTA) use a bespoke prefill
+// rather than the shared pageWhatsappLink() template — owner spec, 22 Oct
+// 2026 mobile-first restructure — asking for date/venue/theme/add-ons up
+// front, tuned for a parent planning a kid's birthday.
 const BACKDROPS_WHATSAPP_MESSAGE =
   "Hi LinkNow! I'm planning a birthday party.\n" +
   'Date: \n' +
@@ -97,12 +95,11 @@ const FULL_PARTY_ADDON_IDS = ['bouncy-castle', 'candy-floss', 'popcorn-station',
  *
  * Mobile-first restructure (owner request, 22 Oct 2026, 2nd round): everything
  * needed to decide and enquire now sits in the first ~1.5 mobile viewports —
- * compact hero (no button, no photo; the sticky bar below carries the CTA),
- * then one chip-filtered gallery (replacing four separate always-visible
- * carousel rows). "How It Works" compresses to a single strip on mobile;
- * testimonials/FAQ/final CTA are unchanged in substance, just reordered
- * after the gallery. See backdrops.html/.scss for the section-by-section
- * layout and the sticky WhatsApp bar.
+ * compact hero, then one chip-filtered gallery (replacing four separate
+ * always-visible carousel rows). "How It Works" compresses to a single
+ * strip on mobile; testimonials/FAQ/final CTA are unchanged in substance,
+ * just reordered after the gallery. See backdrops.html/.scss for the
+ * section-by-section layout.
  *
  * 3rd round (owner request, 22 Oct 2026, same day): the hero photo and the
  * trust line were both dropped — the photo read as too large/heavy for a
@@ -113,9 +110,12 @@ const FULL_PARTY_ADDON_IDS = ['bouncy-castle', 'candy-floss', 'popcorn-station',
  * (FULL_PARTY_ADDON_IDS below) — the owner wanted the cards shown inline on
  * this page rather than just a link elsewhere.
  *
- * The floating site-wide WhatsApp bubble (components/whatsapp-button/) is
- * hidden on this page on mobile, via a body class toggled below, so there
- * isn't a second WhatsApp button competing with the sticky bar.
+ * 4th round (owner request, 22 Oct 2026, same day): the sticky mobile
+ * bottom WhatsApp CTA bar (and the matching hiding of the floating
+ * site-wide WhatsApp bubble on mobile) was reverted — the owner wanted the
+ * normal floating WhatsApp bubble back (bottom-right, every page including
+ * this one), not a replacement sticky bar. This page no longer touches the
+ * floating bubble at all.
  */
 @Component({
   selector: 'app-backdrops',
@@ -123,9 +123,8 @@ const FULL_PARTY_ADDON_IDS = ['bouncy-castle', 'candy-floss', 'popcorn-station',
   templateUrl: './backdrops.html',
   styleUrl: './backdrops.scss',
 })
-export class Backdrops implements OnDestroy {
+export class Backdrops {
   private readonly injector = inject(Injector);
-  private readonly document = inject(DOCUMENT);
 
   protected readonly whatsappHref = whatsappLink(BACKDROPS_WHATSAPP_MESSAGE);
 
@@ -165,11 +164,6 @@ export class Backdrops implements OnDestroy {
         this.carouselState = this.readScrollState(el);
       }
     });
-    this.document.body.classList.add('backdrops-page');
-  }
-
-  ngOnDestroy(): void {
-    this.document.body.classList.remove('backdrops-page');
   }
 
   protected get activeGroup() {

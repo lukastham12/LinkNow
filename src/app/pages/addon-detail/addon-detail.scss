@@ -214,11 +214,14 @@
   font-size: 1rem;
 }
 
-.outro__actions {
+// Solid + ghost CTA pair, stacked and equal-width (owner request, 22 Oct
+// 2026 — mismatched widths between the two stacked buttons looked jarring).
+// No explicit width on either .btn: the default flex align-items: stretch
+// makes both match the wider one's natural content width.
+.outro__ctas {
   display: flex;
-  justify-content: center;
-}
-
-.outro__secondary {
-  margin-top: 0.75rem;
+  flex-direction: column;
+  width: fit-content;
+  margin: 0 auto;
+  gap: 0.75rem;
 }

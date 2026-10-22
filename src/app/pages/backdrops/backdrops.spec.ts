@@ -12,10 +12,6 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     }).compileComponents();
   });
 
-  afterEach(() => {
-    document.body.classList.remove('backdrops-page');
-  });
-
   it('should create', () => {
     expect(TestBed.createComponent(Backdrops).componentInstance).toBeTruthy();
   });
@@ -31,24 +27,28 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(style.textAlign).toBe('center');
   });
 
-  it('has a single "Birthdays & Celebrations" h1', () => {
+  it('has a single benefit-driven h1 (owner feedback, 22 Oct 2026 — "Birthdays & Celebrations" read as a category label, not a promise) and an accurate eyebrow', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = el.querySelectorAll('h1');
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent).toContain('Birthdays & Celebrations');
+    expect(h1s[0].textContent).toContain('Birthday setups your kid will remember');
+    expect(el.querySelector('.eyebrow')?.textContent).toContain('Birthday Decor & Add-ons');
   });
 
-  it('adds a "backdrops-page" class to the body on create and removes it on destroy (owner spec, 22 Oct 2026 — hides the floating WhatsApp bubble on mobile)', () => {
+  it('explains near the top that any theme is customisable, with examples for younger and older kids (owner feedback, 22 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
-    expect(document.body.classList.contains('backdrops-page')).toBeTrue();
-    fixture.destroy();
-    expect(document.body.classList.contains('backdrops-page')).toBeFalse();
+    const el = fixture.nativeElement as HTMLElement;
+    const theme = el.querySelector('.intro__theme')?.textContent ?? '';
+    expect(theme).toMatch(/any theme/i);
+    expect(theme).toMatch(/pok[eé]mon/i);
+    expect(theme).toMatch(/roblox/i);
+    expect(theme).toMatch(/football/i);
   });
 
-  it('shows no hero CTA button for mobile-only markup (sticky bar carries it) but a desktop-only one exists, and no hero photo or trust line (owner spec, 22 Oct 2026 — both dropped the same day)', () => {
+  it('shows no hero CTA button in mobile-only markup (keeps the hero compact so the gallery starts above the fold) but a desktop-only one exists, and no hero photo or trust line (owner spec, 22 Oct 2026 — both dropped the same day)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -230,14 +230,14 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(el.querySelectorAll('.carousel').length).toBe(1);
   });
 
-  it('every WhatsApp button (hero, sticky bar, final CTA) uses the page-specific birthday-party prefill (owner spec, 22 Oct 2026)', () => {
+  it('every WhatsApp button (hero, final CTA) uses the page-specific birthday-party prefill (owner spec, 22 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const waLinks = Array.from(
       el.querySelectorAll('a[href*="wa.me/6588090600"]'),
     ) as HTMLAnchorElement[];
-    expect(waLinks.length).toBeGreaterThanOrEqual(3);
+    expect(waLinks.length).toBeGreaterThanOrEqual(2);
     for (const a of waLinks) {
       const decoded = decodeURIComponent(a.href);
       expect(decoded).toContain("I'm planning a birthday party");
@@ -248,16 +248,6 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     }
     expect(el.querySelector('a[href^="mailto:"]')).toBeNull();
     expect(el.querySelector('a[href="/contact"]')).toBeNull();
-  });
-
-  it('shows a sticky mobile WhatsApp CTA bar', () => {
-    const fixture = TestBed.createComponent(Backdrops);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const bar = el.querySelector('.sticky-cta') as HTMLAnchorElement;
-    expect(bar).toBeTruthy();
-    expect(bar.textContent?.trim()).toBe('WhatsApp us your date & theme');
-    expect(bar.getAttribute('href')).toContain('wa.me/6588090600');
   });
 
   it('shows no quantity language, and no price outside the "Make It a Full Party" add-ons (guardrail — decor stays quote-only)', () => {
