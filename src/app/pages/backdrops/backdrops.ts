@@ -116,6 +116,16 @@ const FULL_PARTY_ADDON_IDS = ['bouncy-castle', 'candy-floss', 'popcorn-station',
  * normal floating WhatsApp bubble back (bottom-right, every page including
  * this one), not a replacement sticky bar. This page no longer touches the
  * floating bubble at all.
+ *
+ * 5th round (owner request, 22 Oct 2026, same day): (a) backdrop-20
+ * (Minecraft) moved up to lead the Birthday row — see ORDER in
+ * backdrops.data.ts. (b) The intro copy was shortened to ~3 lines (the
+ * theme line dropped its younger/older-kid split, keeping the same
+ * examples). (c) A "Backdrops from S$349" price anchor was added to the
+ * intro lede — an explicit, owner-acknowledged exception to this page's
+ * decor-stays-quote-only rule (BRIEF.md §4), scoped to this one line; the
+ * "Make It a Full Party" add-ons already had owner-approved pricing, this
+ * is the first approved number for backdrops themselves.
  */
 @Component({
   selector: 'app-backdrops',

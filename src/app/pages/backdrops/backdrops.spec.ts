@@ -37,7 +37,7 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(el.querySelector('.eyebrow')?.textContent).toContain('Birthday Decor & Add-ons');
   });
 
-  it('explains near the top that any theme is customisable, with examples for younger and older kids (owner feedback, 22 Oct 2026)', () => {
+  it('explains near the top that any theme is customisable, with examples (owner feedback, 22 Oct 2026; shortened to 22 Oct 2026, same day, for length)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -250,14 +250,16 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(el.querySelector('a[href="/contact"]')).toBeNull();
   });
 
-  it('shows no quantity language, and no price outside the "Make It a Full Party" add-ons (guardrail — decor stays quote-only)', () => {
+  it('shows a "Backdrops from S$349" price anchor in the intro (owner override, 22 Oct 2026 — explicit, acknowledged exception to decor staying quote-only on this page only) and no price anywhere else outside it and the "Make It a Full Party" add-ons', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent ?? '').not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
+    expect(el.querySelector('.intro__lede')?.textContent).toContain('S$349');
 
     const clone = el.cloneNode(true) as HTMLElement;
     clone.querySelector('.full-party')?.remove();
+    clone.querySelector('.intro')?.remove();
     expect(clone.textContent).not.toMatch(/\$|SGD|from\s*s?\$/i);
   });
 

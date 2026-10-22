@@ -89,7 +89,9 @@ const PHOTOS: Record<number, { caption: string; category: BackdropCategory }> = 
   11: { caption: 'Peppa Pig-themed birthday backdrop', category: 'Birthday' },
 };
 
-const ORDER = [25, 2, 22, 21, 18, 19, 24, 15, 17, 12, 5, 7, 14, 20, 1, 3, 13, 10, 11];
+// backdrop-20 (Minecraft) moved up to lead the Birthday row (owner request,
+// 22 Oct 2026 — "move the Minecraft card into the first three").
+const ORDER = [25, 2, 22, 21, 18, 19, 20, 24, 15, 17, 12, 5, 7, 14, 1, 3, 13, 10, 11];
 
 export const BACKDROPS: readonly BackdropPhoto[] = ORDER.map((num) => {
   const n = String(num).padStart(2, '0');
