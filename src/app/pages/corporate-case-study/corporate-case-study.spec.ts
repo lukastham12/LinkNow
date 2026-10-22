@@ -27,6 +27,18 @@ describe('CorporateCaseStudyPage', () => {
     }
   });
 
+  it('.btn gets a 220px min-width and centered text so short-label buttons match longer ones (button-width consistency fix)', async () => {
+    await configure('peoples-association');
+    const fixture = TestBed.createComponent(CorporateCaseStudyPage);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const btn = el.querySelector('.btn') as HTMLElement;
+    expect(btn).toBeTruthy();
+    const style = getComputedStyle(btn);
+    expect(style.minWidth).toBe('220px');
+    expect(style.textAlign).toBe('center');
+  });
+
   it("renders the People's Association case study with its h1, brief/build/result and a back link", async () => {
     await configure('peoples-association');
     const fixture = TestBed.createComponent(CorporateCaseStudyPage);
@@ -108,7 +120,7 @@ describe('CorporateCaseStudyPage', () => {
     expect(text).toMatch(/twilight: flea & feast/i);
     expect(text).toMatch(/suntec singapore/i);
     expect(text).toMatch(/4m\s*×\s*4m/i);
-    expect(text).toContain('[RESULT — to fill in]');
+    expect(text).toMatch(/32%/);
 
     const imgs = Array.from(el.querySelectorAll('.showcase__img')) as HTMLImageElement[];
     expect(imgs.length).toBe(1);

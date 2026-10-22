@@ -1,51 +1,118 @@
 <section class="intro">
-  <p class="eyebrow">Our Work</p>
+  <p class="eyebrow">Party Planning</p>
   <h1 class="intro__title">Birthdays & Celebrations</h1>
   <p class="intro__lede">
-    A look at backdrops we've designed and built across Singapore — for birthdays, weddings and
-    corporate events. Every piece is bespoke to the occasion, so browse for inspiration and tell us
-    what you have in mind.
+    Decor, food stations and entertainment — set up and cleared for you.
   </p>
-  <div class="intro__actions">
+  <div class="intro__actions intro__actions--desktop-only">
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
       Enquire on WhatsApp
     </a>
   </div>
 </section>
 
-@for (group of groups; track group.category; let i = $index) {
-  <section class="gallery" [attr.aria-labelledby]="group.category + '-heading'">
-    <h2 [id]="group.category + '-heading'" class="gallery__title">{{ group.category }}</h2>
-    <div class="carousel-wrap">
+<section class="gallery" aria-labelledby="gallery-heading">
+  <h2 id="gallery-heading" class="visually-hidden">Celebration gallery</h2>
+  <div class="chips" role="tablist" aria-label="Filter the gallery by celebration type">
+    @for (chip of chips; track chip.category; let i = $index) {
       <button
+        #chipRef
         type="button"
-        class="carousel__arrow carousel__arrow--prev"
-        [attr.aria-label]="'Scroll to previous ' + group.category + ' photos'"
-        [disabled]="carouselState[group.category]?.atStart ?? true"
-        (click)="scrollCarousel(group.category, 'prev')"
+        role="tab"
+        class="chip"
+        [class.chip--active]="chip.category === activeCategory()"
+        [attr.aria-selected]="chip.category === activeCategory()"
+        [attr.tabindex]="chip.category === activeCategory() ? 0 : -1"
+        [id]="'chip-' + i"
+        aria-controls="gallery-panel"
+        (click)="selectCategory(chip.category)"
+        (keydown)="onChipKeydown($event, i)"
       >
-        <span aria-hidden="true">&lsaquo;</span>
+        {{ chip.label }}
       </button>
-      <ul #carouselRef class="carousel" (scroll)="onCarouselScroll(group.category, $event)">
+    }
+  </div>
+
+  <div
+    id="gallery-panel"
+    class="carousel-wrap"
+    role="tabpanel"
+    [attr.aria-labelledby]="'chip-' + activeChipIndex"
+  >
+    <button
+      type="button"
+      class="carousel__arrow carousel__arrow--prev"
+      aria-label="Scroll to previous photo"
+      [disabled]="carouselState.atStart"
+      (click)="scrollCarousel('prev')"
+    >
+      <span aria-hidden="true">&lsaquo;</span>
+    </button>
+    <ul #carouselRef class="carousel" (scroll)="onCarouselScroll($event)">
+      @for (photo of activeGroup.photos; track photo.src) {
+        <li class="carousel__item">
+          <img class="carousel__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+          <p class="carousel__caption">{{ photo.caption }}</p>
+        </li>
+      }
+    </ul>
+    <button
+      type="button"
+      class="carousel__arrow carousel__arrow--next"
+      aria-label="Scroll to next photo"
+      [disabled]="carouselState.atEnd"
+      (click)="scrollCarousel('next')"
+    >
+      <span aria-hidden="true">&rsaquo;</span>
+    </button>
+  </div>
+
+  <!-- Every category's photos stay in the DOM (not just the selected one) so
+       the full gallery is crawlable — genuinely display:none (not the
+       position:absolute visually-hidden utility) so these ~15 inactive-
+       category images don't sit near the fold and get fetched eagerly on
+       mobile; aria-hidden since this list exists for crawlability, not
+       screen-reader users (who already get the visible carousel). -->
+  @for (group of groups; track group.category) {
+    @if (group.category !== activeCategory()) {
+      <ul class="gallery-hidden" aria-hidden="true">
         @for (photo of group.photos; track photo.src) {
-          <li class="carousel__item">
-            <img class="carousel__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
-            <p class="carousel__caption">{{ photo.caption }}</p>
-          </li>
+          <li><img [src]="photo.src" [alt]="photo.alt" loading="lazy" /></li>
         }
       </ul>
-      <button
-        type="button"
-        class="carousel__arrow carousel__arrow--next"
-        [attr.aria-label]="'Scroll to next ' + group.category + ' photos'"
-        [disabled]="carouselState[group.category]?.atEnd ?? false"
-        (click)="scrollCarousel(group.category, 'next')"
-      >
-        <span aria-hidden="true">&rsaquo;</span>
-      </button>
-    </div>
-  </section>
-}
+    }
+  }
+</section>
+
+<section class="full-party" aria-labelledby="full-party-heading">
+  <p class="eyebrow eyebrow--center">Make It a Full Party</p>
+  <h2 id="full-party-heading" class="steps__title">Decor is just the start</h2>
+  <p class="full-party__lede">
+    Pair your backdrop with food stations and entertainment — all bookable alongside your decor.
+  </p>
+  <div class="full-party__addons">
+    @for (addon of fullPartyAddons; track addon.id) {
+      <app-addon-card [addon]="addon" />
+    }
+  </div>
+  <div class="intro__actions intro__actions--center">
+    <a class="btn btn--ghost" routerLink="/services/add-ons">See all add-ons &amp; full pricing</a>
+  </div>
+</section>
+
+<section class="steps" aria-labelledby="steps-heading">
+  <p class="eyebrow eyebrow--center">How It Works</p>
+  <h2 id="steps-heading" class="steps__title">From theme to set up, in 4 steps</h2>
+  <ol class="steps__list">
+    @for (step of howItWorks; track step.title; let i = $index) {
+      <li class="steps__item">
+        <span class="steps__number" aria-hidden="true">{{ i + 1 }}</span>
+        <h3 class="steps__item-title">{{ step.title }}</h3>
+        <p class="steps__item-text">{{ step.text }}</p>
+      </li>
+    }
+  </ol>
+</section>
 
 <section class="reviews" aria-labelledby="reviews-heading">
   <p class="eyebrow eyebrow--center">Testimonials</p>
@@ -58,10 +125,20 @@
 <app-faq-accordion eyebrow="Good to Know" title="Frequently Asked Questions" [faqs]="faqs" />
 
 <section class="outro">
-  <p class="outro__text">Want a backdrop like these? Enquire on WhatsApp.</p>
+  <p class="outro__text">Ready to plan the party? Tell us your date and theme.</p>
   <div class="intro__actions intro__actions--center">
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
       Enquire on WhatsApp
     </a>
   </div>
 </section>
+
+<a
+  class="btn btn--solid sticky-cta"
+  [href]="whatsappHref"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="WhatsApp us your date and theme"
+>
+  WhatsApp us your date & theme
+</a>

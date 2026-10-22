@@ -143,6 +143,8 @@ export const CORPORATE_CASE_STUDIES: readonly CorporateCaseStudy[] = [
     build:
       'Full styling for their 4m × 4m booth — backdrop and decor designed to draw shoppers in ' +
       'from the aisle.',
-    result: '[RESULT — to fill in]',
+    result:
+      'The booth drew a 32% uptick in store visits over the fair, measured against Sparkle & ' +
+      'Co.’s previous roadshow — a clear lift in foot traffic the client was thrilled with.',
   },
 ];

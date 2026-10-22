@@ -12,6 +12,17 @@ describe('Flowers (Wedding & ROM Styling page)', () => {
     expect(TestBed.createComponent(Flowers).componentInstance).toBeTruthy();
   });
 
+  it('.btn gets a 220px min-width and centered text so short-label buttons match longer ones (button-width consistency fix)', () => {
+    const fixture = TestBed.createComponent(Flowers);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const btn = el.querySelector('.btn') as HTMLElement;
+    expect(btn).toBeTruthy();
+    const style = getComputedStyle(btn);
+    expect(style.minWidth).toBe('220px');
+    expect(style.textAlign).toBe('center');
+  });
+
   it('has a single h1 focused on wedding & ROM styling, not just florals', () => {
     const fixture = TestBed.createComponent(Flowers);
     fixture.detectChanges();

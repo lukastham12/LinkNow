@@ -26,6 +26,18 @@ describe('AddonDetailPage', () => {
     }
   });
 
+  it('.btn gets a 220px min-width and centered text so short-label buttons match longer ones (button-width consistency fix)', async () => {
+    await configure('popcorn-station');
+    const fixture = TestBed.createComponent(AddonDetailPage);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const btn = el.querySelector('.btn') as HTMLElement;
+    expect(btn).toBeTruthy();
+    const style = getComputedStyle(btn);
+    expect(style.minWidth).toBe('220px');
+    expect(style.textAlign).toBe('center');
+  });
+
   it('renders the Popcorn Station page with its h1, tagline, pricing tiers and extra-hour note', async () => {
     await configure('popcorn-station');
     const fixture = TestBed.createComponent(AddonDetailPage);
