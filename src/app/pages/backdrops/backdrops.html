@@ -1,5 +1,5 @@
 <section class="intro">
-  <p class="eyebrow">Our Work</p>
+  <p class="eyebrow">Party Planning</p>
   <h1 class="intro__title">Birthdays & Celebrations</h1>
   <p class="intro__lede">
     Birthday parties, sorted — decor, food stations and entertainment, set up and cleared for you.
@@ -25,6 +25,22 @@
       </li>
     }
   </ol>
+</section>
+
+<section class="full-party" aria-labelledby="full-party-heading">
+  <p class="eyebrow eyebrow--center">Make It a Full Party</p>
+  <h2 id="full-party-heading" class="steps__title">Decor is just the start</h2>
+  <p class="full-party__lede">
+    Pair your backdrop with food stations and entertainment — all bookable alongside your decor.
+  </p>
+  <div class="full-party__addons">
+    @for (addon of fullPartyAddons; track addon.id) {
+      <app-addon-card [addon]="addon" />
+    }
+  </div>
+  <div class="intro__actions intro__actions--center">
+    <a class="btn btn--ghost" routerLink="/services/add-ons">See all add-ons &amp; full pricing</a>
+  </div>
 </section>
 
 @for (group of groups; track group.category; let i = $index) {
@@ -72,7 +88,7 @@
 <app-faq-accordion eyebrow="Good to Know" title="Frequently Asked Questions" [faqs]="faqs" />
 
 <section class="outro">
-  <p class="outro__text">Want a backdrop like these? Enquire on WhatsApp.</p>
+  <p class="outro__text">Ready to plan the party? Tell us your date and theme.</p>
   <div class="intro__actions intro__actions--center">
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
       Enquire on WhatsApp

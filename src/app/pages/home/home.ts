@@ -44,8 +44,10 @@ interface HeroImage {
 // images... Peppa Pig is boring"): swapped out backdrop-11 (a basic printed
 // Peppa Pig tablecloth + plain balloon garland) for two more elaborate,
 // editorial-looking builds already in the portfolio — backdrop-12 (gold/
-// black 16th birthday, neon signage, foil numbers) and backdrop-17 (teddy-
-// bear-themed 1st birthday, styled dessert table, blue/peach palette).
+// black birthday backdrop, neon signage, foil numbers) and backdrop-17
+// (teddy-bear-themed 1st birthday, styled dessert table, blue/peach
+// palette). backdrop-12's "16th" was dropped from its caption/alt 22 Oct
+// 2026 — see backdrops.data.ts for why.
 // Both were re-derived from their pre-optimisation originals (git history,
 // commit 0b59aab~1) and re-saved at hero scale (1150px long edge) rather
 // than upscaled from their smaller 700px gallery-thumbnail versions, which
@@ -67,7 +69,7 @@ const HERO_IMAGES: readonly HeroImage[] = [
   },
   {
     src: '/backdrops/backdrop-12.jpg',
-    alt: 'A gold and black 16th birthday backdrop with neon signage and foil number balloons, styled by LinkNow',
+    alt: 'A gold and black birthday backdrop with neon signage and foil number balloons, styled by LinkNow',
     width: 959,
     height: 1150,
   },

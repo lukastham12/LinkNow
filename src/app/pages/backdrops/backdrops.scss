@@ -32,6 +32,16 @@
   background: color-mix(in srgb, var(--color-rose) 88%, #000);
 }
 
+.btn--ghost {
+  color: var(--color-rose);
+  border: 1px solid var(--color-hairline);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-rose);
+  background: color-mix(in srgb, var(--color-rose) 7%, transparent);
+}
+
 // Intro --------------------------------------------------------------------
 
 .intro {
@@ -66,7 +76,8 @@
 
 // How It Works (owner request, 22 Oct 2026) ---------------------------------
 
-.steps {
+.steps,
+.full-party {
   max-width: 1120px;
   margin: 0 auto;
   padding: 1rem 1.25rem 2rem;
@@ -124,6 +135,29 @@
   .steps__list {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+// Make It a Full Party (owner feedback, 22 Oct 2026 — the intro promises
+// food stations and entertainment, but the page only showed backdrops with
+// no link or proof) — a short strip of add-on cards right after the steps,
+// before the photo gallery. Reuses the same app-addon-card component as the
+// homepage teaser and /services/add-ons.
+.full-party {
+  text-align: center;
+}
+
+.full-party__lede {
+  margin: 0 auto 1.5rem;
+  color: var(--color-text-muted);
+  max-width: 48ch;
+  font-size: 0.92rem;
+}
+
+.full-party__addons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
 }
 
 // Gallery — one section + horizontally-scrolling carousel per category -----

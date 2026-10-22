@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { Backdrops } from './backdrops';
 import { BACKDROP_GROUPS, BACKDROPS } from './backdrops.data';
 import { TESTIMONIALS } from '../../shared/testimonials';
@@ -7,6 +8,7 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Backdrops],
+      providers: [provideRouter([])],
     }).compileComponents();
   });
 
@@ -46,6 +48,28 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(items.length).toBe(4);
     const titles = items.map((i) => i.querySelector('.steps__item-title')?.textContent?.trim());
     expect(titles).toEqual(['Send us your theme', 'We send a mock-up', 'You confirm', 'We set up and clear']);
+  });
+
+  it('shows a "Make It a Full Party" strip with 4 add-on cards linking to /services/add-ons (owner feedback, 22 Oct 2026)', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+
+    const sections = Array.from(el.querySelectorAll('section'));
+    const stepsIndex = sections.findIndex((s) => s.querySelector('#steps-heading'));
+    const fullPartyIndex = sections.findIndex((s) => s.querySelector('#full-party-heading'));
+    const galleryIndex = sections.findIndex((s) => s.classList.contains('gallery'));
+    expect(fullPartyIndex).toBe(stepsIndex + 1);
+    expect(fullPartyIndex).toBeLessThan(galleryIndex);
+
+    const fullPartySection = sections[fullPartyIndex];
+    const addonTitles = Array.from(fullPartySection.querySelectorAll('h3')).map((h) =>
+      h.textContent?.trim(),
+    );
+    expect(addonTitles).toEqual(['Bouncy Castle', 'Candy Floss', 'Popcorn Station', 'Party Hosting']);
+
+    const seeAllLink = fullPartySection.querySelector('a.btn--ghost') as HTMLAnchorElement;
+    expect(seeAllLink.getAttribute('href')).toBe('/services/add-ons');
   });
 
   it('lists all 19 backdrop photos with descriptive alt text, lazy-loaded', () => {
@@ -187,12 +211,17 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(text).not.toMatch(/request a quote|contact us/i);
   });
 
-  it('shows NO price, currency or quantity language anywhere (guardrail)', () => {
+  it('shows no quantity language, and no price outside the "Make It a Full Party" add-ons (guardrail)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
-    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
-    expect(text).not.toMatch(/\$|SGD|price|from\s*\$/i);
-    expect(text).not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent ?? '').not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
+
+    // Backdrops/decor itself stays quote-only — no price anywhere outside
+    // the add-on cards (shared/addons.ts, approved pricing — 19 Oct 2026).
+    const clone = el.cloneNode(true) as HTMLElement;
+    clone.querySelector('.full-party')?.remove();
+    expect(clone.textContent).not.toMatch(/\$|SGD|price|from\s*\$/i);
   });
 
   it('shows real testimonials below the gallery (UX review, 16 Oct 2026 — reviews previously only lived on the homepage)', () => {

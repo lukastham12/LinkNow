@@ -36,6 +36,14 @@
 // upload of the same "Our Little Hunny" gender-reveal photo as backdrop-25
 // (owner request, 23 Oct 2026) — leaving backdrop-01…25 minus those five as
 // gallery items.
+//
+// backdrop-12's caption dropped "16th" (owner request, 22 Oct 2026) — now
+// "Gold and black birthday backdrop", age-generic. With backdrop-14
+// ("Basketball-themed 16th birthday") also in this category, two explicit
+// "16th birthday" captions overemphasised teen parties on a page already
+// missing a 2–5-year-old's birthday (flagged separately — see CLAUDE.md);
+// dropping the age from one of the two softens that without fabricating a
+// toddler photo that doesn't exist.
 
 export type BackdropCategory =
   | 'Birthday'
@@ -69,7 +77,7 @@ const PHOTOS: Record<number, { caption: string; category: BackdropCategory }> = 
   24: { caption: 'Safari-themed 1st birthday backdrop', category: 'Birthday' },
   15: { caption: '21st birthday', category: 'Grown-Up Celebrations' },
   17: { caption: 'Teddy-bear-themed 1st birthday backdrop', category: 'Birthday' },
-  12: { caption: '16th birthday, gold & black', category: 'Birthday' },
+  12: { caption: 'Gold and black birthday backdrop', category: 'Birthday' },
   5: { caption: 'Baby shower', category: 'Baby Shower & Gender Reveal' },
   7: { caption: 'Floral birthday backdrop', category: 'Birthday' },
   14: { caption: 'Basketball-themed 16th birthday', category: 'Birthday' },

@@ -1,10 +1,20 @@
 import { afterNextRender, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { pageWhatsappLink } from '../../shared/contact';
 import { TESTIMONIALS } from '../../shared/testimonials';
 import { FAQS } from '../../shared/faq';
+import { ADDONS } from '../../shared/addons';
+import { AddonCard } from '../../components/addon-card/addon-card';
 import { FaqAccordion } from '../../components/faq-accordion/faq-accordion';
 import { ReviewsCarousel } from '../../components/reviews-carousel/reviews-carousel';
 import { BACKDROP_GROUPS } from './backdrops.data';
+
+// "Make It a Full Party" strip (owner feedback, 22 Oct 2026) — a fixed,
+// deliberately short pick of 4 add-ons (not all 7) that a parent planning a
+// kid's birthday is most likely to want: one food station, one sweet
+// station, entertainment and hosting. Buffet Catering, Soft Serve Ice Cream
+// and Balloon Sculpting are left for the full /services/add-ons page.
+const FULL_PARTY_ADDON_IDS = ['bouncy-castle', 'candy-floss', 'popcorn-station', 'party-hosting'];
 
 interface CarouselScrollState {
   atStart: boolean;
@@ -73,16 +83,25 @@ const HOW_IT_WORKS: readonly HowItWorksStep[] = [
  * Carousel arrows (UX review, 16 Oct 2026): previous/next buttons on
  * tablet/desktop (hidden on mobile, where touch swipe already works) —
  * see the carouselState/scrollCarousel members above.
+ *
+ * "Make It a Full Party" strip (owner feedback, 22 Oct 2026, from an
+ * AI-persona review of a parent browsing for her kid's party): the intro
+ * mentions food stations and entertainment, but previously nothing below
+ * backed that up — no link to /services/add-ons, no add-on cards. See
+ * FULL_PARTY_ADDON_IDS above.
  */
 @Component({
   selector: 'app-backdrops',
-  imports: [ReviewsCarousel, FaqAccordion],
+  imports: [ReviewsCarousel, FaqAccordion, AddonCard, RouterLink],
   templateUrl: './backdrops.html',
   styleUrl: './backdrops.scss',
 })
 export class Backdrops {
   protected readonly whatsappHref = pageWhatsappLink('Birthdays & Celebrations');
   protected readonly groups = BACKDROP_GROUPS;
+  protected readonly fullPartyAddons = FULL_PARTY_ADDON_IDS.map(
+    (id) => ADDONS.find((a) => a.id === id)!,
+  );
   protected readonly howItWorks = HOW_IT_WORKS;
   protected readonly testimonials = TESTIMONIALS;
   protected readonly faqs = FAQS;
