@@ -104,15 +104,15 @@ export const BACKDROPS: readonly BackdropPhoto[] = ORDER.map((num) => {
   };
 });
 
-// Birthday first (owner request, 22 Oct 2026 — kids' birthdays should lead,
-// since that's most of what this page's visitors are searching for), then
-// Grown-Up Celebrations, then the two baby/newborn-stage occasions as their
-// own trailing groups.
+// Birthday first (owner request, 22 Oct 2026 — kids' birthdays should
+// lead, since that's most of what this page's visitors are searching
+// for). Reordered 23 Oct 2026 (owner request) — Baby Shower & Gender
+// Reveal moved up to 2nd, Grown-Up Celebrations moved to last.
 export const BACKDROP_CATEGORIES: readonly BackdropCategory[] = [
   'Birthday',
-  'Grown-Up Celebrations',
-  '100 Days & Naming',
   'Baby Shower & Gender Reveal',
+  '100 Days & Naming',
+  'Grown-Up Celebrations',
 ];
 
 export interface BackdropGroup {

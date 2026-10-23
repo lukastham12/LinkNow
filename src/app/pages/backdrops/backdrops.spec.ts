@@ -73,9 +73,9 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     const chips = Array.from(el.querySelectorAll('.chip')) as HTMLButtonElement[];
     expect(chips.map((c) => c.textContent?.trim())).toEqual([
       "Kids' Birthdays",
-      'Grown-Up',
-      '100 Days & Naming',
       'Baby Shower',
+      '100 Days & Naming',
+      'Grown-Up',
     ]);
     expect(chips[0].getAttribute('aria-selected')).toBe('true');
     expect(chips[1].getAttribute('aria-selected')).toBe('false');
@@ -94,13 +94,13 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(visibleImgs.length).toBe(birthdayGroup.photos.length);
 
     const chips = Array.from(el.querySelectorAll('.chip')) as HTMLButtonElement[];
-    chips[3].click();
+    chips[1].click();
     fixture.detectChanges();
 
     visibleImgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
     expect(visibleImgs.length).toBe(babyGroup.photos.length);
     expect(visibleImgs[0].getAttribute('src')).toBe(babyGroup.photos[0].src);
-    expect(chips[3].getAttribute('aria-selected')).toBe('true');
+    expect(chips[1].getAttribute('aria-selected')).toBe('true');
     expect(chips[0].getAttribute('aria-selected')).toBe('false');
   });
 
