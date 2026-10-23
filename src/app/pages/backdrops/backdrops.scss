@@ -56,12 +56,11 @@
   display: none;
 }
 
-// Hero — compact (mobile-first restructure, 22 Oct 2026): no button on
-// mobile, so the gallery below starts as close to the fold as possible —
-// the floating site-wide WhatsApp bubble and the outro CTA cover mobile
-// enquiries. Desktop restores the button. No hero photo (owner request,
-// 22 Oct 2026, same day — it read as too large/heavy for a compact
-// mobile-first hero). --------------------------------------------------
+// Hero — compact (mobile-first restructure, 22 Oct 2026). No hero photo
+// (owner request, 22 Oct 2026, same day — it read as too large/heavy for
+// a compact mobile-first hero). The "Enquire Now" button is visible on
+// every breakpoint, directly under the price fine print (owner request,
+// 23 Oct 2026 — previously hidden below 900px). --------------------------
 
 .intro {
   max-width: 1120px;
@@ -84,14 +83,28 @@
   font-size: 0.96rem;
 }
 
-// Price anchor (owner override, 22 Oct 2026) — bolded and in the rose
-// accent so it reads as a clear, separate fact, not folded into the
-// lede/theme copy above it.
+// Price anchor (owner override, 22 Oct 2026) — the price phrase itself
+// keeps the rose accent + bold so it's what the eye lands on; the rest of
+// the line stays regular body text. The fine-print note right below it
+// reuses --color-text-muted, already darkened (UX review, 16 Oct 2026) to
+// clear WCAG AA at normal text size, so it stays legible rather than
+// reading as hidden fine print.
 .intro__price {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.3rem;
   max-width: 48ch;
   font-size: 0.96rem;
+}
+
+.intro__price strong {
   color: var(--color-rose);
+  font-weight: 700;
+}
+
+.intro__price-note {
+  margin: 0 0 0.75rem;
+  max-width: 48ch;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
 }
 
 .intro__actions {
@@ -104,17 +117,9 @@
   justify-content: center;
 }
 
-.intro__actions--desktop-only {
-  display: none;
-}
-
 @media (min-width: 900px) {
   .intro {
     padding: 2.75rem 1.25rem 1.75rem;
-  }
-
-  .intro__actions--desktop-only {
-    display: flex;
   }
 }
 

@@ -54,8 +54,9 @@ const HOW_IT_WORKS: readonly HowItWorksStep[] = [
 // Mobile-first restructure (owner request, 22 Oct 2026, 2nd round) — chip
 // labels shown on the page differ from the underlying BackdropCategory
 // values (which stay unchanged so existing data/aria-id wiring doesn't
-// break): "Birthday" reads as "Kids' Birthdays" here so it reads clearly
-// next to "Grown-Up" rather than implying it covers every age.
+// break): "Birthday" reads as "Kids' Birthdays" here so it doesn't imply
+// it covers every age (see BACKDROP_CATEGORIES in backdrops.data.ts for
+// the chip display order, reordered 23 Oct 2026).
 const CHIP_LABELS: Record<BackdropCategory, string> = {
   Birthday: "Kids' Birthdays",
   'Grown-Up Celebrations': 'Grown-Up',

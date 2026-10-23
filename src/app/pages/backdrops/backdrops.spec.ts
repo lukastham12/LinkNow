@@ -48,14 +48,14 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(theme).toMatch(/football/i);
   });
 
-  it('shows no hero CTA button in mobile-only markup (keeps the hero compact so the gallery starts above the fold) but a desktop-only one exists, and no hero photo or trust line (owner spec, 22 Oct 2026 — both dropped the same day)', () => {
+  it('shows an "Enquire Now" hero CTA button, visible on every breakpoint (owner request, 23 Oct 2026 — make sure the WhatsApp button is visible on mobile), and no hero photo or trust line (owner spec, 22 Oct 2026 — both dropped the same day)', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
 
-    const desktopActions = el.querySelector('.intro__actions--desktop-only');
-    expect(desktopActions).toBeTruthy();
-    expect(desktopActions?.querySelector('a.btn--solid')).toBeTruthy();
+    expect(el.querySelector('.intro__actions--desktop-only')).toBeNull();
+    const heroActions = el.querySelector('.intro .intro__actions');
+    expect(heroActions?.querySelector('a.btn--solid')?.textContent?.trim()).toBe('Enquire Now');
 
     expect(el.querySelector('.intro__photo')).toBeNull();
     expect(el.querySelector('.intro__trust')).toBeNull();
@@ -73,9 +73,9 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     const chips = Array.from(el.querySelectorAll('.chip')) as HTMLButtonElement[];
     expect(chips.map((c) => c.textContent?.trim())).toEqual([
       "Kids' Birthdays",
-      'Grown-Up',
-      '100 Days & Naming',
       'Baby Shower',
+      '100 Days & Naming',
+      'Grown-Up',
     ]);
     expect(chips[0].getAttribute('aria-selected')).toBe('true');
     expect(chips[1].getAttribute('aria-selected')).toBe('false');
@@ -94,13 +94,13 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(visibleImgs.length).toBe(birthdayGroup.photos.length);
 
     const chips = Array.from(el.querySelectorAll('.chip')) as HTMLButtonElement[];
-    chips[3].click();
+    chips[1].click();
     fixture.detectChanges();
 
     visibleImgs = Array.from(el.querySelectorAll('.carousel__img')) as HTMLImageElement[];
     expect(visibleImgs.length).toBe(babyGroup.photos.length);
     expect(visibleImgs[0].getAttribute('src')).toBe(babyGroup.photos[0].src);
-    expect(chips[3].getAttribute('aria-selected')).toBe('true');
+    expect(chips[1].getAttribute('aria-selected')).toBe('true');
     expect(chips[0].getAttribute('aria-selected')).toBe('false');
   });
 
@@ -250,20 +250,44 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(el.querySelector('a[href="/contact"]')).toBeNull();
   });
 
-  it('shows a bold "Backdrop starts at S$349" price anchor in the intro (owner override, 22 Oct 2026 — explicit, acknowledged exception to decor staying quote-only on this page only) and no price anywhere else outside it and the "Make It a Full Party" add-ons', () => {
+  it('shows a bold "Backdrop starts at S$349" price line plus a muted fine-print note, directly above the "Enquire Now" button (owner request, 23 Oct 2026) — no price anywhere else outside it and the "Make It a Full Party" add-ons', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent ?? '').not.toMatch(/\bstems?\b|\bstalks?\b|\bqty\b|\bquantity\b/i);
 
     const priceEl = el.querySelector('.intro__price');
-    expect(priceEl?.textContent?.trim()).toBe('Backdrop starts at S$349');
-    expect(priceEl?.querySelector('strong')?.textContent).toContain('S$349');
+    expect(priceEl?.textContent?.trim()).toBe('Backdrop starts at S$349, including setup and teardown.');
+    expect(priceEl?.querySelector('strong')?.textContent).toBe('Backdrop starts at S$349');
+
+    const noteEl = el.querySelector('.intro__price-note');
+    expect(noteEl?.textContent?.trim()).toBe('Final price depends on size and theme.');
+
+    // Price -> note -> button, in that order, inside the hero.
+    const introChildren = Array.from(el.querySelector('.intro')?.children ?? []);
+    const priceIndex = introChildren.indexOf(priceEl!);
+    const noteIndex = introChildren.indexOf(noteEl!);
+    const actionsIndex = introChildren.findIndex((c) => c.classList.contains('intro__actions'));
+    expect(priceIndex).toBeLessThan(noteIndex);
+    expect(noteIndex).toBeLessThan(actionsIndex);
 
     const clone = el.cloneNode(true) as HTMLElement;
     clone.querySelector('.full-party')?.remove();
     clone.querySelector('.intro')?.remove();
     expect(clone.textContent).not.toMatch(/\$|SGD|from\s*s?\$/i);
+  });
+
+  it('fine print under the price has at least 14px text and AA-compliant muted colour (owner request, 23 Oct 2026 — readable note, not hidden fine print)', () => {
+    const fixture = TestBed.createComponent(Backdrops);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const noteEl = el.querySelector('.intro__price-note') as HTMLElement;
+    const style = getComputedStyle(noteEl);
+    expect(parseFloat(style.fontSize)).toBeGreaterThanOrEqual(14);
+    // --color-text-muted (#6b655a on --color-bg #faf6f3) was darkened in an
+    // earlier UX review specifically to clear WCAG AA (~5.4:1) — reusing the
+    // same token here for the same reason.
+    expect(style.color).toBe('rgb(107, 101, 90)');
   });
 
   it('shows real testimonials minus the two bouquet reviews (owner spec, 22 Oct 2026 — this page only, shared/testimonials.ts is unchanged)', () => {
