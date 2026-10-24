@@ -1,0 +1,231 @@
+// Shared building blocks (mirrors the other pages for a consistent look) -----
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-label);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.eyebrow--center {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  font-size: var(--font-size-button);
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.8rem;
+  min-width: 220px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.btn--solid {
+  background: var(--color-rose);
+  color: #fff;
+  border: 1px solid var(--color-rose);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
+// Hero -----------------------------------------------------------------
+
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 1.5rem;
+}
+
+.hero__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.7rem, 7vw, 2.6rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.hero__subhead {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  max-width: 56ch;
+  font-size: 0.96rem;
+}
+
+.hero__trust {
+  margin: 0 0 1rem;
+  color: var(--color-rose);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero__actions--center {
+  justify-content: center;
+}
+
+// Shared section box model -----------------------------------------------
+
+.gallery,
+.why,
+.reviews,
+.steps,
+.outro {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+.gallery__title,
+.why__title,
+.reviews__title,
+.steps__title {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+  font-weight: 600;
+}
+
+// Photo grid ---------------------------------------------------------------
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.gallery__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+// Why-us strip ---------------------------------------------------------------
+
+.why__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.why__item-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (min-width: 720px) {
+  .why__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Reviews ---------------------------------------------------------------
+
+.reviews__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.review {
+  margin: 0;
+  padding: 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.review__quote {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.review__attribution {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+@media (min-width: 720px) {
+  .reviews__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// How It Works ---------------------------------------------------------------
+
+.steps__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.steps__item {
+  text-align: center;
+}
+
+.steps__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-hairline);
+  color: var(--color-rose);
+  font-weight: 600;
+}
+
+.steps__item-title {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.steps__item-text {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  max-width: 32ch;
+  margin-inline: auto;
+}
+
+@media (min-width: 720px) {
+  .steps__list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Outro ---------------------------------------------------------------
+
+.outro {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
+.outro__text {
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
