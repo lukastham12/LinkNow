@@ -306,6 +306,58 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
+  // SEO landing pages — 3 standalone pages targeting organic Google/AI
+  // search (owner request, 24 Oct 2026), one shared component rendering
+  // from shared/seo-landing-pages.ts by slug (see SeoLandingPageComponent's
+  // own doc comment). Registered before the wildcard.
+  {
+    path: 'birthday-decoration-singapore',
+    loadComponent: () =>
+      import('./pages/seo-landing/seo-landing').then((m) => m.SeoLandingPageComponent),
+    data: {
+      slug: 'birthday-decoration-singapore',
+      seo: {
+        title: 'Birthday Decoration Singapore | From S$349 | LinkNow Pte Ltd',
+        description:
+          'LinkNow Pte Ltd offers birthday decoration services in Singapore. Custom backdrops, ' +
+          'balloon garlands and full party styling. HDB void decks, condo function rooms and ' +
+          'private venues. From S$349.',
+        path: '/birthday-decoration-singapore/',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'party-decoration-singapore',
+    loadComponent: () =>
+      import('./pages/seo-landing/seo-landing').then((m) => m.SeoLandingPageComponent),
+    data: {
+      slug: 'party-decoration-singapore',
+      seo: {
+        title: 'Party Decoration Singapore | From S$349 | LinkNow Pte Ltd',
+        description:
+          'LinkNow Pte Ltd offers party decoration services in Singapore. Custom backdrops, ' +
+          'balloon garlands and full party styling. HDB void decks, condo function rooms and ' +
+          'private venues. From S$349.',
+        path: '/party-decoration-singapore/',
+      } satisfies PageSeo,
+    },
+  },
+  {
+    path: 'event-decoration-singapore',
+    loadComponent: () =>
+      import('./pages/seo-landing/seo-landing').then((m) => m.SeoLandingPageComponent),
+    data: {
+      slug: 'event-decoration-singapore',
+      seo: {
+        title: 'Event Decoration Singapore | From S$349 | LinkNow Pte Ltd',
+        description:
+          'LinkNow Pte Ltd offers event decoration services in Singapore. Custom backdrops, ' +
+          'balloon garlands and full event styling. HDB void decks, condo function rooms and ' +
+          'private venues. From S$349.',
+        path: '/event-decoration-singapore/',
+      } satisfies PageSeo,
+    },
+  },
   // Unknown paths fall back to the homepage.
   { path: '**', redirectTo: '' },
 ];
