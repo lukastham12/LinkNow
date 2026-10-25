@@ -342,18 +342,30 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
+  // Event Decoration Singapore — rebuilt 25 Oct 2026 (owner spec) as its own
+  // bespoke page (EventDecorationSingaporePage), replacing the simpler entry
+  // this slug used to render via the generic SeoLandingPageComponent (see
+  // shared/seo-landing-pages.ts, which no longer carries this slug). Richer
+  // structure: personal/business split, dedicated FAQ, dual WhatsApp/email
+  // CTAs — see the component's own doc comment.
   {
     path: 'event-decoration-singapore',
+    // Lazy-loaded, same precedent as Buffet Catering and the SEO landing
+    // pages: bundling this page's component eagerly pushed the initial
+    // bundle over its 500kB budget. Still prerendered at build time like
+    // every other route (RenderMode.Prerender in app.routes.server.ts).
     loadComponent: () =>
-      import('./pages/seo-landing/seo-landing').then((m) => m.SeoLandingPageComponent),
+      import('./pages/event-decoration-singapore/event-decoration-singapore').then(
+        (m) => m.EventDecorationSingaporePage,
+      ),
     data: {
-      slug: 'event-decoration-singapore',
       seo: {
-        title: 'Event Decoration Singapore | From S$349 | LinkNow Pte Ltd',
+        title: 'Event Decoration Singapore | LinkNow Pte Ltd',
         description:
-          'LinkNow Pte Ltd offers event decoration services in Singapore. Custom backdrops, ' +
-          'balloon garlands and full event styling. HDB void decks, condo function rooms and ' +
-          'private venues. From S$349.',
+          'LinkNow Pte Ltd is an event decoration company in Singapore offering custom ' +
+          'backdrops, balloon installations and full party styling for birthdays, corporate ' +
+          'events, store openings and private celebrations. Setup and teardown included. ' +
+          'From S$349.',
         path: '/event-decoration-singapore/',
       } satisfies PageSeo,
     },

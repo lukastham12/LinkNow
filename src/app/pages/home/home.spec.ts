@@ -33,24 +33,24 @@ describe('Home', () => {
     expect(el.querySelector('.hero')?.textContent ?? '').not.toContain('UEN');
   });
 
-  it('has exactly one H1, matching the Homepage redesign copy exactly (R1.1)', () => {
+  it('has exactly one H1, matching the SEO-optimised copy exactly (25 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = Array.from(el.querySelectorAll('h1'));
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent?.trim()).toBe("Event decorations for anything you're planning in Singapore");
+    expect(h1s[0].textContent?.trim()).toBe('Event Decoration & Party Decoration in Singapore');
   });
 
-  it('hero subheadline says what we do (incl. custom requests) and why to engage us', () => {
+  it('hero subheadline names LinkNow as a birthday/party/event decoration company (25 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const sub = el.querySelector('.hero__sub');
     expect(sub?.textContent?.replace(/\s+/g, ' ').trim()).toBe(
-      "Balloon decor, custom backdrops, florals and corporate styling — and if your event " +
-        "isn't on the list, we'll still make it happen. Premium craftsmanship, honest " +
-        'pricing and a team you can rely on.',
+      'LinkNow Pte Ltd is a birthday, party and event decoration company in Singapore — ' +
+        'custom backdrops, balloon garlands and full party styling for any occasion. HDB void ' +
+        'decks, condo function rooms and private venues welcome. From S$349.',
     );
   });
 

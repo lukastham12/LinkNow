@@ -126,44 +126,10 @@ export const SEO_LANDING_PAGES: readonly SeoLandingPage[] = [
       },
     ],
   },
-  {
-    slug: 'event-decoration-singapore',
-    keyword: 'Event Decoration Singapore',
-    subhead:
-      'LinkNow Pte Ltd is an event decoration company in Singapore, styling custom backdrops ' +
-      'and balloon setups for HDB void decks, condo function rooms and private venues.',
-    occasionWhatsapp: 'event',
-    occasionPriceLabel: 'Event decoration',
-    metaTitle: 'Event Decoration Singapore | From S$349 | LinkNow Pte Ltd',
-    metaDescription:
-      'LinkNow Pte Ltd offers event decoration services in Singapore. Custom backdrops, ' +
-      'balloon garlands and full event styling. HDB void decks, condo function rooms and ' +
-      'private venues. From S$349.',
-    photos: [
-      {
-        src: '/backdrops/backdrop-23.jpg',
-        alt: 'Event decoration Singapore — retail pop-up booth styling at Suntec Singapore',
-      },
-      {
-        src: '/backdrops/backdrop-08.jpg',
-        alt: 'Event decoration Singapore — in-store storefront event styling',
-      },
-      {
-        src: '/backdrops/backdrop-09.jpg',
-        alt: 'Event decoration Singapore — in-store event decor',
-      },
-      {
-        src: '/backdrops/backdrop-19.jpg',
-        alt: 'Event decoration Singapore — naming ceremony backdrop',
-      },
-      {
-        src: '/backdrops/backdrop-01.jpg',
-        alt: 'Event decoration Singapore — naming ceremony backdrop',
-      },
-      {
-        src: '/backdrops/backdrop-21.jpg',
-        alt: 'Event decoration Singapore — 55th birthday soirée backdrop',
-      },
-    ],
-  },
+  // 'event-decoration-singapore' used to be the 3rd entry here, rendered via
+  // the generic SeoLandingPageComponent. Removed 25 Oct 2026 — the owner
+  // asked for a richer, bespoke rebuild of that page (personal/business
+  // split, dedicated FAQ, dual WhatsApp/email CTAs), which now lives at
+  // pages/event-decoration-singapore/ with its own route registration in
+  // app.routes.ts. This array now covers only the 2 simpler SEO pages.
 ];

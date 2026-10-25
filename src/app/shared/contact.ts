@@ -115,6 +115,7 @@ export const NAV_LINKS: readonly NavLink[] = [
       { label: 'Weddings & ROM', path: '/flowers' },
       { label: 'For Businesses', path: '/corporate' },
       { label: 'Party Add-Ons', path: '/services/add-ons' },
+      { label: 'Event Decoration Singapore', path: '/event-decoration-singapore' },
     ],
   },
   { label: 'About', path: '/about' },

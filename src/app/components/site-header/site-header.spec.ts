@@ -49,7 +49,7 @@ describe('SiteHeader', () => {
     expect(caret.getAttribute('aria-controls')).toBe(submenu.id);
   });
 
-  it('lists the four service children linking to /backdrops, /flowers, /corporate and /services/add-ons', () => {
+  it('lists the five service children linking to /backdrops, /flowers, /corporate, /services/add-ons and /event-decoration-singapore', () => {
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -60,6 +60,7 @@ describe('SiteHeader', () => {
       'Weddings & ROM',
       'For Businesses',
       'Party Add-Ons',
+      'Event Decoration Singapore',
     ]);
     const floral = links.find((a) => a.textContent?.includes('Weddings & ROM'));
     expect(floral?.getAttribute('href')).toBe('/flowers');
@@ -69,6 +70,8 @@ describe('SiteHeader', () => {
     expect(corporate?.getAttribute('href')).toBe('/corporate');
     const addons = links.find((a) => a.textContent?.includes('Party Add-Ons'));
     expect(addons?.getAttribute('href')).toBe('/services/add-ons');
+    const eventDecor = links.find((a) => a.textContent?.includes('Event Decoration Singapore'));
+    expect(eventDecor?.getAttribute('href')).toBe('/event-decoration-singapore');
   });
 
   it('opens the dropdown on keyboard focus (focusin) and reflects it in aria-expanded', () => {
