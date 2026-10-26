@@ -47,14 +47,18 @@ const REVIEW_QUOTES = [
 const SCRIPT_ID = 'ld-json-seo-landing';
 
 /**
- * Shared component for the 3 SEO landing pages (added 24 Oct 2026, owner
- * request) — one static route per target keyword ('/birthday-decoration-
- * singapore', '/party-decoration-singapore', '/event-decoration-singapore'),
+ * Shared component for the SEO landing pages (added 24 Oct 2026, owner
+ * request) — one static route per target keyword, currently
+ * '/birthday-decoration-singapore' and '/party-decoration-singapore',
  * each prerendered, targeting organic Google and AI-search (Perplexity,
  * Gemini, ChatGPT) traffic. Mirrors the addon-detail/corporate-case-study
  * pattern already used elsewhere: the slug is carried on route `data`
  * (app.routes.ts), looked up in SEO_LANDING_PAGES (shared/seo-landing-
- * pages.ts) rather than duplicating 3 near-identical page components.
+ * pages.ts) rather than duplicating near-identical page components.
+ * ('/event-decoration-singapore' used to be a 3rd entry here too — it was
+ * replaced 25 Oct 2026 with its own bespoke component, pages/event-
+ * decoration-singapore/, which needed a richer structure than this generic
+ * pattern covers. See shared/seo-landing-pages.ts for the full note.)
  *
  * Trust-line note: the spec originally asked for a fabricated "★ 4.8 on
  * Google" rating. No real rating exists in this codebase, so — confirmed
