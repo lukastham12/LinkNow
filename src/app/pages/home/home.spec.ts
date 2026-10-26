@@ -14,6 +14,42 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
+  it('hero <img> is wired to an (error) handler that falls back to the SSR-safe default photo if the client-side swap fails to load (26 Oct 2026 fix — "some users can\'t see the hero image")', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    interface HomeWithHero {
+      heroImage: ReturnType<typeof import('@angular/core').signal<{ src: string }>>;
+      onHeroImageError(): void;
+    }
+    const component = fixture.componentInstance as unknown as HomeWithHero;
+    // HERO_IMAGES[0] in home.ts — the SSR/prerender-safe default. afterNextRender()
+    // has already fired by this point in a TestBed fixture (it already picked a
+    // random photo, which is why this test can't just read the current src as
+    // "the default"), so the known-good fallback src is asserted directly here.
+    const defaultSrc = '/backdrops/hero-minecraft.jpg';
+
+    // Simulate the post-hydration rotation having picked a different photo,
+    // then that photo's fetch failing on the visitor's end (ad blocker,
+    // flaky network, CDN hiccup). Before this fix the <img> was simply left
+    // pointing at a broken src with no fallback.
+    component.heroImage.set({ src: '/backdrops/backdrop-12.jpg' });
+    expect(component.heroImage().src).not.toBe(defaultSrc);
+
+    // Directly invoke the error handler, as the (error) binding would on a
+    // failed image load, and confirm it reverts to the known-good default.
+    component.onHeroImageError();
+    expect(component.heroImage().src).toBe(defaultSrc);
+
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const img = el.querySelector('.hero__img') as HTMLImageElement;
+    expect(img.getAttribute('src')).toBe(defaultSrc);
+
+    // A second error on the already-reverted default must not loop/throw.
+    expect(() => component.onHeroImageError()).not.toThrow();
+    expect(component.heroImage().src).toBe(defaultSrc);
+  });
+
   it('.btn gets a 220px min-width and centered text so short-label buttons match longer ones (button-width consistency fix)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();

@@ -113,6 +113,26 @@ export class Home {
     });
   }
 
+  /**
+   * Bug fix (26 Oct 2026 — reported as "some users can't see the hero
+   * image"): the prerendered page always ships with HERO_IMAGES[0], which
+   * is guaranteed to exist — then, purely for variety, afterNextRender()
+   * above swaps in a DIFFERENT, randomly-picked photo once the browser has
+   * hydrated. That swap forces a brand-new network fetch; if it fails for
+   * any reason specific to the visitor (ad blocker, flaky connection,
+   * privacy extension, a CDN edge hiccup) the <img> box still reserves its
+   * space but renders nothing — a perfectly good photo silently replaced
+   * by a blank one. Reproduced locally by blocking the swapped-in image's
+   * request: naturalWidth drops to 0 with no visible fallback. This
+   * handler falls back to the known-good SSR default the moment a swap
+   * fails, so a failed "variety" fetch can never leave the hero blank.
+   */
+  protected onHeroImageError(): void {
+    if (this.heroImage().src !== HERO_IMAGES[0].src) {
+      this.heroImage.set(HERO_IMAGES[0]);
+    }
+  }
+
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
 
