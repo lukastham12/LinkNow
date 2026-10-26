@@ -139,8 +139,9 @@ export class SeoService {
           image: absoluteUrl('/brand/logo.jpg'),
           email: EMAIL_ADDRESS,
           description:
-            'Singapore event decor studio creating custom backdrops, floral ' +
-            'services and corporate event styling for celebrations and formal occasions.',
+            'LinkNow Pte Ltd is a birthday, party and event decoration company in Singapore — ' +
+            'custom backdrops, balloon installations and full party styling for birthdays, ' +
+            'corporate events, store openings and private celebrations.',
           areaServed: { '@type': 'Country', name: 'Singapore' },
           contactPoint: {
             '@type': 'ContactPoint',

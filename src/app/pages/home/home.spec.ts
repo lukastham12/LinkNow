@@ -14,6 +14,42 @@ describe('Home', () => {
     expect(TestBed.createComponent(Home).componentInstance).toBeTruthy();
   });
 
+  it('hero <img> is wired to an (error) handler that falls back to the SSR-safe default photo if the client-side swap fails to load (26 Oct 2026 fix — "some users can\'t see the hero image")', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    interface HomeWithHero {
+      heroImage: ReturnType<typeof import('@angular/core').signal<{ src: string }>>;
+      onHeroImageError(): void;
+    }
+    const component = fixture.componentInstance as unknown as HomeWithHero;
+    // HERO_IMAGES[0] in home.ts — the SSR/prerender-safe default. afterNextRender()
+    // has already fired by this point in a TestBed fixture (it already picked a
+    // random photo, which is why this test can't just read the current src as
+    // "the default"), so the known-good fallback src is asserted directly here.
+    const defaultSrc = '/backdrops/hero-minecraft.jpg';
+
+    // Simulate the post-hydration rotation having picked a different photo,
+    // then that photo's fetch failing on the visitor's end (ad blocker,
+    // flaky network, CDN hiccup). Before this fix the <img> was simply left
+    // pointing at a broken src with no fallback.
+    component.heroImage.set({ src: '/backdrops/backdrop-12.jpg' });
+    expect(component.heroImage().src).not.toBe(defaultSrc);
+
+    // Directly invoke the error handler, as the (error) binding would on a
+    // failed image load, and confirm it reverts to the known-good default.
+    component.onHeroImageError();
+    expect(component.heroImage().src).toBe(defaultSrc);
+
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const img = el.querySelector('.hero__img') as HTMLImageElement;
+    expect(img.getAttribute('src')).toBe(defaultSrc);
+
+    // A second error on the already-reverted default must not loop/throw.
+    expect(() => component.onHeroImageError()).not.toThrow();
+    expect(component.heroImage().src).toBe(defaultSrc);
+  });
+
   it('.btn gets a 220px min-width and centered text so short-label buttons match longer ones (button-width consistency fix)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
@@ -33,24 +69,37 @@ describe('Home', () => {
     expect(el.querySelector('.hero')?.textContent ?? '').not.toContain('UEN');
   });
 
-  it('has exactly one H1, matching the Homepage redesign copy exactly (R1.1)', () => {
+  it('has exactly one H1, matching the SEO-optimised copy exactly (26 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = Array.from(el.querySelectorAll('h1'));
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent?.trim()).toBe("Event decorations for anything you're planning in Singapore");
+    expect(h1s[0].textContent?.trim()).toBe(
+      'Birthday, Party & Event Decoration Singapore | LinkNow Pte Ltd',
+    );
   });
 
-  it('hero subheadline says what we do (incl. custom requests) and why to engage us', () => {
+  it('passes [compact]="true" to app-events-we-style so the homepage shows the 3-item add-ons teaser (26 Oct 2026)', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const addonsSection = Array.from(el.querySelectorAll('section')).find((s) =>
+      s.querySelector('#addons-heading'),
+    ) as HTMLElement;
+    expect(addonsSection.querySelectorAll('.addon').length).toBe(3);
+    expect(addonsSection.querySelector('.addons__see-all')).toBeTruthy();
+  });
+
+  it('hero subheadline names LinkNow as a birthday/party/event decoration company (25 Oct 2026)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const sub = el.querySelector('.hero__sub');
     expect(sub?.textContent?.replace(/\s+/g, ' ').trim()).toBe(
-      "Balloon decor, custom backdrops, florals and corporate styling — and if your event " +
-        "isn't on the list, we'll still make it happen. Premium craftsmanship, honest " +
-        'pricing and a team you can rely on.',
+      'LinkNow Pte Ltd is a birthday, party and event decoration company in Singapore — ' +
+        'custom backdrops, balloon garlands and full party styling for any occasion. HDB void ' +
+        'decks, condo function rooms and private venues welcome. From S$349.',
     );
   });
 

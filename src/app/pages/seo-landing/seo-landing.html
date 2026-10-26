@@ -1,0 +1,72 @@
+<section class="hero">
+  <h1 class="hero__title">{{ page.keyword }}</h1>
+  <p class="hero__subhead">{{ page.subhead }}</p>
+  <p class="hero__trust">Real 5-star reviews from Singapore customers · {{ page.occasionPriceLabel }} from S$349</p>
+  <div class="hero__actions">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+</section>
+
+<section class="gallery" aria-labelledby="gallery-heading">
+  <p class="eyebrow eyebrow--center">Our Work</p>
+  <h2 id="gallery-heading" class="gallery__title">Real setups we've styled</h2>
+  <div class="gallery__grid">
+    @for (photo of page.photos; track photo.src) {
+      <img class="gallery__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+    }
+  </div>
+</section>
+
+<section class="why" aria-labelledby="why-heading">
+  <p class="eyebrow eyebrow--center">Why LinkNow</p>
+  <h2 id="why-heading" class="why__title">What's included</h2>
+  <div class="why__grid">
+    <div class="why__item">
+      <h3 class="why__item-title">Setup & teardown included</h3>
+    </div>
+    <div class="why__item">
+      <h3 class="why__item-title">Mock-up before you commit</h3>
+    </div>
+    <div class="why__item">
+      <h3 class="why__item-title">HDB, condo & void deck setups</h3>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" aria-labelledby="reviews-heading">
+  <p class="eyebrow eyebrow--center">Testimonials</p>
+  <h2 id="reviews-heading" class="reviews__title">What our clients say</h2>
+  <div class="reviews__grid">
+    @for (review of reviews; track review.quote) {
+      <blockquote class="review">
+        <p class="review__quote">&ldquo;{{ review.quote }}&rdquo;</p>
+        <p class="review__attribution">Verified Google review</p>
+      </blockquote>
+    }
+  </div>
+</section>
+
+<section class="steps" aria-labelledby="steps-heading">
+  <p class="eyebrow eyebrow--center">How It Works</p>
+  <h2 id="steps-heading" class="steps__title">From theme to set up, in 4 steps</h2>
+  <ol class="steps__list">
+    @for (step of howItWorks; track step.title; let i = $index) {
+      <li class="steps__item">
+        <span class="steps__number" aria-hidden="true">{{ i + 1 }}</span>
+        <h3 class="steps__item-title">{{ step.title }}</h3>
+        <p class="steps__item-text">{{ step.text }}</p>
+      </li>
+    }
+  </ol>
+</section>
+
+<section class="outro">
+  <p class="outro__text">Ready to plan? Tell us your date and theme.</p>
+  <div class="hero__actions hero__actions--center">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      Enquire on WhatsApp
+    </a>
+  </div>
+</section>

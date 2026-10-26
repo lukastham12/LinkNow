@@ -1,0 +1,67 @@
+<section class="hero">
+  <h1 class="hero__title">Event Decoration Singapore</h1>
+  <p class="hero__subhead">
+    LinkNow Pte Ltd is an event decoration company in Singapore — custom backdrops, balloon
+    installations and full styling for birthdays, corporate functions, weddings, store openings
+    and private celebrations. Setup and teardown included.
+  </p>
+  <p class="hero__trust">Starting from S$349</p>
+  <div class="hero__actions">
+    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+      WhatsApp for personal events
+    </a>
+    <a class="btn btn--ghost" [href]="mailtoHref">Email for business events</a>
+  </div>
+</section>
+
+<section class="work" aria-labelledby="work-heading">
+  <p class="eyebrow eyebrow--center">Our Work</p>
+  <h2 id="work-heading" class="work__title">The best of what we've built</h2>
+
+  <div class="work__group">
+    <h3 class="work__group-title">Birthdays & Celebrations</h3>
+    <div class="work__grid">
+      @for (photo of birthdayPhotos; track photo.src) {
+        <img class="work__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+      }
+    </div>
+    <a class="btn btn--ghost" routerLink="/backdrops">See Birthdays & Celebrations</a>
+  </div>
+
+  <div class="work__group">
+    <h3 class="work__group-title">For Businesses</h3>
+    <div class="work__grid">
+      @for (photo of businessPhotos; track photo.src) {
+        <img class="work__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+      }
+    </div>
+    <a class="btn btn--ghost" routerLink="/corporate">See For Businesses</a>
+  </div>
+</section>
+
+<section class="split" aria-labelledby="split-heading">
+  <p class="eyebrow eyebrow--center">Two Ways We Help</p>
+  <h2 id="split-heading" class="split__title">Personal celebration or business event?</h2>
+  <div class="split__grid">
+    <div class="split__card">
+      <h3 class="split__card-title">Personal Celebrations</h3>
+      <p class="split__card-text">
+        Birthdays, baby showers, 100 days and naming ceremonies — styled to your theme, set up
+        and cleared for you.
+      </p>
+      <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+        Enquire on WhatsApp
+      </a>
+    </div>
+    <div class="split__card">
+      <h3 class="split__card-title">Business Events</h3>
+      <p class="split__card-text">
+        Store openings, launches, D&amp;D and roadshows, and corporate activations — proposals
+        and mock-ups before you commit.
+      </p>
+      <a class="btn btn--ghost" [href]="mailtoHref">Email us</a>
+    </div>
+  </div>
+</section>
+
+<app-faq-accordion eyebrow="Good to Know" title="Event Decoration FAQ" [faqs]="faqs" />

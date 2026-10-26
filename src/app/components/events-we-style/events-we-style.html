@@ -27,30 +27,42 @@
     quote.
   </p>
 
-  <h3 class="addons__group-title">Food &amp; Drink Stations</h3>
-  <div class="addons">
-    @for (addon of foodAddons; track addon.id) {
-      <app-addon-card [addon]="addon" />
-    }
-  </div>
+  @if (compact()) {
+    <div class="addons">
+      @for (addon of teaserAddons; track addon.id) {
+        <app-addon-card [addon]="addon" />
+      }
+    </div>
 
-  <h3 class="addons__group-title">Entertainment</h3>
-  <div class="addons">
-    @for (addon of entertainmentAddons; track addon.id) {
-      <app-addon-card [addon]="addon" />
-    }
-  </div>
+    <div class="section__cta">
+      <a class="addons__see-all" routerLink="/services/add-ons">See all add-ons &rarr;</a>
+    </div>
+  } @else {
+    <h3 class="addons__group-title">Food &amp; Drink Stations</h3>
+    <div class="addons">
+      @for (addon of foodAddons; track addon.id) {
+        <app-addon-card [addon]="addon" />
+      }
+    </div>
 
-  <div class="section__cta section__cta--stacked">
-    <a class="btn btn--solid" routerLink="/services/add-ons">See all add-ons &amp; full pricing</a>
-    <a
-      class="btn btn--ghost"
-      [href]="addonsWaLink"
-      target="_blank"
-      rel="noopener noreferrer"
-      (click)="trackWhatsappClick('addons', 'generic')"
-    >
-      Ask about these services on WhatsApp
-    </a>
-  </div>
+    <h3 class="addons__group-title">Entertainment</h3>
+    <div class="addons">
+      @for (addon of entertainmentAddons; track addon.id) {
+        <app-addon-card [addon]="addon" />
+      }
+    </div>
+
+    <div class="section__cta section__cta--stacked">
+      <a class="btn btn--solid" routerLink="/services/add-ons">See all add-ons &amp; full pricing</a>
+      <a
+        class="btn btn--ghost"
+        [href]="addonsWaLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="trackWhatsappClick('addons', 'generic')"
+      >
+        Ask about these services on WhatsApp
+      </a>
+    </div>
+  }
 </section>

@@ -173,6 +173,16 @@
   margin-top: 2.5rem;
 }
 
+.addons__see-all {
+  color: var(--color-rose);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.addons__see-all:hover {
+  text-decoration: underline;
+}
+
 // Responsive ------------------------------------------------------------------
 
 @media (min-width: 720px) {

@@ -49,16 +49,17 @@ describe('SiteHeader', () => {
     expect(caret.getAttribute('aria-controls')).toBe(submenu.id);
   });
 
-  it('lists the four service children linking to /backdrops, /flowers, /corporate and /services/add-ons', () => {
+  it('lists the five service children in order: Event Decoration Singapore, Birthdays & Celebrations, For Businesses, Weddings & ROM, Party Add-Ons', () => {
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const links = Array.from(el.querySelectorAll('.submenu__link')) as HTMLAnchorElement[];
     const labels = links.map((a) => a.textContent?.trim());
     expect(labels).toEqual([
+      'Event Decoration Singapore',
       'Birthdays & Celebrations',
-      'Weddings & ROM',
       'For Businesses',
+      'Weddings & ROM',
       'Party Add-Ons',
     ]);
     const floral = links.find((a) => a.textContent?.includes('Weddings & ROM'));
@@ -69,6 +70,8 @@ describe('SiteHeader', () => {
     expect(corporate?.getAttribute('href')).toBe('/corporate');
     const addons = links.find((a) => a.textContent?.includes('Party Add-Ons'));
     expect(addons?.getAttribute('href')).toBe('/services/add-ons');
+    const eventDecor = links.find((a) => a.textContent?.includes('Event Decoration Singapore'));
+    expect(eventDecor?.getAttribute('href')).toBe('/event-decoration-singapore');
   });
 
   it('opens the dropdown on keyboard focus (focusin) and reflects it in aria-expanded', () => {

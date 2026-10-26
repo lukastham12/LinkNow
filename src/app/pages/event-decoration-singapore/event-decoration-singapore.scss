@@ -1,0 +1,181 @@
+// Shared building blocks (mirrors pages/seo-landing for a consistent look) --
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-label);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+.eyebrow--center {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  font-size: var(--font-size-button);
+  letter-spacing: var(--track-mid);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.8rem;
+  min-width: 220px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.btn--solid {
+  background: var(--color-rose);
+  color: #fff;
+  border: 1px solid var(--color-rose);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--color-rose) 88%, #000);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-rose);
+  border: 1px solid var(--color-rose);
+}
+
+.btn--ghost:hover {
+  background: var(--color-blush);
+}
+
+// Hero -----------------------------------------------------------------
+
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 1.5rem;
+}
+
+.hero__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.7rem, 7vw, 2.6rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.hero__subhead {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  max-width: 64ch;
+  font-size: 0.96rem;
+}
+
+.hero__trust {
+  margin: 0 0 1rem;
+  color: var(--color-rose);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+// Shared section box model -----------------------------------------------
+
+.work,
+.split {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+.work__title,
+.split__title {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+  font-weight: 600;
+}
+
+// Our Work — split into Birthdays & Celebrations / For Businesses ---------
+
+.work__group {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.work__group:last-child {
+  margin-bottom: 0;
+}
+
+.work__group-title {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.work__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+@media (max-width: 560px) {
+  .work__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .work__grid .work__img:last-child {
+    display: none;
+  }
+}
+
+// Two-path split -----------------------------------------------------------
+
+.split__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.split__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.split__card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.split__card-text {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.split__card .btn {
+  align-self: flex-start;
+}
+
+@media (min-width: 720px) {
+  .split__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
