@@ -76,6 +76,17 @@ describe('SeoService', () => {
     expect(org.taxID).toBe('202608341G');
     expect(org.email).toBe('novestelatham@linknow-singapore.com');
 
+    // Description matches the GBP wording — "birthday, party and event
+    // decoration company", not the older "event decor studio" phrasing
+    // (26 Oct 2026 keyword-consistency fix).
+    expect(org.description).toBe(
+      'LinkNow Pte Ltd is a birthday, party and event decoration company in Singapore — ' +
+        'custom backdrops, balloon installations and full party styling for birthdays, ' +
+        'corporate events, store openings and private celebrations.',
+    );
+    expect(org.description).not.toContain('event decor studio');
+    expect(org.description).not.toContain('floral services');
+
     // No fabricated business data / pricing / ratings (BRIEF.md §4 + ticket 008).
     expect(json).not.toContain('address');
     expect(json).not.toContain('openingHours');

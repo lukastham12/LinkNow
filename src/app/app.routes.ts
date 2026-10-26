@@ -20,7 +20,7 @@ export const routes: Routes = [
     component: Home,
     data: {
       seo: {
-        title: 'Event Decorations & Balloon Decor Singapore | LinkNow Pte Ltd',
+        title: 'Birthday, Party & Event Decoration Singapore | LinkNow Pte Ltd',
         description:
           'Balloon decorations, backdrops and party add-ons for birthdays, baby showers, ' +
           'weddings, festive and corporate events across Singapore. Enquire on WhatsApp.',
