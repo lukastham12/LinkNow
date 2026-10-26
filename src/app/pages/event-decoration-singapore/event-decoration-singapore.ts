@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LEGAL_NAME, absoluteUrl } from '../../shared/site';
-import { EMAIL_ADDRESS, WHATSAPP_NUMBER, whatsappLink } from '../../shared/contact';
+import { EMAIL_ADDRESS, WHATSAPP_NUMBER, pageWhatsappLink } from '../../shared/contact';
 import { Faq } from '../../shared/faq';
 import { FaqAccordion } from '../../components/faq-accordion/faq-accordion';
 
@@ -104,9 +104,12 @@ export class EventDecorationSingaporePage implements OnInit, OnDestroy {
   protected readonly emailAddress = EMAIL_ADDRESS;
   protected readonly mailtoHref = `mailto:${EMAIL_ADDRESS}`;
 
-  protected readonly whatsappHref = whatsappLink(
-    "Hi LinkNow! I'm planning an event.\nDate: \nVenue: \nTheme: ",
-  );
+  // Switched from a hand-rolled Date/Venue/Theme-only message to the
+  // site-wide pageWhatsappLink() convention (26 Oct 2026, pre-merge review
+  // finding): the hand-rolled version silently dropped Event and Budget,
+  // reopening the exact follow-up-chasing gap the 16 Oct 2026 UX fix
+  // (ENQUIRY_TEMPLATE) was built to close.
+  protected readonly whatsappHref = pageWhatsappLink('Event Decoration Singapore');
 
   protected readonly birthdayPhotos: readonly WorkPhoto[] = [
     {

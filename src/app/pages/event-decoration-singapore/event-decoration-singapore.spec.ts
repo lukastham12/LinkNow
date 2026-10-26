@@ -55,6 +55,20 @@ describe('EventDecorationSingaporePage', () => {
     }
   });
 
+  it('WhatsApp CTA uses the site-wide pageWhatsappLink() template (Event/Date/Venue/Theme/Budget), not a hand-rolled message missing fields (26 Oct 2026, pre-merge review fix)', () => {
+    const fixture = TestBed.createComponent(EventDecorationSingaporePage);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const waLink = el.querySelector('a[href*="wa.me/6588090600"]') as HTMLAnchorElement;
+    const decoded = decodeURIComponent(waLink.getAttribute('href') ?? '');
+    expect(decoded).toContain('I saw your Event Decoration Singapore page');
+    expect(decoded).toContain('Event:');
+    expect(decoded).toContain('Date:');
+    expect(decoded).toContain('Venue:');
+    expect(decoded).toContain('Theme:');
+    expect(decoded).toContain('Budget:');
+  });
+
   it('shows "Our Work" split into a Birthdays & Celebrations gallery and a For Businesses gallery, each with 3 photos and a deep-link button', () => {
     const fixture = TestBed.createComponent(EventDecorationSingaporePage);
     fixture.detectChanges();

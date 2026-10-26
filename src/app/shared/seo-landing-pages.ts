@@ -36,8 +36,6 @@ export interface SeoLandingPage {
    *  seo-landing.html): names LinkNow as a [keyword] company in Singapore
    *  and covers venues (HDB, condo, void deck). */
   subhead: string;
-  /** Occasion noun used in the WhatsApp prefill, e.g. "birthday party". */
-  occasionWhatsapp: string;
   /** Occasion label used in the price trust-line, e.g. "Birthday decoration". */
   occasionPriceLabel: string;
   metaTitle: string;
@@ -52,7 +50,6 @@ export const SEO_LANDING_PAGES: readonly SeoLandingPage[] = [
     subhead:
       'LinkNow Pte Ltd is a birthday decoration company in Singapore, styling custom backdrops ' +
       'and balloon setups for HDB void decks, condo function rooms and private venues.',
-    occasionWhatsapp: 'birthday party',
     occasionPriceLabel: 'Birthday decoration',
     metaTitle: 'Birthday Decoration Singapore | From S$349 | LinkNow Pte Ltd',
     metaDescription:
@@ -92,7 +89,6 @@ export const SEO_LANDING_PAGES: readonly SeoLandingPage[] = [
     subhead:
       'LinkNow Pte Ltd is a party decoration company in Singapore, styling custom backdrops and ' +
       'balloon setups for HDB void decks, condo function rooms and private venues.',
-    occasionWhatsapp: 'party',
     occasionPriceLabel: 'Party decoration',
     metaTitle: 'Party Decoration Singapore | From S$349 | LinkNow Pte Ltd',
     metaDescription:

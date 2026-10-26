@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LEGAL_NAME, absoluteUrl } from '../../shared/site';
-import { WHATSAPP_NUMBER, whatsappLink } from '../../shared/contact';
+import { WHATSAPP_NUMBER, pageWhatsappLink } from '../../shared/contact';
 import { SEO_LANDING_PAGES, SeoLandingPage } from '../../shared/seo-landing-pages';
 import { TESTIMONIALS } from '../../shared/testimonials';
 
@@ -96,9 +96,12 @@ export class SeoLandingPageComponent implements OnInit, OnDestroy {
 
   protected readonly reviews = TESTIMONIALS.filter((t) => REVIEW_QUOTES.includes(t.quote));
 
-  protected readonly whatsappHref = whatsappLink(
-    `Hi LinkNow! I'm planning a ${this.page.occasionWhatsapp}.\nDate: \nVenue: \nTheme: `,
-  );
+  // Switched from a hand-rolled Date/Venue/Theme-only message to the
+  // site-wide pageWhatsappLink() convention (26 Oct 2026, pre-merge review
+  // finding): the hand-rolled version silently dropped Event and Budget,
+  // reopening the exact follow-up-chasing gap the 16 Oct 2026 UX fix
+  // (ENQUIRY_TEMPLATE) was built to close.
+  protected readonly whatsappHref = pageWhatsappLink(this.page.keyword);
 
   ngOnInit(): void {
     this.injectStructuredData();

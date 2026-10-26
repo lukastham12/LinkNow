@@ -69,15 +69,13 @@ describe('Home', () => {
     expect(el.querySelector('.hero')?.textContent ?? '').not.toContain('UEN');
   });
 
-  it('has exactly one H1, matching the SEO-optimised copy exactly (26 Oct 2026)', () => {
+  it('has exactly one H1, matching the SEO-optimised copy exactly — no meta-title pipe/brand-suffix in the visible heading (26 Oct 2026, pre-merge review fix)', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = Array.from(el.querySelectorAll('h1'));
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent?.trim()).toBe(
-      'Birthday, Party & Event Decoration Singapore | LinkNow Pte Ltd',
-    );
+    expect(h1s[0].textContent?.trim()).toBe('Birthday, Party & Event Decoration Singapore');
   });
 
   it('passes [compact]="true" to app-events-we-style so the homepage shows the 3-item add-ons teaser (26 Oct 2026)', () => {

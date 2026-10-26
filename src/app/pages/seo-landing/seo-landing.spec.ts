@@ -125,7 +125,7 @@ describe('SeoLandingPageComponent', () => {
         expect(titles).toEqual(['Send us your theme', 'We send a mock-up', 'You confirm', 'We set up and clear']);
       });
 
-      it('WhatsApp buttons open with the occasion-specific prefilled text (hero + final CTA)', async () => {
+      it('WhatsApp buttons use the site-wide pageWhatsappLink() template (Event/Date/Venue/Theme/Budget), not a hand-rolled message missing fields (26 Oct 2026, pre-merge review fix)', async () => {
         await configure(page.slug);
         const fixture = TestBed.createComponent(SeoLandingPageComponent);
         fixture.detectChanges();
@@ -136,10 +136,12 @@ describe('SeoLandingPageComponent', () => {
         expect(waLinks.length).toBe(2);
         for (const a of waLinks) {
           const decoded = decodeURIComponent(a.href);
-          expect(decoded).toContain(`I'm planning a ${page.occasionWhatsapp}.`);
+          expect(decoded).toContain(`I saw your ${page.keyword} page`);
+          expect(decoded).toContain('Event:');
           expect(decoded).toContain('Date:');
           expect(decoded).toContain('Venue:');
           expect(decoded).toContain('Theme:');
+          expect(decoded).toContain('Budget:');
         }
       });
 
