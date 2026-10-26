@@ -79,32 +79,64 @@
   gap: 0.75rem;
 }
 
-.hero__actions--center {
-  justify-content: center;
-}
-
 // Shared section box model -----------------------------------------------
 
-.split,
-.gallery,
-.why,
-.reviews,
-.steps,
-.outro {
+.work,
+.split {
   max-width: 1120px;
   margin: 0 auto;
   padding: 2rem 1.25rem;
 }
 
-.split__title,
-.gallery__title,
-.why__title,
-.reviews__title,
-.steps__title {
+.work__title,
+.split__title {
   margin: 0 0 1.5rem;
   text-align: center;
   font-size: clamp(1.25rem, 3.5vw, 1.6rem);
   font-weight: 600;
+}
+
+// Our Work — split into Birthdays & Celebrations / For Businesses ---------
+
+.work__group {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.work__group:last-child {
+  margin-bottom: 0;
+}
+
+.work__group-title {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.work__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+@media (max-width: 560px) {
+  .work__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .work__grid .work__img:last-child {
+    display: none;
+  }
 }
 
 // Two-path split -----------------------------------------------------------
@@ -146,158 +178,4 @@
   .split__grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-// Photo grid ---------------------------------------------------------------
-
-.gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1rem;
-}
-
-.gallery__img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-}
-
-// Why-us strip ---------------------------------------------------------------
-
-.why__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-  text-align: center;
-}
-
-.why__item-title {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-@media (min-width: 720px) {
-  .why__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-// Reviews ---------------------------------------------------------------
-
-.reviews__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-.review {
-  margin: 0;
-  padding: 1.25rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-}
-
-.review__quote {
-  margin: 0 0 0.5rem;
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-.review__attribution {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: 0.78rem;
-}
-
-@media (min-width: 720px) {
-  .reviews__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-// How It Works ---------------------------------------------------------------
-
-.steps__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-.steps__item {
-  text-align: center;
-}
-
-.steps__number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-bottom: 0.6rem;
-  border-radius: 50%;
-  border: 1px solid var(--color-hairline);
-  color: var(--color-rose);
-  font-weight: 600;
-}
-
-.steps__item-title {
-  margin: 0 0 0.4rem;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.steps__item-text {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: 0.88rem;
-  line-height: 1.5;
-  max-width: 32ch;
-  margin-inline: auto;
-}
-
-@media (min-width: 720px) {
-  .steps__list {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-// Portfolio link ---------------------------------------------------------
-
-.portfolio-link {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1.25rem 2rem;
-  text-align: center;
-}
-
-.portfolio-link__cta {
-  color: var(--color-rose);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.portfolio-link__cta:hover {
-  text-decoration: underline;
-}
-
-// Outro ---------------------------------------------------------------
-
-.outro {
-  text-align: center;
-  padding-top: 1rem;
-  padding-bottom: 3rem;
-}
-
-.outro__text {
-  margin: 0 0 1.5rem;
-  color: var(--color-text-muted);
-  font-size: 1rem;
 }

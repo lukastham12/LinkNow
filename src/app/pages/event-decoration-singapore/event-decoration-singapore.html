@@ -5,12 +5,37 @@
     installations and full styling for birthdays, corporate functions, weddings, store openings
     and private celebrations. Setup and teardown included.
   </p>
-  <p class="hero__trust">Real 5-star reviews from Singapore customers · Event decoration from S$349</p>
+  <p class="hero__trust">Starting from S$349</p>
   <div class="hero__actions">
     <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
       WhatsApp for personal events
     </a>
     <a class="btn btn--ghost" [href]="mailtoHref">Email for business events</a>
+  </div>
+</section>
+
+<section class="work" aria-labelledby="work-heading">
+  <p class="eyebrow eyebrow--center">Our Work</p>
+  <h2 id="work-heading" class="work__title">The best of what we've built</h2>
+
+  <div class="work__group">
+    <h3 class="work__group-title">Birthdays & Celebrations</h3>
+    <div class="work__grid">
+      @for (photo of birthdayPhotos; track photo.src) {
+        <img class="work__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+      }
+    </div>
+    <a class="btn btn--ghost" routerLink="/backdrops">See Birthdays & Celebrations</a>
+  </div>
+
+  <div class="work__group">
+    <h3 class="work__group-title">For Businesses</h3>
+    <div class="work__grid">
+      @for (photo of businessPhotos; track photo.src) {
+        <img class="work__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+      }
+    </div>
+    <a class="btn btn--ghost" routerLink="/corporate">See For Businesses</a>
   </div>
 </section>
 
@@ -39,73 +64,4 @@
   </div>
 </section>
 
-<section class="gallery" aria-labelledby="gallery-heading">
-  <p class="eyebrow eyebrow--center">Our Work</p>
-  <h2 id="gallery-heading" class="gallery__title">Real events we've styled</h2>
-  <div class="gallery__grid">
-    @for (photo of photos; track photo.src) {
-      <img class="gallery__img" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
-    }
-  </div>
-</section>
-
-<section class="why" aria-labelledby="why-heading">
-  <p class="eyebrow eyebrow--center">Why LinkNow</p>
-  <h2 id="why-heading" class="why__title">What's included</h2>
-  <div class="why__grid">
-    <div class="why__item">
-      <h3 class="why__item-title">Setup &amp; teardown included</h3>
-    </div>
-    <div class="why__item">
-      <h3 class="why__item-title">All venues — void deck, condo, ballroom, retail</h3>
-    </div>
-    <div class="why__item">
-      <h3 class="why__item-title">Mock-up before you commit</h3>
-    </div>
-  </div>
-</section>
-
-<section class="reviews" aria-labelledby="reviews-heading">
-  <p class="eyebrow eyebrow--center">Testimonials</p>
-  <h2 id="reviews-heading" class="reviews__title">What our clients say</h2>
-  <div class="reviews__grid">
-    <blockquote class="review">
-      <p class="review__quote">&ldquo;{{ personalReview.quote }}&rdquo;</p>
-      <p class="review__attribution">Verified Google review</p>
-    </blockquote>
-    <blockquote class="review">
-      <p class="review__quote">&ldquo;{{ businessReview.quote }}&rdquo;</p>
-      <p class="review__attribution">Verified Google review</p>
-    </blockquote>
-  </div>
-</section>
-
-<section class="steps" aria-labelledby="steps-heading">
-  <p class="eyebrow eyebrow--center">How It Works</p>
-  <h2 id="steps-heading" class="steps__title">From theme to set up, in 4 steps</h2>
-  <ol class="steps__list">
-    @for (step of howItWorks; track step.title; let i = $index) {
-      <li class="steps__item">
-        <span class="steps__number" aria-hidden="true">{{ i + 1 }}</span>
-        <h3 class="steps__item-title">{{ step.title }}</h3>
-        <p class="steps__item-text">{{ step.text }}</p>
-      </li>
-    }
-  </ol>
-</section>
-
-<section class="portfolio-link">
-  <a class="portfolio-link__cta" routerLink="/backdrops">Browse our full decoration portfolio →</a>
-</section>
-
 <app-faq-accordion eyebrow="Good to Know" title="Event Decoration FAQ" [faqs]="faqs" />
-
-<section class="outro">
-  <p class="outro__text">Whatever you're planning, we'll make it look the part.</p>
-  <div class="hero__actions hero__actions--center">
-    <a class="btn btn--solid" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
-      WhatsApp for personal events
-    </a>
-    <a class="btn btn--ghost" [href]="mailtoHref">Email for business events</a>
-  </div>
-</section>

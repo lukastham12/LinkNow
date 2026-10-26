@@ -32,14 +32,14 @@ describe('EventDecorationSingaporePage', () => {
     expect(firstP?.textContent).toContain('LinkNow Pte Ltd is an event decoration company in Singapore');
   });
 
-  it('shows a trust line with no fabricated star rating', () => {
+  it('shows a plain "Starting from S$349" trust line with no fabricated star rating or reviews claim', () => {
     const fixture = TestBed.createComponent(EventDecorationSingaporePage);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const trust = el.querySelector('.hero__trust')?.textContent ?? '';
+    const trust = el.querySelector('.hero__trust')?.textContent?.trim() ?? '';
+    expect(trust).toBe('Starting from S$349');
     expect(trust).not.toMatch(/\d(\.\d)?\s*(star|\/\s*5|on google)/i);
-    expect(trust).toContain('Real 5-star reviews from Singapore customers');
-    expect(trust).toContain('Event decoration from S$349');
+    expect(trust).not.toContain('reviews');
   });
 
   it('has both a WhatsApp CTA and an email CTA using the canonical email address', () => {
@@ -55,6 +55,43 @@ describe('EventDecorationSingaporePage', () => {
     }
   });
 
+  it('shows "Our Work" split into a Birthdays & Celebrations gallery and a For Businesses gallery, each with 3 photos and a deep-link button', () => {
+    const fixture = TestBed.createComponent(EventDecorationSingaporePage);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const groups = Array.from(el.querySelectorAll('.work__group'));
+    expect(groups.length).toBe(2);
+
+    const titles = groups.map((g) => g.querySelector('.work__group-title')?.textContent?.trim());
+    expect(titles).toEqual(['Birthdays & Celebrations', 'For Businesses']);
+
+    const birthdayImgs = groups[0].querySelectorAll('.work__img');
+    expect(birthdayImgs.length).toBe(3);
+    const birthdayLink = groups[0].querySelector('a.btn') as HTMLAnchorElement;
+    expect(birthdayLink.getAttribute('href')).toBe('/backdrops');
+
+    const businessImgs = groups[1].querySelectorAll('.work__img');
+    expect(businessImgs.length).toBe(3);
+    const businessLink = groups[1].querySelector('a.btn') as HTMLAnchorElement;
+    expect(businessLink.getAttribute('href')).toBe('/corporate');
+
+    for (const img of Array.from(el.querySelectorAll('.work__img')) as HTMLImageElement[]) {
+      expect(img.getAttribute('loading')).toBe('lazy');
+      expect(img.getAttribute('alt')).toBeTruthy();
+    }
+  });
+
+  it('excludes backdrop-13 and backdrop-24 from the Our Work galleries', () => {
+    const fixture = TestBed.createComponent(EventDecorationSingaporePage);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const imgs = Array.from(el.querySelectorAll('.work__img')) as HTMLImageElement[];
+    for (const img of imgs) {
+      expect(img.getAttribute('src')).not.toContain('backdrop-13.jpg');
+      expect(img.getAttribute('src')).not.toContain('backdrop-24.jpg');
+    }
+  });
+
   it('shows a personal-events card and a business-events card, each with its own CTA', () => {
     const fixture = TestBed.createComponent(EventDecorationSingaporePage);
     fixture.detectChanges();
@@ -65,71 +102,15 @@ describe('EventDecorationSingaporePage', () => {
     expect(titles).toEqual(['Personal Celebrations', 'Business Events']);
   });
 
-  it('shows 6 photos with descriptive alt text matching "event decoration Singapore"', () => {
+  it('does not render the removed Why LinkNow, testimonials, How It Works or outro sections', () => {
     const fixture = TestBed.createComponent(EventDecorationSingaporePage);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    const imgs = Array.from(el.querySelectorAll('.gallery__img')) as HTMLImageElement[];
-    expect(imgs.length).toBe(6);
-    for (const img of imgs) {
-      expect(img.getAttribute('loading')).toBe('lazy');
-      expect((img.getAttribute('alt') ?? '').toLowerCase()).toContain('event decoration singapore');
-    }
-  });
-
-  it('excludes backdrop-13 and backdrop-24 (still show a child\'s full name in the photo itself)', () => {
-    const fixture = TestBed.createComponent(EventDecorationSingaporePage);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const imgs = Array.from(el.querySelectorAll('.gallery__img')) as HTMLImageElement[];
-    for (const img of imgs) {
-      expect(img.getAttribute('src')).not.toContain('backdrop-13.jpg');
-      expect(img.getAttribute('src')).not.toContain('backdrop-24.jpg');
-    }
-  });
-
-  it('shows the 3-point why-us strip', () => {
-    const fixture = TestBed.createComponent(EventDecorationSingaporePage);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const items = Array.from(el.querySelectorAll('.why__item-title')).map((n) => n.textContent?.trim());
-    expect(items).toEqual([
-      'Setup & teardown included',
-      'All venues — void deck, condo, ballroom, retail',
-      'Mock-up before you commit',
-    ]);
-  });
-
-  it('shows exactly 2 real review cards, not fabricated', () => {
-    const fixture = TestBed.createComponent(EventDecorationSingaporePage);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const quotes = Array.from(el.querySelectorAll('.review__quote')).map((n) => n.textContent ?? '');
-    expect(quotes.length).toBe(2);
-    for (const q of quotes) {
-      expect(q.length).toBeGreaterThan(0);
-    }
-    const attributions = Array.from(el.querySelectorAll('.review__attribution')).map((n) =>
-      n.textContent?.trim(),
-    );
-    expect(attributions.every((a) => a === 'Verified Google review')).toBeTrue();
-  });
-
-  it('reuses the exact "How It Works" 4-step copy from /backdrops', () => {
-    const fixture = TestBed.createComponent(EventDecorationSingaporePage);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const titles = Array.from(el.querySelectorAll('.steps__item-title')).map((n) => n.textContent?.trim());
-    expect(titles).toEqual(['Send us your theme', 'We send a mock-up', 'You confirm', 'We set up and clear']);
-  });
-
-  it('links to the full /backdrops portfolio', () => {
-    const fixture = TestBed.createComponent(EventDecorationSingaporePage);
-    fixture.detectChanges();
-    const el = fixture.nativeElement as HTMLElement;
-    const link = el.querySelector('.portfolio-link__cta');
-    expect(link?.getAttribute('ng-reflect-router-link') ?? link?.getAttribute('href')).toBeTruthy();
-    expect(link?.textContent).toContain('Browse our full decoration portfolio');
+    expect(el.querySelector('.why')).toBeNull();
+    expect(el.querySelector('.reviews')).toBeNull();
+    expect(el.querySelector('.steps')).toBeNull();
+    expect(el.querySelector('.outro')).toBeNull();
+    expect(el.querySelector('.portfolio-link')).toBeNull();
   });
 
   it('shows 4 FAQ questions and does not state unconfirmed billing policy as fact', () => {
@@ -146,15 +127,18 @@ describe('EventDecorationSingaporePage', () => {
     expect(text).not.toContain('no deposit required');
     expect(text).not.toContain('progress billing');
     // And must not reintroduce a suggested lead-time window.
-    expect(text).not.toContain("at least 1 month");
+    expect(text).not.toContain('at least 1 month');
     expect(text).toContain("there's no hard lead time or preferred window");
   });
 
-  it('shows the final CTA text with both WhatsApp and email buttons', () => {
+  it('ends at the FAQ — no content section renders after it', () => {
     const fixture = TestBed.createComponent(EventDecorationSingaporePage);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent ?? '').toContain("Whatever you're planning, we'll make it look the part.");
+    const children = Array.from(el.children);
+    const faqIndex = children.findIndex((c) => c.tagName.toLowerCase() === 'app-faq-accordion');
+    expect(faqIndex).toBeGreaterThan(-1);
+    expect(faqIndex).toBe(children.length - 1);
   });
 
   it('injects a page-scoped LocalBusiness JSON-LD block with no fabricated rating or address', () => {

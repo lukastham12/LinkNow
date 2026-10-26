@@ -3,60 +3,13 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LEGAL_NAME, absoluteUrl } from '../../shared/site';
 import { EMAIL_ADDRESS, WHATSAPP_NUMBER, whatsappLink } from '../../shared/contact';
-import { TESTIMONIALS } from '../../shared/testimonials';
 import { Faq } from '../../shared/faq';
 import { FaqAccordion } from '../../components/faq-accordion/faq-accordion';
 
-interface HowItWorksStep {
-  title: string;
-  text: string;
+interface WorkPhoto {
+  src: string;
+  alt: string;
 }
-
-interface ReviewCard {
-  quote: string;
-}
-
-// Exact copy reused from /backdrops' HOW_IT_WORKS (backdrops.ts) — per the
-// owner's spec for this page ("How it works — Reuse exact 4-step copy from
-// /backdrops").
-const HOW_IT_WORKS: readonly HowItWorksStep[] = [
-  {
-    title: 'Send us your theme',
-    text: "Message us on WhatsApp with your date, venue and the theme or vibe you're going for.",
-  },
-  {
-    title: 'We send a mock-up',
-    text: "You'll see a visual of the design before anything is built, so there are no surprises.",
-  },
-  {
-    title: 'You confirm',
-    text: 'Approve the mock-up and we lock in your date.',
-  },
-  {
-    title: 'We set up and clear',
-    text: 'Delivery, setup before your event and teardown after — all handled for you.',
-  },
-];
-
-// Two real, verbatim reviews from shared/testimonials.ts (not fabricated —
-// per the owner's spec, hardcode 2 relevant quotes): one personal-event
-// review and one corporate/community review, so the split section below is
-// backed by a real quote on each side.
-const PERSONAL_REVIEW_QUOTE =
-  'Excellent experience with Novi Tham as our party host! She kept the kids super entertained, ' +
-  'and the party energy was fantastic. Thank you so much for making my son’s birthday special! ' +
-  'Highly recommended.';
-
-const BUSINESS_REVIEW_QUOTE =
-  'I engaged Novi and her team for balloon sculpting services, event decorations, and the ' +
-  'grand opening setup. Despite a last-minute request for her team to come earlier for the ' +
-  'setup, Novi was very accommodating and flexible. There were a few hiccups leading up to the ' +
-  'event, but she was quick to respond, react, and rectify the issues immediately. As this was ' +
-  'an open house event, we needed the balloon sculptor to be roving rather than stationed at ' +
-  'one location. Her team was able to accommodate our request and engage with the children ' +
-  'throughout the event, creating balloons for them along the way. I would definitely engage ' +
-  'Novi and her team again for future events. They were responsive, accommodating, and ' +
-  'professional throughout. Highly recommended!';
 
 // FAQ answers (owner spec, 24-25 Oct 2026). Two of the spec's four questions
 // asked for specific, unconfirmed business policy as fact (30-day credit
@@ -104,19 +57,35 @@ const EVENT_FAQS: readonly Faq[] = [
 const SCRIPT_ID = 'ld-json-event-decoration-singapore';
 
 /**
- * `/event-decoration-singapore` (owner spec, 24-25 Oct 2026) — a dedicated,
- * richer rebuild of the page superseding the simpler entry of the same slug
- * that previously rendered via the shared SeoLandingPageComponent (see
- * shared/seo-landing-pages.ts, now with this slug removed). Bespoke
- * component rather than the generic pattern: this page has a two-path
- * personal/business split, its own 4-question FAQ and dual WhatsApp/email
- * CTAs, none of which the generic SEO landing shape covers.
+ * `/event-decoration-singapore` (owner spec, 24-26 Oct 2026) — a dedicated,
+ * bespoke page. Bespoke component rather than the generic SEO-landing
+ * pattern: this page has a two-path personal/business split, its own
+ * 4-question FAQ and dual WhatsApp/email CTAs, none of which the generic
+ * pattern covers.
+ *
+ * Page order, 26 Oct 2026 restructure (owner spec): hero -> Our Work (split
+ * into a Birthdays & Celebrations gallery and a For Businesses gallery, each
+ * deep-linking to /backdrops and /corporate) -> Two Ways We Help (personal/
+ * business split) -> FAQ -> global footer. The why-us strip, testimonials,
+ * "How It Works" and the closing dual-CTA outro were all removed per the
+ * same spec — the page now ends at the FAQ.
+ *
+ * "Our Work" photo picks reuse already-vetted curation rather than inventing
+ * a new "best of" selection: the 3 birthday/celebration photos are the same
+ * ones the owner singled out as the most visually striking for HERO_IMAGES
+ * on the homepage (pages/home/home.ts, 20 Oct 2026 note) minus backdrop-24
+ * (still shows a child's full name on the backdrop itself — see CLAUDE.md's
+ * name-blurring note); the 3 business photos are the headline images of the
+ * /corporate case studies already featured on the homepage's corporate
+ * teaser (People's Association, Avocadoria) plus Sparkle & Co.'s own case
+ * study photo.
  *
  * Trust-line note: the owner's spec asked for a fabricated "★ 4.8 on
- * Google" rating — no real Google rating exists in this codebase, so this
- * reuses the same unfabricated wording already settled on /backdrops and
- * the other SEO landing pages ("Real X-star reviews...") instead of
- * inventing a number.
+ * Google" rating — no real Google rating exists in this codebase. The
+ * 26 Oct 2026 round replaced the earlier unfabricated "Real 5-star
+ * reviews..." wording with a plain, number-free "Starting from S$349" at
+ * the owner's explicit request (that line no longer needs to carry a
+ * reviews claim once the Testimonials section below it was removed).
  *
  * Per-page JSON-LD: a separate LocalBusiness block (own
  * <script id="ld-json-event-decoration-singapore">), distinct from the
@@ -131,46 +100,41 @@ const SCRIPT_ID = 'ld-json-event-decoration-singapore';
 export class EventDecorationSingaporePage implements OnInit, OnDestroy {
   private readonly document = inject(DOCUMENT);
 
-  protected readonly howItWorks = HOW_IT_WORKS;
   protected readonly faqs = EVENT_FAQS;
   protected readonly emailAddress = EMAIL_ADDRESS;
   protected readonly mailtoHref = `mailto:${EMAIL_ADDRESS}`;
-
-  protected readonly personalReview: ReviewCard = {
-    quote: TESTIMONIALS.find((t) => t.quote === PERSONAL_REVIEW_QUOTE)?.quote ?? '',
-  };
-  protected readonly businessReview: ReviewCard = {
-    quote: TESTIMONIALS.find((t) => t.quote === BUSINESS_REVIEW_QUOTE)?.quote ?? '',
-  };
 
   protected readonly whatsappHref = whatsappLink(
     "Hi LinkNow! I'm planning an event.\nDate: \nVenue: \nTheme: ",
   );
 
-  protected readonly photos: readonly { src: string; alt: string }[] = [
+  protected readonly birthdayPhotos: readonly WorkPhoto[] = [
+    {
+      src: '/backdrops/hero-minecraft.jpg',
+      alt: 'A Minecraft-themed 8th birthday backdrop with balloon garlands, styled by LinkNow',
+    },
+    {
+      src: '/backdrops/backdrop-12.jpg',
+      alt: 'A gold and black birthday backdrop with neon signage and foil number balloons, styled by LinkNow',
+    },
+    {
+      src: '/backdrops/backdrop-17.jpg',
+      alt: 'A teddy-bear-themed 1st birthday backdrop with a styled dessert table, styled by LinkNow',
+    },
+  ];
+
+  protected readonly businessPhotos: readonly WorkPhoto[] = [
+    {
+      src: '/corporate/peoples-association-01.jpg',
+      alt: "Balloon pillar entrance and ribbon-cutting setup for a People's Association Open House",
+    },
     {
       src: '/backdrops/backdrop-23.jpg',
-      alt: 'Event decoration Singapore — retail pop-up booth styling',
+      alt: 'Sparkle & Co. retail pop-up backdrop styled by LinkNow at The Twilight: Flea & Feast',
     },
     {
       src: '/backdrops/backdrop-08.jpg',
-      alt: 'Event decoration Singapore — in-store storefront event styling',
-    },
-    {
-      src: '/backdrops/backdrop-09.jpg',
-      alt: 'Event decoration Singapore — in-store event decor',
-    },
-    {
-      src: '/backdrops/backdrop-19.jpg',
-      alt: 'Event decoration Singapore — naming ceremony backdrop',
-    },
-    {
-      src: '/backdrops/backdrop-01.jpg',
-      alt: 'Event decoration Singapore — naming ceremony backdrop',
-    },
-    {
-      src: '/backdrops/backdrop-21.jpg',
-      alt: 'Event decoration Singapore — 55th birthday celebration backdrop',
+      alt: 'In-store Easter event styled for Avocadoria — storefront view',
     },
   ];
 

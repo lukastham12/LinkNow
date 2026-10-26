@@ -49,18 +49,18 @@ describe('SiteHeader', () => {
     expect(caret.getAttribute('aria-controls')).toBe(submenu.id);
   });
 
-  it('lists the five service children linking to /backdrops, /flowers, /corporate, /services/add-ons and /event-decoration-singapore', () => {
+  it('lists the five service children in order: Event Decoration Singapore, Birthdays & Celebrations, For Businesses, Weddings & ROM, Party Add-Ons', () => {
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const links = Array.from(el.querySelectorAll('.submenu__link')) as HTMLAnchorElement[];
     const labels = links.map((a) => a.textContent?.trim());
     expect(labels).toEqual([
-      'Birthdays & Celebrations',
-      'Weddings & ROM',
-      'For Businesses',
-      'Party Add-Ons',
       'Event Decoration Singapore',
+      'Birthdays & Celebrations',
+      'For Businesses',
+      'Weddings & ROM',
+      'Party Add-Ons',
     ]);
     const floral = links.find((a) => a.textContent?.includes('Weddings & ROM'));
     expect(floral?.getAttribute('href')).toBe('/flowers');
