@@ -129,6 +129,49 @@ describe('EventsWeStyle', () => {
     expect(addonsButton?.getAttribute('target')).toBe('_blank');
   });
 
+  it('[compact]="true" (homepage usage) shows a flat 3-item teaser strip with a "See all add-ons →" link instead of the full grouped grid', () => {
+    const fixture = TestBed.createComponent(EventsWeStyle);
+    fixture.componentRef.setInput('compact', true);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const addonsSection = Array.from(el.querySelectorAll('section')).find((s) =>
+      s.querySelector('#addons-heading'),
+    ) as HTMLElement;
+    expect(addonsSection).toBeTruthy();
+
+    // No category subheadings or the full two-group grid in compact mode.
+    expect(addonsSection.querySelectorAll('.addons__group-title').length).toBe(0);
+
+    const items = Array.from(addonsSection.querySelectorAll('.addon'));
+    expect(items.length).toBe(3);
+    const titles = items.map((item) => item.querySelector('h3')?.textContent?.trim());
+    expect(titles).toEqual(['Popcorn Station', 'Bouncy Castle', 'Buffet Catering']);
+
+    const seeAll = addonsSection.querySelector('.addons__see-all') as HTMLAnchorElement;
+    expect(seeAll).toBeTruthy();
+    expect(seeAll.textContent?.trim()).toBe('See all add-ons →');
+    expect(seeAll.getAttribute('href')).toBe('/services/add-ons');
+
+    // Neither of the full-mode CTA buttons render in compact mode.
+    expect(addonsSection.querySelector('a.btn--solid')).toBeNull();
+    expect(
+      Array.from(addonsSection.querySelectorAll('a.btn--ghost')).find(
+        (a) => a.textContent?.trim() === 'Ask about these services on WhatsApp',
+      ),
+    ).toBeUndefined();
+  });
+
+  it('defaults to the full grouped grid when compact is not set (unchanged /services behaviour)', () => {
+    const fixture = TestBed.createComponent(EventsWeStyle);
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const addonsSection = Array.from(el.querySelectorAll('section')).find((s) =>
+      s.querySelector('#addons-heading'),
+    ) as HTMLElement;
+    expect(addonsSection.querySelectorAll('.addon').length).toBe(7);
+    expect(addonsSection.querySelector('.addons__see-all')).toBeNull();
+  });
+
   it('fires a whatsapp_click GA event for the add-ons button, without blocking navigation', () => {
     const fixture = TestBed.createComponent(EventsWeStyle);
     fixture.detectChanges();
