@@ -64,7 +64,7 @@ const SCRIPT_ID = 'ld-json-event-decoration-singapore';
  * pattern covers.
  *
  * Page order, 26 Oct 2026 restructure (owner spec): hero -> Our Work (split
- * into a Birthdays & Celebrations gallery and a For Businesses gallery, each
+ * into a Party Decorations gallery and a For Businesses gallery, each
  * deep-linking to /backdrops and /corporate) -> Two Ways We Help (personal/
  * business split) -> FAQ -> global footer. The why-us strip, testimonials,
  * "How It Works" and the closing dual-CTA outro were all removed per the

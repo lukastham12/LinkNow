@@ -56,22 +56,26 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
-  // Birthdays & Celebrations portfolio (renamed from "Custom Backdrops"
-  // 23 Oct 2026, URL kept unchanged) — reachable via the Services dropdown
-  // and the Birthdays & Celebrations service card.
+  // Party Decorations portfolio (renamed from "Birthdays & Celebrations" and
+  // from URL /backdrops to /party-decorations-singapore, 28 Oct 2026, owner
+  // request — keyword-aligned URL/H1/nav label, same pattern as the other
+  // "...-singapore" SEO pages) — reachable via the Services dropdown and the
+  // Party Decorations service card. The /backdrops path below redirects here
+  // so any existing bookmarks/backlinks still resolve.
   {
-    path: 'backdrops',
+    path: 'party-decorations-singapore',
     component: Backdrops,
     data: {
       seo: {
-        title: 'Birthdays & Celebrations Decor in Singapore | LinkNow Pte Ltd',
+        title: 'Party Decorations Singapore | LinkNow Pte Ltd',
         description:
           'A portfolio of custom event backdrops built in Singapore for birthdays, weddings, ' +
           'corporate events and formal occasions. See our work and enquire on WhatsApp.',
-        path: '/backdrops/',
+        path: '/party-decorations-singapore/',
       } satisfies PageSeo,
     },
   },
+  { path: 'backdrops', redirectTo: 'party-decorations-singapore' },
   // For Businesses (renamed from "Corporate Events" 23 Oct 2026, URL kept
   // unchanged) — informational page reachable via the Services dropdown and
   // the For Businesses service card. Registered before the wildcard.
@@ -326,22 +330,13 @@ export const routes: Routes = [
       } satisfies PageSeo,
     },
   },
-  {
-    path: 'party-decoration-singapore',
-    loadComponent: () =>
-      import('./pages/seo-landing/seo-landing').then((m) => m.SeoLandingPageComponent),
-    data: {
-      slug: 'party-decoration-singapore',
-      seo: {
-        title: 'Party Decoration Singapore | From S$349 | LinkNow Pte Ltd',
-        description:
-          'LinkNow Pte Ltd offers party decoration services in Singapore. Custom backdrops, ' +
-          'balloon garlands and full party styling. HDB void decks, condo function rooms and ' +
-          'private venues. From S$349.',
-        path: '/party-decoration-singapore/',
-      } satisfies PageSeo,
-    },
-  },
+  // The generic 'party-decoration-singapore' (singular) SEO landing page was
+  // removed 28 Oct 2026, owner request — it was keyword-cannibalizing
+  // against the richer, real portfolio page at '/party-decorations-singapore'
+  // (plural, the renamed /backdrops). Redirects there instead of 404ing any
+  // existing bookmark/backlink/search-index entry; see server.ts for the
+  // matching real HTTP 301.
+  { path: 'party-decoration-singapore', redirectTo: 'party-decorations-singapore' },
   // Event Decoration Singapore — rebuilt 25 Oct 2026 (owner spec) as its own
   // bespoke page (EventDecorationSingaporePage), replacing the simpler entry
   // this slug used to render via the generic SeoLandingPageComponent (see

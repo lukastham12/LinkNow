@@ -136,7 +136,7 @@ export class Home {
   // Real 5-star Google reviews only; empty until the owner supplies them.
   protected readonly testimonials = TESTIMONIALS;
 
-  // Same FAQ shown on /backdrops (UX review, 23 Oct 2026 — the same
+  // Same FAQ shown on /party-decorations-singapore (UX review, 23 Oct 2026 — the same
   // pre-enquiry questions apply before a visitor ever reaches the gallery).
   protected readonly faqs = FAQS;
 
@@ -144,12 +144,12 @@ export class Home {
   protected readonly clients = CLIENTS;
 
   // Recent work, split by audience — a retail teaser (plain gallery tiles,
-  // linking to the full /backdrops gallery) and a corporate teaser (the same
+  // linking to the full /party-decorations-singapore gallery) and a corporate teaser (the same
   // use-case cards shown on /corporate, linking straight to each client's
   // case-study page).
   protected readonly retail: PortfolioGroup = {
     label: 'Customers',
-    ctaLink: '/backdrops',
+    ctaLink: '/party-decorations-singapore',
     items: [
       {
         image: '/backdrops/backdrop-20.jpg',

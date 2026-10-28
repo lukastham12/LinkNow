@@ -69,7 +69,7 @@ describe('EventDecorationSingaporePage', () => {
     expect(decoded).toContain('Budget:');
   });
 
-  it('shows "Our Work" split into a Birthdays & Celebrations gallery and a For Businesses gallery, each with 3 photos and a deep-link button', () => {
+  it('shows "Our Work" split into a Party Decorations gallery and a For Businesses gallery, each with 3 photos and a deep-link button (28 Oct 2026 rename)', () => {
     const fixture = TestBed.createComponent(EventDecorationSingaporePage);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
@@ -77,12 +77,12 @@ describe('EventDecorationSingaporePage', () => {
     expect(groups.length).toBe(2);
 
     const titles = groups.map((g) => g.querySelector('.work__group-title')?.textContent?.trim());
-    expect(titles).toEqual(['Birthdays & Celebrations', 'For Businesses']);
+    expect(titles).toEqual(['Party Decorations', 'For Businesses']);
 
     const birthdayImgs = groups[0].querySelectorAll('.work__img');
     expect(birthdayImgs.length).toBe(3);
     const birthdayLink = groups[0].querySelector('a.btn') as HTMLAnchorElement;
-    expect(birthdayLink.getAttribute('href')).toBe('/backdrops');
+    expect(birthdayLink.getAttribute('href')).toBe('/party-decorations-singapore');
 
     const businessImgs = groups[1].querySelectorAll('.work__img');
     expect(businessImgs.length).toBe(3);

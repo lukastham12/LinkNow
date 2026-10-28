@@ -92,7 +92,9 @@ const EXCLUDED_QUOTE_SNIPPETS = ['the big and beautiful bouquet', 'soap flower b
 const FULL_PARTY_ADDON_IDS = ['bouncy-castle', 'candy-floss', 'popcorn-station', 'party-hosting'];
 
 /**
- * Birthdays & Celebrations portfolio page (route '/backdrops').
+ * Party Decorations portfolio page (route '/party-decorations-singapore',
+ * renamed from "Birthdays & Celebrations" / '/backdrops' 28 Oct 2026, owner
+ * request — the old path now redirects here, see app.routes.ts/server.ts).
  *
  * Mobile-first restructure (owner request, 22 Oct 2026, 2nd round): everything
  * needed to decide and enquire now sits in the first ~1.5 mobile viewports —

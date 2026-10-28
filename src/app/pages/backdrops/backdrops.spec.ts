@@ -4,7 +4,7 @@ import { Backdrops } from './backdrops';
 import { BACKDROP_GROUPS, BACKDROPS } from './backdrops.data';
 import { TESTIMONIALS } from '../../shared/testimonials';
 
-describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
+describe('Backdrops (Party Decorations portfolio page, route /party-decorations-singapore)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Backdrops],
@@ -27,13 +27,13 @@ describe('Backdrops (Birthdays & Celebrations portfolio page)', () => {
     expect(style.textAlign).toBe('center');
   });
 
-  it('has a single benefit-driven h1 (owner feedback, 22 Oct 2026 — "Birthdays & Celebrations" read as a category label, not a promise) and an accurate eyebrow', () => {
+  it('has a single h1 reading "Party Decorations Singapore" (28 Oct 2026, owner request — aligned to the new /party-decorations-singapore URL) and an accurate eyebrow', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = el.querySelectorAll('h1');
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent).toContain('Birthday setups your kid will remember');
+    expect(h1s[0].textContent?.trim()).toBe('Party Decorations Singapore');
     expect(el.querySelector('.eyebrow')?.textContent).toContain('Birthday Decor & Add-ons');
   });
 

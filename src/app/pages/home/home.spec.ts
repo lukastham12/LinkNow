@@ -206,7 +206,7 @@ describe('Home', () => {
       (g) => g.querySelector('.section__cta a') as HTMLAnchorElement | null,
     );
     expect(ctas.every((a) => a?.textContent?.trim() === 'See more')).toBeTrue();
-    expect(ctas[0]?.getAttribute('href')).toBe('/backdrops');
+    expect(ctas[0]?.getAttribute('href')).toBe('/party-decorations-singapore');
     expect(ctas[1]?.getAttribute('href')).toBe('/corporate');
   });
 
