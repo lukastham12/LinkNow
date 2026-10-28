@@ -25,6 +25,28 @@ const angularApp = new AngularNodeAppEngine();
  */
 
 /**
+ * /backdrops was renamed to /party-decorations-singapore (28 Oct 2026, owner
+ * request — keyword-aligned URL). A real HTTP 301 here (rather than relying
+ * on the Angular router's client-side redirectTo) preserves SEO value for
+ * any existing bookmarks/backlinks/search-index entries, and works even
+ * when the requester doesn't execute JS. Registered before static-file
+ * serving so it takes effect on every deployment target that runs this
+ * Express server.
+ */
+app.get(['/backdrops', '/backdrops/'], (_req, res) => {
+  res.redirect(301, '/party-decorations-singapore/');
+});
+
+/**
+ * The generic '/party-decoration-singapore' (singular) SEO landing page was
+ * removed the same day — it was keyword-cannibalizing against the real
+ * portfolio page above. Same real-301 treatment for the same reasons.
+ */
+app.get(['/party-decoration-singapore', '/party-decoration-singapore/'], (_req, res) => {
+  res.redirect(301, '/party-decorations-singapore/');
+});
+
+/**
  * Serve static files from /browser
  */
 app.use(

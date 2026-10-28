@@ -18,12 +18,12 @@ export interface FeaturedService {
 
 export const FEATURED_SERVICES: readonly FeaturedService[] = [
   {
-    name: 'Birthdays & Celebrations',
+    name: 'Party Decorations',
     blurb:
       "Birthdays, naming ceremonies, 100 days and more — you name the celebration, we'll style it.",
     image: '/backdrops/backdrop-24.jpg',
     imageAlt: 'A safari-themed 1st birthday balloon backdrop styled by LinkNow',
-    link: '/backdrops',
+    link: '/party-decorations-singapore',
   },
   {
     name: 'Weddings & ROM',

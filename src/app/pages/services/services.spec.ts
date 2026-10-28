@@ -55,7 +55,7 @@ describe('Services', () => {
     const cards = Array.from(section.querySelectorAll('a.service--link')) as HTMLAnchorElement[];
     expect(cards.length).toBe(3);
     const hrefs = cards.map((a) => a.getAttribute('href'));
-    expect(hrefs).toEqual(['/backdrops', '/flowers', '/corporate']);
+    expect(hrefs).toEqual(['/party-decorations-singapore', '/flowers', '/corporate']);
   });
 
   it('shows the same "Other Services We Provide" section as the homepage, with 6 add-ons linking to their own pages', () => {

@@ -1,10 +1,13 @@
 // Data for the SEO landing pages (route component: pages/seo-landing/) —
-// added 24 Oct 2026, owner request: 3 standalone pages targeting organic
-// Google/AI search for "birthday decoration singapore", "party decoration
-// singapore" and "event decoration singapore". One shared component renders
-// all 3 from this array (ActivatedRoute snapshot data -> find by slug),
-// mirroring the addon-detail/corporate-case-study pattern already used
-// elsewhere on the site, rather than 3 near-duplicate page components.
+// added 24 Oct 2026, owner request: standalone pages targeting organic
+// Google/AI search for keywords like "birthday decoration singapore".
+// Originally 3 pages (birthday/party/event); the party and event entries
+// were each later removed in favour of richer, bespoke pages for those
+// keywords — see the notes below the one remaining entry. The shared
+// component renders from this array (ActivatedRoute snapshot data -> find
+// by slug), mirroring the addon-detail/corporate-case-study pattern already
+// used elsewhere on the site, rather than a dedicated page component per
+// keyword.
 //
 // Trust line: the owner's original spec asked for a fabricated "★ 4.8 on
 // Google" rating — no real Google rating exists in this codebase (same
@@ -83,49 +86,17 @@ export const SEO_LANDING_PAGES: readonly SeoLandingPage[] = [
       },
     ],
   },
-  {
-    slug: 'party-decoration-singapore',
-    keyword: 'Party Decoration Singapore',
-    subhead:
-      'LinkNow Pte Ltd is a party decoration company in Singapore, styling custom backdrops and ' +
-      'balloon setups for HDB void decks, condo function rooms and private venues.',
-    occasionPriceLabel: 'Party decoration',
-    metaTitle: 'Party Decoration Singapore | From S$349 | LinkNow Pte Ltd',
-    metaDescription:
-      'LinkNow Pte Ltd offers party decoration services in Singapore. Custom backdrops, ' +
-      'balloon garlands and full party styling. HDB void decks, condo function rooms and ' +
-      'private venues. From S$349.',
-    photos: [
-      {
-        src: '/backdrops/backdrop-03.jpg',
-        alt: 'Party decoration Singapore — 30th birthday balloon backdrop',
-      },
-      {
-        src: '/backdrops/backdrop-15.jpg',
-        alt: 'Party decoration Singapore — 21st birthday balloon backdrop',
-      },
-      {
-        src: '/backdrops/backdrop-05.jpg',
-        alt: 'Party decoration Singapore — baby shower balloon decor',
-      },
-      {
-        src: '/backdrops/backdrop-02.jpg',
-        alt: 'Party decoration Singapore — 100 Days celebration backdrop',
-      },
-      {
-        src: '/backdrops/backdrop-25.jpg',
-        alt: 'Party decoration Singapore — gender reveal balloon arch',
-      },
-      {
-        src: '/backdrops/backdrop-22.jpg',
-        alt: 'Party decoration Singapore — 28th birthday Stitch-themed backdrop',
-      },
-    ],
-  },
-  // 'event-decoration-singapore' used to be the 3rd entry here, rendered via
+  // 'event-decoration-singapore' used to be the 2nd entry here, rendered via
   // the generic SeoLandingPageComponent. Removed 25 Oct 2026 — the owner
   // asked for a richer, bespoke rebuild of that page (personal/business
   // split, dedicated FAQ, dual WhatsApp/email CTAs), which now lives at
   // pages/event-decoration-singapore/ with its own route registration in
-  // app.routes.ts. This array now covers only the 2 simpler SEO pages.
+  // app.routes.ts.
+  //
+  // 'party-decoration-singapore' (singular) used to be the 3rd entry here.
+  // Removed 28 Oct 2026, owner request: it was keyword-cannibalizing against
+  // the richer, real portfolio page at '/party-decorations-singapore'
+  // (plural — the renamed /backdrops, see pages/backdrops/) for essentially
+  // the same search phrase. That route now redirects to the portfolio page
+  // instead (app.routes.ts). This array now covers only the birthday page.
 ];

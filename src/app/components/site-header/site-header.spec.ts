@@ -49,28 +49,28 @@ describe('SiteHeader', () => {
     expect(caret.getAttribute('aria-controls')).toBe(submenu.id);
   });
 
-  it('lists the five service children in order: Event Decoration Singapore, Birthdays & Celebrations, For Businesses, Weddings & ROM, Party Add-Ons', () => {
+  it('lists the five service children in order: Events Decoration, Party Decorations, For Businesses, Weddings & ROM, Party Add-Ons (28 Oct 2026 rename)', () => {
     const fixture = TestBed.createComponent(SiteHeader);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const links = Array.from(el.querySelectorAll('.submenu__link')) as HTMLAnchorElement[];
     const labels = links.map((a) => a.textContent?.trim());
     expect(labels).toEqual([
-      'Event Decoration Singapore',
-      'Birthdays & Celebrations',
+      'Events Decoration',
+      'Party Decorations',
       'For Businesses',
       'Weddings & ROM',
       'Party Add-Ons',
     ]);
     const floral = links.find((a) => a.textContent?.includes('Weddings & ROM'));
     expect(floral?.getAttribute('href')).toBe('/flowers');
-    const backdrops = links.find((a) => a.textContent?.includes('Birthdays & Celebrations'));
-    expect(backdrops?.getAttribute('href')).toBe('/backdrops');
+    const partyDecor = links.find((a) => a.textContent?.includes('Party Decorations'));
+    expect(partyDecor?.getAttribute('href')).toBe('/party-decorations-singapore');
     const corporate = links.find((a) => a.textContent?.includes('For Businesses'));
     expect(corporate?.getAttribute('href')).toBe('/corporate');
     const addons = links.find((a) => a.textContent?.includes('Party Add-Ons'));
     expect(addons?.getAttribute('href')).toBe('/services/add-ons');
-    const eventDecor = links.find((a) => a.textContent?.includes('Event Decoration Singapore'));
+    const eventDecor = links.find((a) => a.textContent?.includes('Events Decoration'));
     expect(eventDecor?.getAttribute('href')).toBe('/event-decoration-singapore');
   });
 
