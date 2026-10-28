@@ -27,13 +27,13 @@ describe('Backdrops (Party Decorations portfolio page, route /party-decorations-
     expect(style.textAlign).toBe('center');
   });
 
-  it('has a single h1 reading "Party Decorations" (28 Oct 2026, owner request — aligned to the new /party-decorations-singapore URL) and an accurate eyebrow', () => {
+  it('has a single h1 reading "Party Decorations Singapore" (28 Oct 2026, owner request — aligned to the new /party-decorations-singapore URL) and an accurate eyebrow', () => {
     const fixture = TestBed.createComponent(Backdrops);
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     const h1s = el.querySelectorAll('h1');
     expect(h1s.length).toBe(1);
-    expect(h1s[0].textContent?.trim()).toBe('Party Decorations');
+    expect(h1s[0].textContent?.trim()).toBe('Party Decorations Singapore');
     expect(el.querySelector('.eyebrow')?.textContent).toContain('Birthday Decor & Add-ons');
   });
 
