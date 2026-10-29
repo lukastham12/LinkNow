@@ -1,0 +1,20 @@
+# Cloudflare Pages edge redirects — processed before static-asset/SPA
+# fallback matching, so these fire reliably regardless of what serving layer
+# actually runs in production (confirmed 29 Oct 2026: the Express-level 301s
+# in src/server.ts do NOT execute on this deployment — Cloudflare's static
+# hosting serves the homepage's prerendered HTML as an SPA fallback for any
+# unmatched path instead, which left a canonical-mismatch problem at these
+# old URLs: a 200 response with the homepage's own <title>/<h1> and a
+# canonical pointing at "/" — not a redirect, not the right page either).
+#
+# Exact-path rules only (no trailing "*"), so these do NOT catch the real
+# image assets still served from /backdrops/backdrop-XX.jpg (public/backdrops/).
+#
+# /backdrops -> /party-decorations-singapore/ (28 Oct 2026 rename)
+/backdrops            /party-decorations-singapore/   301
+/backdrops/           /party-decorations-singapore/   301
+
+# /party-decoration-singapore (singular SEO landing page, removed 28 Oct 2026
+# — keyword-cannibalizing against the real portfolio page above)
+/party-decoration-singapore    /party-decorations-singapore/   301
+/party-decoration-singapore/   /party-decorations-singapore/   301
